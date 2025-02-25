@@ -2,8 +2,8 @@
 🏞️ Here is the [link](https://uob-comsm0166.github.io/2025-group-11a/assignments/week02/PaintingApp) to the painting app.
 
 <div align="center">
-    <img src="https://uob-comsm0166.github.io/2025-group-11a/assignments/week02/printing.jpg" alt="printing" width="300">
-    <p>Image 1: Example of the Printing App</p>
+    <img src="https://uob-comsm0166.github.io/2025-group-11a/assignments/week02/PaintingApp/painting.jpg" alt="painting" width="300">
+    <p>Image 1: Example of the Painting App</p>
 </div>
 <br>
 <br>
