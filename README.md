@@ -23,14 +23,13 @@
   (photo)
 </div>
 
-<div style="text-align:center">
   | MEMBER | NAME               | EMAIL                   | ROLE               |
   |--------|--------------------|-------------------------|--------------------|
   | 1      | Yiqing Zhou        | lr24125@bristol.ac.uk   | Scrum Master, Coder |
   | 2      |                    |                         |                     |
   | 3      |                    |                         |                     |
   | 4      |                    |                         |                     |
-</div>
+
 
 
 # 2. Introduction <a id="introduction"></a>  
