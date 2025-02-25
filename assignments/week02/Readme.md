@@ -1,3 +1,13 @@
+# Painting APP
+🏞️ Here is the [link](https://uob-comsm0166.github.io/2025-group-11a/assignments/week02/PaintingApp) to the painting app.
+
+<div align="center">
+    <img src="https://uob-comsm0166.github.io/2025-group-11a/assignments/week02/printing.jpg" alt="printing" width="300">
+    <p>Image 1: Example of the Printing App</p>
+</div>
+<br>
+<br>
+
 # Two ideas of the game
 ### 1. Side-Scrolling Platformer Game
 
@@ -5,7 +15,7 @@ Players control a character to jump, move, and navigate through side-scrolling p
 
 <div align="center">
     <img src="https://uob-comsm0166.github.io/2025-group-11a/assignments/week02/mario.png" alt="mario" width="300">
-    <p>Image 1: Inspiration for Side-Scrolling Platformer Game, Super Mario Bros<br>
+    <p>Image 2: Inspiration for Side-Scrolling Platformer Game, Super Mario Bros<br>
     Source: <a href="https://mario.fandom.com/wiki/World_1-1_(Super_Mario_Bros._3)" target="_blank">Super Mario Bros. 3 - World 1-1</a></p>
 </div>
 
@@ -16,6 +26,6 @@ Unlike traditional Snake games, this version leverages p5.js's mouse interaction
 
 <div align="center"> 
     <img src="https://uob-comsm0166.github.io/2025-group-11a/assignments/week02/snake.png" alt="snake" width="300"> 
-    <p>Image 2: Inspiration for Snake Game, Snake Battle<br>
+    <p>Image 3: Inspiration for Snake Game, Snake Battle<br>
     Source: <a href="https://play.google.com/store/apps/details?id=snake.battle.arcade.io.game&hl=en_GB&pli=1">Snake Battle on Google Play</a></p> 
 </div>
