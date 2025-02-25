@@ -19,17 +19,19 @@
 
 
 # 1. Development Team <a id="development-team"></a>  
-<div style="text-align:center">
+<div align="center">
   (photo)
 </div>
 
+<div align="center">
+  
   | MEMBER | NAME               | EMAIL                   | ROLE               |
   |--------|--------------------|-------------------------|--------------------|
   | 1      | Yiqing Zhou        | lr24125@bristol.ac.uk   | Scrum Master, Coder |
   | 2      | Xing Yang          | zj24404@bristol.ac.uk   | Optimizer, Coder    |
   | 3      |                    |                         |                     |
   | 4      |                    |                         |                     |
-
+</div>
 
 
 # 2. Introduction <a id="introduction"></a>  
