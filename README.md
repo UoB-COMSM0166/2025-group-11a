@@ -18,7 +18,7 @@
 
 
 
-# 1. Development Team {#development-team}  
+# 1. Development Team <a id="development-team"></a>  
 <div style="text-align:center">
   (photo)
 
@@ -31,26 +31,26 @@
 </div>
 
 
-# 2. Introduction {#introduction}
+# 2. Introduction <a id="introduction"></a>  
 - 5% ~250 words
 - Describe your game, what is based on, what makes it novel?
 
 
-# 3. Requirements {#requirements}
+# 3. Requirements <a id="requirements"></a>  
 
 
 
-# 4. Design {#design}
+# 4. Design <a id="design"></a>  
 - 15% ~750 words
 - System architecture. Class diagrams, behavioural diagrams.
 
 
-# 5. Implementation {#implementation}
+# 5. Implementation <a id="implementation"></a>  
 - 15% ~750 words
 - Describe implementation of your game, in particular highlighting the three areas of challenge in developing your game.
 
 
-# 6. Evaluation {#evaluation}
+# 6. Evaluation <a id="evaluation"></a>  
 - 15% ~750 words
 
 - One qualitative evaluation (your choice)
@@ -60,18 +60,18 @@
 - Description of how code was tested.
 
 
-# 7. Process {#process}  
+# 7. Process <a id="process"></a>  
 - 15% ~750 words
 
 - Teamwork. How did you work together, what tools did you use. Did you have team roles? Reflection on how you worked together.
 
 
-# 8. Conclusion {#conclusion}  
+# 8. Conclusion <a id="conclusion"></a>  
 - 10% ~500 words
 
 - Reflect on project as a whole. Lessons learned. Reflect on challenges. Future work.
 
-# 9. References {#references}
+# 9. References <a id="references"></a>  
 ### Contribution Statement
 - Provide a table of everyone's contribution, which may be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Let us know as soon as possible if there are any issues with teamwork as soon as they are apparent.
 
