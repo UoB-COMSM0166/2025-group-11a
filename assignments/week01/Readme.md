@@ -3,14 +3,14 @@
 ### Game List:  
 **Super Mario Bros.** – A classic 2D platformer that defined the genre.  
 **Celeste** – A challenging precision platformer with a deep emotional story.  
-**Hollow Knight** – A Metroidvania-style platformer with combat, exploration, and beautiful hand-drawn art.
-**Ori and the Blind Forest** – A visually stunning platformer with fluid movement and a touching story.
-**Super Meat Boy** – A hardcore platformer known for its fast-paced, precise controls.
-**Sonic the Hedgehog** – A high-speed platformer featuring Sonic’s signature running and jumping mechanics.
-**Rayman Legends** – A beautifully animated platformer with creative level design and co-op gameplay.
-**Donkey Kong Country** – A classic 2D platformer with dynamic movement and engaging levels.
-**Shovel Knight** – A retro-style platformer inspired by classic NES games.
-**LittleBigPlanet** – A physics-based 2.5D platformer with a focus on level creation and community sharing.
+**Hollow Knight** – A Metroidvania-style platformer with combat, exploration, and beautiful hand-drawn art.  
+**Ori and the Blind Forest** – A visually stunning platformer with fluid movement and a touching story.  
+**Super Meat Boy** – A hardcore platformer known for its fast-paced, precise controls.  
+**Sonic the Hedgehog** – A high-speed platformer featuring Sonic’s signature running and jumping mechanics.  
+**Rayman Legends** – A beautifully animated platformer with creative level design and co-op gameplay.  
+**Donkey Kong Country** – A classic 2D platformer with dynamic movement and engaging levels.  
+**Shovel Knight** – A retro-style platformer inspired by classic NES games.  
+**LittleBigPlanet** – A physics-based 2.5D platformer with a focus on level creation and community sharing.  
 
 ### Game Overview  
 Platformer games are a classic genre where players control a character that navigates various levels by jumping between platforms, avoiding obstacles, and defeating enemies. These games often test players' reflexes, precision, and problemsolving skills. Some platformers focus on exploration, while others emphasize fastpaced movement and tight platforming mechanics.  
@@ -71,16 +71,16 @@ Hidden secrets and alternate paths, encouraging exploration.
 
 ## Idea2:Advanced Snake Game  
 ### Game List:  
-**Snake (Nokia version)** – The classic black-and-white snake game that was popular on Nokia phones.
-**Slither.io** – A popular multiplayer online snake game where players compete to grow the longest snake.
-**Little Big Snake** – Similar to Slither.io, but with added upgrades, missions, and more gameplay features.
-**Snake Pass** – A 3D physics-based snake game focused on crawling and puzzle-solving rather than traditional mechanics.
-**Google Snake Game** – A browser-based version of Snake, accessible by searching "snake game" on Google.
-**Snake '97** – A remake of the classic Nokia 3310 Snake game with retro pixel graphics.
-**Deep.io** – A multiplayer online game that combines snake mechanics with an evolving fish-eat-fish concept.
-**Tron Light Cycle** – While not strictly a snake game, it shares similar mechanics where players must avoid crashing into light trails.
-**Nibbler** – A 1982 arcade game considered one of the earliest snake-like games.
-**Snake Rivals** – A modern 3D snake battle royale game with different skins and game modes.
+**Snake (Nokia version)** – The classic black-and-white snake game that was popular on Nokia phones.  
+**Slither.io** – A popular multiplayer online snake game where players compete to grow the longest snake.  
+**Little Big Snake** – Similar to Slither.io, but with added upgrades, missions, and more gameplay features.  
+**Snake Pass** – A 3D physics-based snake game focused on crawling and puzzle-solving rather than traditional mechanics.  
+**Google Snake Game** – A browser-based version of Snake, accessible by searching "snake game" on Google.  
+**Snake '97** – A remake of the classic Nokia 3310 Snake game with retro pixel graphics.  
+**Deep.io** – A multiplayer online game that combines snake mechanics with an evolving fish-eat-fish concept.  
+**Tron Light Cycle** – While not strictly a snake game, it shares similar mechanics where players must avoid crashing into light trails.  
+**Nibbler** – A 1982 arcade game considered one of the earliest snake-like games.  
+**Snake Rivals** – A modern 3D snake battle royale game with different skins and game modes.  
 
 ### Game Overview  
 Snake games revolve around controlling a growing snake that moves across a playfield, consuming items to grow while avoiding collisions. The classic version features simple movement mechanics, but modern adaptations introduce various gameplay twists, such as multiplayer competition, puzzlesolving, and environmental interactions.  
