@@ -2,9 +2,7 @@
 ## Idea1:Platformer games
 ### Game List:  
 **Super Mario Bros.** – A classic 2D platformer that defined the genre.  
-
 **Celeste** – A challenging precision platformer with a deep emotional story.  
-
 **Hollow Knight** – A Metroidvania-style platformer with combat, exploration, and beautiful hand-drawn art.
 **Ori and the Blind Forest** – A visually stunning platformer with fluid movement and a touching story.
 **Super Meat Boy** – A hardcore platformer known for its fast-paced, precise controls.
