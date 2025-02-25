@@ -21,13 +21,15 @@
 # 1. Development Team <a id="development-team"></a>  
 <div style="text-align:center">
   (photo)
+</div>
 
+<div style="text-align:center">
   | MEMBER | NAME               | EMAIL                   | ROLE               |
-|--------|--------------------|-------------------------|--------------------|
-| 1      | Yiqing Zhou     | lr24125@bristol.ac.uk   | Scrum Master, Coder |
-| 2      |                 |                         |                     |
-| 3      |                 |                         |                     |
-| 4      |                 |                         |                     |
+  |--------|--------------------|-------------------------|--------------------|
+  | 1      | Yiqing Zhou        | lr24125@bristol.ac.uk   | Scrum Master, Coder |
+  | 2      |                    |                         |                     |
+  | 3      |                    |                         |                     |
+  | 4      |                    |                         |                     |
 </div>
 
 
