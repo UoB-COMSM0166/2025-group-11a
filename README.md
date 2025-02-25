@@ -26,7 +26,7 @@
   | MEMBER | NAME               | EMAIL                   | ROLE               |
   |--------|--------------------|-------------------------|--------------------|
   | 1      | Yiqing Zhou        | lr24125@bristol.ac.uk   | Scrum Master, Coder |
-  | 2      |                    |                         |                     |
+  | 2      | Xing Yang          | zj24404@bristol.ac.uk   | Optimizer, Coder    |
   | 3      |                    |                         |                     |
   | 4      |                    |                         |                     |
 
