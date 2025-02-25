@@ -1,5 +1,5 @@
 # Game Research
-## Idea1:Platformer games
+## Idea1: Platformer games
 ### Game List:  
 **Super Mario Bros.** – A classic 2D platformer that defined the genre.  
 **Celeste** – A challenging precision platformer with a deep emotional story.  
@@ -69,7 +69,7 @@ Limited resources, forcing players to carefully manage their jumps and abilities
 Hidden secrets and alternate paths, encouraging exploration.  
 
 
-## Idea2:Advanced Snake Game  
+## Idea2: Advanced Snake Games  
 ### Game List:  
 **Snake (Nokia version)** – The classic black-and-white snake game that was popular on Nokia phones.  
 **Slither.io** – A popular multiplayer online snake game where players compete to grow the longest snake.  
