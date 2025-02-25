@@ -1,14 +1,14 @@
 # Game Research
 ## Idea1:Platformer games
-Game List:  
+### Game List:  
 Super Mario Bros.  
 Celeste  
 Hollow Knight  
 
-Game Overview  
+### Game Overview  
 Platformer games are a classic genre where players control a character that navigates various levels by jumping between platforms, avoiding obstacles, and defeating enemies. These games often test players' reflexes, precision, and problemsolving skills. Some platformers focus on exploration, while others emphasize fastpaced movement and tight platforming mechanics.  
 
-Game Mechanics  
+### Game Mechanics  
 
 1. Game Objectives  
 Players must progress through levels by jumping across platforms, avoiding hazards, and defeating or bypassing enemies. The ultimate goal is to reach the end of each level, with some games featuring boss fights or collectibles that unlock special rewards. As the game advances, level designs become more challenging, requiring precise movements and strategic use of mechanics.  
@@ -63,15 +63,15 @@ Hidden secrets and alternate paths, encouraging exploration.
 
 
 ## Idea2:Advanced Snake Game  
-Game List:  
+### Game List:  
 Classic Snake (Nokia)  
 Slither.io  
 Snake Pass  
 
-Game Overview  
+### Game Overview  
 Snake games revolve around controlling a growing snake that moves across a playfield, consuming items to grow while avoiding collisions. The classic version features simple movement mechanics, but modern adaptations introduce various gameplay twists, such as multiplayer competition, puzzlesolving, and environmental interactions.  
 
-Game Mechanics  
+### Game Mechanics  
 
 1. Game Objectives  
 Players control a snake that moves continuously in one direction. The goal is to collect food to grow longer while avoiding obstacles, the game boundaries, and selfcollisions. The longer the snake grows, the harder it becomes to maneuver. Some variations include additional objectives, such as surviving against AI opponents, completing challenges, or navigating mazelike levels.  
