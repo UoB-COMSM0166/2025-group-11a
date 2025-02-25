@@ -1,8 +1,10 @@
 # Game Research
 ## Idea1:Platformer games
 ### Game List:  
-**Super Mario Bros.** – A classic 2D platformer that defined the genre.
-**Celeste** – A challenging precision platformer with a deep emotional story.
+**Super Mario Bros.** – A classic 2D platformer that defined the genre.  
+
+**Celeste** – A challenging precision platformer with a deep emotional story.  
+
 **Hollow Knight** – A Metroidvania-style platformer with combat, exploration, and beautiful hand-drawn art.
 **Ori and the Blind Forest** – A visually stunning platformer with fluid movement and a touching story.
 **Super Meat Boy** – A hardcore platformer known for its fast-paced, precise controls.
@@ -121,7 +123,7 @@ AI Snakes: Compete for food and try to block the player’s path.
 Moving Obstacles: Blocks that shift positions over time.  
 Trap Zones: Areas that temporarily lock the player inside, forcing careful navigation.  
 
-7. Game Difficulty and Challenges  
+**7. Game Difficulty and Challenges**
 Increasing game speed over time.  
 More complex level layouts with hazards.  
 AI snakes with different movement patterns and aggression levels.  
