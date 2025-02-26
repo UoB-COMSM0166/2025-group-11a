@@ -1,6 +1,7 @@
 let playerSnake;
 let foodManager;
 let gameMap;
+let gameWon = false;
 let gameOver = false;
 let gameStarted = false;
 let gridSize = 20;
@@ -72,6 +73,22 @@ function createUI() {
   let restartButton = createButton('RESTART');
   restartButton.parent(gameOverScreen);
   restartButton.mousePressed(restartGame);
+
+  // 创建游戏胜利屏幕
+  let gameWonScreen = createDiv('');
+  gameWonScreen.id('gameWonScreen');
+  gameWonScreen.parent('main');
+  
+  let gameWonTitle = createElement('h1', 'YOU WIN!');
+  gameWonTitle.parent(gameWonScreen);
+  
+  let winScoreDisplay = createP('');
+  winScoreDisplay.id('finalScore');
+  winScoreDisplay.parent(gameWonScreen);
+  
+  let winRestartButton = createButton('RESTART');
+  winRestartButton.parent(gameWonScreen);
+  winRestartButton.mousePressed(restartGame);
   
   // 创建右上角控制按钮
   let buttonContainer = createDiv('');
@@ -95,6 +112,16 @@ function draw() {
   }
   
   background(20);
+
+  if (score >= 100) {
+    gameWon = true;
+  }
+
+  if (gameWon) {
+    document.getElementById('gameWonScreen').style.visibility = 'visible';
+    document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
+    return;
+  }
   
   if (gameOver) {
     document.getElementById('gameOverScreen').style.visibility = 'visible';
@@ -203,6 +230,8 @@ function drawPulsingWarning() {
 
 function restartGame() {
   document.getElementById('gameOverScreen').style.visibility = 'hidden';
+  document.getElementById('gameWonScreen').style.visibility = 'hidden'; 
+  gameWon = false;
   initGame();
 }
 
