@@ -20,8 +20,8 @@ function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('main');
   frameRate(30);
-  initGame();
   createUI();
+  initGame();
 }
 
 function initGame() {
@@ -35,6 +35,7 @@ function initGame() {
   foodManager.generateFood(200);
   score = 0;
   gameOver = false;
+  document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
 }
 
 function createUI() {
