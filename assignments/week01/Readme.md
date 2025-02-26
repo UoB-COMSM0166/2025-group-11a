@@ -1,5 +1,5 @@
 # Game Research
-### **Idea1: Platformer Games**  
+### **Type 1: Platformer Games**  
 
 #### **Game List:**  
 - **Super Mario Bros.** – A classic 2D platformer that defined the genre.  
@@ -23,27 +23,23 @@ Platformer games are a classic genre where players control a character that navi
 ### **Game Mechanics**  
 
 #### **1. Game Objectives**  
-- Players must **progress through levels** by jumping across platforms, avoiding hazards, and defeating or bypassing enemies.  
-- The ultimate goal is to **reach the end of each level**, with some games featuring **boss fights or collectibles** that unlock special rewards.  
-- As the game advances, **level designs become more challenging**, requiring precise movements and strategic use of mechanics.  
-
----
+- Players must progress through levels by jumping across platforms, avoiding hazards, and defeating or bypassing enemies.  
+- The ultimate goal is to reach the end of each level, with some games featuring boss fights or collectibles that unlock special rewards.  
+- As the game advances, level designs become more challenging, requiring precise movements and strategic use of mechanics.  
 
 #### **2. Character Abilities**  
-1. **Basic Movement** – Walking, running, and jumping form the core of movement mechanics.  
-2. **Wall Jump** – Allows players to jump off walls to reach higher platforms.  
-3. **Dash** – A quick burst of movement in any direction, useful for dodging attacks or crossing large gaps.  
-4. **Double Jump** – Grants an extra jump midair, allowing for more control and recovery.  
-5. **Climbing** – Some games allow players to grab onto ledges or climb walls for better vertical movement.  
-6. **Special Abilities** – Players can unlock unique skills as they progress, such as:  
-   - **Glide** – Slows descent, helping with precise landings.  
-   - **Ground Pound** – A powerful downward attack that can break certain platforms or stun enemies.  
-   - **Grappling Hook** – Lets players swing across gaps or pull themselves toward objects.  
-
----
+- **Basic Movement** – Walking, running, and jumping form the core of movement mechanics.  
+- **Wall Jump** – Allows players to jump off walls to reach higher platforms.  
+- **Dash** – A quick burst of movement in any direction, useful for dodging attacks or crossing large gaps.  
+- **Double Jump** – Grants an extra jump midair, allowing for more control and recovery.  
+- **Climbing** – Some games allow players to grab onto ledges or climb walls for better vertical movement.  
+- **Special Abilities** – Players can unlock unique skills as they progress, such as:  
+  - **Glide** – Slows descent, helping with precise landings.  
+  - **Ground Pound** – A powerful downward attack that can break certain platforms or stun enemies.  
+  - **Grappling Hook** – Lets players swing across gaps or pull themselves toward objects.  
 
 #### **3. Level Design**  
-- **Platform Variety** – Platforms can be **static, moving, disappearing, or interactable** (e.g., pressing switches to activate bridges).  
+- **Platform Variety** – Platforms can be static, moving, disappearing, or interactable (e.g., pressing switches to activate bridges).  
 - **Hazards and Obstacles:**  
   - Spikes, lava, bottomless pits, and moving saw blades.  
   - Crumbling platforms that disappear after stepping on them.  
@@ -54,36 +50,44 @@ Platformer games are a classic genre where players control a character that navi
   - **Dark Levels** – Reduced visibility, requiring light sources or memory-based navigation.  
 - **Checkpoints** – Players can restart from a checkpoint instead of beginning from the start of the level when they die.  
 
----
-
 #### **4. Resource Management**  
-1. **Health System:**  
-   - Some platformers use a **"one-hit death"** system, while others provide multiple hit points.  
-   - Players may collect **hearts or health packs** to restore HP.  
-2. **Collectibles:**  
-   - Coins, gems, or special items can be collected for **points, power-ups, or unlocking secret levels**.  
-   - Some collectibles can enhance abilities, like **increasing jump height or dash range**.  
-3. **Lives and Respawns:**  
-   - Players have a **limited number of lives**, and losing all of them results in a **game over**.  
-   - Some games have **infinite retries**, but deaths might reset progress within a level.  
-
----
+- **Health System:**  
+  - Some platformers use a "one-hit death" system, while others provide multiple hit points.  
+  - Players may collect hearts or health packs to restore HP.  
+- **Collectibles:**  
+  - Coins, gems, or special items can be collected for points, power-ups, or unlocking secret levels.  
+  - Some collectibles can enhance abilities, like increasing jump height or dash range.  
+- **Lives and Respawns:**  
+  - Players have a limited number of lives, and losing all of them results in a game over.  
+  - Some games have infinite retries, but deaths might reset progress within a level.  
 
 #### **5. Enemy Types**  
-1. **Basic Enemies** – Slow-moving and easy to defeat, often found in large numbers.  
-2. **Flying Enemies** – Move unpredictably and require careful timing to avoid or attack.  
-3. **Chasing Enemies** – Actively follow the player, forcing fast reactions.  
-4. **Large Enemies** – Stronger foes with unique attack patterns, sometimes requiring multiple hits to defeat.  
-5. **Stage Bosses** – Require **pattern recognition and precise movement** to defeat, often with multiple attack phases.  
-
----
+- **Basic Enemies** – Slow-moving and easy to defeat, often found in large numbers.  
+- **Flying Enemies** – Move unpredictably and require careful timing to avoid or attack.  
+- **Chasing Enemies** – Actively follow the player, forcing fast reactions.  
+- **Large Enemies** – Stronger foes with unique attack patterns, sometimes requiring multiple hits to defeat.  
+- **Stage Bosses** – Require pattern recognition and precise movement to defeat, often with multiple attack phases.  
 
 #### **6. Game Difficulty and Challenges**  
 - **Progressive Difficulty** – Platformer games can range from beginner-friendly to extremely difficult, depending on movement mechanics and level design.  
-- **More Complex Platforming Sections** – Later levels require **precise timing and fast reactions**.  
+- **More Complex Platforming Sections** – Later levels require precise timing and fast reactions.  
 - **Faster-Moving Obstacles and Enemies** – Increase challenge over time.  
-- **Limited Resources** – Players must **carefully manage their jumps and abilities**.  
-- **Hidden Secrets and Alternate Paths** – Encourage **exploration and mastery** of movement mechanics.  
+- **Limited Resources** – Players must carefully manage their jumps and abilities.  
+- **Hidden Secrets and Alternate Paths** – Encourage exploration and mastery of movement mechanics.  
+
+---
+
+### **Shining Points**  
+- **Highly responsive controls** – Platformers rely on tight, precise input for satisfying gameplay.  
+- **Creative movement mechanics** – Wall jumps, dashes, gliding, and more add depth to gameplay.  
+- **Engaging boss fights** – Often require mastering movement and attack patterns.  
+
+---
+
+### **Possible Creative Twists**  
+- **Multi-Character Gameplay** – Switch between different characters with unique abilities.  
+- **Combat-Focused Platformer** – Mix action elements with platforming, introducing weapon-based combat.  
+- **AI-Generated Challenge Mode** – The game adapts enemy placement and obstacles based on player skill.  
 
 
 ### **Idea2: Advanced Snake Games**  
