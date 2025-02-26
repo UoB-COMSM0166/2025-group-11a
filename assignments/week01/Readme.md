@@ -90,7 +90,7 @@ Platformer games are a classic genre where players control a character that navi
 - **AI-Generated Challenge Mode** – The game adapts enemy placement and obstacles based on player skill.  
 
 
-### **Idea2: Advanced Snake Games**  
+### **Type 2: Advanced Snake Games**  
 
 #### **Game List:**  
 - **Snake (Nokia version)** – The classic black-and-white snake game that was popular on Nokia phones.  
@@ -107,73 +107,76 @@ Platformer games are a classic genre where players control a character that navi
 ---
 
 ### **Game Overview**  
-Snake games revolve around **controlling a growing snake** that moves across a playfield, consuming items to grow while avoiding collisions. The classic version features **simple movement mechanics**, but modern adaptations introduce various gameplay twists, such as **multiplayer competition, puzzle-solving, and environmental interactions**.  
+Snake games revolve around controlling a growing snake that moves across a playfield, consuming items to grow while avoiding collisions. The classic version features simple movement mechanics, but modern adaptations introduce various gameplay twists, such as multiplayer competition, puzzle-solving, and environmental interactions.  
 
 ---
 
 ### **Game Mechanics**  
 
 #### **1. Game Objectives**  
-- Players control a **continuously moving snake** in one direction.  
-- The goal is to **collect food to grow longer** while avoiding obstacles, boundaries, and self-collisions.  
-- The **longer the snake grows, the harder it becomes** to maneuver.  
+- Players control a continuously moving snake in one direction.  
+- The goal is to collect food to grow longer while avoiding obstacles, boundaries, and self-collisions.  
+- The longer the snake grows, the harder it becomes to maneuver.  
 - Some variations include additional objectives, such as:  
-  - **Surviving against AI opponents**.  
-  - **Completing challenges**.  
-  - **Navigating maze-like levels**.  
-
----
+  - Surviving against AI opponents.  
+  - Completing challenges.  
+  - Navigating maze-like levels.  
 
 #### **2. Snake Movement and Controls**  
-1. **Classic Movement** – The snake moves in **four directions** (up, down, left, right) with either **smooth or grid-based controls**.  
-2. **Curved Movement** – Some modern versions allow for **fluid, curved turning**, making movement feel more natural.  
-3. **Speed Boost** – Players can temporarily speed up at the cost of:  
-   - Shrinking slightly.  
-   - Consuming energy.  
-4. **Growth Mechanics** – The snake **grows in length** with each item collected, making movement more challenging over time.  
-
----
+- **Classic Movement** – The snake moves in four directions (up, down, left, right) with either smooth or grid-based controls.  
+- **Curved Movement** – Some modern versions allow for fluid, curved turning, making movement feel more natural.  
+- **Speed Boost** – Players can temporarily speed up at the cost of:  
+  - Shrinking slightly.  
+  - Consuming energy.  
+- **Growth Mechanics** – The snake grows in length with each item collected, making movement more challenging over time.  
 
 #### **3. Level Design**  
-- **Classic Mode** – An open field with **no boundaries or obstacles**.  
-- **Maze Mode** – Players navigate through **narrow pathways**, requiring **precise movement**.  
-- **Arena Mode** – AI-controlled or multiplayer snakes compete in a **confined space**.  
-- **Moving Obstacles** – Some levels feature **shifting barriers**, forcing constant adaptation.  
+- **Classic Mode** – An open field with no boundaries or obstacles.  
+- **Maze Mode** – Players navigate through narrow pathways, requiring precise movement.  
+- **Arena Mode** – AI-controlled or multiplayer snakes compete in a confined space.  
+- **Moving Obstacles** – Some levels feature shifting barriers, forcing constant adaptation.  
 - **Dynamic Terrain:**  
   - **Water** – Slows down movement.  
   - **Ice** – Makes turning harder.  
 
----
-
 #### **4. Power-Ups and Items**  
-1. **Growth Items** – Standard food that **increases the snake’s length**.  
-2. **Shrink Items** – Rare items that **shorten the snake**, helping with maneuverability.  
-3. **Speed Boosts** – Temporarily **increases movement speed** but adds risk.  
-4. **Invincibility** – Allows the snake to **pass through itself or obstacles** for a short time.  
-5. **Magnet Power-Up** – Automatically **attracts food items** within a certain radius.  
-
----
+- **Growth Items** – Standard food that increases the snake’s length.  
+- **Shrink Items** – Rare items that shorten the snake, helping with maneuverability.  
+- **Speed Boosts** – Temporarily increases movement speed but adds risk.  
+- **Invincibility** – Allows the snake to pass through itself or obstacles for a short time.  
+- **Magnet Power-Up** – Automatically attracts food items within a certain radius.  
 
 #### **5. Game Modes**  
-- **Endless Mode** – The game continues **until the snake crashes** or reaches a **maximum length**.  
-- **Time Attack** – Players must **grow as much as possible** within a time limit.  
-- **Puzzle Mode** – Players **navigate pre-designed mazes** to collect all items without getting trapped.  
-- **Battle Mode** – Compete against **AI snakes or other players**, trying to outgrow or trap them.  
-
----
+- **Endless Mode** – The game continues until the snake crashes or reaches a maximum length.  
+- **Time Attack** – Players must grow as much as possible within a time limit.  
+- **Puzzle Mode** – Players navigate pre-designed mazes to collect all items without getting trapped.  
+- **Battle Mode** – Compete against AI snakes or other players, trying to outgrow or trap them.  
 
 #### **6. Enemy and AI Behavior**  
-- **AI Snakes** – Compete for food and **try to block the player’s path**.  
-- **Moving Obstacles** – Blocks that **shift positions over time**.  
-- **Trap Zones** – Areas that **temporarily lock the player inside**, forcing careful navigation.  
+- **AI Snakes** – Compete for food and try to block the player’s path.  
+- **Moving Obstacles** – Blocks that shift positions over time.  
+- **Trap Zones** – Areas that temporarily lock the player inside, forcing careful navigation.  
+
+#### **7. Game Difficulty and Challenges**  
+- **Increasing Game Speed** – Over time, the snake moves faster, requiring quicker reflexes.  
+- **More Complex Level Layouts** – Levels introduce hazards and obstacles to increase difficulty.  
+- **AI Snakes with Different Behaviors** – Some aggressive, some evasive, forcing different strategies.  
+- **Limited Special Abilities** – Players must use power-ups strategically to survive longer.  
 
 ---
 
-#### **7. Game Difficulty and Challenges**  
-- **Increasing Game Speed** – Over time, the snake moves **faster**, requiring quicker reflexes.  
-- **More Complex Level Layouts** – Levels introduce **hazards and obstacles** to increase difficulty.  
-- **AI Snakes with Different Behaviors** – Some **aggressive, some evasive**, forcing different strategies.  
-- **Limited Special Abilities** – Players must **use power-ups strategically** to survive longer.  
+### **Shining Points**  
+- **Easy to learn, hard to master** – Simple mechanics make the game accessible, while high-speed play requires skill.  
+- **Highly addictive gameplay** – The constant challenge of growing longer keeps players engaged.  
+- **Strategic positioning** – Players must decide when to speed up, slow down, or trap opponents.  
+- **Great for all ages** – A timeless genre with appeal for both casual and competitive players.  
+
+---
+
+### **Possible Creative Twists**  
+- **Multiplayer Team Battles** – Teams of snakes cooperate to complete objectives, such as capturing zones or protecting their leader.  
+- **Snake Racing Mode** – Competitive speed-based levels where players must reach the finish line first while collecting boosts and avoiding hazards.  
+- **AI-Generated Challenges** – The game adapts obstacles and enemy behavior based on the player’s skill level.  
 
 
 ### Idea3: Tower Defense Games  
