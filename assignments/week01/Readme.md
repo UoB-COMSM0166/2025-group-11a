@@ -363,3 +363,76 @@ Scrolling shooter games, also known as **"shoot 'em ups" (shmups)**, involve pla
   - Some games reward **perfect dodging** or **no-hit runs** with extra points or hidden content.  
   - Destroying specific enemies in a set order may reveal **secret upgrades or power-ups**.  
 
+
+### **Idea 5: Endless Runner Games**  
+
+#### **Game List:**  
+- **Subway Surfers** – A classic endless runner where players run along train tracks, dodging trains and obstacles.  
+- **Temple Run** – A jungle-themed runner where players escape from a cursed temple while avoiding traps.  
+- **Jetpack Joyride** – A side-scrolling endless runner with jetpacks, lasers, and unique power-ups.  
+- **Sonic Dash** – A fast-paced endless runner featuring Sonic’s signature speed and obstacle dodging.  
+- **Alto’s Adventure** – A visually stunning snowboarding endless runner with smooth mechanics.  
+- **Talking Tom Gold Run** – A family-friendly endless runner where players chase down a thief to recover stolen gold.  
+- **Crash Bandicoot: On the Run!** – A spin-off of the classic Crash Bandicoot series featuring running, jumping, and spinning mechanics.  
+- **Vector** – A parkour-themed endless runner with fluid animations and a dystopian setting.  
+- **Bendy in Nightmare Run** – A stylized 1930s-themed endless runner where players escape from monstrous enemies.  
+- **Into the Dead** – A horror-style endless runner where players run through a zombie-infested world.  
+
+---
+
+### **Game Overview**  
+Endless runner games are fast-paced action games where players control a character that continuously moves forward. The goal is to **run as far as possible** while avoiding obstacles, collecting power-ups, and sometimes battling enemies. Some endless runners focus on **speed and reflex-based challenges**, while others introduce **story elements, power progression, or unique movement mechanics** to keep gameplay engaging.  
+
+---
+
+### **Game Mechanics**  
+
+#### **1. Game Objectives**  
+- The primary goal is to **run as far as possible** without crashing into obstacles or getting caught by an enemy.  
+- Some endless runners feature **missions** or **collectibles** that unlock new characters, skins, or story progression.  
+- The game may increase in difficulty over time, making it harder to avoid obstacles or survive.  
+
+---
+
+#### **2. Character Abilities**  
+- **Basic Movement:** Players can swipe or tilt their device to move left, right, jump, or slide.  
+- **Wall Running:** Some games allow players to run along walls to avoid obstacles.  
+- **Dash/Boost:** A temporary speed increase to escape danger or break through barriers.  
+- **Glide/Wingsuit:** Slows down descent and allows for aerial movement.  
+- **Attack Ability:** Some runners let players attack enemies in their path.  
+
+---
+
+#### **3. Level Design**  
+- **Dynamic Paths:** The environment changes over time, with moving platforms or multiple branching paths.  
+- **Obstacles:** Players must avoid pits, barriers, spinning blades, and incoming vehicles.  
+- **Themed Environments:**  
+  - **City Streets:** Running across rooftops and through alleyways.  
+  - **Jungle Ruins:** Ancient temples with crumbling bridges and traps.  
+  - **Futuristic Worlds:** Cybernetic landscapes with neon lights and high-tech hazards.  
+  - **Underground Tunnels:** Dark environments with sudden turns and limited visibility.  
+
+---
+
+#### **4. Resource Management**  
+- **Health System:** Some runners allow players to take multiple hits before losing.  
+- **Collectibles:** Coins, gems, or special items used for upgrades or unlocking new characters.  
+- **Power-ups:** Temporary abilities like shields, magnets (auto-collect items), or invincibility.  
+- **Revival Items:** Players can spend in-game currency or watch ads to continue after failing.  
+
+---
+
+#### **5. Enemy Types**  
+- **Chasing Enemies:** Players are pursued by an enemy (e.g., a cop, monster, or robot).  
+- **Stationary Obstacles:** Barriers that must be jumped over, slid under, or dodged.  
+- **Moving Hazards:** Vehicles, rolling boulders, or enemy patrols that move unpredictably.  
+- **Attackers:** Some games introduce enemies that throw projectiles or try to knock the player off course.  
+
+---
+
+#### **6. Game Difficulty and Challenges**  
+- The game speeds up over time, requiring faster reactions.  
+- Complex obstacle patterns force players to adapt quickly.  
+- Some games feature **daily challenges** or **boss fights** in certain modes.  
+- Collecting items or completing missions unlocks **harder difficulty levels** or new game modes.  
+
