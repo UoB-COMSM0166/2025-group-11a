@@ -29,7 +29,7 @@
   |--------|--------------------|-------------------------|--------------------|
   | 1      | Yiqing Zhou        | lr24125@bristol.ac.uk   | Scrum Master, Coder |
   | 2      | Xing Yang          | zj24404@bristol.ac.uk   | Optimizer, Coder    |
-  | 3      |                    |                         |                     |
+  | 3      | Cheng Wang         | fd24967@bristol.ac.uk   | Designer, Coder     |
   | 4      |                    |                         |                     |
 </div>
 
