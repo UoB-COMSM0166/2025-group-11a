@@ -121,6 +121,8 @@ function draw() {
     if (playerSnake.checkCollisionWithAISnake(smallSnakes[i])) {
       gameOver = true;
     }
+
+    drawStaminaBar();
   }
   
   // 检查食物数量，如果过少则生成更多
@@ -205,4 +207,42 @@ function restartGame() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+}
+
+function drawStaminaBar() {
+  // 如果体力已满且鼠标未按住，则不显示体力条
+  if (playerSnake.stamina >= playerSnake.maxStamina && !(mouseIsPressed && mouseButton === LEFT)) {
+    return;
+  }
+  
+  let barWidth = 100;
+  let barHeight = 10;
+  let offsetY = -100; // 体力条距离蛇头部的垂直偏移
+
+  // 获取蛇头部的位置
+  let head = playerSnake.body[0];
+  let x = head.x - barWidth / 2; // 水平居中在蛇头部
+  let y = head.y + offsetY; // 在蛇头部上方
+
+  // 绘制背景条
+  noStroke();
+  fill(100, 100);
+  rect(x, y, barWidth, barHeight);
+
+  // 绘制体力条
+  let staminaWidth = map(playerSnake.stamina, 0, playerSnake.maxStamina, 0, barWidth);
+  // 根据体力状态设置颜色
+  if (mouseIsPressed && mouseButton === LEFT && playerSnake.stamina > 0) {
+    fill(0, 200, 200, 100); 
+  } else {
+    fill(100, 255, 100, 100); 
+  }
+  rect(x, y, staminaWidth, barHeight);
+
+  // 绘制边框
+  noFill();
+  stroke(255);
+  strokeWeight(2);
+  rect(x, y, barWidth, barHeight);
+  
 }

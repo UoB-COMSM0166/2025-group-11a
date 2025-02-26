@@ -1,6 +1,13 @@
 class PlayerSnake extends Snake {
   constructor(x = 0, y = 0) {
-    super(x, y, 5, [50, 200, 50]); // 绿色玩家蛇
+    super(x, y, 5, [50, 200, 50]); 
+    this.isAccelerating = false; 
+    this.stamina = 100; 
+    this.maxStamina = 100; 
+    this.staminaDrainRate = 1; 
+    this.staminaRecoverRate = 0.5; 
+    this.originalSpeed = snakeSpeed; 
+    this.boostSpeed = snakeSpeed * 2; 
   }
 
   updateDirection() {
@@ -11,6 +18,7 @@ class PlayerSnake extends Snake {
       dir.normalize();
       this.direction = dir;
     }
+    this.isAccelerating = mouseIsPressed && mouseButton === LEFT;
   }
 
   checkFoodCollision(foods) {
@@ -40,5 +48,28 @@ class PlayerSnake extends Snake {
     }
     
     return false;
+  }
+
+  move() {
+    // 根据是否加速来调整速度
+    if (this.isAccelerating && this.stamina > 0) {
+      this.speed = this.boostSpeed;
+      this.stamina -= this.staminaDrainRate;
+    } else {
+      this.speed = this.originalSpeed;
+      if (this.stamina < this.maxStamina) {
+        this.stamina += this.staminaRecoverRate;
+      }
+    }
+
+    // 确保体力值在合理范围内
+    this.stamina = constrain(this.stamina, 0, this.maxStamina);
+
+    if (this.stamina <= 0) {
+      this.isAccelerating = false;
+      this.speed = this.originalSpeed; // 确保速度重置
+    }
+
+    super.move();
   }
 }
