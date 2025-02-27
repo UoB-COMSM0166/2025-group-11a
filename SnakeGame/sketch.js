@@ -1,5 +1,6 @@
 let playerSnake;
 let foodManager;
+let obstacleManager;
 let gameMap;
 let gameWon = false;
 let gameOver = false;
@@ -32,8 +33,10 @@ function initGame() {
     smallSnakes.push(new AISnake()); // 生成5条AI小蛇
   }
   foodManager = new FoodManager();
+  obstacleManager = new ObstacleManager();
   gameMap = new GameMap(gridSize, mapSize, borderSize);
   foodManager.generateFood(200);
+  obstacleManager.generateObstacle(10);
   score = 0;
   gameOver = false;
   document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
@@ -168,6 +171,10 @@ function draw() {
   if (playerSnake.checkBoundaryCollision()) {
     gameOver = true;
   }
+
+  if (playerSnake.checkObstacleCollision(obstacleManager.obstacles)) {
+    gameOver = true;
+  }
   
   // 检查并处理食物碰撞，返回吃到的食物数量
   let foodEaten = playerSnake.checkFoodCollision(foodManager.foods);
@@ -178,6 +185,7 @@ function draw() {
   
   playerSnake.draw();
   foodManager.drawFoods();
+  obstacleManager.drawObstacles();
   gameMap.drawBoundary();
 }
 
