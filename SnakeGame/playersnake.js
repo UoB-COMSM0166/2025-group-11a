@@ -36,6 +36,16 @@ class PlayerSnake extends Snake {
     return foodEaten;
   }
   
+  checkObstacleCollision(obstacles) {
+     let head = this.body[0];
+    for(let i = obstacles.length -1; i >= 0; i--) {
+      if (p5.Vector.dist(head, obstacles[i]) < gridSize * 1.1) {
+       return true;
+      }
+    }
+    return false;
+  }
+  
   checkCollisionWithAISnake(aiSnake) {
     let head = this.body[0];
     
