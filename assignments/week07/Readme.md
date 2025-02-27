@@ -11,15 +11,84 @@ Due to the simplicity of our current game mechanics, we have only set one task: 
 <br>
 
 # Heuristic Evaluation
-| **interface** | **issue** | **heuristic** | **frequency** | **impact** | **persistence** | **severity** |
-| ----------| ----- | --------- | --------- | ------ | ----------- | -------- |
-| starting | lack a description of gameplay mechanics, level selection, and the option to choose between single-player and multiplayer modes | visibility of system status | 3 | 3 | 4 | 3.33 |
-| gaming | ai Snake won't die when it touches the player | consistency and standards | 4 | 2 | 3 | 3 |
-| gaming | unable to pause the game | user control and freedom | 3 | 2 | 3 | 2.67 |
-| ending | lack of winning conditions | consistency and standards | 2 | 4 | 2 | 2.67 |
-| gaming | difficulty in distinguishing snake movement | recognition rather than recall | 2 | 3 | 3 | 2.67 |
-| gaming | background and player snake visually synchronized | aesthetic and minimalist design | 3 | 1 | 2 | 2 |
-| gaming | restarting the game doesn't not clear the score | consistency and standards | 1 | 1 | 1 | 1 |  
+<table>
+  <thead>
+    <tr>
+      <th><strong>interface</strong></th>
+      <th><strong>issue</strong></th>
+      <th><strong>heuristic</strong></th>
+      <th><strong>frequency</strong></th>
+      <th><strong>impact</strong></th>
+      <th><strong>persistence</strong></th>
+      <th><strong>severity</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>starting</td>
+      <td>lack a description of gameplay mechanics, level selection, and the option to choose between single-player and multiplayer modes</td>
+      <td>visibility of system status</td>
+      <td>3</td>
+      <td>3</td>
+      <td>4</td>
+      <td>3.33</td>
+    </tr>
+    <tr>
+      <td>gaming</td>
+      <td>ai Snake won't die when it touches the player</td>
+      <td>consistency and standards</td>
+      <td>4</td>
+      <td>2</td>
+      <td>3</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>gaming</td>
+      <td>unable to pause the game</td>
+      <td>user control and freedom</td>
+      <td>3</td>
+      <td>2</td>
+      <td>3</td>
+      <td>2.67</td>
+    </tr>
+    <tr>
+      <td>ending</td>
+      <td>lack of winning conditions</td>
+      <td>consistency and standards</td>
+      <td>2</td>
+      <td>4</td>
+      <td>2</td>
+      <td>2.67</td>
+    </tr>
+    <tr>
+      <td>gaming</td>
+      <td>difficulty in distinguishing snake movement</td>
+      <td>recognition rather than recall</td>
+      <td>2</td>
+      <td>3</td>
+      <td>3</td>
+      <td>2.67</td>
+    </tr>
+    <tr>
+      <td>gaming</td>
+      <td>background and player snake visually synchronized</td>
+      <td>aesthetic and minimalist design</td>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>gaming</td>
+      <td>restarting the game doesn't not clear the score</td>
+      <td>consistency and standards</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
 <br>
 
 # Summary of areas requiring adjustments
