@@ -37,11 +37,32 @@ class PlayerSnake extends Snake {
   }
   
   checkObstacleCollision(obstacles) {
-     let head = this.body[0];
-    for(let i = obstacles.length -1; i >= 0; i--) {
-      if (p5.Vector.dist(head, obstacles[i]) < gridSize * 1.1) {
-       return true;
-      }
+    let head = this.body[0];
+    let headSize = gridSize; // 这里假设蛇头大小是 gridSize
+    let extraPadding = gridSize * 0.2; // 额外检测范围，让竖向障碍物更早触发碰撞，用于调试
+
+    for (let i = obstacles.length - 1; i >= 0; i--) {
+        let o = obstacles[i];
+
+        if (o.isHorizontal) {
+            if (
+                head.x < o.x + o.length +extraPadding &&// 提前触发
+                head.x + headSize > o.x -extraPadding &&
+                head.y < o.y +  gridSize &&
+                head.y + headSize > o.y
+            ) {
+                return true;
+            }
+        } else {
+            if (
+                head.x < o.x +  gridSize &&
+                head.x + headSize > o.x &&
+                head.y < o.y + o.length + extraPadding &&// 提前触发
+                head.y + headSize > o.y - extraPadding
+            ) {
+                return true;
+            }
+        }
     }
     return false;
   }
