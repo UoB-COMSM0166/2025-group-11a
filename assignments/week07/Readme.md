@@ -15,7 +15,7 @@ Due to the simplicity of our current game mechanics, we have only set one task: 
 | ----------| ----- | --------- | --------- | ------ | ----------- | -------- |
 | starting | lack a description of gameplay mechanics, level selection, and the option to choose between single-player and multiplayer modes | visibility of system status | 3 | 3 | 4 | 3.33 |
 | gaming | ai Snake won't die when it touches the player | consistency and standards | 4 | 2 | 3 | 3 |
-| gaming | unable to pause the game | 3 | 2 | 3 | 2.67 |
+| gaming | unable to pause the game | user control and freedom | 3 | 2 | 3 | 2.67 |
 | ending | lack of winning conditions | consistency and standards | 2 | 4 | 2 | 2.67 |
 | gaming | difficulty in distinguishing snake movement | recognition rather than recall | 2 | 3 | 3 | 2.67 |
 | gaming | background and player snake visually synchronized | aesthetic and minimalist design | 3 | 1 | 2 | 2 |
