@@ -8,6 +8,17 @@ class PlayerSnake extends Snake {
     this.staminaRecoverRate = 0.5; 
     this.originalSpeed = snakeSpeed; 
     this.boostSpeed = snakeSpeed * 2; 
+    this.isInvincible = false; // 无敌状态
+    this.invincibleDuration = 0; // 无敌持续时间（以帧为单位） 
+  }
+
+  activateInvincibility() {
+    this.isInvincible = true;
+    this.invincibleDuration = 120; // 设置无敌持续120帧
+  }
+
+  chargeStamina() {
+    this.stamina = this.maxStamina;
   }
 
   updateDirection() {
@@ -35,13 +46,50 @@ class PlayerSnake extends Snake {
     
     return foodEaten;
   }
+
+  checkItemCollision(items) {
+    let head = this.body[0]; // 获取蛇头位置
+
+    for (let i = items.length - 1; i >= 0; i--) {
+      // 使用 items[i].position 来访问道具的坐标
+      if (p5.Vector.dist(head, items[i].position) < gridSize * 1.1) {
+        let itemType = items[i].type; // 获取碰撞道具的类型
+        items.splice(i, 1); // 碰撞后删除道具
+        return { collided: true, type: itemType }; // 返回包含碰撞结果和道具类型的对象
+      }
+    }
+    return { collided: false, type: null }; // 如果没有碰撞，返回 false 和 null 类型
+  }
+
+
   
   checkObstacleCollision(obstacles) {
-     let head = this.body[0];
-    for(let i = obstacles.length -1; i >= 0; i--) {
-      if (p5.Vector.dist(head, obstacles[i]) < gridSize * 1.1) {
-       return true;
-      }
+    let head = this.body[0];
+    let headSize = gridSize; // 这里假设蛇头大小是 gridSize
+    let extraPadding = gridSize * 0.6; // 额外检测范围，让竖向障碍物更早触发碰撞，用于调试
+
+    for (let i = obstacles.length - 1; i >= 0; i--) {
+        let o = obstacles[i];
+
+        if (o.isHorizontal) {
+            if (
+                head.x < o.x + o.length + extraPadding &&// 提前触发
+                head.x + headSize > o.x &&
+                head.y < o.y +  gridSize &&
+                head.y + headSize > o.y
+            ) {
+                return true;
+            }
+        } else {
+            if (
+                head.x < o.x +  gridSize &&
+                head.x + headSize > o.x &&
+                head.y < o.y + o.length + extraPadding &&// 提前触发
+                head.y + headSize > o.y
+            ) {
+                return true;
+            }
+        }
     }
     return false;
   }
