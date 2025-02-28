@@ -1,6 +1,7 @@
 let playerSnake;
 let foodManager;
 let obstacleManager;
+let itemManager;
 let gameMap;
 let gameWon = false;
 let gameOver = false;
@@ -34,9 +35,11 @@ function initGame() {
   }
   foodManager = new FoodManager();
   obstacleManager = new ObstacleManager();
+  itemManager = new ItemManager();
   gameMap = new GameMap(gridSize, mapSize, borderSize);
   foodManager.generateFood(200);
   obstacleManager.generateObstacle(10);
+  itemManager.generateItem(10);
   score = 0;
   gameOver = false;
   document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
@@ -149,7 +152,7 @@ function draw() {
     }
     
     // 检查玩家与AI小蛇的碰撞
-    if (playerSnake.checkCollisionWithAISnake(smallSnakes[i])) {
+    if (playerSnake.checkCollisionWithAISnake(smallSnakes[i]) && !playerSnake.isInvincible) {
       gameOver = true;
     }
 
@@ -159,6 +162,10 @@ function draw() {
   // 检查食物数量，如果过少则生成更多
   if (foodManager.foods.length < 100) {
     foodManager.generateFood(10);
+  }
+
+  if (itemManager.items.length < 5) {
+    itemManager.generateItem(5);
   }
   
   if (!gameOver) {
@@ -172,8 +179,26 @@ function draw() {
     gameOver = true;
   }
 
-  if (playerSnake.checkObstacleCollision(obstacleManager.obstacles)) {
+  if (playerSnake.checkObstacleCollision(obstacleManager.obstacles) && !playerSnake.isInvincible) {
     gameOver = true;
+  }
+
+  if (playerSnake.isInvincible) {
+    playerSnake.invincibleDuration--;
+    if (playerSnake.invincibleDuration <= 0) {
+      playerSnake.isInvincible = false; // 无敌时间结束
+    }
+  }
+
+  let result = playerSnake.checkItemCollision(itemManager.items);
+
+  if (result.collided) {
+    if (result.type === "stamina") {
+      playerSnake.chargeStamina();
+    }
+    if (result.type === "invincible") {
+      playerSnake.activateInvincibility();
+    }
   }
   
   // 检查并处理食物碰撞，返回吃到的食物数量
@@ -182,11 +207,18 @@ function draw() {
     score += foodEaten;
     document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
   }
-  
-  playerSnake.draw();
+ 
   foodManager.drawFoods();
   obstacleManager.drawObstacles();
+  itemManager.drawItems();
   gameMap.drawBoundary();
+  if (playerSnake.isInvincible) {
+    if (playerSnake.invincibleDuration % 10 >= 3) {
+      playerSnake.draw();
+    }
+  } else {
+    playerSnake.draw();
+  }  
 }
 
 function translateCenter() {
