@@ -18,6 +18,7 @@ let boundaryStroke = 2;
 let cornerSize = 20;            // 四角标识长度（像素）
 let warningDistance = 500;      
 let score = 0;
+let difficultyMode = 'normal';
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
@@ -28,17 +29,35 @@ function setup() {
 }
 
 function initGame() {
+  // 清理残留对象
+  if(foodManager) foodManager.foods = [];
+  if(obstacleManager) obstacleManager.obstacles = [];
+  if(itemManager) itemManager.items = [];
+
   playerSnake = new PlayerSnake();
   smallSnakes = [];
-  for (let i = 0; i < 5; i++) {
-    smallSnakes.push(new AISnake()); // 生成5条AI小蛇
+
+  // 根据难度模式调整参数
+  let aiSnakeCount = difficultyMode === 'hard' ? 10 : 5;
+  let foodCount = difficultyMode === 'hard' ? 50 : 200;
+  let obstacleCount = difficultyMode === 'hard' ? 30 : 10;
+
+  for (let i = 0; i < aiSnakeCount; i++) {
+    smallSnakes.push(new AISnake());
   }
+  
+  // foodManager.generateFood(foodCount);
+  // obstacleManager.generateObstacle(obstacleCount);
+
+  // for (let i = 0; i < 5; i++) {
+  //   smallSnakes.push(new AISnake()); // 生成5条AI小蛇
+  // }
   foodManager = new FoodManager();
   obstacleManager = new ObstacleManager();
   itemManager = new ItemManager();
   gameMap = new GameMap(gridSize, mapSize, borderSize);
-  foodManager.generateFood(200);
-  obstacleManager.generateObstacle(10);
+  foodManager.generateFood(foodCount);
+  obstacleManager.generateObstacle(obstacleCount);
   itemManager.generateItem(10);
   score = 0;
   gameOver = false;
@@ -60,8 +79,30 @@ function createUI() {
   let startButton = createButton('START GAME');
   startButton.parent(startScreen);
   startButton.mousePressed(() => {
-    gameStarted = true;
     document.getElementById('startScreen').style.display = 'none';
+    showDifficultySelection();
+    // document.getElementById('difficultyScreen').style.display = 'block';
+  });
+
+  let difficultyScreen = createDiv('');
+  difficultyScreen.id('difficultyScreen');
+  difficultyScreen.style('display', 'none');
+  difficultyScreen.parent('main');
+
+  let difficultyTitle = createElement('h2', 'DIFFICULTY：');
+  difficultyTitle.parent(difficultyScreen);
+
+  let normalButton = createButton('NORMAL');
+  normalButton.parent(difficultyScreen);
+  normalButton.mousePressed(() => {
+    difficultyMode = 'normal';
+    startGame();
+  });
+  let hardButton = createButton('HARD');
+  hardButton.parent(difficultyScreen);
+  hardButton.mousePressed(() => {
+    difficultyMode = 'hard';
+    startGame();
   });
   
   // 创建游戏结束屏幕
@@ -110,6 +151,10 @@ function createUI() {
   scoreDiv.class('score');
   scoreDiv.id('scoreDisplay');
   scoreDiv.parent('main');
+
+  // 初始隐藏分数和重新开始按钮，直到游戏真正开始
+  document.getElementById('scoreDisplay').style.visibility = 'hidden';
+  document.querySelector('.button-container').style.visibility = 'hidden';
 }
 
 function draw() {
@@ -119,17 +164,21 @@ function draw() {
   
   background(20);
 
-  if (score >= 100) {
+  if (score >= 10) {
     gameWon = true;
   }
 
   if (gameWon) {
+    document.getElementById('scoreDisplay').style.visibility = 'hidden';
+    document.querySelector('.button-container').style.visibility = 'hidden';
     document.getElementById('gameWonScreen').style.visibility = 'visible';
     document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
     return;
   }
   
   if (gameOver) {
+    document.getElementById('scoreDisplay').style.visibility = 'hidden';
+    document.querySelector('.button-container').style.visibility = 'hidden';
     document.getElementById('gameOverScreen').style.visibility = 'visible';
     document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
     return;
@@ -269,10 +318,32 @@ function drawPulsingWarning() {
 }
 
 function restartGame() {
+  // 隐藏游戏相关界面
   document.getElementById('gameOverScreen').style.visibility = 'hidden';
-  document.getElementById('gameWonScreen').style.visibility = 'hidden'; 
+  document.getElementById('gameWonScreen').style.visibility = 'hidden';
+
+  // 隐藏分数和重新开始按钮
+  document.getElementById('scoreDisplay').style.visibility = 'hidden';
+  document.querySelector('.button-container').style.visibility = 'hidden';
+  
+  // 显示开始界面 - 不需要额外设置样式，CSS会自动应用
+  document.getElementById('startScreen').style.display = 'flex';
+    
+  // 如果显示了难度选择界面，也需要隐藏它
+  document.getElementById('difficultyScreen').style.display = 'none';
+  
+  // 完全重置游戏状态
+  gameStarted = false;
+  gameOver = false;
   gameWon = false;
-  initGame();
+  
+  // 清理现有游戏对象
+  if(playerSnake) playerSnake = null;
+  smallSnakes = [];
+  // document.getElementById('gameOverScreen').style.visibility = 'hidden';
+  // document.getElementById('gameWonScreen').style.visibility = 'hidden'; 
+  // gameWon = false;
+  // initGame();
 }
 
 function windowResized() {
@@ -315,4 +386,27 @@ function drawStaminaBar() {
   strokeWeight(2);
   rect(x, y, barWidth, barHeight);
   
+}
+
+function showDifficultySelection() {
+  document.getElementById('difficultyScreen').style.display = 'block';
+  document.getElementById('scoreDisplay').style.visibility = 'hidden';
+  document.querySelector('.button-container').style.visibility = 'hidden';
+}
+
+function startGame() {
+  // 隐藏所有非游戏界面
+  document.getElementById('difficultyScreen').style.display = 'none';
+  document.getElementById('startScreen').style.display = 'none';
+
+  // 显示分数和重新开始按钮
+  document.getElementById('scoreDisplay').style.visibility = 'visible';
+  document.querySelector('.button-container').style.visibility = 'visible';
+  
+  // 重置游戏状态
+  gameStarted = true;
+  gameOver = false;
+  gameWon = false;
+  
+  initGame();
 }
