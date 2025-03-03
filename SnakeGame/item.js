@@ -15,7 +15,14 @@ class ItemManager {
         });
       }
     }
-  
+    //在ai蛇死亡的位置生成随机道具
+    generateItemAt(position) {
+        let type = this.randomType(); // 选择随机道具类型
+        this.items.push({
+            position: position,
+            type: type
+        });
+    }
     randomType() {
       let types = ["invincible", "stamina", "helmet"];
       return random(types);

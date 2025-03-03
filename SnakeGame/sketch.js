@@ -164,7 +164,7 @@ function draw() {
   
   background(20);
 
-  if (score >= 10) {
+  if (score >= 100) {
     gameWon = true;
   }
 
@@ -204,7 +204,12 @@ function draw() {
     if (playerSnake.checkCollisionWithAISnake(smallSnakes[i]) && !playerSnake.isInvincible) {
       gameOver = true;
     }
-
+    // AI蛇头碰到玩家蛇身体后，ai蛇死亡-移除自己并生成随机数量的食物
+    if (smallSnakes[i].checkCollisionWithPlayer(playerSnake)) {
+      smallSnakes[i].die(); // 让 AI蛇死亡生成食物
+      smallSnakes.splice(i, 1); // 删除 AI蛇
+      continue; // 跳过后续逻辑，防止报错
+    }
     drawStaminaBar();
   }
   

@@ -7,18 +7,19 @@ class PlayerSnake extends Snake {
     this.staminaDrainRate = 1; 
     this.staminaRecoverRate = 0.5; 
     this.originalSpeed = snakeSpeed; 
-    this.boostSpeed = snakeSpeed * 2; 
+    this.boostSpeed = snakeSpeed * 2;
+    this.boostCooldown = 0;//加速冷却时间
     this.isInvincible = false; // 无敌状态
     this.invincibleDuration = 0; // 无敌持续时间（以帧为单位） 
   }
 
   activateInvincibility() {
     this.isInvincible = true;
-    this.invincibleDuration = 120; // 设置无敌持续120帧
+    this.invincibleDuration = 180; // 无敌时间持续180帧
   }
 
   chargeStamina() {
-    this.stamina = this.maxStamina;
+    this.stamina = min(this.stamina + 50, this.maxStamina);//每次只增加 50 点体力，但不会超过 maxStamina。
   }
 
   updateDirection() {
@@ -61,51 +62,65 @@ class PlayerSnake extends Snake {
     return { collided: false, type: null }; // 如果没有碰撞，返回 false 和 null 类型
   }
 
-
-  
   checkObstacleCollision(obstacles) {
     let head = this.body[0];
     let headSize = gridSize; // 这里假设蛇头大小是 gridSize
-    let extraPadding = gridSize * 0.6; // 额外检测范围，让竖向障碍物更早触发碰撞，用于调试
+    let extraPadding = gridSize * 0.6; // 额外检测范围，让竖向障碍物更早触发碰撞
+    let collisionDetected = false; // 碰撞标志
 
     for (let i = obstacles.length - 1; i >= 0; i--) {
-        let o = obstacles[i];
-
-        if (o.isHorizontal) {
-            if (
-                head.x < o.x + o.length + extraPadding &&// 提前触发
-                head.x + headSize > o.x &&
-                head.y < o.y +  gridSize &&
-                head.y + headSize > o.y
-            ) {
-                return true;
-            }
-        } else {
-            if (
-                head.x < o.x +  gridSize &&
-                head.x + headSize > o.x &&
-                head.y < o.y + o.length + extraPadding &&// 提前触发
-                head.y + headSize > o.y
-            ) {
-                return true;
-            }
+      let o = obstacles[i];
+      if (o.isHorizontal) {
+        if (
+            head.x < o.x + o.length + extraPadding && // 提前触发
+            head.x + headSize > o.x &&
+            head.y < o.y + gridSize &&
+            head.y + headSize > o.y
+        ) {
+          collisionDetected = true;
+          break;
         }
+      } else {
+        if (
+            head.x < o.x + gridSize &&
+            head.x + headSize > o.x &&
+            head.y < o.y + o.length + extraPadding && // 提前触发
+            head.y + headSize > o.y
+        ) {
+          collisionDetected = true;
+          break;
+        }
+      }
+    }
+    if (collisionDetected) {
+      if (!this.isRecovering) { // 防止重复触发
+        this.isRecovering = true;
+        this.speed = 0; // 停止移动
+        // 撞到障碍物后，轻微后退，模拟撞击效果
+        this.direction.rotate(PI / 2);
+        this.body[0].sub(this.direction.copy().mult(gridSize * 0.5)); // 反弹半个格子
+      }
+      return true;
     }
     return false;
   }
-  
+
+  //玩家蛇头 碰到 ai蛇头与蛇身时， 均会死亡
   checkCollisionWithAISnake(aiSnake) {
     let head = this.body[0];
-    
-    // 检查与AI蛇身体的碰撞
-    for (let i = 0; i < aiSnake.body.length; i++) {
+    let aiHead = aiSnake.body[0]; // 获取AI蛇的头部
+    // 先检查玩家蛇头是否撞到AI蛇头
+    if (p5.Vector.dist(head, aiHead) < gridSize) {
+      return true; // 头碰头，玩家死亡
+    }
+    // 检查玩家蛇头是否撞到AI蛇的身体
+    for (let i = 1; i < aiSnake.body.length; i++) { // 从1开始，避免重复检查AI头部
       let seg = aiSnake.body[i];
       if (p5.Vector.dist(head, seg) < gridSize) {
-        return true;
+        return true; // 碰到AI身体，玩家死亡
       }
     }
-    
-    return false;
+    return false; // 没有碰撞
   }
 
   move() {
