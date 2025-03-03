@@ -89,4 +89,53 @@ class AISnake extends Snake {
       }
     }
   }
+
+  //检测 AI蛇的 蛇头是否碰到玩家蛇的身体
+  checkCollisionWithPlayer(playerSnake) {
+    let aiHead = this.body[0]; // AI蛇的头部
+    let playerBody = playerSnake.body; // 获取玩家蛇的身体
+
+    // 遍历玩家蛇的每一节身体
+    for (let i = 1; i < playerBody.length; i++) {
+      if (p5.Vector.dist(aiHead, playerBody[i]) < gridSize) { // 碰撞检测
+        return true; // 发生碰撞
+      }
+    }
+    return false; // 没有碰撞
+  }
+
+  //AI蛇的死亡会生成随机数量的食物和道具
+  die() {
+    let bodyParts = this.body.length; // 获取 AI 蛇身体长度
+    let foodCount = floor(random(ceil(bodyParts * 0.3), ceil(bodyParts * 0.6))); // 30% - 60% 的身体掉落食物
+    let itemCount = floor(random(0, ceil(bodyParts * 0.15))); // 0% - 15% 的身体掉落道具
+
+    // 限制最大掉落数量
+    foodCount = min(foodCount, 5);  // 最多掉落 5 个食物
+    itemCount = min(itemCount, 2);  // 最多掉落 2 个道具
+
+    let shuffledBody = [...this.body]; // 复制并打乱身体数组
+    shuffledBody = shuffledBody.sort(() => random() - 0.5);
+
+    // 生成食物
+    for (let i = 0; i < foodCount; i++) {
+      let bodySegment = shuffledBody[i]; // 取随机的身体部位
+      let offsetX = random(-gridSize * 0.3, gridSize * 0.3);
+      let offsetY = random(-gridSize * 0.3, gridSize * 0.3);
+      let newFood = createVector(bodySegment.x + offsetX, bodySegment.y + offsetY);
+      foodManager.foods.push(newFood);
+    }
+
+    // 生成道具
+    for (let i = 0; i < itemCount; i++) {
+      let bodySegment = shuffledBody[foodCount + i]; // 取剩余部分
+      if (!bodySegment) break; // 避免索引越界
+
+      let offsetX = random(-gridSize * 0.5, gridSize * 0.5);
+      let offsetY = random(-gridSize * 0.5, gridSize * 0.5);
+      let itemPos = createVector(bodySegment.x + offsetX, bodySegment.y + offsetY);
+      itemManager.generateItemAt(itemPos);
+    }
+  }
+
 }
