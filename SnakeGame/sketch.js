@@ -19,6 +19,7 @@ let cornerSize = 20;            // 四角标识长度（像素）
 let warningDistance = 500;      
 let score = 0;
 let difficultyMode = 'normal';
+let currentMap = 'default';
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
@@ -33,9 +34,19 @@ function initGame() {
   if(foodManager) foodManager.foods = [];
   if(obstacleManager) obstacleManager.obstacles = [];
   if(itemManager) itemManager.items = [];
+  // 清理地图相关元素
+  if(gameMap && gameMap.swampManager) {
+    gameMap.swampManager.swamps = [];
+  }
 
   playerSnake = new PlayerSnake();
   smallSnakes = [];
+
+  // 根据地图选择初始化
+  if(currentMap === 'swamp') {
+    gameMap.generateSwamps(); // 生成沼泽地形
+  }
+
 
   // 根据难度模式调整参数
   let aiSnakeCount = difficultyMode === 'hard' ? 10 : 5;
@@ -62,6 +73,10 @@ function initGame() {
   score = 0;
   gameOver = false;
   document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
+
+  if (currentMap === 'swamp') {
+  gameMap.generateSwamps(); // 新增沼泽生成
+  }
 }
 
 function createUI() {
@@ -80,10 +95,43 @@ function createUI() {
   startButton.parent(startScreen);
   startButton.mousePressed(() => {
     document.getElementById('startScreen').style.display = 'none';
-    showDifficultySelection();
+    document.getElementById('mapSelectScreen').style.display = 'flex'; 
+    // showDifficultySelection();
     // document.getElementById('difficultyScreen').style.display = 'block';
   });
 
+  // 创建地图选择界面
+  let mapSelectScreen = createDiv('');
+  mapSelectScreen.id('mapSelectScreen');
+  mapSelectScreen.style('display', 'none');
+  mapSelectScreen.parent('main');
+
+  let mapTitle = createElement('h2', 'MAP');
+  mapTitle.parent(mapSelectScreen);
+
+  // 默认地图按钮
+  let defaultMapBtn = createButton('DEFAULT');
+  defaultMapBtn.parent(mapSelectScreen);
+  defaultMapBtn.mousePressed(() => {
+    currentMap = 'default';
+    showDifficultySelection();
+  });
+
+  // 沼泽地图按钮
+  let swampMapBtn = createButton('SWAMP');
+  swampMapBtn.parent(mapSelectScreen);
+  swampMapBtn.mousePressed(() => {
+    currentMap = 'swamp';
+    showDifficultySelection();
+  });
+
+  let mapButtonContainer = createDiv('');
+  mapButtonContainer.class('button-row');
+  mapButtonContainer.parent(mapSelectScreen);
+  defaultMapBtn.parent(mapButtonContainer);
+  swampMapBtn.parent(mapButtonContainer);
+
+  // 难度选择
   let difficultyScreen = createDiv('');
   difficultyScreen.id('difficultyScreen');
   difficultyScreen.style('display', 'none');
@@ -189,7 +237,11 @@ function draw() {
   gameMap.drawFixedGrid();
   pop(); 
   translateCenter();
-  
+
+  if (currentMap = 'swamp') {
+  gameMap.drawSwamps(); // 新增沼泽绘制
+  }
+
   // 更新和绘制AI小蛇
   for (let i = smallSnakes.length - 1; i >= 0; i--) {
     smallSnakes[i].update();
@@ -399,6 +451,7 @@ function drawStaminaBar() {
 }
 
 function showDifficultySelection() {
+  document.getElementById('mapSelectScreen').style.display = 'none';
   document.getElementById('difficultyScreen').style.display = 'block';
   document.getElementById('scoreDisplay').style.visibility = 'hidden';
   document.querySelector('.button-container').style.visibility = 'hidden';
@@ -408,6 +461,7 @@ function startGame() {
   // 隐藏所有非游戏界面
   document.getElementById('difficultyScreen').style.display = 'none';
   document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('mapSelectScreen').style.display = 'none';
 
   // 显示分数和重新开始按钮
   document.getElementById('scoreDisplay').style.visibility = 'visible';

@@ -124,12 +124,15 @@ class PlayerSnake extends Snake {
   }
 
   move() {
+    // 检测沼泽减速
+    let currentSlowdown = gameMap.swampManager.inSwamp(this.body[0]);
+
     // 根据是否加速来调整速度
     if (this.isAccelerating && this.stamina > 0) {
-      this.speed = this.boostSpeed;
+      this.speed = this.boostSpeed * currentSlowdown;
       this.stamina -= this.staminaDrainRate;
     } else {
-      this.speed = this.originalSpeed;
+      this.speed = this.originalSpeed * currentSlowdown;
       if (this.stamina < this.maxStamina) {
         this.stamina += this.staminaRecoverRate;
       }

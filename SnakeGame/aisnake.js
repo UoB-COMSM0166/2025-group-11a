@@ -43,6 +43,8 @@ class AISnake extends Snake {
     }
     
     // 移动AI蛇
+    let currentSlowdown = gameMap.swampManager.inSwamp(this.body[0]);
+    this.speed = snakeSpeed * currentSlowdown;
     this.move();
     
     // 检查并吃食物
