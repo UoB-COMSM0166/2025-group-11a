@@ -164,7 +164,7 @@ function draw() {
   
   background(20);
 
-  if (score >= 100) {
+  if (score >= 20) {
     gameWon = true;
   }
 
@@ -214,10 +214,11 @@ function draw() {
   }
   
   // 检查食物数量，如果过少则生成更多
-  if (foodManager.foods.length < 100) {
-    foodManager.generateFood(10);
+  if (difficultyMode === 'normal') {
+    if (foodManager.foods.length < 100) {
+      foodManager.generateFood(10);
+    }
   }
-
   if (itemManager.items.length < 5) {
     itemManager.generateItem(5);
   }
