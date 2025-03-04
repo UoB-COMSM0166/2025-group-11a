@@ -199,6 +199,10 @@ function draw() {
     if (smallSnakes[i].checkBoundaryCollision(true)) {
       smallSnakes[i] = new AISnake();
     }
+
+    if (smallSnakes[i].length < 10) {
+      smallSnakes[i] = new AISnake();
+    }
     
     // 检查玩家与AI小蛇的碰撞
     if (playerSnake.checkCollisionWithAISnake(smallSnakes[i]) && !playerSnake.isInvincible) {
