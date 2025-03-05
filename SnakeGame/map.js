@@ -7,26 +7,26 @@ class GameMap {
     this.swampManager = new SwampManager();
   }
 
-  drawGrid() {
-    push();
-    stroke(255, 50); // 白色半透明网格线
-    strokeWeight(1);
+  // drawGrid() {
+  //   push();
+  //   stroke(255, 50); // 白色半透明网格线
+  //   strokeWeight(1);
 
-    let startX = -width * this.visibleRange - (width / 2 % this.gridSize);
-    let startY = -height * this.visibleRange - (height / 2 % this.gridSize);
+  //   let startX = -width * this.visibleRange - (width / 2 % this.gridSize);
+  //   let startY = -height * this.visibleRange - (height / 2 % this.gridSize);
 
-    // 绘制水平网格线
-    for (let y = startY; y < height * this.visibleRange; y += this.gridSize) {
-      line(-width * this.visibleRange, y, width * this.visibleRange, y);
-    }
+  //   // 绘制水平网格线
+  //   for (let y = startY; y < height * this.visibleRange; y += this.gridSize) {
+  //     line(-width * this.visibleRange, y, width * this.visibleRange, y);
+  //   }
 
-    // 绘制垂直网格线
-    for (let x = startX; x < width * this.visibleRange; x += this.gridSize) {
-      line(x, -height * this.visibleRange, x, height * this.visibleRange);
-    }
+  //   // 绘制垂直网格线
+  //   for (let x = startX; x < width * this.visibleRange; x += this.gridSize) {
+  //     line(x, -height * this.visibleRange, x, height * this.visibleRange);
+  //   }
 
-    pop();
-  }
+  //   pop();
+  // }
 
   drawBoundary() {
     push();
@@ -38,13 +38,13 @@ class GameMap {
       h: height * this.mapSize
     };
 
-    // 计算可见边界（比游戏边界稍大）
-    let visibleBoundary = {
-      x: -width * this.borderSize / 2,
-      y: -height * this.borderSize / 2,
-      w: width * this.borderSize,
-      h: height * this.borderSize
-    };
+    // // 计算可见边界（比游戏边界稍大）
+    // let visibleBoundary = {
+    //   x: -width * this.borderSize / 2,
+    //   y: -height * this.borderSize / 2,
+    //   w: width * this.borderSize,
+    //   h: height * this.borderSize
+    // };
 
     // 绘制白色可见边界
     // GameMap.stroke(255);
@@ -56,32 +56,59 @@ class GameMap {
     pop();
   }
 
-  // 绘制固定网格，不随蛇移动
+  // // 绘制固定网格，不随蛇移动
+  // drawFixedGrid() {
+  //   push();
+  //   stroke(255, 30); // 白色半透明网格线
+  //   strokeWeight(1);
+    
+  //   // 计算屏幕上可见的网格
+  //   let startX = floor(-width / 2 / gridSize) * gridSize;
+  //   let startY = floor(-height / 2 / gridSize) * gridSize;
+  //   let endX = ceil(width / 2 / gridSize) * gridSize;
+  //   let endY = ceil(height / 2 / gridSize) * gridSize;
+    
+  //   // 将画布原点移到屏幕中心
+  //   translate(width / 2, height / 2);
+    
+  //   // 绘制水平网格线
+  //   for (let y = startY; y <= endY; y += gridSize) {
+  //     line(startX, y, endX, y);
+  //   }
+    
+  //   // 绘制垂直网格线
+  //   for (let x = startX; x <= endX; x += gridSize) {
+  //     line(x, startY, x, endY);
+  //   }
+  //   pop();
+  // }
+
   drawFixedGrid() {
     push();
     stroke(255, 30); // 白色半透明网格线
     strokeWeight(1);
     
-    // 计算屏幕上可见的网格
-    let startX = floor(-width / 2 / gridSize) * gridSize;
-    let startY = floor(-height / 2 / gridSize) * gridSize;
-    let endX = ceil(width / 2 / gridSize) * gridSize;
-    let endY = ceil(height / 2 / gridSize) * gridSize;
+    // 计算整个地图范围的网格
+    let startX = floor(-width * this.mapSize / 2 / this.gridSize) * this.gridSize;
+    let startY = floor(-height * this.mapSize / 2 / this.gridSize) * this.gridSize;
+    let endX = ceil(width * this.mapSize / 2 / this.gridSize) * this.gridSize;
+    let endY = ceil(height * this.mapSize / 2 / this.gridSize) * this.gridSize;
     
-    // 将画布原点移到屏幕中心
-    translate(width / 2, height / 2);
+    // 移动原点，使网格从左上角绘制
+    translate(0, 0);
     
     // 绘制水平网格线
-    for (let y = startY; y <= endY; y += gridSize) {
+    for (let y = startY; y <= endY; y += this.gridSize) {
       line(startX, y, endX, y);
     }
     
     // 绘制垂直网格线
-    for (let x = startX; x <= endX; x += gridSize) {
+    for (let x = startX; x <= endX; x += this.gridSize) {
       line(x, startY, x, endY);
     }
+    
     pop();
-  }
+    }
 
   generateSwamps() {
     this.swampManager.generateSwamps(difficultyMode === 'hard' ? 8 : 5);

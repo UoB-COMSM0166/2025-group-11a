@@ -202,6 +202,7 @@ function draw() {
   }
   
   background(20);
+  translateCenter();
 
   if (score >= 20) {
     gameWon = true;
@@ -227,7 +228,7 @@ function draw() {
   push(); 
   gameMap.drawFixedGrid();
   pop(); 
-  translateCenter();
+
 
   if (currentMap = 'swamp') {
   gameMap.drawSwamps(); // 新增沼泽绘制
