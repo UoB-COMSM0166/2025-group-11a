@@ -42,27 +42,11 @@ function initGame() {
   playerSnake = new PlayerSnake();
   smallSnakes = [];
 
-  // 根据地图选择初始化
-  if(currentMap === 'swamp') {
-    gameMap.generateSwamps(); // 生成沼泽地形
-  }
-
-
   // 根据难度模式调整参数
   let aiSnakeCount = difficultyMode === 'hard' ? 10 : 5;
   let foodCount = difficultyMode === 'hard' ? 50 : 200;
   let obstacleCount = difficultyMode === 'hard' ? 30 : 10;
 
-  for (let i = 0; i < aiSnakeCount; i++) {
-    smallSnakes.push(new AISnake());
-  }
-  
-  // foodManager.generateFood(foodCount);
-  // obstacleManager.generateObstacle(obstacleCount);
-
-  // for (let i = 0; i < 5; i++) {
-  //   smallSnakes.push(new AISnake()); // 生成5条AI小蛇
-  // }
   foodManager = new FoodManager();
   obstacleManager = new ObstacleManager();
   itemManager = new ItemManager();
@@ -74,8 +58,15 @@ function initGame() {
   gameOver = false;
   document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
 
-  if (currentMap === 'swamp') {
-  gameMap.generateSwamps(); // 新增沼泽生成
+
+  for (let i = 0; i < aiSnakeCount; i++) {
+    smallSnakes.push(new AISnake());
+  }
+
+  // 根据地图选择初始化
+  if(currentMap === 'swamp') {
+    gameMap.generateSwamps(); // 生成沼泽地形
+    gameMap.drawSwamps(); // 绘制沼泽地形
   }
 }
 
@@ -244,14 +235,9 @@ function draw() {
 
   // 更新和绘制AI小蛇
   for (let i = smallSnakes.length - 1; i >= 0; i--) {
-    smallSnakes[i].update();
     smallSnakes[i].draw();
+    smallSnakes[i].update();
     
-    // 检查AI小蛇是否超出边界，如果是则重新生成
-    if (smallSnakes[i].checkBoundaryCollision(true)) {
-      smallSnakes[i] = new AISnake();
-    }
-
     if (smallSnakes[i].length < 10) {
       smallSnakes[i] = new AISnake();
     }
@@ -383,15 +369,9 @@ function restartGame() {
   // 隐藏游戏相关界面
   document.getElementById('gameOverScreen').style.visibility = 'hidden';
   document.getElementById('gameWonScreen').style.visibility = 'hidden';
-
-  // 隐藏分数和重新开始按钮
   document.getElementById('scoreDisplay').style.visibility = 'hidden';
   document.querySelector('.button-container').style.visibility = 'hidden';
-  
-  // 显示开始界面 - 不需要额外设置样式，CSS会自动应用
   document.getElementById('startScreen').style.display = 'flex';
-    
-  // 如果显示了难度选择界面，也需要隐藏它
   document.getElementById('difficultyScreen').style.display = 'none';
   
   // 完全重置游戏状态
@@ -402,10 +382,10 @@ function restartGame() {
   // 清理现有游戏对象
   if(playerSnake) playerSnake = null;
   smallSnakes = [];
-  // document.getElementById('gameOverScreen').style.visibility = 'hidden';
-  // document.getElementById('gameWonScreen').style.visibility = 'hidden'; 
-  // gameWon = false;
-  // initGame();
+  document.getElementById('gameOverScreen').style.visibility = 'hidden';
+  document.getElementById('gameWonScreen').style.visibility = 'hidden'; 
+  gameWon = false;
+  initGame();
 }
 
 function windowResized() {
@@ -420,12 +400,12 @@ function drawStaminaBar() {
   
   let barWidth = 100;
   let barHeight = 10;
-  let offsetY = -100; // 体力条距离蛇头部的垂直偏移
+  let offsetY = -100; 
 
   // 获取蛇头部的位置
   let head = playerSnake.body[0];
-  let x = head.x - barWidth / 2; // 水平居中在蛇头部
-  let y = head.y + offsetY; // 在蛇头部上方
+  let x = head.x - barWidth / 2; 
+  let y = head.y + offsetY; 
 
   // 绘制背景条
   noStroke();
