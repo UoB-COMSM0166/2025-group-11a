@@ -182,13 +182,13 @@ function createUI() {
   buttonContainer.class('button-container');
   buttonContainer.parent('main');
   
-  // **让按钮纵向排列
+  //让按钮纵向排列
   buttonContainer.style('display', 'flex');
   buttonContainer.style('flex-direction', 'column'); // 纵向排列
   buttonContainer.style('gap', '10px'); // 按钮间隔
   buttonContainer.style('align-items', 'center'); // 居中对齐
 
-  // **添加暂停按钮
+  //添加暂停按钮
   let pauseBtn = createButton('PAUSE');
   pauseBtn.parent(buttonContainer);
   pauseBtn.mousePressed(() => {
