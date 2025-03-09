@@ -10,16 +10,23 @@ class PlayerSnake extends Snake {
     this.boostSpeed = snakeSpeed * 2;
     this.boostCooldown = 0;//加速冷却时间
     this.isInvincible = false; // 无敌状态
-    this.invincibleDuration = 0; // 无敌持续时间（以帧为单位） 
+    this.invincibleDuration = 0; 
+    this.isEnlarged = false; // 头部食物碰撞变大
+    this.enlargeDuration = 0;
   }
 
-  activateInvincibility() {
+  actInvincibility() {
     this.isInvincible = true;
     this.invincibleDuration = 180; // 无敌时间持续180帧
   }
 
-  chargeStamina() {
+  actStamina() {
     this.stamina = min(this.stamina + 50, this.maxStamina);//每次只增加 50 点体力，但不会超过 maxStamina。
+  }
+
+  actEnlarge() {
+    this.isEnlarged = true;
+    this.enlargeDuration = 180;
   }
 
   updateDirection() {
@@ -36,9 +43,10 @@ class PlayerSnake extends Snake {
   checkFoodCollision(foods) {
     let head = this.body[0];
     let foodEaten = 0;
-    
     for (let i = foods.length - 1; i >= 0; i--) {
-      if (p5.Vector.dist(head, foods[i]) < gridSize * 1.1) {
+      //食物碰撞分是否enlarged两种情况
+      if (this.isEnlarged == false && p5.Vector.dist(head, foods[i]) < gridSize * 1.1
+    || this.isEnlarged == true && p5.Vector.dist(head, foods[i]) < gridSize * 2.2) {
         this.grow();
         foods.splice(i, 1);
         foodEaten++;
@@ -48,25 +56,28 @@ class PlayerSnake extends Snake {
     return foodEaten;
   }
 
+
   checkItemCollision(items) {
-    let head = this.body[0]; // 获取蛇头位置
+    let head = this.body[0];
 
     for (let i = items.length - 1; i >= 0; i--) {
-      // 使用 items[i].position 来访问道具的坐标
-      if (p5.Vector.dist(head, items[i].position) < gridSize * 1.1) {
-        let itemType = items[i].type; // 获取碰撞道具的类型
-        items.splice(i, 1); // 碰撞后删除道具
-        return { collided: true, type: itemType }; // 返回包含碰撞结果和道具类型的对象
+      //d道具碰撞分是否enlarged两种情况
+      if (this.isEnlarged == false && p5.Vector.dist(head, items[i].position) < gridSize * 1.1
+    ||this.isEnlarged == true && p5.Vector.dist(head, items[i].position) < gridSize * 2.2) {
+        let itemType = items[i].type;
+        
+        items.splice(i, 1);
+        return { collided: true, type: itemType };
       }
     }
-    return { collided: false, type: null }; // 如果没有碰撞，返回 false 和 null 类型
+    return { collided: false, type: null };
   }
 
   checkObstacleCollision(obstacles) {
     let head = this.body[0];
-    let headSize = gridSize; // 这里假设蛇头大小是 gridSize
-    let extraPadding = gridSize * 0.6; // 额外检测范围，让竖向障碍物更早触发碰撞
-    let collisionDetected = false; // 碰撞标志
+    let headSize = gridSize;
+    let extraPadding = gridSize * 0.6; // 额外检测范围，用于调试碰撞
+    let collisionDetected = false;
 
     for (let i = obstacles.length - 1; i >= 0; i--) {
       let o = obstacles[i];
