@@ -28,6 +28,7 @@ function setup() {
   frameRate(30);
   createUI();
   initGame();
+
 }
 
 function initGame() {
@@ -42,6 +43,9 @@ function initGame() {
 
   playerSnake = new PlayerSnake();
   smallSnakes = [];
+  playerSnake.isInvincible = true; // 游戏刚开始时玩家蛇处于无敌状态
+  playerSnake.invincibleDuration = 60;
+  
 
   // 根据难度模式调整参数
   let aiSnakeCount = difficultyMode === 'hard' ? 10 : 5;
@@ -300,22 +304,32 @@ function draw() {
   if (playerSnake.checkObstacleCollision(obstacleManager.obstacles) && !playerSnake.isInvincible) {
     gameOver = true;
   }
-
+  //逐帧减少玩家道具时间
   if (playerSnake.isInvincible) {
     playerSnake.invincibleDuration--;
     if (playerSnake.invincibleDuration <= 0) {
       playerSnake.isInvincible = false; // 无敌时间结束
     }
   }
+  if (playerSnake.isEnlarged) {
+    playerSnake.enlargeDuration--;
+    if (playerSnake.enlargeDuration <= 0) {
+      playerSnake.isEnlarged = false;
+    }
+  }
 
+
+  // 检查玩家身上是否有道具
   let result = playerSnake.checkItemCollision(itemManager.items);
-
   if (result.collided) {
     if (result.type === "stamina") {
-      playerSnake.chargeStamina();
+      itemManager.activateStamina();
     }
     if (result.type === "invincible") {
-      playerSnake.activateInvincibility();
+      itemManager.activateInvincible();
+    }
+    if (result.type === "enlarge") {
+      itemManager.activateEnlarge();
     }
   }
   
@@ -330,13 +344,63 @@ function draw() {
   obstacleManager.drawObstacles();
   itemManager.drawItems();
   gameMap.drawBoundary();
+
+  // 实现无敌闪烁
   if (playerSnake.isInvincible) {
     if (playerSnake.invincibleDuration % 10 >= 3) {
       playerSnake.draw();
     }
   } else {
     playerSnake.draw();
-  }  
+  }
+
+  // 实现觅食范围变大的特效
+  if (playerSnake.isEnlarged) {
+    let head = playerSnake.body[0];
+    push();
+    let baseRadius = gridSize * 2.2;
+    let pulseAmount = map(sin(frameCount * 0.1), -1, 1, 0, 0.2);
+    let currentRadius = baseRadius * (1 + pulseAmount);
+    
+    for (let r = currentRadius; r > currentRadius * 0.7; r -= 2) {
+      let alpha = map(r, currentRadius, currentRadius * 0.7, 50, 150);
+      stroke(50, 200, 50, alpha);
+      strokeWeight(1.5);
+      noFill();
+      ellipse(head.x, head.y, r * 2);
+    }
+    
+    let particleCount = 8;
+    for (let i = 0; i < particleCount; i++) {
+      let angle = map(i, 0, particleCount, 0, TWO_PI) + frameCount * 0.02;
+      let orbitRadius = currentRadius * 0.85;
+      let x = head.x + cos(angle) * orbitRadius;
+      let y = head.y + sin(angle) * orbitRadius;
+      noStroke();
+      fill(100, 255, 100, 200);
+      let particleSize = 4 + sin(frameCount * 0.2 + i) * 2;
+      ellipse(x, y, particleSize);
+    }
+    
+    noStroke();
+    let glowRadius = gridSize * 1.5;
+    for (let r = glowRadius; r > 0; r -= 4) {
+      let alpha = map(r, glowRadius, 0, 0, 70);
+      fill(80, 220, 80, alpha);
+      ellipse(head.x, head.y, r * 2);
+    }
+    pop();
+  }
+
+  if (!gameOver && !gameWon && gameStarted) {
+    itemManager.updateTooltips();
+  }
+
+  resetMatrix();
+  if (!gameOver && !gameWon && gameStarted) {
+    itemManager.updateStatusDisplay(playerSnake);
+    itemManager.drawStatusDisplay();
+  }
 }
 
 function translateCenter() {
