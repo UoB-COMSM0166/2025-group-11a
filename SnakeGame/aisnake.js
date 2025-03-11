@@ -354,6 +354,8 @@ class AISnake extends Snake {
   }
 
   moveTowardsFood(obstacleCollision) {
+    let targetDirection = this.direction.copy();//make sure targetDirection always exists
+
     // 如果刚刚发生了碰撞或没有目标食物，则重新寻找食物
     if (!obstacleCollision || this.targetFood === null) {
       this.findRandomNearestFood(foodManager.foods);

@@ -9,14 +9,14 @@ let gameStarted = false;
 let gridSize = 20;
 let snakeSpeed = 5;
 let smallSnakes = [];
-let mapSize = 2;
-let borderSize = 1.8;
-let gridAlpha = 50;
+let mapSize = 2; 
+let borderSize = 1.8; 
+let gridAlpha = 50; 
 let visibleGridRange = 2; // 可见网格范围（单位：画布倍数）
-let boundaryColor = [255, 0, 0];
-let boundaryStroke = 2;
+let boundaryColor = [255, 0, 0]; 
+let boundaryStroke = 2;        
 let cornerSize = 20;            // 四角标识长度（像素）
-let warningDistance = 500;
+let warningDistance = 500;      
 let score = 0;
 let difficultyMode = 'normal';
 let currentMap = 'default';
@@ -71,11 +71,17 @@ function initGame() {
         smallSnakes.push(new AISnake());
     }
 
-    // 根据地图选择初始化
-    if (currentMap === 'swamp') {
-        gameMap.generateSwamps(); // 生成沼泽地形
-        gameMap.drawSwamps(); // 绘制沼泽地形
-    }
+  // 根据地图选择初始化
+  if(currentMap === 'swamp') {
+    gameMap.generateSwamps(); // 生成沼泽地形
+    gameMap.drawSwamps(); // 绘制沼泽地形
+  }else if (currentMap === 'fog') {
+    gameMap.generateFogs(); // 生成迷雾
+    gameMap.drawFogs();
+  }else if (currentMap === 'teleport') {
+    gameMap.generateTeleports(); // 生成传送点
+    gameMap.drawTeleports(); // 绘制传送点
+  }
 }
 
 function createUI() {
@@ -170,11 +176,26 @@ function createUI() {
         showDifficultySelection();
     });
 
-    let mapButtonContainer = createDiv('');
-    mapButtonContainer.class('button-row');
-    mapButtonContainer.parent(mapSelectScreen);
-    defaultMapBtn.parent(mapButtonContainer);
-    swampMapBtn.parent(mapButtonContainer);
+  // 迷雾地图按钮
+  let fogMapBtn = createButton('FOG');
+  fogMapBtn.parent(mapSelectScreen);
+  fogMapBtn.mousePressed(() => {
+    currentMap = 'fog';
+    showDifficultySelection();
+  });
+
+  let teleportMapBtn = createButton('TELEPORT');
+  teleportMapBtn.parent(mapSelectScreen);
+  teleportMapBtn.mousePressed(() => {
+    currentMap = 'teleport';
+    showDifficultySelection();
+  });
+
+  let mapButtonContainer = createDiv('');
+  mapButtonContainer.class('button-row');
+  mapButtonContainer.parent(mapSelectScreen);
+  defaultMapBtn.parent(mapButtonContainer);
+  swampMapBtn.parent(mapButtonContainer);
 
     // 难度选择
     let difficultyScreen = createDiv('');
@@ -303,153 +324,179 @@ function draw() {
     pop();
 
 
-    if (currentMap = 'swamp') {
-        gameMap.drawSwamps(); // 新增沼泽绘制
+  if (currentMap === 'swamp') {
+  gameMap.drawSwamps(); // 新增沼泽绘制
+  }
+  // 绘制传送点
+  if (currentMap === 'teleport') {
+    gameMap.drawTeleports();
+
+    // 检查玩家是否触发传送
+    gameMap.teleportManager.checkTeleport(playerSnake);
+    // 检查AI蛇是否触发传送
+    for (let snake of smallSnakes) {
+      gameMap.teleportManager.checkTeleport(snake);
+    }
+  }
+  if (this.isFlashing) {
+    this.flashDuration--;
+    if (this.flashDuration <= 0) {
+      this.isFlashing = false;
     }
 
-    // 更新和绘制AI小蛇
-    for (let i = smallSnakes.length - 1; i >= 0; i--) {
-        smallSnakes[i].draw();
-        smallSnakes[i].update();
-
-        if (smallSnakes[i].length < 10) {
-            smallSnakes[i] = new AISnake();
-        }
-
-        // 检查玩家与AI小蛇的碰撞
-        if (playerSnake.checkCollisionWithAISnake(smallSnakes[i]) && !playerSnake.isInvincible) {
-            gameOver = true;
-        }
-        // AI蛇头碰到玩家蛇身体后，ai蛇死亡-移除自己并生成随机数量的食物
-        if (smallSnakes[i].checkCollisionWithPlayer(playerSnake)) {
-            smallSnakes[i].die(); // 让 AI蛇死亡生成食物
-            smallSnakes.splice(i, 1); // 删除 AI蛇
-            continue; // 跳过后续逻辑，防止报错
-        }
-        drawStaminaBar();
+    // 闪烁效果只在某些帧绘制
+    if (this.flashDuration % 4 >= 2) {
+      // 不绘制蛇（实现闪烁）
+      return;
     }
-
-    // 检查食物数量，如果过少则生成更多
-    if (difficultyMode === 'normal') {
-        if (foodManager.foods.length < 100) {
-            foodManager.generateFood(10);
-        }
+  }
+  // 更新和绘制AI小蛇
+  for (let i = smallSnakes.length - 1; i >= 0; i--) {
+    smallSnakes[i].draw();
+    smallSnakes[i].update();
+    
+    if (smallSnakes[i].length < 10) {
+      smallSnakes[i] = new AISnake();
     }
-    if (itemManager.items.length < 5) {
-        itemManager.generateItem(5);
+    
+    // 检查玩家与AI小蛇的碰撞
+    if (playerSnake.checkCollisionWithAISnake(smallSnakes[i]) && !playerSnake.isInvincible) {
+      gameOver = true;
     }
-
-    if (!gameOver) {
-        drawBoundaryWarning();
+    // AI蛇头碰到玩家蛇身体后，ai蛇死亡-移除自己并生成随机数量的食物
+    if (smallSnakes[i].checkCollisionWithPlayer(playerSnake)) {
+      smallSnakes[i].die(); // 让 AI蛇死亡生成食物
+      smallSnakes.splice(i, 1); // 删除 AI蛇
+      continue; // 跳过后续逻辑，防止报错
     }
-
-    playerSnake.updateDirection();
-    playerSnake.move();
-
-    if (playerSnake.checkBoundaryCollision()) {
-        gameOver = true;
+    drawStaminaBar();
+  }
+  
+  // 检查食物数量，如果过少则生成更多
+  if (difficultyMode === 'normal') {
+    if (foodManager.foods.length < 100) {
+      foodManager.generateFood(10);
     }
+  }
+  if (itemManager.items.length < 5) {
+    itemManager.generateItem(5);
+  }
+  
+  if (!gameOver) {
+    drawBoundaryWarning();
+  }
+  
+  playerSnake.updateDirection();
+  playerSnake.move();
+  
+  if (playerSnake.checkBoundaryCollision()) {
+    gameOver = true;
+  }
 
-    if (playerSnake.checkObstacleCollision(obstacleManager.obstacles) && !playerSnake.isInvincible) {
-        gameOver = true;
+  if (playerSnake.checkObstacleCollision(obstacleManager.obstacles) && !playerSnake.isInvincible) {
+    gameOver = true;
+  }
+  //逐帧减少玩家道具时间
+  if (playerSnake.isInvincible) {
+    playerSnake.invincibleDuration--;
+    if (playerSnake.invincibleDuration <= 0) {
+      playerSnake.isInvincible = false; // 无敌时间结束
     }
-    //逐帧减少玩家道具时间
-    if (playerSnake.isInvincible) {
-        playerSnake.invincibleDuration--;
-        if (playerSnake.invincibleDuration <= 0) {
-            playerSnake.isInvincible = false; // 无敌时间结束
-        }
+  }
+  if (playerSnake.isEnlarged) {
+    playerSnake.enlargeDuration--;
+    if (playerSnake.enlargeDuration <= 0) {
+      playerSnake.isEnlarged = false;
     }
-    if (playerSnake.isEnlarged) {
-        playerSnake.enlargeDuration--;
-        if (playerSnake.enlargeDuration <= 0) {
-            playerSnake.isEnlarged = false;
-        }
+  }
+
+
+  // 检查玩家身上是否有道具
+  let result = playerSnake.checkItemCollision(itemManager.items);
+  if (result.collided) {
+    if (result.type === "stamina") {
+      itemManager.activateStamina();
     }
-
-
-    // 检查玩家身上是否有道具
-    let result = playerSnake.checkItemCollision(itemManager.items);
-    if (result.collided) {
-        if (result.type === "stamina") {
-            itemManager.activateStamina();
-        }
-        if (result.type === "invincible") {
-            itemManager.activateInvincible();
-        }
-        if (result.type === "enlarge") {
-            itemManager.activateEnlarge();
-        }
+    if (result.type === "invincible") {
+      itemManager.activateInvincible();
     }
-
-    // 检查并处理食物碰撞，返回吃到的食物数量
-    let foodEaten = playerSnake.checkFoodCollision(foodManager.foods);
-    if (foodEaten > 0) {
-        score += foodEaten;
-        document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
+    if (result.type === "enlarge") {
+      itemManager.activateEnlarge();
     }
+  }
+  
+  // 检查并处理食物碰撞，返回吃到的食物数量
+  let foodEaten = playerSnake.checkFoodCollision(foodManager.foods);
+  if (foodEaten > 0) {
+    score += foodEaten;
+    document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
+  }
+ 
+  foodManager.drawFoods();
+  obstacleManager.drawObstacles();
+  itemManager.drawItems();
+  gameMap.drawBoundary();
 
-    foodManager.drawFoods();
-    obstacleManager.drawObstacles();
-    itemManager.drawItems();
-    gameMap.drawBoundary();
-
-    // 实现无敌闪烁
-    if (playerSnake.isInvincible) {
-        if (playerSnake.invincibleDuration % 10 >= 3) {
-            playerSnake.draw();
-        }
-    } else {
-        playerSnake.draw();
+  // 实现无敌闪烁
+  if (playerSnake.isInvincible) {
+    if (playerSnake.invincibleDuration % 10 >= 3) {
+      playerSnake.draw();
     }
+  } else {
+    playerSnake.draw();
+  }
 
-    // 实现觅食范围变大的特效
-    if (playerSnake.isEnlarged) {
-        let head = playerSnake.body[0];
-        push();
-        let baseRadius = gridSize * 2.2;
-        let pulseAmount = map(sin(frameCount * 0.1), -1, 1, 0, 0.2);
-        let currentRadius = baseRadius * (1 + pulseAmount);
-
-        for (let r = currentRadius; r > currentRadius * 0.7; r -= 2) {
-            let alpha = map(r, currentRadius, currentRadius * 0.7, 50, 150);
-            stroke(50, 200, 50, alpha);
-            strokeWeight(1.5);
-            noFill();
-            ellipse(head.x, head.y, r * 2);
-        }
-
-        let particleCount = 8;
-        for (let i = 0; i < particleCount; i++) {
-            let angle = map(i, 0, particleCount, 0, TWO_PI) + frameCount * 0.02;
-            let orbitRadius = currentRadius * 0.85;
-            let x = head.x + cos(angle) * orbitRadius;
-            let y = head.y + sin(angle) * orbitRadius;
-            noStroke();
-            fill(100, 255, 100, 200);
-            let particleSize = 4 + sin(frameCount * 0.2 + i) * 2;
-            ellipse(x, y, particleSize);
-        }
-
-        noStroke();
-        let glowRadius = gridSize * 1.5;
-        for (let r = glowRadius; r > 0; r -= 4) {
-            let alpha = map(r, glowRadius, 0, 0, 70);
-            fill(80, 220, 80, alpha);
-            ellipse(head.x, head.y, r * 2);
-        }
-        pop();
+  // 实现觅食范围变大的特效
+  if (playerSnake.isEnlarged) {
+    let head = playerSnake.body[0];
+    push();
+    let baseRadius = gridSize * 2.2;
+    let pulseAmount = map(sin(frameCount * 0.1), -1, 1, 0, 0.2);
+    let currentRadius = baseRadius * (1 + pulseAmount);
+    
+    for (let r = currentRadius; r > currentRadius * 0.7; r -= 2) {
+      let alpha = map(r, currentRadius, currentRadius * 0.7, 50, 150);
+      stroke(50, 200, 50, alpha);
+      strokeWeight(1.5);
+      noFill();
+      ellipse(head.x, head.y, r * 2);
     }
+    
+    let particleCount = 8;
+    for (let i = 0; i < particleCount; i++) {
+      let angle = map(i, 0, particleCount, 0, TWO_PI) + frameCount * 0.02;
+      let orbitRadius = currentRadius * 0.85;
+      let x = head.x + cos(angle) * orbitRadius;
+      let y = head.y + sin(angle) * orbitRadius;
+      noStroke();
+      fill(100, 255, 100, 200);
+      let particleSize = 4 + sin(frameCount * 0.2 + i) * 2;
+      ellipse(x, y, particleSize);
+    }
+    
+    noStroke();
+    let glowRadius = gridSize * 1.5;
+    for (let r = glowRadius; r > 0; r -= 4) {
+      let alpha = map(r, glowRadius, 0, 0, 70);
+      fill(80, 220, 80, alpha);
+      ellipse(head.x, head.y, r * 2);
+    }
+    pop();
+  }
 
     if (!gameOver && !gameWon && gameStarted) {
         itemManager.updateTooltips();
     }
 
-    resetMatrix();
-    if (!gameOver && !gameWon && gameStarted) {
-        itemManager.updateStatusDisplay(playerSnake);
-        itemManager.drawStatusDisplay();
-    }
+  if (currentMap === 'fog') {
+    gameMap.drawFogs();
+  }
+
+  resetMatrix();
+  if (!gameOver && !gameWon && gameStarted) {
+    itemManager.updateStatusDisplay(playerSnake);
+    itemManager.drawStatusDisplay();
+  }
 }
 
 function translateCenter() {
