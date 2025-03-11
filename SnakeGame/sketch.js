@@ -75,6 +75,9 @@ function initGame() {
   }else if (currentMap === 'fog') {
     gameMap.generateFogs(); // 生成迷雾
     gameMap.drawFogs();
+  }else if (currentMap === 'teleport') {
+    gameMap.generateTeleports(); // 生成传送点
+    gameMap.drawTeleports(); // 绘制传送点
   }
 }
 
@@ -129,6 +132,13 @@ function createUI() {
   fogMapBtn.parent(mapSelectScreen);
   fogMapBtn.mousePressed(() => {
     currentMap = 'fog';
+    showDifficultySelection();
+  });
+
+  let teleportMapBtn = createButton('TELEPORT');
+  teleportMapBtn.parent(mapSelectScreen);
+  teleportMapBtn.mousePressed(() => {
+    currentMap = 'teleport';
     showDifficultySelection();
   });
 
@@ -268,7 +278,29 @@ function draw() {
   if (currentMap === 'swamp') {
   gameMap.drawSwamps(); // 新增沼泽绘制
   }
+  // 绘制传送点
+  if (currentMap === 'teleport') {
+    gameMap.drawTeleports();
 
+    // 检查玩家是否触发传送
+    gameMap.teleportManager.checkTeleport(playerSnake);
+    // 检查AI蛇是否触发传送
+    for (let snake of smallSnakes) {
+      gameMap.teleportManager.checkTeleport(snake);
+    }
+  }
+  if (this.isFlashing) {
+    this.flashDuration--;
+    if (this.flashDuration <= 0) {
+      this.isFlashing = false;
+    }
+
+    // 闪烁效果只在某些帧绘制
+    if (this.flashDuration % 4 >= 2) {
+      // 不绘制蛇（实现闪烁）
+      return;
+    }
+  }
   // 更新和绘制AI小蛇
   for (let i = smallSnakes.length - 1; i >= 0; i--) {
     smallSnakes[i].draw();

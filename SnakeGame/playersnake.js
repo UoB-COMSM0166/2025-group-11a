@@ -159,4 +159,10 @@ class PlayerSnake extends Snake {
 
     super.move();
   }
+
+  teleportFlash() {
+    // 传送后的闪烁效果
+    this.isFlashing = true;
+    this.flashDuration = 15; // 闪烁持续15帧
+  }
 }

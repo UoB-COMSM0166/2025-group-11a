@@ -6,6 +6,7 @@ class GameMap {
     this.visibleRange = 2;      // 可见网格范围倍数
     this.swampManager = new SwampManager();
     this.fogManager = new FogManager();
+    this.teleportManager = new TeleportManager();
   }
 
   // drawGrid() {
@@ -125,6 +126,16 @@ class GameMap {
 
   drawFogs() {
     this.fogManager.drawFogs();
+  }
+
+  // 添加生成传送点的方法
+  generateTeleports() {
+    this.teleportManager.generateTeleports(difficultyMode === 'hard' ? 6 : 4);
+  }
+
+// 添加绘制传送点的方法
+  drawTeleports() {
+    this.teleportManager.drawTeleports();
   }
 }
 
@@ -390,3 +401,230 @@ class FogManager {
     pop();
   }
 }
+// 在 map.js 中添加 TeleportManager 类
+
+class TeleportManager {
+  constructor() {
+    this.teleports = [];
+    this.teleportCooldown = 0; // 传送冷却时间，防止连续传送
+    this.cooldownTime = 30; // 冷却时间帧数（约1秒）
+    this.teleportEffect = []; // 存储传送特效的数组
+  }
+
+  generateTeleports(count = 4) {
+    // 清空现有传送点
+    this.teleports = [];
+
+    // 生成指定数量的传送点
+    for (let i = 0; i < count; i++) {
+      let position = createVector(
+          random(-width * mapSize/2 + 200, width * mapSize/2 - 200),
+          random(-height * mapSize/2 + 200, height * mapSize/2 - 200)
+      );
+
+      // 确保传送点之间有足够距离
+      let minDistance = 500;
+      let isTooClose = false;
+
+      for (let j = 0; j < this.teleports.length; j++) {
+        if (p5.Vector.dist(position, this.teleports[j].position) < minDistance) {
+          isTooClose = true;
+          break;
+        }
+      }
+
+      // 如果太近，则重新尝试
+      if (isTooClose) {
+        i--;
+        continue;
+      }
+
+      // 随机生成传送点颜色
+      let portalColor = [
+        random(100, 200),  // R
+        random(100, 200),  // G
+        random(200, 255)   // B
+      ];
+
+      this.teleports.push({
+        position: position,
+        color: portalColor,
+        radius: gridSize * 2,
+        active: true
+      });
+    }
+
+    // 为每个传送点分配一个目标传送点（不重复）
+    let destinations = [...Array(this.teleports.length).keys()];
+    for (let i = 0; i < this.teleports.length; i++) {
+      // 从剩余目标中随机选择一个不是自己的传送点
+      let validDestinations = destinations.filter(idx => idx !== i);
+      let destIndex = random(validDestinations);
+
+      // 记录目标传送点索引
+      this.teleports[i].destination = floor(destIndex);
+
+      // 为传送点分配一个唯一ID用于可视化
+      this.teleports[i].id = i;
+    }
+  }
+
+  drawTeleports() {
+    push();
+    for (let teleport of this.teleports) {
+      if (!teleport.active) continue; // 跳过非活跃的传送点
+
+      // 绘制外圈旋转光环
+      let outerRadius = teleport.radius * 1.5;
+      noFill();
+      for (let i = 0; i < 2; i++) {
+        let rotationOffset = (frameCount * 0.02 + i * PI);
+        let transparency = map(sin(frameCount * 0.05 + i), -1, 1, 150, 255);
+
+        stroke(teleport.color[0], teleport.color[1], teleport.color[2], transparency);
+        strokeWeight(2);
+
+        beginShape();
+        for (let a = 0; a < TWO_PI; a += 0.3) {
+          let r = outerRadius + sin(a * 6 + rotationOffset) * (gridSize * 0.2);
+          let x = teleport.position.x + cos(a) * r;
+          let y = teleport.position.y + sin(a) * r;
+          vertex(x, y);
+        }
+        endShape(CLOSE);
+      }
+
+      // 绘制内圈
+      noStroke();
+      for (let r = teleport.radius; r > 0; r -= 5) {
+        let alpha = map(r, teleport.radius, 0, 100, 200);
+        fill(teleport.color[0], teleport.color[1], teleport.color[2], alpha);
+        ellipse(teleport.position.x, teleport.position.y, r * 2);
+      }
+
+      // 绘制传送点ID或标识
+      fill(255);
+      textSize(16);
+      textAlign(CENTER, CENTER);
+      text(teleport.id + 1, teleport.position.x, teleport.position.y);
+
+      // 绘制指向目标的微小指示器
+      let destPos = this.teleports[teleport.destination].position;
+      let direction = p5.Vector.sub(destPos, teleport.position).normalize().mult(teleport.radius * 0.6);
+      stroke(255, 255, 0, 200);
+      strokeWeight(2);
+      line(
+          teleport.position.x,
+          teleport.position.y,
+          teleport.position.x + direction.x,
+          teleport.position.y + direction.y
+      );
+
+      // 在线的终点添加箭头
+      push();
+      translate(teleport.position.x + direction.x, teleport.position.y + direction.y);
+      rotate(direction.heading());
+      fill(255, 255, 0, 200);
+      noStroke();
+      triangle(0, 0, -10, 5, -10, -5);
+      pop();
+    }
+
+    // 绘制传送特效
+    for (let i = this.teleportEffect.length - 1; i >= 0; i--) {
+      let effect = this.teleportEffect[i];
+      effect.life--;
+
+      // 扩散效果
+      noFill();
+      stroke(effect.color[0], effect.color[1], effect.color[2], map(effect.life, 0, effect.maxLife, 0, 255));
+      strokeWeight(effect.life / 5);
+      ellipse(effect.position.x, effect.position.y, (effect.maxLife - effect.life) * 6);
+
+      // 粒子效果
+      for (let j = 0; j < 5; j++) {
+        let angle = random(TWO_PI);
+        let distance = (effect.maxLife - effect.life) * 3;
+        fill(effect.color[0], effect.color[1], effect.color[2], random(100, 255));
+        noStroke();
+        ellipse(
+            effect.position.x + cos(angle) * distance,
+            effect.position.y + sin(angle) * distance,
+            random(3, 6)
+        );
+      }
+
+      // 移除生命周期结束的特效
+      if (effect.life <= 0) {
+        this.teleportEffect.splice(i, 1);
+      }
+    }
+
+    // 如果成功传送，则添加闪烁效果
+    if (gameMap.teleportManager.checkTeleport(playerSnake)) {
+      playerSnake.teleportFlash();
+    }
+
+    pop();
+  }
+
+  // 检查并处理传送
+  checkTeleport(snake) {
+    // 如果在冷却中，减少冷却时间并返回
+    if (this.teleportCooldown > 0) {
+      this.teleportCooldown--;
+      return false;
+    }
+
+    let head = snake.body[0];
+    for (let i = 0; i < this.teleports.length; i++) {
+      let teleport = this.teleports[i];
+      if (!teleport.active) continue;
+
+      // 检测蛇头是否接近传送点
+      if (p5.Vector.dist(head, teleport.position) < teleport.radius) {
+        // 获取目标传送点
+        let destination = this.teleports[teleport.destination];
+
+        // 创建传送特效
+        this.addTeleportEffect(teleport.position, teleport.color);
+        this.addTeleportEffect(destination.position, destination.color);
+
+        // 计算传送后的方向（保持当前方向）
+        let newPosition = p5.Vector.add(
+            destination.position,
+            p5.Vector.mult(snake.direction, gridSize * 3) // 在传送点前方出现
+        );
+
+        // 传送蛇的整个身体
+        let offset = p5.Vector.sub(newPosition, head);
+        for (let j = 0; j < snake.body.length; j++) {
+          snake.body[j].add(offset);
+        }
+
+        // 设置传送冷却
+        this.teleportCooldown = this.cooldownTime;
+
+        // 添加提示信息
+        if (snake === playerSnake) {
+          itemManager.addTooltip("Teleported!", newPosition, [255, 255, 100]);
+        }
+
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // 添加传送特效
+  addTeleportEffect(position, color) {
+    this.teleportEffect.push({
+      position: position.copy(),
+      color: color,
+      maxLife: 20,
+      life: 20
+    });
+  }
+}
+
+
