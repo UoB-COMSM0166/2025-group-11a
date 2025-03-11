@@ -157,7 +157,7 @@ button:hover {
   /* background: rgba(0, 0, 0, 0.8); */
   /* padding: 2rem;
   border-radius: 10px; */
-/* } */ 
+/* } */
 /* 地图选择界面样式 */
 #mapSelectScreen {
   position: absolute;
@@ -194,3 +194,52 @@ button:hover {
   background: #45a049;
   transform: scale(1.1);
 } */
+
+#escBtnPage{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  visibility: hidden;
+}
+#escBtnPage button{
+  width: 200px;
+  margin: 20px 0;
+  padding: 15px 0;
+  font-size: 1.2em;
+}
+.help_btn{
+  width: 142.5px;
+  margin-top: 20px;
+}
+#HelpPage{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  z-index: 30;
+  padding: 6vw;
+  visibility: hidden;
+}
+#HelpPage h1{
+  color: white;
+}
+#HelpPage p{
+  color: white;
+  width: 90vw;
+  white-space: normal;
+  display: block;
+  margin-top: 20px;
+  line-height: 150%;
+}
+#HelpPage button{
+  margin-top: 20px;
+}
