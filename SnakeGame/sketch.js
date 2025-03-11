@@ -72,6 +72,9 @@ function initGame() {
   if(currentMap === 'swamp') {
     gameMap.generateSwamps(); // 生成沼泽地形
     gameMap.drawSwamps(); // 绘制沼泽地形
+  }else if (currentMap === 'fog') {
+    gameMap.generateFogs(); // 生成迷雾
+    gameMap.drawFogs();
   }
 }
 
@@ -118,6 +121,14 @@ function createUI() {
   swampMapBtn.parent(mapSelectScreen);
   swampMapBtn.mousePressed(() => {
     currentMap = 'swamp';
+    showDifficultySelection();
+  });
+
+  // 迷雾地图按钮
+  let fogMapBtn = createButton('FOG');
+  fogMapBtn.parent(mapSelectScreen);
+  fogMapBtn.mousePressed(() => {
+    currentMap = 'fog';
     showDifficultySelection();
   });
 
@@ -254,7 +265,7 @@ function draw() {
   pop(); 
 
 
-  if (currentMap = 'swamp') {
+  if (currentMap === 'swamp') {
   gameMap.drawSwamps(); // 新增沼泽绘制
   }
 
@@ -394,6 +405,10 @@ function draw() {
 
   if (!gameOver && !gameWon && gameStarted) {
     itemManager.updateTooltips();
+  }
+
+  if (currentMap === 'fog') {
+    gameMap.drawFogs();
   }
 
   resetMatrix();

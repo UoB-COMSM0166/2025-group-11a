@@ -5,6 +5,7 @@ class GameMap {
     this.borderSize = borderSize; // 可见边界大小
     this.visibleRange = 2;      // 可见网格范围倍数
     this.swampManager = new SwampManager();
+    this.fogManager = new FogManager();
   }
 
   // drawGrid() {
@@ -116,6 +117,14 @@ class GameMap {
 
   drawSwamps() {
     this.swampManager.drawSwamps();
+  }
+
+  generateFogs() {
+    this.fogManager.generateFogs(difficultyMode === 'hard' ? 8 : 5);
+  }
+
+  drawFogs() {
+    this.fogManager.drawFogs();
   }
 }
 
@@ -273,5 +282,111 @@ class SwampManager {
       }
     }
     return collision;
+  }
+}
+
+class FogManager {
+  constructor() {
+    this.fogs = [];
+    this.noiseSeed = 0;
+  }
+
+  generateFogs(count = 5) {
+    this.noiseSeed = random(1000);
+    for (let i = 0; i < count; i++) {
+      let center = createVector(
+          random(-width * mapSize/2 + 200, width * mapSize/2 - 200),
+          random(-height * mapSize/2 + 200, height * mapSize/2 - 200)
+      );
+
+      let fog = {
+        position: center,
+        points: this.generateOrganicFogShape(center),
+        slowdown: 0.6 // 进入迷雾后速度降低 40%
+      };
+
+      this.fogs.push(fog);
+    }
+  }
+
+  generateOrganicFogShape(center) {
+    let points = [];
+    const baseRadius = random(100, 180);
+    const noiseLayers = [
+      { scale: 0.15, weight: 0.5 }, // 低频形状
+      { scale: 0.4, weight: 0.3 },  // 中频细节
+      { scale: 1.2, weight: 0.2 }   // 高频细节
+    ];
+    const pointCount = 36; // 增加采样点
+
+    // 生成基础形状
+    for (let a = 0; a < TWO_PI; a += TWO_PI/pointCount) {
+      let radius = baseRadius;
+
+      // 多层噪声叠加
+      noiseLayers.forEach(layer => {
+        const xoff = cos(a) * layer.scale + this.noiseSeed;
+        const yoff = sin(a) * layer.scale + this.noiseSeed;
+        radius += noise(xoff, yoff) * layer.weight * baseRadius;
+      });
+
+      // 添加缓变扰动
+      radius *= map(sin(a * 3 + this.noiseSeed), -1, 1, 0.95, 1.05);
+
+      points.push(createVector(
+          center.x + radius * cos(a),
+          center.y + radius * sin(a)
+      ));
+    }
+
+    // 形状后处理
+    return this.processFogShape(points);
+  }
+
+  processFogShape(points) {
+    // 三次平滑处理
+    for (let i = 0; i < 3; i++) {
+      points = points.map((p, idx) => {
+        const prev = points[(idx + points.length - 1) % points.length];
+        const next = points[(idx + 1) % points.length];
+        return createVector(
+            (prev.x + p.x * 4 + next.x) / 6,
+            (prev.y + p.y * 4 + next.y) / 6
+        );
+      });
+    }
+
+    // 添加微观扰动
+    return points.map(p =>
+        createVector(
+            p.x + random(-3, 3),
+            p.y + random(-2, 2)
+        )
+    );
+  }
+
+  drawFogs() {
+    push();
+    noStroke();
+    for (let i = 0; i < this.fogs.length; i++) {
+      let fog = this.fogs[i];
+
+      // 计算动态透明度：基于正弦波变化，范围 80 - 255
+      let alpha = map(sin(frameCount * 0.01 + i), -1, 1, 80, 255);
+
+      let offsetX = map(noise(frameCount * 0.005, i), 0, 1, -2, 2);
+      let offsetY = map(noise(frameCount * 0.005 + 1000, i), 0, 1, -2, 2);
+      let movedPosition = createVector(fog.position.x + offsetX, fog.position.y + offsetY);
+      fill(150, 150, 150, alpha); // 设置随时间变化的透明度
+
+      beginShape();
+      for (let p of fog.points) {
+        vertex(p.x + offsetX, p.y + offsetY);
+      }
+      vertex(fog.points[0].x + offsetX, fog.points[0].y + offsetY);// 确保闭合
+      endShape(CLOSE);
+    }
+
+    pop();
   }
 }
