@@ -57,6 +57,11 @@ class Snake {
     this.speed = snakeSpeed;
     this.bodyColor = bodyColor;
     this.pendingSegments = 0; // 待添加的节数
+    this.alternateColor = [
+      this.bodyColor[0] - 30, 
+      this.bodyColor[1] - 30, 
+      this.bodyColor[2] - 30
+    ]; // 创建一个相似但略深的颜色用于交替
 
     // 初始化蛇身体
     for (let i = 0; i < initialSize; i++) {
@@ -66,8 +71,9 @@ class Snake {
 
   draw() {
     push();
-    stroke(255);
-    strokeWeight(1);
+    // stroke(255);
+    // strokeWeight(1);
+    noStroke();
 
   for (let i = this.body.length - 1; i >= 0; i--) {
     let seg = this.body[i];
@@ -97,7 +103,12 @@ class Snake {
       ellipse(eyeX2, eyeY2, pupilSize);
     } else {
       // 蛇身
-      fill(this.bodyColor[0], this.bodyColor[1], this.bodyColor[2]);
+      // fill(this.bodyColor[0], this.bodyColor[1], this.bodyColor[2]);
+      if (i % 2 === 0) {
+        fill(this.bodyColor[0], this.bodyColor[1], this.bodyColor[2]);
+      } else {
+        fill(this.alternateColor[0], this.alternateColor[1], this.alternateColor[2]);
+      }
       ellipse(seg.x, seg.y, gridSize * 1.2);
     }
   }

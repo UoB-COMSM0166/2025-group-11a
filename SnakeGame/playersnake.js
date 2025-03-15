@@ -1,6 +1,6 @@
 class PlayerSnake extends Snake {
   constructor(x = 0, y = 0) {
-    super(x, y, 5, [50, 200, 50]); 
+    super(x, y, 5, [120, 230, 120]); 
     this.isAccelerating = false; 
     this.stamina = 100; 
     this.maxStamina = 100; 
@@ -48,7 +48,8 @@ class PlayerSnake extends Snake {
       if (this.isEnlarged == false && p5.Vector.dist(head, foods[i]) < gridSize * 1.1
     || this.isEnlarged == true && p5.Vector.dist(head, foods[i]) < gridSize * 2.2) {
         this.grow();
-        foods.splice(i, 1);
+        // foods.splice(i, 1);
+        foodManager.removeFood(i);
         foodEaten++;
       }
     }

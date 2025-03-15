@@ -168,8 +168,9 @@ class AISnake extends Snake {
     for (let i = foods.length - 1; i >= 0; i--) {
       if (p5.Vector.dist(head, foods[i]) < gridSize) {
         this.grow();
-        foods.splice(i, 1);
-        
+        // foods.splice(i, 1);
+        foodManager.removeFood(i);
+
         // 如果刚才吃的是目标食物，重置目标
         if (this.targetFood === foods[i]) {
           this.targetFood = null;
@@ -212,6 +213,11 @@ class AISnake extends Snake {
       let offsetY = random(-gridSize * 0.3, gridSize * 0.3);
       let newFood = createVector(bodySegment.x + offsetX, bodySegment.y + offsetY);
       foodManager.foods.push(newFood);
+      foodManager.foodColors.push({
+        h: random(360),
+        s: random(20, 50),
+        b: random(80, 100)
+      });
     }
 
     // 生成道具
