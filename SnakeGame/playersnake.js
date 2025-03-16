@@ -45,7 +45,7 @@ class PlayerSnake extends Snake {
     let foodEaten = 0;
     for (let i = foods.length - 1; i >= 0; i--) {
       //食物碰撞分是否enlarged两种情况
-      if (this.isEnlarged == false && p5.Vector.dist(head, foods[i]) < gridSize * 1.1
+      if (this.isEnlarged == false && p5.Vector.dist(head, foods[i]) < gridSize * 0.8
     || this.isEnlarged == true && p5.Vector.dist(head, foods[i]) < gridSize * 2.2) {
         this.grow();
         // foods.splice(i, 1);
