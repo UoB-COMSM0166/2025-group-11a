@@ -40,22 +40,123 @@ class ItemManager {
   drawItems() {
     push();
     for (let item of this.items) {
-      if (item.type === "invincible") {
-        fill(255, 215, 0);
-      } else if (item.type === "stamina") {
-        fill(0, 0, 255);
-      } else if (item.type === "enlarge") {
-        fill(128, 128, 128);
-      }
       let x = item.position.x;
       let y = item.position.y;
-
       let size = gridSize * 0.8;
-      triangle(
-      x, y - size / 2,    
-      x - size / 2, y + size / 2,
-      x + size / 2, y + size / 2
-      );
+      
+      // 为所有道具添加发光效果底座
+      noStroke();
+      for (let r = size * 1.2; r > size * 0.8; r -= 2) {
+        let alpha = map(r, size * 1.2, size * 0.8, 50, 150);
+        
+        // 根据类型设置底座颜色
+        if (item.type === "invincible") {
+          fill(255, 215, 0, alpha);
+        } else if (item.type === "stamina") {
+          fill(0, 100, 200, alpha);
+        } else if (item.type === "enlarge") {
+          fill(50, 180, 50, alpha);
+        }
+        
+        ellipse(x, y, r);
+      }
+
+      if (item.type === "invincible") {
+        // 无敌道具 - 盾牌样式
+        fill(255, 215, 0);
+        stroke(255, 255, 200);
+        strokeWeight(1.5);
+        
+        beginShape();
+        vertex(x, y - size * 0.7);
+        vertex(x + size * 0.6, y - size * 0.2);
+        vertex(x + size * 0.6, y + size * 0.3);
+        vertex(x, y + size * 0.7);
+        vertex(x - size * 0.6, y + size * 0.3);
+        vertex(x - size * 0.6, y - size * 0.2);
+        endShape(CLOSE);
+
+        stroke(255, 255, 200);
+        strokeWeight(1);
+        fill(255, 240, 110);
+
+        push();
+        translate(x, y);
+        for (let i = 0; i < 5; i++) {
+          let angle = TWO_PI / 5 * i - PI/2;
+          let sx = cos(angle) * size * 0.3;
+          let sy = sin(angle) * size * 0.3;
+          line(0, 0, sx, sy);
+        }
+        pop();
+        
+      } else if (item.type === "stamina") {
+        // 体力道具 - 闪电样式
+        stroke(100, 180, 255);
+        strokeWeight(2);
+        fill(0, 100, 255);
+        
+        // 闪电形状
+        beginShape();
+        vertex(x + size * 0.1, y - size * 0.6);
+        vertex(x - size * 0.2, y - size * 0.1);
+        vertex(x, y + size * 0.1);
+        vertex(x - size * 0.3, y + size * 0.6);
+        vertex(x + size * 0.2, y + size * 0.1);
+        vertex(x, y - size * 0.1);
+        endShape(CLOSE);
+        
+      } else if (item.type === "enlarge") {
+        // 扩大范围道具 - 雷达样式
+        stroke(30, 100, 30);
+        strokeWeight(1.5);
+        fill(50, 180, 50);
+        ellipse(x, y, size * 1.5);
+
+        // 雷达同心圆
+        noFill();
+        stroke(100, 230, 100, 180);
+        strokeWeight(1);
+        ellipse(x, y, size * 1);
+        ellipse(x, y, size * 0.7);
+        ellipse(x, y, size * 0.45);
+        
+        //雷达扫描线
+        stroke(150, 255, 150);
+        strokeWeight(1.5);
+        let scanAngle = (frameCount * 0.05) % TWO_PI;
+        line(x, y, x + cos(scanAngle) * size * 0.75, y + sin(scanAngle) * size * 0.75);
+        
+        fill(200, 255, 200);
+        noStroke();
+        ellipse(x, y, size * 0.15);
+      }
+      
+      
+      // 道具周围的粒子效果
+      if (frameCount % 5 === 0) {
+        for (let i = 0; i < 2; i++) {
+          let particleManager = {
+            particles: []
+          };
+          
+          let angle = random(TWO_PI);
+          let distance = random(size * 0.8, size);
+          let px = x + cos(angle) * distance;
+          let py = y + sin(angle) * distance;
+          
+          if (item.type === "invincible") {
+            fill(255, 215, 0, 150);
+          } else if (item.type === "stamina") {
+            fill(100, 150, 255, 150);
+          } else if (item.type === "enlarge") {
+            fill(200, 200, 200, 150);
+          }
+          
+          noStroke();
+          ellipse(px, py, random(2, 4));
+        }
+      }
     }
     pop();
   }
@@ -72,7 +173,7 @@ class ItemManager {
 
   activateEnlarge(){
     playerSnake.actEnlarge();
-    this.addTooltip("Enlarged!", playerSnake.body[0], [150, 150, 150]);
+    this.addTooltip("Enlarged!", playerSnake.body[0], [50, 180, 50]);
   }
   
   // 添加道具提示文本
@@ -125,7 +226,7 @@ class ItemManager {
         color: [255, 215, 0],
         progress: playerSnake.invincibleDuration / 180, // 假设最大持续时间为180帧
         symbol: '✓',
-        name: 'Invincible!'
+        name: 'Invincible'
       });
     }
     
@@ -133,10 +234,10 @@ class ItemManager {
     if (playerSnake.isEnlarged && playerSnake.enlargeDuration > 0) {
       this.activeEffects.push({
         type: 'enlarge',
-        color: [150, 150, 150], // 灰色
+        color: [50, 180, 50],
         progress: playerSnake.enlargeDuration / 180,
         symbol: '⊕',
-        name: 'Enlarged!'
+        name: 'Enlarged'
       });
     }
   }
@@ -173,12 +274,12 @@ class ItemManager {
     let endAngle = 2 * PI * effect.progress;
     arc(x, y, this.iconSize * 0.8, this.iconSize * 0.8, -PI/2, -PI/2 + endAngle);
     
-    // 显示剩余秒数（假设30帧/秒）
+    // 显示剩余秒数（30帧/秒）
     let secondsLeft = Math.ceil(effect.progress * 180 / 30);
     fill(255);
     noStroke();
     textAlign(CENTER, CENTER);
-    textSize(12);
+    textSize(10);
     text(secondsLeft + "Sec", x, y + 5);
     
     textSize(10);
