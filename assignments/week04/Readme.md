@@ -1,11 +1,23 @@
 # Skateholders
-The stakeholders of the Snake game can be analyzed in layers using the **onion model** to ensure that all key needs are fully considered. 
-The core layer includes direct stakeholders, such as **players**, **developers**, **designers**, and **testers**.  
-**Players** need a smooth gaming experience, intuitive operations, and interesting gameplay; **developers** are responsible for programming and optimization of the game to ensure stable performance;
-**designers** focus on game flow and UI/UX design to make the game interface intuitive and beautiful;
-**testers** ensure that the game runs stably on different devices and fix potential problems. The middle layer involves indirect stakeholders, such as **game operators** and **guardians**. **Operators** (such as Steam and Google Play) are responsible for the distribution, promotion, and maintenance of the game, focusing on market performance, privacy compliance, and player feedback;
-**guardians** may be concerned about the gaming behavior of minors and expect the game to have parental control and anti-addiction mechanisms. 
-The outer layer is external influencers, including **regulators**, **advertisers**, **competitors**, and **game communities**. **Regulators** ensure that games comply with data privacy, age rating, and advertising compliance requirements; **advertisers** focus on precise delivery to ensure that advertising does not affect user experience; **competitors** provide market competition pressure to encourage continuous optimization and innovation of games; the **game community** is composed of live broadcast players, forum users, etc., who influence game improvements through feedback and increase game awareness through social promotion. Overall, this stakeholder analysis method helps the development team to accurately identify needs, optimize game design, and improve market competitiveness, so that the game can both meet player needs and develop in the market in the long term.
+The stakeholders of the **Snake Game** can be analyzed in layers using the **onion model** to ensure that all key needs are fully considered.  
+### **Core Layer: Direct Stakeholders**  
+These are individuals directly involved in the game's development and experience:  
+- **Players** 🎮 – Require a smooth gaming experience, intuitive controls, and engaging gameplay.  
+- **Developers** 👨‍💻 – Responsible for programming and optimizing the game to ensure stable performance.  
+- **Designers** 🎨 – Focus on UI/UX and game flow to create an intuitive and visually appealing interface.  
+- **Testers** 🛠 – Ensure the game runs stably on different devices and resolve potential issues.  
+### **Middle Layer: Indirect Stakeholders**  
+These stakeholders support or influence the game without being directly involved in its creation:  
+- **Game Operators** 🕹 (e.g., Steam, Google Play) – Handle game distribution, promotion, and maintenance, ensuring market performance, privacy compliance, and player feedback.  
+- **Guardians** 👨‍👩‍👧‍👦 – Concerned about the gaming behavior of minors, expecting parental controls and anti-addiction mechanisms.
+- **Advertisers** 📢 – Focus on precise ad delivery while ensuring ads do not disrupt the user experience.  
+### **Outer Layer: External Influencers**  
+These stakeholders shape the game's market presence and compliance:  
+- **Regulators** ⚖ – Ensure compliance with **data privacy, age rating, and advertising policies**.  
+- **Competitors** 🏆 – Drive market competition, encouraging continuous optimization and innovation.  
+- **Game Community** 🌍 – Includes **streamers, forum users, and influencers**, who provide feedback and increase game awareness through social engagement.  
+### **Conclusion**  
+This stakeholder analysis helps the **development team** accurately **identify needs, optimize game design, and improve market competitiveness**. By considering all stakeholder groups, the game can **meet player expectations while achieving sustainable market growth**.  
 <div align="center">
     <img width="408" alt="skateholders" src="https://github.com/user-attachments/assets/493b80dc-c43c-46d4-9e9a-78d451e56de6" />
     <p>Image 1: Skateholders of our Snake game</p>
