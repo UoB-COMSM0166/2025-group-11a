@@ -1,6 +1,6 @@
 # Skateholders
 The stakeholders of the Snake game can be analyzed in layers using the **onion model** to ensure that all key needs are fully considered. 
-The core layer includes direct stakeholders, such as **players**, **developers**, **designers**, and **testers**.
+The core layer includes direct stakeholders, such as **players**, **developers**, **designers**, and **testers**.  
 **Players** need a smooth gaming experience, intuitive operations, and interesting gameplay; **developers** are responsible for programming and optimization of the game to ensure stable performance;
 **designers** focus on game flow and UI/UX design to make the game interface intuitive and beautiful;
 **testers** ensure that the game runs stably on different devices and fix potential problems. The middle layer involves indirect stakeholders, such as **game operators** and **guardians**. **Operators** (such as Steam and Google Play) are responsible for the distribution, promotion, and maintenance of the game, focusing on market performance, privacy compliance, and player feedback;
