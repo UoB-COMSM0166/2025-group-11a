@@ -38,3 +38,16 @@ The outer layer is external influencers, including **regulators**, **advertisers
 #### **🔗 Epic 6: Multi-Device Compatibility and Cloud Save**
 - As a player, I want my game progress to be automatically saved in the cloud so that I don’t lose data when switching devices.
 - As a player, I want to sync my game data between mobile and PC so that I can continue playing anytime, anywhere.
+
+# Reflection
+During the process of defining **epics and user stories** for our **Snake Game**, our team gained valuable insights into requirement engineering and product planning. Here are the key lessons learned:  
+1. **How to Define a Clear User Story?**  
+   We learned that a well-defined **user story** should follow the **As a [user], I want to [goal] so that [reason]** format. This structure helped us ensure clarity and **user-centric design**. For instance, defining *“As a player, I want to control the snake using touch or keyboard so that I can play easily”* made it explicit who the user is, what they need, and why it matters. We also realized that **breaking large epics into smaller, independent user stories** improves task allocation and implementation feasibility.  
+2. **How to Determine Acceptance Criteria?**  
+   Writing **clear acceptance criteria** was crucial to ensuring that each feature is properly implemented and tested. We followed the **Given-When-Then** structure to define testable outcomes. For example, for the **colorblind mode**, we specified:  
+   - *Given the player is in the settings menu, When they select a color mode, Then the snake and food colors should update accordingly.*  
+   This approach made it easier for testers and developers to validate functionality against defined requirements.  
+3. **How to Fit These Requirements into the Context of the Application?**  
+   One major challenge was ensuring that our **user stories aligned with the overall game experience**. We had to balance **technical feasibility, gameplay mechanics, and user needs**. For instance, implementing **leaderboards** required backend support, while **multi-device sync** had to be feasible within our game architecture. Prioritizing features using **MoSCoW (Must-have, Should-have, Could-have, Won’t-have)** helped us focus on essential functionality first, ensuring a smooth development process.  
+### **Final Thoughts**  
+By systematically breaking down **epics into user stories**, setting **clear acceptance criteria**, and aligning requirements with the **game’s objectives**, we enhanced both **gameplay design and development efficiency**. This structured approach not only improved team collaboration but also ensured that we built a **fun, accessible, and engaging Snake Game experience** for all players. 🚀
