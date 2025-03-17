@@ -35,12 +35,12 @@ This stakeholder analysis helps the **development team** accurately **identify n
 - As a player, I want to adjust the game’s background color to reduce eye strain.
 - As a player, I want special sound effects when eating food to enhance immersion.
 
-#### **🏆 Epic 3: Leaderboards and Social Features**
-- As a player, I want to see my ranking on the global leaderboard to understand my performance.
-- As a player, I want to invite friends to compare scores to increase interactivity.
+#### **🏆 Epic 3: Map Mode Optimization**
+- As a player, I want different map modes, such as swamp, desert, and teleportation, each with unique characteristics, so that I can experience varied gameplay.
+- As a player, I want the swamp mode to have slow movement areas, the desert mode to have occasional sandstorms, and the teleportation mode to feature portals for quick repositioning to enhance the challenge.
 
 #### **⚙ Epic 4: Personalization and Accessibility Settings**
-- As a color-blind player, I want to adjust the color mode to clearly distinguish the snake and food.
+- As a player, I want to customize the snake’s color so that I can clearly distinguish it from the background and food.
 - As a player, I want to adjust the game difficulty to match different challenge levels.  
 
 #### **🕹 Epic 5: Multi-Mode Support**
