@@ -4,13 +4,14 @@ html, body {
   overflow: hidden;
   width: 100%;
   height: 100%;
+  font-family: 'Courier New', monospace; /* 像素风格常用字体 */
 }
 
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #222;
+  background-color: #111;
 }
 
 main {
@@ -38,16 +39,47 @@ canvas {
 button {
   padding: 10px 20px;
   font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  background-color: #4CAF50;
+  /* 更新字体为更游戏风格的选项 */
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+  font-weight: bold;
   color: white;
+  background-color: #4CAF50;
+  border: none;
+  border-top: 3px solid #65df69;
+  border-left: 3px solid #65df69;
+  border-right: 3px solid #388E3C;
+  border-bottom: 3px solid #388E3C;
   cursor: pointer;
-  transition: background-color 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 0 #2E7D32;
+  position: relative;
+  outline: none;
+  /* 削角效果 */
+  clip-path: polygon(
+    10px 0,
+    100% 0,  
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,  
+    0 100%,   
+    0 10px
+  );
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #5BC75E;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2E7D32;
+}
+
+button:active {
+  background-color: #388E3C;
+  border-top: 3px solid #388E3C;
+  border-left: 3px solid #388E3C;
+  border-right: 3px solid #65df69;
+  border-bottom: 3px solid #65df69;
+  transform: translateY(4px);
+  box-shadow: none;
 }
 
 #gameOverScreen {
@@ -56,7 +88,7 @@ button:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.85);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,16 +97,40 @@ button:hover {
   font-size: 24px;
   z-index: 20;
   visibility: hidden;
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
 }
 
 #gameOverScreen h1 {
-  color: #ff0000;
+  color: #ff5252;
   font-size: 48px;
   margin-bottom: 20px;
+  text-shadow: 4px 4px 0 #d32f2f;
+  /* 更新字体为更游戏风格的选项 */
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
 }
 
 #gameOverScreen button {
-  margin-top: 20px;
+  margin-top: 30px;
+  background-color: #4CAF50;
+  border-top: 3px solid #65df69;
+  border-left: 3px solid #65df69;
+  border-right: 3px solid #388E3C;
+  border-bottom: 3px solid #388E3C;
+  box-shadow: 0 4px 0 #2E7D32;
+}
+
+#gameOverScreen button:hover {
+  background-color: #5BC75E;
+  box-shadow: 0 2px 0 #2E7D32;
+}
+
+#gameOverScreen button:active {
+  background-color: #388E3C;
+  border-top: 3px solid #388E3C;
+  border-left: 3px solid #388E3C;
+  border-right: 3px solid #65df69;
+  border-bottom: 3px solid #65df69;
+  box-shadow: none;
 }
 
 #gameWonScreen {
@@ -83,11 +139,34 @@ button:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 30px;
+  border: 4px solid #4CAF50;
+  border-style: double;
   color: white;
   visibility: hidden;
+  /* 削角效果 */
+  clip-path: polygon(
+    15px 0,
+    100% 0,  
+    100% calc(100% - 15px),
+    calc(100% - 15px) 100%,  
+    0 100%,   
+    0 15px
+  );
+}
+
+#gameWonScreen h1 {
+  color: #4CAF50;
+  font-size: 48px;
+  margin-bottom: 20px;
+  text-shadow: 4px 4px 0 #2E7D32;
+  /* 更新字体为更游戏风格的选项 */
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+}
+
+#gameWonScreen button {
+  margin-top: 30px;
 }
 
 #startScreen {
@@ -96,7 +175,7 @@ button:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.85);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -107,8 +186,12 @@ button:hover {
 
 #startScreen h1 {
   color: #4CAF50;
-  font-size: 48px;
+  font-size: 60px;
   margin-bottom: 20px;
+  text-shadow: 5px 5px 0 #2E7D32;
+  letter-spacing: 4px;
+  /* 更新字体为更游戏风格的选项 */
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
 }
 
 #startScreen p {
@@ -117,6 +200,14 @@ button:hover {
   max-width: 600px;
   text-align: center;
   line-height: 1.5;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 15px;
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+}
+
+#startScreen button {
+  font-size: 22px;
+  padding: 15px 40px;
 }
 
 .score {
@@ -126,38 +217,22 @@ button:hover {
   color: white;
   font-size: 24px;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 10px;
-  border-radius: 5px;
+  border: 2px solid #4CAF50;
+  /* 更新字体为更游戏风格的选项 */
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+  /* 削角效果 */
+  clip-path: polygon(
+    8px 0,
+    100% 0,
+    100% calc(100% - 8px),  
+    calc(100% - 8px) 100%,  
+    0 100%,   
+    0 8px
+  );
 }
 
-#difficultyScreen {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-}
-
-#difficultyScreen button {
-  margin: 15px;
-  padding: 15px 30px;
-  font-size: 1.2em;
-}
-
-/* 地图选择界面样式 */
-/* #mapSelectScreen {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-  /* background: rgba(0, 0, 0, 0.8); */
-  /* padding: 2rem;
-  border-radius: 10px; */
-/* } */
 /* 地图选择界面样式 */
 #mapSelectScreen {
   position: absolute;
@@ -165,81 +240,275 @@ button:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  /* 新增以下内容 */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px; /* 控制标题和按钮间距 */
+  gap: 20px; 
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 30px;
+  border: 4px solid #4CAF50;
+  border-style: double;
+  /* 削角效果 */
+  clip-path: polygon(
+    15px 0,
+    100% 0,
+    100% calc(100% - 15px),
+    calc(100% - 15px) 100%, 
+    0 100%,   
+    0 15px
+  );
 }
+
+#mapSelectScreen h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+  color: #4CAF50;
+  text-shadow: 3px 3px 0 #2E7D32;
+  letter-spacing: 2px;
+  text-align: center;
+  /* 更新字体为更游戏风格的选项 */
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+}
+
+#mapSelectScreen button {
+  margin: 8px;
+  min-width: 150px;
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  border-top: 3px solid #65df69;
+  border-left: 3px solid #65df69;
+  border-right: 3px solid #388E3C;
+  border-bottom: 3px solid #388E3C;
+  box-shadow: 0 4px 0 #2E7D32;
+}
+
+#mapSelectScreen button:hover {
+  background-color: #5BC75E;
+  box-shadow: 0 2px 0 #2E7D32;
+}
+
+#mapSelectScreen button:active {
+  background-color: #388E3C;
+  border-top: 3px solid #388E3C;
+  border-left: 3px solid #388E3C;
+  border-right: 3px solid #65df69;
+  border-bottom: 3px solid #65df69;
+  box-shadow: none;
+}
+
 #mapSelectScreen .button-row {
   display: flex;
-  flex-direction: row;  /* 按钮横向排列 */
-  gap: 20px;            /* 按钮间距 */
-  flex-wrap: wrap;      /* 允许换行 */
+  flex-direction: row;
+  gap: 15px;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
-/*
-#mapSelectScreen button {
+/* 难度选择界面样式 */
+#difficultyScreen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 30px;
+  border: 4px solid #4CAF50;
+  border-style: double;
+  /* 削角效果 */
+  clip-path: polygon(
+    15px 0,
+    100% 0,
+    100% calc(100% - 15px),
+    calc(100% - 15px) 100%,  
+    0 100%,   
+    0 15px
+  );
+}
 
+#difficultyScreen h2 {
+  font-size: 32px;
+  margin-bottom: 25px;
+  color: #4CAF50;
+  text-shadow: 3px 3px 0 #2E7D32;
+  letter-spacing: 2px;
+  /* 更新字体为更游戏风格的选项 */
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+}
+
+#difficultyScreen button {
   margin: 15px;
+  min-width: 180px;
   padding: 15px 30px;
-  font-size: 1.2rem;
-  flex-direction: row;
-  cursor: pointer;
+  font-size: 18px;
+}
 
-}*/
+/* NORMAL按钮样式 */
+#difficultyScreen button:first-of-type {
+  background-color: #4CAF50;
+  border-top: 3px solid #65df69;
+  border-left: 3px solid #65df69;
+  border-right: 3px solid #388E3C;
+  border-bottom: 3px solid #388E3C;
+  box-shadow: 0 4px 0 #2E7D32;
+}
 
-/* #mapSelectScreen button:hover {
-  background: #45a049;
-  transform: scale(1.1);
-} */
+#difficultyScreen button:first-of-type:hover {
+  background-color: #5BC75E;
+  box-shadow: 0 2px 0 #2E7D32;
+}
 
-#escBtnPage{
+#difficultyScreen button:first-of-type:active {
+  background-color: #388E3C;
+  border-top: 3px solid #388E3C;
+  border-left: 3px solid #388E3C;
+  border-right: 3px solid #65df69;
+  border-bottom: 3px solid #65df69;
+  box-shadow: none;
+}
+
+/* HARD按钮样式 */
+#difficultyScreen button:last-of-type {
+  background-color: #4CAF50;
+  border-top: 3px solid #65df69;
+  border-left: 3px solid #65df69;
+  border-right: 3px solid #388E3C;
+  border-bottom: 3px solid #388E3C;
+  box-shadow: 0 4px 0 #2E7D32;
+}
+
+#difficultyScreen button:last-of-type:hover {
+  background-color: #5BC75E;
+  box-shadow: 0 2px 0 #2E7D32;
+}
+
+#difficultyScreen button:last-of-type:active {
+  background-color: #388E3C;
+  border-top: 3px solid #388E3C;
+  border-left: 3px solid #388E3C;
+  border-right: 3px solid #65df69;
+  border-bottom: 3px solid #65df69;
+  box-shadow: none;
+}
+
+#escBtnPage {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   visibility: hidden;
 }
-#escBtnPage button{
+
+#escBtnPage button {
   width: 200px;
-  margin: 20px 0;
+  margin: 15px 0;
   padding: 15px 0;
-  font-size: 1.2em;
+  font-size: 18px;
 }
-.help_btn{
-  width: 142.5px;
+
+#escBtnPage button:first-of-type {
+  background-color: #4CAF50;
+  border-top: 3px solid #65df69;
+  border-left: 3px solid #65df69;
+  border-right: 3px solid #388E3C;
+  border-bottom: 3px solid #388E3C;
+  box-shadow: 0 4px 0 #2E7D32;
+}
+
+#escBtnPage button:last-of-type {
+  background-color: #4CAF50;
+  border-top: 3px solid #65df69;
+  border-left: 3px solid #65df69;
+  border-right: 3px solid #388E3C;
+  border-bottom: 3px solid #388E3C;
+  box-shadow: 0 4px 0 #2E7D32;
+}
+
+.help_btn {
+  width: 180px;
   margin-top: 20px;
+  background-color: #4CAF50;
+  border-top: 3px solid #65df69;
+  border-left: 3px solid #65df69;
+  border-right: 3px solid #388E3C;
+  border-bottom: 3px solid #388E3C;
+  box-shadow: 0 4px 0 #2E7D32;
 }
-#HelpPage{
+
+.help_btn:hover {
+  background-color: #5BC75E;
+  box-shadow: 0 2px 0 #2E7D32;
+}
+
+.help_btn:active {
+  background-color: #388E3C;
+  border-top: 3px solid #388E3C;
+  border-left: 3px solid #388E3C;
+  border-right: 3px solid #65df69;
+  border-bottom: 3px solid #65df69;
+  box-shadow: none;
+}
+
+#HelpPage {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background: black;
+  background-color: rgba(0, 0, 0, 0.9);
   z-index: 30;
   padding: 6vw;
   visibility: hidden;
+  box-sizing: border-box;
 }
-#HelpPage h1{
-  color: white;
+
+#HelpPage h1 {
+  color: #4CAF50;
+  font-size: 36px;
+  margin-bottom: 20px;
+  text-shadow: 3px 3px 0 #2E7D32;
+  letter-spacing: 2px;
+  /* 更新字体为更游戏风格的选项 */
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
 }
-#HelpPage p{
+
+#HelpPage p {
   color: white;
   width: 90vw;
+  max-width: 800px;
   white-space: normal;
   display: block;
   margin-top: 20px;
-  line-height: 150%;
+  line-height: 1.6;
+  font-size: 16px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-left: 3px solid #4CAF50;
+  /* 削角效果 */
+  clip-path: polygon(
+    10px 0,
+    100% 0,  
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,  
+    0 100%,   
+    0 0
+  );
 }
-#HelpPage button{
-  margin-top: 20px;
+
+#HelpPage button {
+  margin-top: 30px;
+  background-color: #4CAF50;
+  border-top: 3px solid #65df69;
+  border-left: 3px solid #65df69;
+  border-right: 3px solid #388E3C;
+  border-bottom: 3px solid #388E3C;
+  box-shadow: 0 4px 0 #2E7D32;
 }
