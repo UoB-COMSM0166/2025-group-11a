@@ -21,9 +21,18 @@ let score = 0;
 let difficultyMode = 'normal';
 let currentMap = 'default';
 let isPaused = false; // 记录游戏是否暂停
-
 let gameState = false; // 记录是否开始游戏
 let pauseBtn = null;  // 将暂停按钮提前
+let swampBg;//背景图片
+let desertBg;
+let teleportBg;
+
+function preload() {
+  swampBg = loadImage('assets/pictures/swamp.jpg'); 
+  desertBg = loadImage('assets/pictures/desert.jpg');
+  teleportBg = loadImage('assets/pictures/teleport.jpg');
+}
+
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('main');
@@ -76,9 +85,9 @@ function initGame() {
     if(currentMap === 'swamp') {
       gameMap.generateSwamps(); // 生成沼泽地形
       gameMap.drawSwamps(); // 绘制沼泽地形
-    }else if (currentMap === 'fog') {
-      gameMap.generateFogs(); // 生成迷雾
-      gameMap.drawFogs();
+    }else if (currentMap === 'desert') {
+      gameMap.generateDeserts(); // 生成迷雾
+      gameMap.drawDeserts();
     }else if (currentMap === 'teleport') {
       gameMap.generateTeleports(); // 生成传送点
       gameMap.drawTeleports(); // 绘制传送点
@@ -142,10 +151,15 @@ function createUI() {
   HelpPage.id('HelpPage')
   HelpPage.parent('main');
   createElement('h1', 'SNAKE GAME').parent(HelpPage);
-  createElement('p', 'This report aims to provide a comprehensive overview of the progress made in ' +
-    'the development of our company\'s new mobile app as of [report date]. The project, which commenced' +
-    ' on [start date], has been progressing through various stages, with the primary goal of delivering' +
-    ' a high - quality, user - friendly mobile application within the scheduled timeline.').parent(HelpPage);
+  // createElement('p', 'This report aims to provide a comprehensive overview of the progress made in ' +
+  //   'the development of our company\'s new mobile app as of [report date]. The project, which commenced' +
+  //   ' on [start date], has been progressing through various stages, with the primary goal of delivering' +
+  //   ' a high - quality, user - friendly mobile application within the scheduled timeline.').parent(HelpPage);
+  createElement('p', '• Eating food can make the snake longer, and eating different props will get rewards').parent(HelpPage);
+  createElement('p', '• Don\'t touch the borders and obstacles, and don\'t hit other snakes with your head').parent(HelpPage);
+  createElement('p', '• The SWAMP level has a speed reduction zone').parent(HelpPage);
+  createElement('p', '• The Desert level has a blind spot').parent(HelpPage);
+  createElement('p', '• The TELEPORT level has a portal').parent(HelpPage);
   let closeHelpButton = createButton('CLOSE');
   closeHelpButton.parent(HelpPage);
   closeHelpButton.mousePressed(() => {
@@ -179,13 +193,14 @@ function createUI() {
   });
 
   // 迷雾地图按钮
-  let fogMapBtn = createButton('FOG');
-  fogMapBtn.parent(mapSelectScreen);
-  fogMapBtn.mousePressed(() => {
-    currentMap = 'fog';
+  let desertMapBtn = createButton('DESERT');
+  desertMapBtn.parent(mapSelectScreen);
+  desertMapBtn.mousePressed(() => {
+    currentMap = 'desert';
     showDifficultySelection();
   });
 
+  //传送地图
   let teleportMapBtn = createButton('TELEPORT');
   teleportMapBtn.parent(mapSelectScreen);
   teleportMapBtn.mousePressed(() => {
@@ -289,7 +304,6 @@ function draw() {
   background(20);
   translateCenter();
 
-
   if (score >= 20) {
     gameWon = true;
   }
@@ -315,6 +329,36 @@ function draw() {
   gameMap.drawFixedGrid();
   pop();
 
+  //背景贴图
+  if (currentMap === 'swamp' && swampBg) {
+    let gameBoundary = {
+      x: -width * gameMap.mapSize / 2,
+      y: -height * gameMap.mapSize / 2,
+      w: width * gameMap.mapSize,
+      h: height * gameMap.mapSize
+    };
+    image(swampBg, gameBoundary.x, gameBoundary.y, gameBoundary.w, gameBoundary.h);
+  }
+
+  if (currentMap === 'desert' && desertBg) {
+    let gameBoundary = {
+      x: -width * gameMap.mapSize / 2,
+      y: -height * gameMap.mapSize / 2,
+      w: width * gameMap.mapSize,
+      h: height * gameMap.mapSize
+    };
+    image(desertBg, gameBoundary.x, gameBoundary.y, gameBoundary.w, gameBoundary.h);
+  }
+
+  if (currentMap === 'teleport' && teleportBg) {
+    let gameBoundary = {
+      x: -width * gameMap.mapSize / 2,
+      y: -height * gameMap.mapSize / 2,
+      w: width * gameMap.mapSize,
+      h: height * gameMap.mapSize
+    };
+    image(teleportBg, gameBoundary.x, gameBoundary.y, gameBoundary.w, gameBoundary.h);
+  }
 
   if (currentMap === 'swamp') {
     gameMap.drawSwamps(); // 新增沼泽绘制
@@ -480,8 +524,8 @@ function draw() {
       itemManager.updateTooltips();
   }
 
-  if (currentMap === 'fog') {
-    gameMap.drawFogs();
+  if (currentMap === 'desert') {
+    gameMap.drawDeserts();
   }
 
   resetMatrix();
@@ -567,7 +611,7 @@ function restartGame() {
   if (itemManager) itemManager.items = [];
   if (gameMap) {
     if (gameMap.swampManager) gameMap.swampManager.swamps = [];
-    if (gameMap.fogManager) gameMap.fogManager.fogs = [];
+    if (gameMap.desertManager) gameMap.desertManager.deserts = [];
     if (gameMap.teleportManager) gameMap.teleportManager.teleports = [];
     gameMap = null;
   }

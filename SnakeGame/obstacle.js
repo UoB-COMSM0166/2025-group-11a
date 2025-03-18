@@ -92,5 +92,98 @@ drawVerticalLadder(x, y, width, height) {
     line(x, rungY, x + width, rungY);
   }
   }
+
+// drawObstacles() {
+//   push();
+//   stroke(210, 180, 140); // 浅棕色
+//   strokeWeight(2);
+//   noFill();
+//   for (let o of this.obstacles) {
+//     if (o.isHorizontal) {
+//       this.drawHorizontalSpikes(o.x, o.y, o.length, 0.5 * gridSize);
+//     } else {
+//       this.drawVerticalSpikes(o.x, o.y, 0.5 * gridSize, o.length);
+//     }
+//   }
+//   pop();
+// }
+
+// drawHorizontalSpikes(x, y, width, height) {
+//   let spikeCount = Math.floor(width / (gridSize * 0.7));
+//   let spikeWidth = width / spikeCount;
+//   beginShape();
+//   for (let i = 0; i <= spikeCount; i++) {
+//     let spikeX = x + i * spikeWidth;
+//     let spikeY1 = i % 2 === 0 ? y : y - height;
+//     let spikeY2 = i % 2 === 0 ? y + height : y + height * 2;
+//     vertex(spikeX, spikeY1);
+//     vertex(spikeX, spikeY2);
+//   }
+//   endShape(CLOSE);
+// }
+
+// drawVerticalSpikes(x, y, width, height) {
+//   let spikeCount = Math.floor(height / (gridSize * 0.7));
+//   let spikeHeight = height / spikeCount;
+//   beginShape();
+//   for (let i = 0; i <= spikeCount; i++) {
+//     let spikeY = y + i * spikeHeight;
+//     let spikeX1 = i % 2 === 0 ? x : x - width;
+//     let spikeX2 = i % 2 === 0 ? x + width : x + width * 2;
+//     vertex(spikeX1, spikeY);
+//     vertex(spikeX2, spikeY);
+//   }
+//   endShape(CLOSE);
+// }
+
+// drawObstacles() {
+//   push();
+//   fill(210, 180, 140); // 浅棕色填充
+//   stroke(210, 180, 140);
+//   strokeWeight(2);
+//   for (let o of this.obstacles) {
+//     if (o.isHorizontal) {
+//       this.drawHorizontalSpikes(o.x, o.y, o.length, 0.5 * gridSize);
+//     } else {
+//       this.drawVerticalSpikes(o.x, o.y, 0.5 * gridSize, o.length);
+//     }
+//   }
+//   pop();
+// }
+
+// drawHorizontalSpikes(x, y, width, height) {
+//   let spikeCount = Math.floor(width / (gridSize * 0.7));
+//   let spikeWidth = width / spikeCount;
+//   for (let i = 0; i < spikeCount; i++) {
+//     let x1 = x + i * spikeWidth;
+//     let x2 = x1 + spikeWidth / 2;
+//     let x3 = x1 + spikeWidth;
+//     let y1 = y;
+//     let y2 = y - height;
+//     let y3 = y + height * 2;
+//     triangle(x1, y1, x2, y2, x3, y1);
+//     triangle(x1, y1 + height, x2, y3, x3, y1 + height);
+//   }
+// }
+
+// drawVerticalSpikes(x, y, width, height) {
+//   let spikeCount = Math.floor(height / (gridSize * 0.7));
+//   let spikeHeight = height / spikeCount;
+//   for (let i = 0; i < spikeCount; i++) {
+//     let y1 = y + i * spikeHeight;
+//     let y2 = y1 + spikeHeight / 2;
+//     let y3 = y1 + spikeHeight;
+//     let x1 = x;
+//     let x2 = x - width;
+//     let x3 = x + width * 2;
+//     triangle(x1, y1, x2, y2, x1, y3);
+//     triangle(x1 + width, y1, x3, y2, x1 + width, y3);
+//   }
+// }
+
+
 }
+
+
+
 
