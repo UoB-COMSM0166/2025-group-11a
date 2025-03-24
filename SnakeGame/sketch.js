@@ -26,6 +26,10 @@ let pauseBtn = null;  // 将暂停按钮提前
 let swampBg;//背景图片
 let desertBg;
 let teleportBg;
+let totalTime = 120; 
+let remainingTime;
+let startTime;
+let gameOverReason = ''; 
 
 function preload() {
   swampBg = loadImage('assets/pictures/swamp.jpg'); 
@@ -236,12 +240,21 @@ function createUI() {
     startGame();
   });
 
+  // 创建倒计时显示
+  let timerDiv = createDiv(`Time: 120s`);
+  timerDiv.class('timer');
+  timerDiv.id('timerDisplay');
+  timerDiv.parent('main');
+
+
   // 创建游戏结束屏幕
   let gameOverScreen = createDiv('');
   gameOverScreen.id('gameOverScreen');
   gameOverScreen.parent('main');
 
-  let gameOverTitle = createElement('h1', 'GAME OVER');
+  // let gameOverTitle = createElement('h1', 'GAME OVER');
+  let gameOverTitle = createElement('h1', '');
+  gameOverTitle.id('gameOverTitle');
   gameOverTitle.parent(gameOverScreen);
 
   let scoreDisplay = createP('');
@@ -290,11 +303,36 @@ function createUI() {
   // 初始隐藏分数和重新开始按钮，直到游戏真正开始
   document.getElementById('scoreDisplay').style.visibility = 'hidden';
   document.querySelector('.button-container').style.visibility = 'hidden';
+  document.getElementById('timerDisplay').style.visibility = 'hidden';
 }
 
 function draw() {
   if (!gameStarted) {
     return;
+  }
+
+  // 更新倒计时
+  if (!gameOver && !gameWon) {
+    if (startGame) {
+      let elapsed = (millis() - startTime) / 1000;
+      remainingTime = totalTime - elapsed;
+      
+      // 时间耗尽判断
+      if (remainingTime <= 0) {
+        remainingTime = 0;
+        if (score >= 100) {
+          gameWon = true;
+        } else {
+          gameOver = true;
+          gameOverReason = 'timeout';
+        }
+      }
+      
+      // 更新倒计时显示
+      document.getElementById('timerDisplay').innerHTML = 
+        `Time: ${Math.ceil(remainingTime)}s`;
+    }
+    
   }
 
   if (isPaused) {
@@ -304,21 +342,43 @@ function draw() {
   background(20);
   translateCenter();
 
-  if (score >= 20) {
+  if (score >= 100) {
     gameWon = true;
   }
 
   if (gameWon) {
     document.getElementById('scoreDisplay').style.visibility = 'hidden';
     document.querySelector('.button-container').style.visibility = 'hidden';
+    document.getElementById('timerDisplay').style.visibility = 'hidden';
     document.getElementById('gameWonScreen').style.visibility = 'visible';
     document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
     return;
   }
 
   if (gameOver) {
+    console.log("Setting gameOverTitle:", gameOverReason);
+    let gameOverText = "GAME OVER";
+    switch (gameOverReason) {
+      case 'timeout':
+        gameOverText = "TIME'S UP!";
+        break;
+      case 'collision_with_snake':
+        gameOverText = "You hit another snake!";
+        break;
+      case 'collision_with_obstacle':
+        gameOverText = "You hit an obstacle!";
+        break;
+      case 'collision_with_boundary':
+        gameOverText = "You hit the boundary!";
+        break;
+    }
+    // document.getElementById('gameOverTitle').innerHTML = 
+    //   gameOverReason === 'timeout' ? "TIME'S UP!" : "GAME OVER";
+    document.getElementById('gameOverTitle').innerHTML = gameOverText;
+    document.getElementById('gameOverTitle').style.visibility = 'visible';
     document.getElementById('scoreDisplay').style.visibility = 'hidden';
     document.querySelector('.button-container').style.visibility = 'hidden';
+    document.getElementById('timerDisplay').style.visibility = 'hidden';
     document.getElementById('gameOverScreen').style.visibility = 'visible';
     document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
     return;
@@ -398,6 +458,7 @@ function draw() {
     // 检查玩家与AI小蛇的碰撞
     if (playerSnake.checkCollisionWithAISnake(smallSnakes[i]) && !playerSnake.isInvincible) {
       gameOver = true;
+      gameOverReason = 'collision_with_snake';
     }
     // AI蛇头碰到玩家蛇身体后，ai蛇死亡-移除自己并生成随机数量的食物
     if (smallSnakes[i].checkCollisionWithPlayer(playerSnake)) {
@@ -427,10 +488,12 @@ function draw() {
   
   if (playerSnake.checkBoundaryCollision()) {
     gameOver = true;
+    gameOverReason = 'collision_with_boundary';
   }
 
   if (playerSnake.checkObstacleCollision(obstacleManager.obstacles) && !playerSnake.isInvincible) {
     gameOver = true;
+    gameOverReason = 'collision_with_obstacle';
   }
   //逐帧减少玩家道具时间
   if (playerSnake.isInvincible) {
@@ -587,6 +650,7 @@ function restartGame() {
   
   // 隐藏游戏相关界面
   document.getElementById('gameOverScreen').style.visibility = 'hidden';
+  document.getElementById('gameOverTitle').style.visibility = 'hidden';
   document.getElementById('gameWonScreen').style.visibility = 'hidden';
   document.getElementById('scoreDisplay').style.visibility = 'hidden';
   document.querySelector('.button-container').style.visibility = 'hidden';
@@ -602,6 +666,9 @@ function restartGame() {
   gameState = false;
   isPaused = false;
   score = 0;
+  startTime = null;
+  remainingTime = totalTime;
+  gameOverReason = '';
 
   // 清理现有游戏对象
   if (playerSnake) playerSnake = null;
@@ -619,6 +686,7 @@ function restartGame() {
   document.getElementById('gameOverScreen').style.visibility = 'hidden';
   document.getElementById('gameWonScreen').style.visibility = 'hidden';
   document.getElementById('escBtnPage').style.visibility = 'hidden';
+  document.getElementById('timerDisplay').style.visibility = 'hidden';
   gameWon = false;
 
   // foodManager = new FoodManager();
@@ -634,6 +702,7 @@ function restartGame() {
   // 解除之前的draw循环
   // noLoop(); // 停止p5.js的draw循环
   // setTimeout(() => loop(), 100); // 稍后重新启动循环
+  
   
 
   initGame();
@@ -698,11 +767,14 @@ function startGame() {
   // 显示分数和重新开始按钮
   document.getElementById('scoreDisplay').style.visibility = 'visible';
   document.querySelector('.button-container').style.visibility = 'visible';
+  document.getElementById('timerDisplay').style.visibility = 'visible';
 
   // 重置游戏状态
   gameStarted = true;
   gameOver = false;
   gameWon = false;
+
+  startTime = millis();
 
   initGame();
 }

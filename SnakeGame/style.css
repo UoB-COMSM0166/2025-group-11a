@@ -27,10 +27,20 @@ canvas {
   display: block;
 }
 
-.button-container {
+/* .button-container {
   position: absolute;
   top: 20px;
   right: 20px;
+  z-index: 10;
+  display: flex;
+  gap: 10px;
+} */
+
+.button-container {
+  position: absolute;
+  bottom: 20px;  /* 改为底部定位 */
+  right: 20px;
+  top: auto;     /* 移除顶部定位 */
   z-index: 10;
   display: flex;
   gap: 10px;
@@ -132,6 +142,20 @@ button:active {
   border-bottom: 3px solid #65df69;
   box-shadow: none;
 }
+
+#gameOverTitle {
+  font-size: 36px;
+  font-weight: bold;
+  color: #ff5252;
+  text-shadow: 4px 4px 0 #d32f2f;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* #finalScore {
+  font-size: 24px;
+  margin-bottom: 20px;
+} */
 
 #gameWonScreen {
   position: absolute;
@@ -512,3 +536,18 @@ button:active {
   border-bottom: 3px solid #388E3C;
   box-shadow: 0 4px 0 #2E7D32;
 }
+
+#timerDisplay {
+  visibility: hidden; 
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 24px;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border: 2px solid #4CAF50;
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+}
+
