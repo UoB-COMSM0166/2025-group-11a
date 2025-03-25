@@ -29,6 +29,9 @@ let teleportBg;
 let totalTime = 120; 
 let remainingTime;
 let startTime;
+let elapsed;
+let pauseStartTime = 0;
+let totalPausedTime = 0;
 let gameOverReason = ''; 
 
 
@@ -57,7 +60,8 @@ function initGame() {
   //   gameMap.fogManager.fogs = [];
   //   gameMap.teleportManager.teleports = [];
   // }
-
+  startTime = millis();
+  totalPausedTime = 0;
   playerSnake = new PlayerSnake();
   smallSnakes = [];
   playerSnake.isInvincible = true; // 游戏刚开始时玩家蛇处于无敌状态
@@ -137,11 +141,16 @@ function createUI() {
   escButtom1.parent(escBtnPage)
   escButtom2.parent(escBtnPage)
   escButtom1.mousePressed(() => {
-    isPaused = false
+    isPaused = !isPaused; 
     pauseBtn.html(isPaused ? 'RESUME' : 'PAUSE'); // 更新按钮文本
     document.getElementById('scoreDisplay').style.visibility = 'visible';
     document.querySelector('.button-container').style.visibility = 'visible';
     document.getElementById('escBtnPage').style.visibility = 'hidden'
+    if (isPaused) {
+      pauseStartTime = millis();
+    } else {
+      totalPausedTime += millis() - pauseStartTime;
+    }
   })
   escButtom2.mousePressed(() => {
     clear()
@@ -291,9 +300,16 @@ function createUI() {
   pauseBtn = createButton('PAUSE');
   pauseBtn.parent(buttonContainer);
   pauseBtn.mousePressed(() => {
-    isPaused = !isPaused; // 切换状态
+    isPaused = !isPaused;
     pauseBtn.html(isPaused ? 'RESUME' : 'PAUSE'); // 更新按钮文本
+    if (isPaused) {
+      pauseStartTime = millis();
+    } else {
+      totalPausedTime += millis() - pauseStartTime;
+    }
   });
+  elapsed = (millis() - startTime - totalPausedTime) / 1000;
+
 
   // 创建分数显示
   let scoreDiv = createDiv('score: 0');
@@ -315,25 +331,29 @@ function draw() {
   // 更新倒计时
   if (!gameOver && !gameWon) {
     if (startGame) {
-      let elapsed = (millis() - startTime) / 1000;
-      remainingTime = totalTime - elapsed;
-      
-      // 时间耗尽判断
-      if (remainingTime <= 0) {
-        remainingTime = 0;
-        if (score >= 100) {
-          gameWon = true;
-        } else {
-          gameOver = true;
-          gameOverReason = 'timeout';
+      if (!isPaused) {  
+        let currentTime = millis();
+        let elapsed = (currentTime - startTime - totalPausedTime) / 1000;
+        remainingTime = totalTime - elapsed;
+        
+        // 时间耗尽判断
+        if (remainingTime <= 0) {
+          remainingTime = 0;
+          if (score >= 100) {
+            gameWon = true;
+          } else {
+            gameOver = true;
+            gameOverReason = 'timeout';
+          }
         }
+        // 更新倒计时显示
+        document.getElementById('timerDisplay').innerHTML = 
+          `Time: ${Math.ceil(remainingTime)}s`;
       }
-      
-      // 更新倒计时显示
-      document.getElementById('timerDisplay').innerHTML = 
-        `Time: ${Math.ceil(remainingTime)}s`;
     }
-    
+    if (isPaused) {
+      return; // 如果暂停，跳过游戏逻辑
+    }
   }
 
   if (isPaused) {
@@ -668,6 +688,7 @@ function restartGame() {
   isPaused = false;
   score = 0;
   startTime = null;
+  totalPausedTime = 0;
   remainingTime = totalTime;
   gameOverReason = '';
 
@@ -785,11 +806,18 @@ function startGame() {
 function keyPressed() {
   if (gameState) {
     if (keyCode == 27) {
-      isPaused = true
+      isPaused = !isPaused; 
       pauseBtn.html(isPaused ? 'RESUME' : 'PAUSE'); // 更新按钮文本
-      document.getElementById('escBtnPage').style.visibility = 'visible';
-      document.getElementById('scoreDisplay').style.visibility = 'hidden';
-      document.querySelector('.button-container').style.visibility = 'hidden';
+      document.getElementById('escBtnPage').style.visibility = isPaused ? 'visible' : 'hidden';
+      document.getElementById('scoreDisplay').style.visibility = 'visible';
+      document.querySelector('.button-container').style.visibility = 'visible';
+
+      if (isPaused) {
+        pauseStartTime = millis();
+      } else {
+        totalPausedTime += millis() - pauseStartTime;
+      }
+      elapsed = (millis() - startTime - totalPausedTime) / 1000;
     }
   }
 }
