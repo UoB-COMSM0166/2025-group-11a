@@ -31,6 +31,7 @@ let remainingTime;
 let startTime;
 let gameOverReason = ''; 
 
+
 function preload() {
   swampBg = loadImage('assets/pictures/swamp.jpg'); 
   desertBg = loadImage('assets/pictures/desert.jpg');
