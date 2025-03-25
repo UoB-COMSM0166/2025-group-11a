@@ -33,7 +33,7 @@ let elapsed;
 let pauseStartTime = 0;
 let totalPausedTime = 0;
 let gameOverReason = ''; 
-
+ 
 
 function preload() {
   swampBg = loadImage('assets/pictures/swamp.jpg'); 
