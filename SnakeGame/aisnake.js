@@ -1,8 +1,19 @@
 class AISnake extends Snake {
   constructor() {
-    // 随机生成位置，但不要太靠近玩家
-    let x = random(-width * 1.5, width * 1.5);
-    let y = random(-height * 1.5, height * 1.5);
+    // 限制 AI 蛇生成在地图范围内
+    let minX = -width * mapSize / 2 + gridSize;
+    let maxX = width * mapSize / 2 - gridSize;
+    let minY = -height * mapSize / 2 + gridSize;
+    let maxY = height * mapSize / 2 - gridSize;
+
+    let x = random(minX, maxX);
+    let y = random(minY, maxY);
+    
+    // // 确保 AI 蛇不会生成在障碍物上
+    // while (obstacleManager.isOccupied(x, y)) {
+    //   x = random(minX, maxX);
+    //   y = random(minY, maxY);
+    // }
     
     // 随机长度和颜色
     let size = floor(random(3, 8));

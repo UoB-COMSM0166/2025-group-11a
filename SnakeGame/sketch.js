@@ -485,17 +485,18 @@ function draw() {
     if (smallSnakes[i].checkCollisionWithPlayer(playerSnake)) {
       smallSnakes[i].die(); // 让 AI蛇死亡生成食物
       smallSnakes.splice(i, 1); // 删除 AI蛇
+      smallSnakes.push(new AISnake());
       continue; // 跳过后续逻辑，防止报错
     }
     drawStaminaBar();
   }
   
   // 检查食物数量，如果过少则生成更多
-  if (difficultyMode === 'normal') {
-    if (foodManager.foods.length < 100) {
-      foodManager.generateFood(10);
-    }
+  // if (difficultyMode === 'normal') {
+  if (foodManager.foods.length < 100) {
+    foodManager.generateFood(10);
   }
+  // }
   if (itemManager.items.length < 5) {
     itemManager.generateItem(5);
   }
