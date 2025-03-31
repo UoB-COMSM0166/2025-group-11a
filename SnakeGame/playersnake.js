@@ -108,9 +108,6 @@ class PlayerSnake extends Snake {
       if (!this.isRecovering) { // 防止重复触发
         this.isRecovering = true;
         this.speed = 0; // 停止移动
-        // 撞到障碍物后，轻微后退，模拟撞击效果
-        this.direction.rotate(PI / 2);
-        this.body[0].sub(this.direction.copy().mult(gridSize * 0.5)); // 反弹半个格子
       }
       return true;
     }
