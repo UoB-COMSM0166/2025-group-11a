@@ -69,19 +69,28 @@ class ItemManager {
         
         beginShape();
         vertex(x, y - size * 0.7);
-        vertex(x + size * 0.6, y - size * 0.2);
-        vertex(x + size * 0.6, y + size * 0.3);
+        vertex(x + size * 0.6, y - size * 0.5);
+        vertex(x + size * 0.5, y + size * 0.3);
         vertex(x, y + size * 0.7);
-        vertex(x - size * 0.6, y + size * 0.3);
-        vertex(x - size * 0.6, y - size * 0.2);
+        vertex(x - size * 0.5, y + size * 0.3);
+        vertex(x - size * 0.6, y - size * 0.5);
         endShape(CLOSE);
 
         stroke(255, 255, 200);
-        strokeWeight(1);
+        strokeWeight(2);
         fill(255, 240, 110);
 
         push();
         translate(x, y);
+        noStroke();
+        fill(255);
+        
+        // cross shape
+        rectMode(CENTER);
+        rect(0, -size * 0.05, size * 0.15, size * 0.8);
+
+        rect(0, -size * 0.15, size * 0.7, size * 0.15);
+
         for (let i = 0; i < 5; i++) {
           let angle = TWO_PI / 5 * i - PI/2;
           let sx = cos(angle) * size * 0.3;
@@ -91,39 +100,71 @@ class ItemManager {
         pop();
         
       } else if (item.type === "stamina") {
-        // 体力道具 - 闪电样式
-        stroke(100, 180, 255);
-        strokeWeight(2);
-        fill(0, 100, 255);
+        // 电池主体参数
+        const batteryWidth = size * 0.8;
+        const batteryHeight = size * 1.2;
+        const batteryCorner = size * 0.1;
+        const terminalWidth = size * 0.3;
+        const terminalHeight = size * 0.15;
         
-        // 闪电形状
+        push();
+        
+        //电池主体
+        stroke(255);
+        strokeWeight(1.5);
+        fill(80, 150, 255); // 天蓝色填充
+        rect(
+            x - batteryWidth/2, 
+            y - batteryHeight/2, 
+            batteryWidth, 
+            batteryHeight,
+            batteryCorner
+        );
+        //白色电池盖
+        fill(255);
+        noStroke();
+        rect(
+            x - terminalWidth/2, 
+            y - batteryHeight/2 - terminalHeight, 
+            terminalWidth, 
+            terminalHeight,
+            batteryCorner/2
+        );
+
+        const lightningSize = size * 0.8;
+        fill(255);
         beginShape();
-        vertex(x + size * 0.1, y - size * 0.6);
-        vertex(x - size * 0.2, y - size * 0.1);
-        vertex(x, y + size * 0.1);
-        vertex(x - size * 0.3, y + size * 0.6);
-        vertex(x + size * 0.2, y + size * 0.1);
-        vertex(x, y - size * 0.1);
+        //闪电
+        vertex(x + lightningSize * 0.1, y - lightningSize * 0.6);
+        vertex(x - lightningSize * 0.2, y - lightningSize * 0.1);
+        vertex(x, y + lightningSize * 0.1);
+        vertex(x - lightningSize * 0.3, y + lightningSize * 0.6);
+        vertex(x + lightningSize * 0.2, y + lightningSize * 0.1);
+        vertex(x, y - lightningSize * 0.1);
         endShape(CLOSE);
         
+        pop();
       } else if (item.type === "enlarge") {
         // 扩大范围道具 - 雷达样式
         stroke(30, 100, 30);
-        strokeWeight(1.5);
-        fill(50, 180, 50);
+        strokeWeight(1);
+        fill(120, 200, 70);
         ellipse(x, y, size * 1.5);
 
         // 雷达同心圆
         noFill();
-        stroke(100, 230, 100, 180);
+        stroke(130, 260, 130, 180);
         strokeWeight(1);
         ellipse(x, y, size * 1);
         ellipse(x, y, size * 0.7);
         ellipse(x, y, size * 0.45);
+        stroke(255);
+        ellipse(x, y, size * 1.5);
+        
         
         //雷达扫描线
         stroke(150, 255, 150);
-        strokeWeight(1.5);
+        strokeWeight(3);
         let scanAngle = (frameCount * 0.05) % TWO_PI;
         line(x, y, x + cos(scanAngle) * size * 0.75, y + sin(scanAngle) * size * 0.75);
         
@@ -168,12 +209,12 @@ class ItemManager {
 
   activateStamina(){
     playerSnake.actStamina();
-    this.addTooltip("Stamina Restored!", playerSnake.body[0], [0, 128, 255]);
+    this.addTooltip("Stamina Restored!", playerSnake.body[0], [80, 150, 255]);
   }
 
   activateEnlarge(){
     playerSnake.actEnlarge();
-    this.addTooltip("Enlarged!", playerSnake.body[0], [50, 180, 50]);
+    this.addTooltip("Enlarged!", playerSnake.body[0], [120, 200, 70]);
   }
   
   // 添加道具提示文本
@@ -206,7 +247,7 @@ class ItemManager {
       // 绘制提示文字 - 直接在游戏世界坐标系中绘制
       fill(tooltip.color[0], tooltip.color[1], tooltip.color[2], tooltip.alpha);
       stroke(0, tooltip.alpha * 0.8);
-      strokeWeight(3);
+      strokeWeight(0.5);
       text(tooltip.message, tooltip.position.x, tooltip.position.y + tooltip.offsetY - gridSize * 2);
       
       if (tooltip.lifetime <= 0) {
@@ -249,9 +290,12 @@ class ItemManager {
     push();
     resetMatrix();
     
-    // 在屏幕左下角绘制图标
-    let x = (this.cornerOffset)+20;
-    let y = (height - this.cornerOffset - this.iconSize)+20;
+    // 计算总宽度
+    const totalWidth = this.activeEffects.length * (this.iconSize + this.padding) - this.padding;
+    
+    // 在屏幕上方中间位置绘制图标
+    let x = width / 2 - totalWidth / 2;  // 居中计算起始x位置
+    let y = this.cornerOffset + 30;      // 顶部位置
     
     for (let effect of this.activeEffects) {
       this.drawStatusIcon(x, y, effect);
