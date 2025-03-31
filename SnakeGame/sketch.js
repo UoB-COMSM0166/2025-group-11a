@@ -22,7 +22,6 @@ let difficultyMode = 'normal';
 let currentMap = 'default';
 let isPaused = false; // 记录游戏是否暂停
 let gameState = false; // 记录是否开始游戏
-let pauseBtn = null;  // 将暂停按钮提前
 let swampBg;//背景图片
 let desertBg;
 let teleportBg;
@@ -141,21 +140,15 @@ function createUI() {
   escButtom1.parent(escBtnPage)
   escButtom2.parent(escBtnPage)
   escButtom1.mousePressed(() => {
-    isPaused = !isPaused; 
-    pauseBtn.html(isPaused ? 'RESUME' : 'PAUSE'); // 更新按钮文本
+    isPaused = false; // 恢复游戏
     document.getElementById('scoreDisplay').style.visibility = 'visible';
     document.querySelector('.button-container').style.visibility = 'visible';
-    document.getElementById('escBtnPage').style.visibility = 'hidden'
-    if (isPaused) {
-      pauseStartTime = millis();
-    } else {
-      totalPausedTime += millis() - pauseStartTime;
-    }
-  })
+    document.getElementById('escBtnPage').style.visibility = 'hidden';
+    totalPausedTime += millis() - pauseStartTime;
+  });
   escButtom2.mousePressed(() => {
     clear()
     isPaused = false
-    pauseBtn.html(isPaused ? 'RESUME' : 'PAUSE'); // 更新按钮文本
     restartGame()
   })
   // 创建游戏继续页面 end
@@ -187,12 +180,18 @@ function createUI() {
   mapSelectScreen.style('display', 'none');
   mapSelectScreen.parent('main');
 
+  // 地图标题
   let mapTitle = createElement('h2', 'MAP');
   mapTitle.parent(mapSelectScreen);
 
+  // 第一行按钮容器
+  let firstRow = createDiv('');
+  firstRow.class('button-row');
+  firstRow.parent(mapSelectScreen);
+
   // 默认地图按钮
   let defaultMapBtn = createButton('DEFAULT');
-  defaultMapBtn.parent(mapSelectScreen);
+  defaultMapBtn.parent(firstRow);
   defaultMapBtn.mousePressed(() => {
     currentMap = 'default';
     showDifficultySelection();
@@ -200,33 +199,47 @@ function createUI() {
 
   // 沼泽地图按钮
   let swampMapBtn = createButton('SWAMP');
-  swampMapBtn.parent(mapSelectScreen);
+  swampMapBtn.parent(firstRow);
   swampMapBtn.mousePressed(() => {
     currentMap = 'swamp';
     showDifficultySelection();
   });
 
-  // 迷雾地图按钮
+  // 第二行按钮容器
+  let secondRow = createDiv('');
+  secondRow.class('button-row');
+  secondRow.parent(mapSelectScreen);
+
+  // 沙漠地图按钮
   let desertMapBtn = createButton('DESERT');
-  desertMapBtn.parent(mapSelectScreen);
+  desertMapBtn.parent(secondRow);
   desertMapBtn.mousePressed(() => {
     currentMap = 'desert';
     showDifficultySelection();
   });
 
-  //传送地图
+  // 传送地图按钮
   let teleportMapBtn = createButton('TELEPORT');
-  teleportMapBtn.parent(mapSelectScreen);
+  teleportMapBtn.parent(secondRow);
   teleportMapBtn.mousePressed(() => {
     currentMap = 'teleport';
     showDifficultySelection();
   });
 
-  let mapButtonContainer = createDiv('');
-  mapButtonContainer.class('button-row');
-  mapButtonContainer.parent(mapSelectScreen);
-  defaultMapBtn.parent(mapButtonContainer);
-  swampMapBtn.parent(mapButtonContainer);
+  // 第三行按钮容器（返回按钮）
+  let thirdRow = createDiv('');
+  thirdRow.class('button-row');
+  thirdRow.style('margin-top', '20px');
+  thirdRow.parent(mapSelectScreen);
+
+  // 添加返回按钮
+  let backButtonMap = createButton('BACK');
+  backButtonMap.parent(thirdRow);
+  backButtonMap.class('back-button');
+  backButtonMap.mousePressed(() => {
+    document.getElementById('mapSelectScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'flex';
+  });
 
   // 难度选择
   let difficultyScreen = createDiv('');
@@ -234,20 +247,44 @@ function createUI() {
   difficultyScreen.style('display', 'none');
   difficultyScreen.parent('main');
 
+  // 难度标题
   let difficultyTitle = createElement('h2', 'DIFFICULTY：');
   difficultyTitle.parent(difficultyScreen);
 
+  // 第一行按钮容器
+  let diffFirstRow = createDiv('');
+  diffFirstRow.class('button-row');
+  diffFirstRow.parent(difficultyScreen);
+
+  // 普通难度按钮
   let normalButton = createButton('NORMAL');
-  normalButton.parent(difficultyScreen);
+  normalButton.parent(diffFirstRow);
   normalButton.mousePressed(() => {
     difficultyMode = 'normal';
     startGame();
   });
+
+  // 困难难度按钮
   let hardButton = createButton('HARD');
-  hardButton.parent(difficultyScreen);
+  hardButton.parent(diffFirstRow);
   hardButton.mousePressed(() => {
     difficultyMode = 'hard';
     startGame();
+  });
+
+  // 第二行按钮容器（返回按钮）
+  let diffSecondRow = createDiv('');
+  diffSecondRow.class('button-row');
+  diffSecondRow.style('margin-top', '20px');
+  diffSecondRow.parent(difficultyScreen);
+
+  // 添加返回按钮
+  let backButtonDifficulty = createButton('BACK');
+  backButtonDifficulty.parent(diffSecondRow);
+  backButtonDifficulty.class('back-button');
+  backButtonDifficulty.mousePressed(() => {
+    document.getElementById('difficultyScreen').style.display = 'none';
+    document.getElementById('mapSelectScreen').style.display = 'flex';
   });
 
   // 创建倒计时显示
@@ -295,21 +332,6 @@ function createUI() {
   let buttonContainer = createDiv('');
   buttonContainer.class('button-container');
   buttonContainer.parent('main');
-
-  //添加暂停按钮
-  pauseBtn = createButton('PAUSE');
-  pauseBtn.parent(buttonContainer);
-  pauseBtn.mousePressed(() => {
-    isPaused = !isPaused;
-    pauseBtn.html(isPaused ? 'RESUME' : 'PAUSE'); // 更新按钮文本
-    if (isPaused) {
-      pauseStartTime = millis();
-    } else {
-      totalPausedTime += millis() - pauseStartTime;
-    }
-  });
-  elapsed = (millis() - startTime - totalPausedTime) / 1000;
-
 
   // 创建分数显示
   let scoreDiv = createDiv('score: 0');
@@ -629,31 +651,115 @@ function translateCenter() {
 }
 
 function drawBoundaryWarning() {
+  if (!playerSnake || playerSnake.body.length === 0) return;
+
+  // 可配置参数
+  const warningWidth = 150;      // 预警区域宽度
+  const maxAlpha = 255;          // 最大透明度
+  const gradientLayers = 100;     // 渐变层级
+  
+  const head = playerSnake.body[0];
+  const leftEdge = -width * mapSize / 2;
+  const rightEdge = width * mapSize / 2;
+  const topEdge = -height * mapSize / 2;
+  const bottomEdge = height * mapSize / 2;
+
   push();
-  let edgeDist = 100; // 警示区域宽度
-  let boundary = {
-    xMin: -width * mapSize / 2,
-    xMax: width * mapSize / 2,
-    yMin: -height * mapSize / 2,
-    yMax: height * mapSize / 2
-  };
+  noStroke();
+  
+  // 四边预警（带层级渐变）
+  drawGradientWarning(
+    head.x - leftEdge, 
+    leftEdge, 
+    topEdge, 
+    warningWidth, 
+    height*mapSize, 
+    gradientLayers,
+    'right'
+  );
+  
+  drawGradientWarning(
+    rightEdge - head.x, 
+    rightEdge - warningWidth, 
+    topEdge, 
+    warningWidth, 
+    height*mapSize, 
+    gradientLayers,
+    'left'
+  );
+  
+  drawGradientWarning(
+    head.y - topEdge, 
+    leftEdge, 
+    topEdge, 
+    width*mapSize, 
+    warningWidth, 
+    gradientLayers,
+    'down'
+  );
+  
+  drawGradientWarning(
+    bottomEdge - head.y, 
+    leftEdge, 
+    bottomEdge - warningWidth, 
+    width*mapSize, 
+    warningWidth, 
+    gradientLayers,
+    'up'
+  );
 
-  let head = playerSnake.body[0];
-  let warnIntensity = 0;
-
-  // 计算与边界的距离
-  let dx = min(head.x - boundary.xMin, boundary.xMax - head.x);
-  let dy = min(head.y - boundary.yMin, boundary.yMax - head.y);
-  let minDist = min(dx, dy);
-
-  if (minDist < edgeDist) {
-    warnIntensity = map(minDist, 0, edgeDist, 255, 0);
-    fill(255, 0, 0, warnIntensity);
-    noStroke();
-    rectMode(CORNERS);
-    rect(boundary.xMin, boundary.yMin, boundary.xMax, boundary.yMax);
-  }
   pop();
+  function drawGradientWarning(distance, x, y, w, h, layers, direction) {
+    if (distance >= warningWidth) return;
+    
+    const alphaStep = maxAlpha / layers;
+    const sizeStep = warningWidth / layers;
+    
+    for (let i = 0; i < layers; i++) {
+      const currentAlpha = maxAlpha - (alphaStep * i);
+      const positionRatio = i / layers;
+      
+      fill(255, 50, 50, currentAlpha * (1 - distance/warningWidth));
+      
+      switch(direction) {
+        case 'right':
+          rect(
+            x + (warningWidth * positionRatio), 
+            y, 
+            sizeStep, 
+            h
+          );
+          break;
+          
+        case 'left':
+          rect(
+            x + warningWidth - (warningWidth * positionRatio) - sizeStep, 
+            y, 
+            sizeStep, 
+            h
+          );
+          break;
+          
+        case 'down':
+          rect(
+            x, 
+            y + (warningWidth * positionRatio), 
+            w, 
+            sizeStep
+          );
+          break;
+          
+        case 'up':
+          rect(
+            x, 
+            y + warningWidth - (warningWidth * positionRatio) - sizeStep, 
+            w, 
+            sizeStep
+          );
+          break;
+      }
+    }
+  }
 }
 
 function drawPulsingWarning() {
@@ -802,23 +908,24 @@ function startGame() {
   initGame();
 }
 
-// 键盘事件创建
-// isPaused
+// 键盘事件
 function keyPressed() {
-  if (gameState) {
-    if (keyCode == 27) {
-      isPaused = !isPaused; 
-      pauseBtn.html(isPaused ? 'RESUME' : 'PAUSE'); // 更新按钮文本
-      document.getElementById('escBtnPage').style.visibility = isPaused ? 'visible' : 'hidden';
-      document.getElementById('scoreDisplay').style.visibility = 'visible';
-      document.querySelector('.button-container').style.visibility = 'visible';
-
+  if (gameState) {//space
+    if (keyCode === 32) {
+      isPaused = !isPaused;
       if (isPaused) {
         pauseStartTime = millis();
       } else {
         totalPausedTime += millis() - pauseStartTime;
       }
-      elapsed = (millis() - startTime - totalPausedTime) / 1000;
     }
+    else if (keyCode == 27) {//esc
+      isPaused = true;
+      document.getElementById('escBtnPage').style.visibility = 'visible';
+      document.getElementById('scoreDisplay').style.visibility = 'visible';
+      document.querySelector('.button-container').style.visibility = 'visible';
+      pauseStartTime = millis();
+    }
+    elapsed = (millis() - startTime - totalPausedTime) / 1000;
   }
 }
