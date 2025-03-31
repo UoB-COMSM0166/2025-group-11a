@@ -21,9 +21,26 @@ let score = 0;
 let difficultyMode = 'normal';
 let currentMap = 'default';
 let isPaused = false; // 记录游戏是否暂停
-
 let gameState = false; // 记录是否开始游戏
 let pauseBtn = null;  // 将暂停按钮提前
+let swampBg;//背景图片
+let desertBg;
+let teleportBg;
+let totalTime = 120; 
+let remainingTime;
+let startTime;
+let elapsed;
+let pauseStartTime = 0;
+let totalPausedTime = 0;
+let gameOverReason = ''; 
+ 
+
+function preload() {
+  swampBg = loadImage('assets/pictures/swamp.jpg'); 
+  desertBg = loadImage('assets/pictures/desert.jpg');
+  teleportBg = loadImage('assets/pictures/teleport.jpg');
+}
+
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('main');
@@ -43,7 +60,8 @@ function initGame() {
   //   gameMap.fogManager.fogs = [];
   //   gameMap.teleportManager.teleports = [];
   // }
-
+  startTime = millis();
+  totalPausedTime = 0;
   playerSnake = new PlayerSnake();
   smallSnakes = [];
   playerSnake.isInvincible = true; // 游戏刚开始时玩家蛇处于无敌状态
@@ -76,9 +94,9 @@ function initGame() {
     if(currentMap === 'swamp') {
       gameMap.generateSwamps(); // 生成沼泽地形
       gameMap.drawSwamps(); // 绘制沼泽地形
-    }else if (currentMap === 'fog') {
-      gameMap.generateFogs(); // 生成迷雾
-      gameMap.drawFogs();
+    }else if (currentMap === 'desert') {
+      gameMap.generateDeserts(); // 生成迷雾
+      gameMap.drawDeserts();
     }else if (currentMap === 'teleport') {
       gameMap.generateTeleports(); // 生成传送点
       gameMap.drawTeleports(); // 绘制传送点
@@ -123,11 +141,16 @@ function createUI() {
   escButtom1.parent(escBtnPage)
   escButtom2.parent(escBtnPage)
   escButtom1.mousePressed(() => {
-    isPaused = false
+    isPaused = !isPaused; 
     pauseBtn.html(isPaused ? 'RESUME' : 'PAUSE'); // 更新按钮文本
     document.getElementById('scoreDisplay').style.visibility = 'visible';
     document.querySelector('.button-container').style.visibility = 'visible';
     document.getElementById('escBtnPage').style.visibility = 'hidden'
+    if (isPaused) {
+      pauseStartTime = millis();
+    } else {
+      totalPausedTime += millis() - pauseStartTime;
+    }
   })
   escButtom2.mousePressed(() => {
     clear()
@@ -142,10 +165,15 @@ function createUI() {
   HelpPage.id('HelpPage')
   HelpPage.parent('main');
   createElement('h1', 'SNAKE GAME').parent(HelpPage);
-  createElement('p', 'This report aims to provide a comprehensive overview of the progress made in ' +
-    'the development of our company\'s new mobile app as of [report date]. The project, which commenced' +
-    ' on [start date], has been progressing through various stages, with the primary goal of delivering' +
-    ' a high - quality, user - friendly mobile application within the scheduled timeline.').parent(HelpPage);
+  // createElement('p', 'This report aims to provide a comprehensive overview of the progress made in ' +
+  //   'the development of our company\'s new mobile app as of [report date]. The project, which commenced' +
+  //   ' on [start date], has been progressing through various stages, with the primary goal of delivering' +
+  //   ' a high - quality, user - friendly mobile application within the scheduled timeline.').parent(HelpPage);
+  createElement('p', '• Eating food can make the snake longer, and eating different props will get rewards').parent(HelpPage);
+  createElement('p', '• Don\'t touch the borders and obstacles, and don\'t hit other snakes with your head').parent(HelpPage);
+  createElement('p', '• The SWAMP level has a speed reduction zone').parent(HelpPage);
+  createElement('p', '• The Desert level has a blind spot').parent(HelpPage);
+  createElement('p', '• The TELEPORT level has a portal').parent(HelpPage);
   let closeHelpButton = createButton('CLOSE');
   closeHelpButton.parent(HelpPage);
   closeHelpButton.mousePressed(() => {
@@ -179,13 +207,14 @@ function createUI() {
   });
 
   // 迷雾地图按钮
-  let fogMapBtn = createButton('FOG');
-  fogMapBtn.parent(mapSelectScreen);
-  fogMapBtn.mousePressed(() => {
-    currentMap = 'fog';
+  let desertMapBtn = createButton('DESERT');
+  desertMapBtn.parent(mapSelectScreen);
+  desertMapBtn.mousePressed(() => {
+    currentMap = 'desert';
     showDifficultySelection();
   });
 
+  //传送地图
   let teleportMapBtn = createButton('TELEPORT');
   teleportMapBtn.parent(mapSelectScreen);
   teleportMapBtn.mousePressed(() => {
@@ -221,12 +250,21 @@ function createUI() {
     startGame();
   });
 
+  // 创建倒计时显示
+  let timerDiv = createDiv(`Time: 120s`);
+  timerDiv.class('timer');
+  timerDiv.id('timerDisplay');
+  timerDiv.parent('main');
+
+
   // 创建游戏结束屏幕
   let gameOverScreen = createDiv('');
   gameOverScreen.id('gameOverScreen');
   gameOverScreen.parent('main');
 
-  let gameOverTitle = createElement('h1', 'GAME OVER');
+  // let gameOverTitle = createElement('h1', 'GAME OVER');
+  let gameOverTitle = createElement('h1', '');
+  gameOverTitle.id('gameOverTitle');
   gameOverTitle.parent(gameOverScreen);
 
   let scoreDisplay = createP('');
@@ -262,9 +300,16 @@ function createUI() {
   pauseBtn = createButton('PAUSE');
   pauseBtn.parent(buttonContainer);
   pauseBtn.mousePressed(() => {
-    isPaused = !isPaused; // 切换状态
+    isPaused = !isPaused;
     pauseBtn.html(isPaused ? 'RESUME' : 'PAUSE'); // 更新按钮文本
+    if (isPaused) {
+      pauseStartTime = millis();
+    } else {
+      totalPausedTime += millis() - pauseStartTime;
+    }
   });
+  elapsed = (millis() - startTime - totalPausedTime) / 1000;
+
 
   // 创建分数显示
   let scoreDiv = createDiv('score: 0');
@@ -275,11 +320,40 @@ function createUI() {
   // 初始隐藏分数和重新开始按钮，直到游戏真正开始
   document.getElementById('scoreDisplay').style.visibility = 'hidden';
   document.querySelector('.button-container').style.visibility = 'hidden';
+  document.getElementById('timerDisplay').style.visibility = 'hidden';
 }
 
 function draw() {
   if (!gameStarted) {
     return;
+  }
+
+  // 更新倒计时
+  if (!gameOver && !gameWon) {
+    if (startGame) {
+      if (!isPaused) {  
+        let currentTime = millis();
+        let elapsed = (currentTime - startTime - totalPausedTime) / 1000;
+        remainingTime = totalTime - elapsed;
+        
+        // 时间耗尽判断
+        if (remainingTime <= 0) {
+          remainingTime = 0;
+          if (score >= 100) {
+            gameWon = true;
+          } else {
+            gameOver = true;
+            gameOverReason = 'timeout';
+          }
+        }
+        // 更新倒计时显示
+        document.getElementById('timerDisplay').innerHTML = 
+          `Time: ${Math.ceil(remainingTime)}s`;
+      }
+    }
+    if (isPaused) {
+      return; // 如果暂停，跳过游戏逻辑
+    }
   }
 
   if (isPaused) {
@@ -289,22 +363,43 @@ function draw() {
   background(20);
   translateCenter();
 
-
-  if (score >= 20) {
+  if (score >= 100) {
     gameWon = true;
   }
 
   if (gameWon) {
     document.getElementById('scoreDisplay').style.visibility = 'hidden';
     document.querySelector('.button-container').style.visibility = 'hidden';
+    document.getElementById('timerDisplay').style.visibility = 'hidden';
     document.getElementById('gameWonScreen').style.visibility = 'visible';
     document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
     return;
   }
 
   if (gameOver) {
+    console.log("Setting gameOverTitle:", gameOverReason);
+    let gameOverText = "GAME OVER";
+    switch (gameOverReason) {
+      case 'timeout':
+        gameOverText = "TIME'S UP!";
+        break;
+      case 'collision_with_snake':
+        gameOverText = "You hit another snake!";
+        break;
+      case 'collision_with_obstacle':
+        gameOverText = "You hit an obstacle!";
+        break;
+      case 'collision_with_boundary':
+        gameOverText = "You hit the boundary!";
+        break;
+    }
+    // document.getElementById('gameOverTitle').innerHTML = 
+    //   gameOverReason === 'timeout' ? "TIME'S UP!" : "GAME OVER";
+    document.getElementById('gameOverTitle').innerHTML = gameOverText;
+    document.getElementById('gameOverTitle').style.visibility = 'visible';
     document.getElementById('scoreDisplay').style.visibility = 'hidden';
     document.querySelector('.button-container').style.visibility = 'hidden';
+    document.getElementById('timerDisplay').style.visibility = 'hidden';
     document.getElementById('gameOverScreen').style.visibility = 'visible';
     document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
     return;
@@ -315,6 +410,36 @@ function draw() {
   gameMap.drawFixedGrid();
   pop();
 
+  //背景贴图
+  if (currentMap === 'swamp' && swampBg) {
+    let gameBoundary = {
+      x: -width * gameMap.mapSize / 2,
+      y: -height * gameMap.mapSize / 2,
+      w: width * gameMap.mapSize,
+      h: height * gameMap.mapSize
+    };
+    image(swampBg, gameBoundary.x, gameBoundary.y, gameBoundary.w, gameBoundary.h);
+  }
+
+  if (currentMap === 'desert' && desertBg) {
+    let gameBoundary = {
+      x: -width * gameMap.mapSize / 2,
+      y: -height * gameMap.mapSize / 2,
+      w: width * gameMap.mapSize,
+      h: height * gameMap.mapSize
+    };
+    image(desertBg, gameBoundary.x, gameBoundary.y, gameBoundary.w, gameBoundary.h);
+  }
+
+  if (currentMap === 'teleport' && teleportBg) {
+    let gameBoundary = {
+      x: -width * gameMap.mapSize / 2,
+      y: -height * gameMap.mapSize / 2,
+      w: width * gameMap.mapSize,
+      h: height * gameMap.mapSize
+    };
+    image(teleportBg, gameBoundary.x, gameBoundary.y, gameBoundary.w, gameBoundary.h);
+  }
 
   if (currentMap === 'swamp') {
     gameMap.drawSwamps(); // 新增沼泽绘制
@@ -354,22 +479,24 @@ function draw() {
     // 检查玩家与AI小蛇的碰撞
     if (playerSnake.checkCollisionWithAISnake(smallSnakes[i]) && !playerSnake.isInvincible) {
       gameOver = true;
+      gameOverReason = 'collision_with_snake';
     }
     // AI蛇头碰到玩家蛇身体后，ai蛇死亡-移除自己并生成随机数量的食物
     if (smallSnakes[i].checkCollisionWithPlayer(playerSnake)) {
       smallSnakes[i].die(); // 让 AI蛇死亡生成食物
       smallSnakes.splice(i, 1); // 删除 AI蛇
+      smallSnakes.push(new AISnake());
       continue; // 跳过后续逻辑，防止报错
     }
     drawStaminaBar();
   }
   
   // 检查食物数量，如果过少则生成更多
-  if (difficultyMode === 'normal') {
-    if (foodManager.foods.length < 100) {
-      foodManager.generateFood(10);
-    }
+  // if (difficultyMode === 'normal') {
+  if (foodManager.foods.length < 100) {
+    foodManager.generateFood(10);
   }
+  // }
   if (itemManager.items.length < 5) {
     itemManager.generateItem(5);
   }
@@ -383,10 +510,12 @@ function draw() {
   
   if (playerSnake.checkBoundaryCollision()) {
     gameOver = true;
+    gameOverReason = 'collision_with_boundary';
   }
 
   if (playerSnake.checkObstacleCollision(obstacleManager.obstacles) && !playerSnake.isInvincible) {
     gameOver = true;
+    gameOverReason = 'collision_with_obstacle';
   }
   //逐帧减少玩家道具时间
   if (playerSnake.isInvincible) {
@@ -480,8 +609,8 @@ function draw() {
       itemManager.updateTooltips();
   }
 
-  if (currentMap === 'fog') {
-    gameMap.drawFogs();
+  if (currentMap === 'desert') {
+    gameMap.drawDeserts();
   }
 
   resetMatrix();
@@ -543,6 +672,7 @@ function restartGame() {
   
   // 隐藏游戏相关界面
   document.getElementById('gameOverScreen').style.visibility = 'hidden';
+  document.getElementById('gameOverTitle').style.visibility = 'hidden';
   document.getElementById('gameWonScreen').style.visibility = 'hidden';
   document.getElementById('scoreDisplay').style.visibility = 'hidden';
   document.querySelector('.button-container').style.visibility = 'hidden';
@@ -558,6 +688,10 @@ function restartGame() {
   gameState = false;
   isPaused = false;
   score = 0;
+  startTime = null;
+  totalPausedTime = 0;
+  remainingTime = totalTime;
+  gameOverReason = '';
 
   // 清理现有游戏对象
   if (playerSnake) playerSnake = null;
@@ -567,7 +701,7 @@ function restartGame() {
   if (itemManager) itemManager.items = [];
   if (gameMap) {
     if (gameMap.swampManager) gameMap.swampManager.swamps = [];
-    if (gameMap.fogManager) gameMap.fogManager.fogs = [];
+    if (gameMap.desertManager) gameMap.desertManager.deserts = [];
     if (gameMap.teleportManager) gameMap.teleportManager.teleports = [];
     gameMap = null;
   }
@@ -575,6 +709,7 @@ function restartGame() {
   document.getElementById('gameOverScreen').style.visibility = 'hidden';
   document.getElementById('gameWonScreen').style.visibility = 'hidden';
   document.getElementById('escBtnPage').style.visibility = 'hidden';
+  document.getElementById('timerDisplay').style.visibility = 'hidden';
   gameWon = false;
 
   // foodManager = new FoodManager();
@@ -590,6 +725,7 @@ function restartGame() {
   // 解除之前的draw循环
   // noLoop(); // 停止p5.js的draw循环
   // setTimeout(() => loop(), 100); // 稍后重新启动循环
+  
   
 
   initGame();
@@ -654,11 +790,14 @@ function startGame() {
   // 显示分数和重新开始按钮
   document.getElementById('scoreDisplay').style.visibility = 'visible';
   document.querySelector('.button-container').style.visibility = 'visible';
+  document.getElementById('timerDisplay').style.visibility = 'visible';
 
   // 重置游戏状态
   gameStarted = true;
   gameOver = false;
   gameWon = false;
+
+  startTime = millis();
 
   initGame();
 }
@@ -668,11 +807,18 @@ function startGame() {
 function keyPressed() {
   if (gameState) {
     if (keyCode == 27) {
-      isPaused = true
+      isPaused = !isPaused; 
       pauseBtn.html(isPaused ? 'RESUME' : 'PAUSE'); // 更新按钮文本
-      document.getElementById('escBtnPage').style.visibility = 'visible';
-      document.getElementById('scoreDisplay').style.visibility = 'hidden';
-      document.querySelector('.button-container').style.visibility = 'hidden';
+      document.getElementById('escBtnPage').style.visibility = isPaused ? 'visible' : 'hidden';
+      document.getElementById('scoreDisplay').style.visibility = 'visible';
+      document.querySelector('.button-container').style.visibility = 'visible';
+
+      if (isPaused) {
+        pauseStartTime = millis();
+      } else {
+        totalPausedTime += millis() - pauseStartTime;
+      }
+      elapsed = (millis() - startTime - totalPausedTime) / 1000;
     }
   }
 }
