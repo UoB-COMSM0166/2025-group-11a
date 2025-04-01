@@ -957,7 +957,7 @@ function startGame() {
 // 键盘事件
 function keyPressed() {
   if (gameState) {//space
-    if (keyCode === 32) {
+    if (key === 'p') {
       isPaused = !isPaused;
       if (isPaused) {
         pauseStartTime = millis();
@@ -965,7 +965,7 @@ function keyPressed() {
         totalPausedTime += millis() - pauseStartTime;
       }
     }
-    else if (keyCode == 27) {//esc
+    else if (keyCode == 27|| keyCode == 32) {
       isPaused = true;
       document.getElementById('escBtnPage').style.visibility = 'visible';
       document.getElementById('scoreDisplay').style.visibility = 'visible';
