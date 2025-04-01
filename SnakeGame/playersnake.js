@@ -1,6 +1,6 @@
 class PlayerSnake extends Snake {
   constructor(x = 0, y = 0) {
-    super(x, y, 5, [120, 230, 120]); 
+    super(x, y, 5, selectedColor || [120, 230, 120]);
     this.isAccelerating = false; 
     this.stamina = 100; 
     this.maxStamina = 100; 

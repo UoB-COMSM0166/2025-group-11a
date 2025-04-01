@@ -32,6 +32,9 @@ let elapsed;
 let pauseStartTime = 0;
 let totalPausedTime = 0;
 let gameOverReason = ''; 
+let selectedColor = [120, 230, 120]; // 默认绿色
+let selectedSnakeShape = 'circle'; // 默认形状
+let shapes = ['circle', 'square', 'triangle'];
  
 
 function preload() {
@@ -173,6 +176,49 @@ function createUI() {
     document.getElementById('HelpPage').style.visibility = 'hidden'
   })
   // 创建游戏帮助页面 end
+
+  // 创建蛇形象选择界面
+  let snakeAppearanceScreen = createDiv('');
+  snakeAppearanceScreen.id('snakeAppearanceScreen');
+  snakeAppearanceScreen.style('display', 'none');
+  snakeAppearanceScreen.parent('main');
+  
+  startButton.mousePressed(() => {
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('snakeAppearanceScreen').style.display = 'flex';
+  });
+
+  let snakeAppearanceTitle = createElement('h2', 'CHOOSE YOUR SNAKE COLOR');
+  snakeAppearanceTitle.parent(snakeAppearanceScreen);
+
+  window.selectedColor = [...selectedColor];
+  let previewGraphics = createImg('', 'Preview');
+  previewGraphics.parent(snakeAppearanceScreen);
+  previewGraphics.id('snakePreview');
+  previewGraphics.style('margin', '10px');
+  updatePreview();
+
+  ['R', 'G', 'B'].forEach((channel, i) => {
+    let row = createDiv('').parent(snakeAppearanceScreen);
+    createSpan(channel + ': ').parent(row);
+    let slider = createSlider(0, 255, selectedColor[i]);
+    slider.class('color-slider'); 
+    slider.parent(row);
+    slider.input(() => {
+      selectedColor[i] = slider.value();
+      updatePreview();
+    });
+  });
+
+  let confirmAppearanceBtn = createButton('CONFIRM');
+  confirmAppearanceBtn.parent(snakeAppearanceScreen);
+
+  confirmAppearanceBtn.mousePressed(() => {
+    window.selectedColor = selectedColor;
+    window.selectedSnakeShape = selectedSnakeShape;
+    document.getElementById('snakeAppearanceScreen').style.display = 'none';
+    document.getElementById('mapSelectScreen').style.display = 'flex';
+  });
 
   // 创建地图选择界面
   let mapSelectScreen = createDiv('');
@@ -928,4 +974,17 @@ function keyPressed() {
     }
     elapsed = (millis() - startTime - totalPausedTime) / 1000;
   }
+}
+
+function updatePreview() {
+  let previewCanvas = createGraphics(50, 50);
+  previewCanvas.pixelDensity(2);
+  previewCanvas.clear();
+  previewCanvas.push();
+  previewCanvas.translate(25, 25); // 中心
+  previewCanvas.noStroke();
+  previewCanvas.fill(...selectedColor);
+  previewCanvas.ellipse(0, 0, 20);
+  previewCanvas.pop();
+  document.getElementById('snakePreview').src = previewCanvas.canvas.toDataURL();
 }
