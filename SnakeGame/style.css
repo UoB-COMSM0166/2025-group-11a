@@ -576,3 +576,17 @@ button:active {
   background: #aaa;
   border-radius: 5px;
 }
+
+.timer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 24px;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border: 2px solid #4CAF50;
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+  border-radius: 12px;
+}
