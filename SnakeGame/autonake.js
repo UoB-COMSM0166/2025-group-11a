@@ -1,4 +1,4 @@
-class AISnake extends Snake {
+class AutoSnake extends Snake {
   constructor() {
     // 限制 AI 蛇生成在地图范围内
     let minX = -width * mapSize / 2 + gridSize;
@@ -16,7 +16,7 @@ class AISnake extends Snake {
     // }
 
     // 随机长度和颜色
-    let size = floor(random(3, 8));
+    let size = floor(random(10, 30));
     let bodyColor = [
       floor(random(100, 255)),
       floor(random(50, 150)),

@@ -9,14 +9,15 @@ let gameStarted = false;
 let gridSize = 20;
 let snakeSpeed = 5;
 let smallSnakes = [];
-let mapSize = 2; 
-let borderSize = 1.8; 
-let gridAlpha = 50; 
+let smallSnakes2 = [];
+let mapSize = 2;
+let borderSize = 1.8;
+let gridAlpha = 50;
 let visibleGridRange = 2; // 可见网格范围（单位：画布倍数）
-let boundaryColor = [255, 0, 0]; 
-let boundaryStroke = 2;        
+let boundaryColor = [255, 0, 0];
+let boundaryStroke = 2;
 let cornerSize = 20;            // 四角标识长度（像素）
-let warningDistance = 500;      
+let warningDistance = 500;
 let score = 0;
 let difficultyMode = 'normal';
 let currentMap = 'default';
@@ -25,20 +26,21 @@ let gameState = false; // 记录是否开始游戏
 let swampBg;//背景图片
 let desertBg;
 let teleportBg;
-let totalTime = 120; 
+let totalTime = 120;
 let remainingTime;
 let startTime;
 let elapsed;
 let pauseStartTime = 0;
 let totalPausedTime = 0;
-let gameOverReason = ''; 
+let gameOverReason = '';
 let selectedColor = [120, 230, 120]; // 默认绿色
 let selectedSnakeShape = 'circle'; // 默认形状
 let shapes = ['circle', 'square', 'triangle'];
- 
+let autoSnakes = [];
+
 
 function preload() {
-  swampBg = loadImage('assets/pictures/swamp.jpg'); 
+  swampBg = loadImage('assets/pictures/swamp.jpg');
   desertBg = loadImage('assets/pictures/desert.jpg');
   teleportBg = loadImage('assets/pictures/teleport.jpg');
 }
@@ -52,6 +54,10 @@ function setup() {
 }
 
 function initGame() {
+
+
+
+
 
   // // 清理残留对象
   // if (foodManager) foodManager.foods = [];
@@ -90,6 +96,12 @@ function initGame() {
   for (let i = 0; i < aiSnakeCount; i++) {
     smallSnakes.push(new AISnake());
   }
+  if(smallSnakes2.length<16){
+    for (let i = 0; i < 16; i++) {
+      smallSnakes2.push(new AutoSnake());
+    }
+  }
+
 
   if (gameStarted) {
     // 根据地图选择初始化
@@ -182,7 +194,7 @@ function createUI() {
   snakeAppearanceScreen.id('snakeAppearanceScreen');
   snakeAppearanceScreen.style('display', 'none');
   snakeAppearanceScreen.parent('main');
-  
+
   startButton.mousePressed(() => {
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('snakeAppearanceScreen').style.display = 'flex';
@@ -202,7 +214,7 @@ function createUI() {
     let row = createDiv('').parent(snakeAppearanceScreen);
     createSpan(channel + ': ').parent(row);
     let slider = createSlider(0, 255, selectedColor[i]);
-    slider.class('color-slider'); 
+    slider.class('color-slider');
     slider.parent(row);
     slider.input(() => {
       selectedColor[i] = slider.value();
@@ -393,17 +405,86 @@ function createUI() {
 
 function draw() {
   if (!gameStarted) {
+
+
+
+    background('#63161A');
+
+    translateCenter();
+
+    if (score >= 100) {
+      gameWon = true;
+    }
+
+    if (gameWon) {
+      document.getElementById('scoreDisplay').style.visibility = 'hidden';
+      document.querySelector('.button-container').style.visibility = 'hidden';
+      document.getElementById('timerDisplay').style.visibility = 'hidden';
+      document.getElementById('gameWonScreen').style.visibility = 'visible';
+      document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
+      return;
+    }
+
+    if (gameOver) {
+      console.log("Setting gameOverTitle:", gameOverReason);
+      let gameOverText = "GAME OVER";
+      switch (gameOverReason) {
+        case 'timeout':
+          gameOverText = "TIME'S UP!";
+          break;
+        case 'collision_with_snake':
+          gameOverText = "You hit another snake!";
+          break;
+        case 'collision_with_obstacle':
+          gameOverText = "You hit an obstacle!";
+          break;
+        case 'collision_with_boundary':
+          gameOverText = "You hit the boundary!";
+          break;
+      }
+      // document.getElementById('gameOverTitle').innerHTML =
+      //   gameOverReason === 'timeout' ? "TIME'S UP!" : "GAME OVER";
+      document.getElementById('gameOverTitle').innerHTML = gameOverText;
+      document.getElementById('gameOverTitle').style.visibility = 'visible';
+      document.getElementById('scoreDisplay').style.visibility = 'hidden';
+      document.querySelector('.button-container').style.visibility = 'hidden';
+      document.getElementById('timerDisplay').style.visibility = 'hidden';
+      document.getElementById('gameOverScreen').style.visibility = 'visible';
+      document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
+      return;
+    }
+
+    // 在平移前绘制固定网格
+    push();
+    gameMap.drawFixedGrid();
+    pop();
+
+
+
+
+    // 更新和绘制AI小蛇
+    for (let i = smallSnakes2.length - 1; i >= 0; i--) {
+      smallSnakes2[i].draw();
+      smallSnakes2[i].update();
+
+
+    }
+
+    setTimeout(()=>{
+      defaultCanvas0.style.visibility = 'visible'
+
+    },800)
     return;
   }
 
   // 更新倒计时
   if (!gameOver && !gameWon) {
     if (startGame) {
-      if (!isPaused) {  
+      if (!isPaused) {
         let currentTime = millis();
         let elapsed = (currentTime - startTime - totalPausedTime) / 1000;
         remainingTime = totalTime - elapsed;
-        
+
         // 时间耗尽判断
         if (remainingTime <= 0) {
           remainingTime = 0;
@@ -415,7 +496,7 @@ function draw() {
           }
         }
         // 更新倒计时显示
-        document.getElementById('timerDisplay').innerHTML = 
+        document.getElementById('timerDisplay').innerHTML =
           `Time: ${Math.ceil(remainingTime)}s`;
       }
     }
@@ -428,7 +509,8 @@ function draw() {
     return; // 如果暂停，跳过游戏逻辑
   }
 
-  background(20);
+  background('#63161A');
+
   translateCenter();
 
   if (score >= 100) {
@@ -461,7 +543,7 @@ function draw() {
         gameOverText = "You hit the boundary!";
         break;
     }
-    // document.getElementById('gameOverTitle').innerHTML = 
+    // document.getElementById('gameOverTitle').innerHTML =
     //   gameOverReason === 'timeout' ? "TIME'S UP!" : "GAME OVER";
     document.getElementById('gameOverTitle').innerHTML = gameOverText;
     document.getElementById('gameOverTitle').style.visibility = 'visible';
@@ -535,15 +617,17 @@ function draw() {
       return;
     }
   }
+
+  console.log('xxxxxxxx123')
   // 更新和绘制AI小蛇
   for (let i = smallSnakes.length - 1; i >= 0; i--) {
     smallSnakes[i].draw();
     smallSnakes[i].update();
-    
+
     if (smallSnakes[i].length < 10) {
       smallSnakes[i] = new AISnake();
     }
-    
+
     // 检查玩家与AI小蛇的碰撞
     if (playerSnake.checkCollisionWithAISnake(smallSnakes[i]) && !playerSnake.isInvincible) {
       gameOver = true;
@@ -558,7 +642,7 @@ function draw() {
     }
     drawStaminaBar();
   }
-  
+
   // 检查食物数量，如果过少则生成更多
   // if (difficultyMode === 'normal') {
   if (foodManager.foods.length < 100) {
@@ -568,14 +652,14 @@ function draw() {
   if (itemManager.items.length < 5) {
     itemManager.generateItem(5);
   }
-  
+
   if (!gameOver) {
     drawBoundaryWarning();
   }
-  
+
   playerSnake.updateDirection();
   playerSnake.move();
-  
+
   if (playerSnake.checkBoundaryCollision()) {
     gameOver = true;
     gameOverReason = 'collision_with_boundary';
@@ -613,14 +697,14 @@ function draw() {
       itemManager.activateEnlarge();
     }
   }
-  
+
   // 检查并处理食物碰撞，返回吃到的食物数量
   let foodEaten = playerSnake.checkFoodCollision(foodManager.foods);
   if (foodEaten > 0) {
     score += foodEaten;
     document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
   }
- 
+
   foodManager.drawFoods();
   obstacleManager.drawObstacles();
   itemManager.drawItems();
@@ -642,7 +726,7 @@ function draw() {
     let baseRadius = gridSize * 2.2;
     let pulseAmount = map(sin(frameCount * 0.1), -1, 1, 0, 0.2);
     let currentRadius = baseRadius * (1 + pulseAmount);
-    
+
     for (let r = currentRadius; r > currentRadius * 0.7; r -= 2) {
       let alpha = map(r, currentRadius, currentRadius * 0.7, 50, 150);
       stroke(50, 200, 50, alpha);
@@ -650,7 +734,7 @@ function draw() {
       noFill();
       ellipse(head.x, head.y, r * 2);
     }
-    
+
     let particleCount = 8;
     for (let i = 0; i < particleCount; i++) {
       let angle = map(i, 0, particleCount, 0, TWO_PI) + frameCount * 0.02;
@@ -662,7 +746,7 @@ function draw() {
       let particleSize = 4 + sin(frameCount * 0.2 + i) * 2;
       ellipse(x, y, particleSize);
     }
-    
+
     noStroke();
     let glowRadius = gridSize * 1.5;
     for (let r = glowRadius; r > 0; r -= 4) {
@@ -703,7 +787,7 @@ function drawBoundaryWarning() {
   const warningWidth = 150;      // 预警区域宽度
   const maxAlpha = 255;          // 最大透明度
   const gradientLayers = 100;     // 渐变层级
-  
+
   const head = playerSnake.body[0];
   const leftEdge = -width * mapSize / 2;
   const rightEdge = width * mapSize / 2;
@@ -712,44 +796,57 @@ function drawBoundaryWarning() {
 
   push();
   noStroke();
-  
+
+
+  if(currentMap=='default'){
+    // 修改预警颜色为暗红色
+    // const warningColor = color(139, 0, 0); // 暗红色，低饱和度
+    //
+    // // 绘制外部区域为暗红色
+    // fill('#141414');
+    // rect(leftEdge, topEdge, rightEdge - leftEdge, bottomEdge - topEdge);
+
+  }
+
+
+
   // 四边预警（带层级渐变）
   drawGradientWarning(
-    head.x - leftEdge, 
-    leftEdge, 
-    topEdge, 
-    warningWidth, 
-    height*mapSize, 
+    head.x - leftEdge,
+    leftEdge,
+    topEdge,
+    warningWidth,
+    height*mapSize,
     gradientLayers,
     'right'
   );
-  
+
   drawGradientWarning(
-    rightEdge - head.x, 
-    rightEdge - warningWidth, 
-    topEdge, 
-    warningWidth, 
-    height*mapSize, 
+    rightEdge - head.x,
+    rightEdge - warningWidth,
+    topEdge,
+    warningWidth,
+    height*mapSize,
     gradientLayers,
     'left'
   );
-  
+
   drawGradientWarning(
-    head.y - topEdge, 
-    leftEdge, 
-    topEdge, 
-    width*mapSize, 
-    warningWidth, 
+    head.y - topEdge,
+    leftEdge,
+    topEdge,
+    width*mapSize,
+    warningWidth,
     gradientLayers,
     'down'
   );
-  
+
   drawGradientWarning(
-    bottomEdge - head.y, 
-    leftEdge, 
-    bottomEdge - warningWidth, 
-    width*mapSize, 
-    warningWidth, 
+    bottomEdge - head.y,
+    leftEdge,
+    bottomEdge - warningWidth,
+    width*mapSize,
+    warningWidth,
     gradientLayers,
     'up'
   );
@@ -757,49 +854,49 @@ function drawBoundaryWarning() {
   pop();
   function drawGradientWarning(distance, x, y, w, h, layers, direction) {
     if (distance >= warningWidth) return;
-    
+
     const alphaStep = maxAlpha / layers;
     const sizeStep = warningWidth / layers;
-    
+
     for (let i = 0; i < layers; i++) {
       const currentAlpha = maxAlpha - (alphaStep * i);
       const positionRatio = i / layers;
-      
+
       fill(255, 50, 50, currentAlpha * (1 - distance/warningWidth));
-      
+
       switch(direction) {
         case 'right':
           rect(
-            x + (warningWidth * positionRatio), 
-            y, 
-            sizeStep, 
+            x + (warningWidth * positionRatio),
+            y,
+            sizeStep,
             h
           );
           break;
-          
+
         case 'left':
           rect(
-            x + warningWidth - (warningWidth * positionRatio) - sizeStep, 
-            y, 
-            sizeStep, 
+            x + warningWidth - (warningWidth * positionRatio) - sizeStep,
+            y,
+            sizeStep,
             h
           );
           break;
-          
+
         case 'down':
           rect(
-            x, 
-            y + (warningWidth * positionRatio), 
-            w, 
+            x,
+            y + (warningWidth * positionRatio),
+            w,
             sizeStep
           );
           break;
-          
+
         case 'up':
           rect(
-            x, 
-            y + warningWidth - (warningWidth * positionRatio) - sizeStep, 
-            w, 
+            x,
+            y + warningWidth - (warningWidth * positionRatio) - sizeStep,
+            w,
             sizeStep
           );
           break;
@@ -821,7 +918,7 @@ function drawPulsingWarning() {
 
 function restartGame() {
 
-  
+
   // 隐藏游戏相关界面
   document.getElementById('gameOverScreen').style.visibility = 'hidden';
   document.getElementById('gameOverTitle').style.visibility = 'hidden';
@@ -877,8 +974,8 @@ function restartGame() {
   // 解除之前的draw循环
   // noLoop(); // 停止p5.js的draw循环
   // setTimeout(() => loop(), 100); // 稍后重新启动循环
-  
-  
+
+
 
   initGame();
 }
@@ -956,26 +1053,38 @@ function startGame() {
 
 // 键盘事件
 function keyPressed() {
-  if (gameState) {//space
+  if (gameState) { // 检查游戏状态
     if (key === 'p') {
-      isPaused = !isPaused;
+      isPaused = !isPaused; // 切换暂停状态
       if (isPaused) {
-        pauseStartTime = millis();
+        pauseStartTime = millis(); // 记录暂停开始时间
+        document.getElementById('escBtnPage').style.visibility = 'visible';
+        document.getElementById('scoreDisplay').style.visibility = 'visible';
+        document.querySelector('.button-container').style.visibility = 'visible';
       } else {
-        totalPausedTime += millis() - pauseStartTime;
+        totalPausedTime += millis() - pauseStartTime; // 计算暂停总时间
+        document.getElementById('escBtnPage').style.visibility = 'hidden';
+        document.getElementById('scoreDisplay').style.visibility = 'hidden';
+        document.querySelector('.button-container').style.visibility = 'hidden';
       }
     }
-    else if (keyCode == 27|| keyCode == 32) {
-      isPaused = true;
-      document.getElementById('escBtnPage').style.visibility = 'visible';
-      document.getElementById('scoreDisplay').style.visibility = 'visible';
-      document.querySelector('.button-container').style.visibility = 'visible';
-      pauseStartTime = millis();
+    else if (keyCode == 27 || keyCode == 32) { // 按下 'Esc' 或 '空格' 键
+      isPaused = !isPaused; // 切换暂停状态
+      if (isPaused) {
+        pauseStartTime = millis(); // 记录暂停开始时间
+        document.getElementById('escBtnPage').style.visibility = 'visible';
+        document.getElementById('scoreDisplay').style.visibility = 'visible';
+        document.querySelector('.button-container').style.visibility = 'visible';
+      } else {
+        totalPausedTime += millis() - pauseStartTime; // 计算暂停总时间
+        document.getElementById('escBtnPage').style.visibility = 'hidden';
+        document.getElementById('scoreDisplay').style.visibility = 'hidden';
+        document.querySelector('.button-container').style.visibility = 'hidden';
+      }
     }
-    elapsed = (millis() - startTime - totalPausedTime) / 1000;
+    elapsed = (millis() - startTime - totalPausedTime) / 1000; // 计算游戏已运行的时间（排除暂停时间）
   }
 }
-
 function updatePreview() {
   let previewCanvas = createGraphics(50, 50);
   previewCanvas.pixelDensity(2);

@@ -5,7 +5,7 @@
 //     this.direction = createVector(1, 0);
 //     this.speed = snakeSpeed;
 //     this.bodyColor = bodyColor;
-    
+
 //     // 初始化蛇身体
 //     for (let i = 0; i < initialSize; i++) {
 //       this.body.push(createVector(x - i * gridSize, y));
@@ -17,9 +17,9 @@
 //     push();
 //     stroke(255);
 //     strokeWeight(1);
-//     // 绘制蛇身 
+//     // 绘制蛇身
 //     fill(this.bodyColor[0], this.bodyColor[1], this.bodyColor[2]);
-    
+
 //     for (let i = 0; i < this.body.length; i++) {
 //       let seg = this.body[i];
 //       if (i === 0) {
@@ -58,8 +58,8 @@ class Snake {
     this.bodyColor = bodyColor;
     this.pendingSegments = 0; // 待添加的节数
     this.alternateColor = [
-      this.bodyColor[0] - 30, 
-      this.bodyColor[1] - 30, 
+      this.bodyColor[0] - 30,
+      this.bodyColor[1] - 30,
       this.bodyColor[2] - 30
     ]; // 创建一个相似但略深的颜色用于交替
 
@@ -83,8 +83,8 @@ class Snake {
       ellipse(seg.x, seg.y, gridSize * 1.3);
 
       // 计算眼睛的位置
-      let eyeOffsetX = (gridSize * 0.3) * this.direction.y; 
-      let eyeOffsetY = (gridSize * 0.3) * -this.direction.x; 
+      let eyeOffsetX = (gridSize * 0.3) * this.direction.y;
+      let eyeOffsetY = (gridSize * 0.3) * -this.direction.x;
 
       let eyeX1 = seg.x + eyeOffsetX;
       let eyeY1 = seg.y + eyeOffsetY;
@@ -94,11 +94,11 @@ class Snake {
       let eyeSize = gridSize * 0.4;  // 眼睛大小
       let pupilSize = gridSize * 0.3; // 瞳孔大小
 
-      fill(255); 
+      fill(255);
       ellipse(eyeX1, eyeY1, eyeSize);
       ellipse(eyeX2, eyeY2, eyeSize);
 
-      fill(0); 
+      fill(0);
       ellipse(eyeX1, eyeY1, pupilSize);
       ellipse(eyeX2, eyeY2, pupilSize);
     } else {

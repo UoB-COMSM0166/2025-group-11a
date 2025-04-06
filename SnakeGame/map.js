@@ -29,40 +29,47 @@ class GameMap {
 
     // 绘制白色可见边界
     // GameMap.stroke(255);
-    stroke(255);
-    strokeWeight(2);
+    // stroke(255);
+    // strokeWeight(2);
     noFill();
     // strokeWeight(4);
-    rect(gameBoundary.x, gameBoundary.y, gameBoundary.w, gameBoundary.h);
+    // rect(gameBoundary.x, gameBoundary.y, gameBoundary.w, gameBoundary.h);
     pop();
   }
 
   drawFixedGrid() {
     push();
-    stroke(255, 30); // 白色半透明网格线
+    stroke(255, 0); // 白色半透明网格线
     strokeWeight(1);
-    
+
     // 计算整个地图范围的网格
     let startX = floor(-width * this.mapSize / 2 / this.gridSize) * this.gridSize;
     let startY = floor(-height * this.mapSize / 2 / this.gridSize) * this.gridSize;
     let endX = ceil(width * this.mapSize / 2 / this.gridSize) * this.gridSize;
     let endY = ceil(height * this.mapSize / 2 / this.gridSize) * this.gridSize;
-    
+
     // 移动原点，使网格从左上角绘制
     translate(0, 0);
-    
+
     // 绘制水平网格线
     for (let y = startY; y <= endY; y += this.gridSize) {
-      line(startX, y, endX, y);
+      for (let x = startX; x <= endX; x += this.gridSize) {
+        // 为每个格子选择随机颜色
+        let col = color(30);
+        fill(col);
+        noStroke();
+        rect(x, y, this.gridSize, this.gridSize);  // 绘制填充的网格
+      }
     }
-    
+
     // 绘制垂直网格线
     for (let x = startX; x <= endX; x += this.gridSize) {
       line(x, startY, x, endY);
     }
-    
+
     pop();
-    }
+  }
+
 
   generateSwamps() {
     this.swampManager.generateSwamps(difficultyMode === 'hard' ? 8 : 5);
@@ -104,13 +111,13 @@ class SwampManager {
         random(-width * mapSize/2 + 200, width * mapSize/2 - 200),
         random(-height * mapSize/2 + 200, height * mapSize/2 - 200)
       );
-      
+
       let swamp = {
         position: center,
         points: this.generateOrganicSwampShape(center),
         slowdown: 0.6 // 速度降到60%
       };
-      
+
       this.swamps.push(swamp);
     }
   }
@@ -127,14 +134,14 @@ class SwampManager {
     // 生成基础形状
     for (let a = 0; a < TWO_PI; a += TWO_PI/pointCount) {
       let radius = baseRadius;
-      
+
       // 多层噪声叠加
       noiseLayers.forEach(layer => {
         const xoff = cos(a) * layer.scale + this.noiseSeed;
         const yoff = sin(a) * layer.scale + this.noiseSeed;
         radius += noise(xoff, yoff) * layer.weight * baseRadius;
       });
-    
+
       // 添加缓变扰动
       radius *= map(sin(a * 3 + this.noiseSeed), -1, 1, 0.95, 1.05);
 
@@ -162,7 +169,7 @@ class SwampManager {
     }
 
     // 添加微观扰动
-    return points.map(p => 
+    return points.map(p =>
       createVector(
         p.x + random(-3, 3),
         p.y + random(-2, 2)
@@ -184,16 +191,16 @@ class SwampManager {
       let xoff = cos(a) * noiseScale + noiseOffset;
       let yoff = sin(a) * noiseScale + noiseOffset;
       let zoff = frameCount * 0.01; // 可选：加入时间维度
-      
+
       // 生成噪声值（范围0-1）
       let noiseVal = noise(xoff, yoff, zoff);
-      
+
       // 将噪声值映射到更宽的范围（-0.5到0.5）
       let offset = map(noiseVal, 0, 1, -1, 1);
-      
+
       // 动态半径计算
       let dynamicRadius = baseRadius * (1 + offset);
-      
+
       points.push(createVector(
         center.x + baseRadiusX * cos(a),
         center.y + baseRadiusY * sin(a)
@@ -205,7 +212,7 @@ class SwampManager {
         p.y + random(-8, 8)
       );
     });
-  
+
     return points;
   }
 */

@@ -40,7 +40,7 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   /* 更新字体为更游戏风格的选项 */
-  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+
   font-weight: bold;
   color: white;
   background-color: #4CAF50;
@@ -89,7 +89,7 @@ button:active {
   font-size: 24px;
   z-index: 20;
   visibility: hidden;
-  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+
 }
 
 #gameOverScreen h1 {
@@ -98,7 +98,7 @@ button:active {
   margin-bottom: 20px;
   text-shadow: 4px 4px 0 #d32f2f;
   /* 更新字体为更游戏风格的选项 */
-  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+
 }
 
 #gameOverScreen button {
@@ -146,7 +146,7 @@ button:active {
   margin-bottom: 20px;
   text-shadow: 4px 4px 0 #2E7D32;
   /* 更新字体为更游戏风格的选项 */
-  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+
 }
 
 #gameWonScreen button {
@@ -159,7 +159,7 @@ button:active {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
+  /*background-color: rgba(0, 0, 0, 0.85);*/
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -170,13 +170,17 @@ button:active {
 
 #startScreen h1 {
   color: #4CAF50;
-  font-size: 60px;
+  font-size: 90px;
   margin-bottom: 20px;
   text-shadow: 5px 5px 0 #2E7D32;
   letter-spacing: 4px;
   /* 更新字体为更游戏风格的选项 */
-  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+
 }
+
+#defaultCanvas0{
+  visibility: hidden;
+ }
 
 #startScreen p {
   margin-bottom: 30px;
@@ -184,9 +188,9 @@ button:active {
   max-width: 600px;
   text-align: center;
   line-height: 1.5;
-  background-color: rgba(0, 0, 0, 0.7);
+  /*background-color: rgba(0, 0, 0, 0.7);*/
   padding: 15px;
-  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+
 }
 
 #startScreen button {
@@ -205,7 +209,7 @@ button:active {
   padding: 10px;
   border: 2px solid #4CAF50;
   /* 更新字体为更游戏风格的选项 */
-  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+
   border-radius: 12px; /* 添加圆角 */
 }
 
@@ -228,7 +232,7 @@ button:active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; 
+  gap: 20px;
   background-color: rgba(0, 0, 0, 0.85);
   padding: 30px;
   border: 4px solid #4CAF50;
@@ -247,7 +251,7 @@ button:active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px; 
+  gap: 20px;
   background-color: rgba(0, 0, 0, 0.85);
   padding: 30px;
   border: 4px solid #4CAF50;
@@ -265,7 +269,7 @@ button:active {
   letter-spacing: 2px;
   text-align: center;
   /* 更新字体为更游戏风格的选项 */
-  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+
 }
 
 #mapSelectScreen button {
@@ -327,7 +331,7 @@ button:active {
   text-shadow: 3px 3px 0 #2E7D32;
   letter-spacing: 2px;
   /* 更新字体为更游戏风格的选项 */
-  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+
 }
 
 #difficultyScreen button {
@@ -425,7 +429,7 @@ button:active {
 }
 
 .help_btn {
-  width: 180px;
+  /*width: 180px;*/
   margin-top: 20px;
   background-color: #4CAF50;
   border-top: 3px solid #65df69;
@@ -469,7 +473,7 @@ button:active {
   text-shadow: 3px 3px 0 #2E7D32;
   letter-spacing: 2px;
   /* 更新字体为更游戏风格的选项 */
-  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+
 }
 
 #HelpPage p {
@@ -587,6 +591,6 @@ button:active {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 10px;
   border: 2px solid #4CAF50;
-  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+
   border-radius: 12px;
 }
