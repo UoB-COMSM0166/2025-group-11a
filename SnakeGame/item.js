@@ -164,16 +164,31 @@ class ItemManager {
   activateInvincible(){
     playerSnake.actInvincibility();
     this.addTooltip("Invincible!", playerSnake.body[0], [255, 215, 0]);
+
+    // 添加横幅提示
+    if (bannerManager) {
+      bannerManager.addBanner("获得无敌能力!", "buff");
+    }
   }
 
   activateStamina(){
     playerSnake.actStamina();
     this.addTooltip("Stamina Restored!", playerSnake.body[0], [0, 128, 255]);
+
+    // 添加横幅提示
+    if (bannerManager) {
+      bannerManager.addBanner("体力已恢复!", "buff");
+    }
   }
 
   activateEnlarge(){
     playerSnake.actEnlarge();
     this.addTooltip("Enlarged!", playerSnake.body[0], [50, 180, 50]);
+
+    // 添加横幅提示
+    if (bannerManager) {
+      bannerManager.addBanner("获得扩大范围能力!", "buff");
+    }
   }
   
   // 添加道具提示文本
