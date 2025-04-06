@@ -161,17 +161,17 @@ class ItemManager {
     pop();
   }
 
-  activateInvincible(){
+  activateInvincible() {
     playerSnake.actInvincibility();
     this.addTooltip("Invincible!", playerSnake.body[0], [255, 215, 0]);
 
-    // 添加横幅提示
+    // 添加横幅提示，并包含持续时间信息
     if (bannerManager) {
-      bannerManager.addBanner("获得无敌能力!", "buff");
+      bannerManager.addBanner("获得无敌能力!", "buff", playerSnake.invincibleDuration, 180);
     }
   }
 
-  activateStamina(){
+  activateStamina() {
     playerSnake.actStamina();
     this.addTooltip("Stamina Restored!", playerSnake.body[0], [0, 128, 255]);
 
@@ -181,13 +181,13 @@ class ItemManager {
     }
   }
 
-  activateEnlarge(){
+  activateEnlarge() {
     playerSnake.actEnlarge();
     this.addTooltip("Enlarged!", playerSnake.body[0], [50, 180, 50]);
 
-    // 添加横幅提示
+    // 添加横幅提示，并包含持续时间信息
     if (bannerManager) {
-      bannerManager.addBanner("获得扩大范围能力!", "buff");
+      bannerManager.addBanner("获得扩大范围能力!", "buff", playerSnake.enlargeDuration, 180);
     }
   }
   

@@ -670,10 +670,7 @@ function draw() {
 
   // 检查玩家蛇的长度，达到特定长度时显示提示
   let playerLength = playerSnake.body.length;
-  if (playerLength >= 5 && !playerSnake.lengthNotified5) {
-    bannerManager.addBanner("蛇的长度已达到5!", 'achievement');
-    playerSnake.lengthNotified5 = true; // 标记已经通知过
-  } else if (playerLength >= 10 && !playerSnake.lengthNotified10) {
+  if (playerLength >= 10 && !playerSnake.lengthNotified10) {
     bannerManager.addBanner("蛇的长度已达到10!", 'achievement');
     playerSnake.lengthNotified10 = true;
   } else if (playerLength >= 20 && !playerSnake.lengthNotified20) {
@@ -694,16 +691,25 @@ function draw() {
     gameOver = true;
   }
 
-  //逐帧减少玩家道具时间
+  // 逐帧减少玩家道具时间并更新横幅
   if (playerSnake.isInvincible) {
     playerSnake.invincibleDuration--;
+    // 更新无敌效果的横幅进度条
+    if (bannerManager) {
+      bannerManager.updateDuration("无敌", playerSnake.invincibleDuration);
+    }
     if (playerSnake.invincibleDuration <= 0) {
       playerSnake.isInvincible = false; // 无敌时间结束
       bannerManager.addBanner("无敌效果已结束", 'normal');
     }
   }
+
   if (playerSnake.isEnlarged) {
     playerSnake.enlargeDuration--;
+    // 更新扩大范围效果的横幅进度条
+    if (bannerManager) {
+      bannerManager.updateDuration("扩大范围", playerSnake.enlargeDuration);
+    }
     if (playerSnake.enlargeDuration <= 0) {
       playerSnake.isEnlarged = false;
       bannerManager.addBanner("扩大范围效果已结束", 'normal');

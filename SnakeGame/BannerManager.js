@@ -1,19 +1,29 @@
 class BannerManager {
     constructor() {
         this.banners = []; // 存储当前显示的横幅
-        this.displayTime = 120; // 横幅显示时间（帧数）
+        this.displayTime = 120; // 普通横幅显示时间（帧数）
     }
 
     // 添加横幅提示
-    addBanner(message, type = 'normal') {
+    addBanner(message, type = 'normal', duration = null, maxDuration = null) {
         // 类型：normal（普通消息）, achievement（成就）, warning（警告）, buff（道具效果）
+
+        // 为buff类型设置特殊的生命周期，与道具持续时间相同
+        let bannerLife = this.displayTime;
+        if (type === 'buff' && duration !== null && maxDuration !== null) {
+            bannerLife = maxDuration; // 设置为道具的最大持续时间
+        }
+
         this.banners.push({
             message: message,
             type: type,
-            life: this.displayTime,
+            life: bannerLife,
             opacity: 0,
             y: -50, // 起始位置在屏幕外
-            targetY: 40 // 目标位置
+            targetY: 40, // 目标位置
+            duration: duration, // 道具剩余时间（如果有）
+            maxDuration: maxDuration, // 道具最大持续时间（如果有）
+            isBuff: (type === 'buff' && duration !== null) // 标记是否为有持续时间的buff横幅
         });
     }
 
@@ -22,26 +32,56 @@ class BannerManager {
         for (let i = this.banners.length - 1; i >= 0; i--) {
             let banner = this.banners[i];
 
-            // 淡入阶段
-            if (banner.life > this.displayTime - 30) {
-                banner.opacity = map(banner.life, this.displayTime, this.displayTime - 30, 0, 255);
-                banner.y = lerp(banner.y, banner.targetY, 0.1);
-            }
-            // 显示阶段
-            else if (banner.life > 30) {
-                banner.opacity = 255;
-            }
-            // 淡出阶段
-            else {
-                banner.opacity = map(banner.life, 0, 30, 0, 255);
-                banner.y = lerp(banner.y, -50, 0.05);
-            }
+            // 对于buff横幅，不使用常规的生命周期递减逻辑
+            if (banner.isBuff) {
+                // 如果是buff横幅，生命周期与道具持续时间保持一致
+                banner.life = banner.duration;
 
-            banner.life--;
+                // 当buff效果结束时移除横幅
+                if (banner.life <= 0) {
+                    this.banners.splice(i, 1);
+                    continue;
+                }
 
-            // 移除生命周期结束的横幅
-            if (banner.life <= 0) {
-                this.banners.splice(i, 1);
+                // 淡入阶段（只有开始的30帧）
+                if (banner.maxDuration - banner.life < 30) {
+                    banner.opacity = map(banner.maxDuration - banner.life, 0, 30, 0, 255);
+                    banner.y = lerp(banner.y, banner.targetY, 0.1);
+                } else {
+                    banner.opacity = 255;
+                }
+            } else {
+                // 常规横幅的处理逻辑不变
+                // 淡入阶段
+                if (banner.life > this.displayTime - 30) {
+                    banner.opacity = map(banner.life, this.displayTime, this.displayTime - 30, 0, 255);
+                    banner.y = lerp(banner.y, banner.targetY, 0.1);
+                }
+                // 显示阶段
+                else if (banner.life > 30) {
+                    banner.opacity = 255;
+                }
+                // 淡出阶段
+                else {
+                    banner.opacity = map(banner.life, 0, 30, 0, 255);
+                    banner.y = lerp(banner.y, -50, 0.05);
+                }
+
+                banner.life--;
+
+                // 移除生命周期结束的横幅
+                if (banner.life <= 0) {
+                    this.banners.splice(i, 1);
+                }
+            }
+        }
+    }
+
+    // 更新特定道具效果的持续时间
+    updateDuration(type, duration) {
+        for (let banner of this.banners) {
+            if (banner.type === 'buff' && banner.message.includes(type)) {
+                banner.duration = duration;
             }
         }
     }
@@ -66,7 +106,7 @@ class BannerManager {
                     this.drawWarningBanner(banner.message, y, banner.opacity);
                     break;
                 case 'buff':
-                    this.drawBuffBanner(banner.message, y, banner.opacity);
+                    this.drawBuffBanner(banner.message, y, banner.opacity, banner.duration, banner.maxDuration);
                     break;
                 default:
                     this.drawNormalBanner(banner.message, y, banner.opacity);
@@ -102,7 +142,7 @@ class BannerManager {
         noStroke();
         let iconX = width / 2 - 190;
         let iconY = y;
-        this.star(iconX, iconY, 8, 15, 5); // 修改这里，添加this前缀
+        this.star(iconX, iconY, 8, 15, 5); // 绘制星星图标
 
         // 文字
         textAlign(CENTER, CENTER);
@@ -137,8 +177,8 @@ class BannerManager {
         text(message, width / 2, y);
     }
 
-    // 绘制道具效果横幅
-    drawBuffBanner(message, y, opacity) {
+    // 绘制道具效果横幅（添加进度条）
+    drawBuffBanner(message, y, opacity, duration, maxDuration) {
         // 横幅背景
         fill(30, 80, 30, opacity * 0.9);
         stroke(50, 255, 50, opacity);
@@ -158,6 +198,25 @@ class BannerManager {
         textAlign(CENTER, CENTER);
         fill(255, 255, 255, opacity);
         text(message, width / 2, y);
+
+        // 如果有持续时间信息，绘制进度条
+        if (duration !== null && maxDuration !== null) {
+            // 进度条背景
+            noStroke();
+            fill(30, 30, 30, opacity * 0.7);
+            rect(width / 2 - 180, y + 15, 360, 6, 3);
+
+            // 进度条填充
+            let progressWidth = map(duration, 0, maxDuration, 0, 360);
+            fill(100, 255, 100, opacity);
+            rect(width / 2 - 180, y + 15, progressWidth, 6, 3);
+
+            // 显示剩余秒数（假设30帧/秒）
+            textSize(10);
+            textAlign(RIGHT, CENTER);
+            let secondsLeft = Math.ceil(duration / 30);
+            text(secondsLeft + "秒", width / 2 + 195, y + 15);
+        }
     }
 
     // 清除所有横幅
