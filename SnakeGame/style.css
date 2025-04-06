@@ -55,15 +55,7 @@ button {
   box-shadow: 0 4px 0 #2E7D32;
   position: relative;
   outline: none;
-  /* 削角效果 */
-  clip-path: polygon(
-    10px 0,
-    100% 0,  
-    100% calc(100% - 10px),
-    calc(100% - 10px) 100%,  
-    0 100%,   
-    0 10px
-  );
+  border-radius: 8px; /* 添加圆角 */
 }
 
 button:hover {
@@ -145,15 +137,7 @@ button:active {
   border-style: double;
   color: white;
   visibility: hidden;
-  /* 削角效果 */
-  clip-path: polygon(
-    15px 0,
-    100% 0,  
-    100% calc(100% - 15px),
-    calc(100% - 15px) 100%,  
-    0 100%,   
-    0 15px
-  );
+  border-radius: 12px; /* 添加圆角 */
 }
 
 #gameWonScreen h1 {
@@ -222,18 +206,38 @@ button:active {
   border: 2px solid #4CAF50;
   /* 更新字体为更游戏风格的选项 */
   font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
-  /* 削角效果 */
-  clip-path: polygon(
-    8px 0,
-    100% 0,
-    100% calc(100% - 8px),  
-    calc(100% - 8px) 100%,  
-    0 100%,   
-    0 8px
-  );
+  border-radius: 12px; /* 添加圆角 */
 }
 
 /* 地图选择界面样式 */
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+#snakeAppearanceScreen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; 
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 30px;
+  border: 4px solid #4CAF50;
+  border-style: double;
+  border-radius: 12px; /* 添加圆角 */
+  width: auto;
+  min-width: 400px;
+}
+
 #mapSelectScreen {
   position: absolute;
   top: 50%;
@@ -248,15 +252,9 @@ button:active {
   padding: 30px;
   border: 4px solid #4CAF50;
   border-style: double;
-  /* 削角效果 */
-  clip-path: polygon(
-    15px 0,
-    100% 0,
-    100% calc(100% - 15px),
-    calc(100% - 15px) 100%, 
-    0 100%,   
-    0 15px
-  );
+  border-radius: 12px; /* 添加圆角 */
+  width: auto;
+  min-width: 400px;
 }
 
 #mapSelectScreen h2 {
@@ -317,15 +315,9 @@ button:active {
   padding: 30px;
   border: 4px solid #4CAF50;
   border-style: double;
-  /* 削角效果 */
-  clip-path: polygon(
-    15px 0,
-    100% 0,
-    100% calc(100% - 15px),
-    calc(100% - 15px) 100%,  
-    0 100%,   
-    0 15px
-  );
+  border-radius: 12px; /* 添加圆角 */
+  width: auto;
+  min-width: 400px;
 }
 
 #difficultyScreen h2 {
@@ -492,15 +484,7 @@ button:active {
   background-color: rgba(0, 0, 0, 0.6);
   padding: 20px;
   border-left: 3px solid #4CAF50;
-  /* 削角效果 */
-  clip-path: polygon(
-    10px 0,
-    100% 0,  
-    100% calc(100% - 10px),
-    calc(100% - 10px) 100%,  
-    0 100%,   
-    0 0
-  );
+  border-radius: 6px; /* 添加圆角 */
 }
 
 #HelpPage button {
@@ -511,4 +495,98 @@ button:active {
   border-right: 3px solid #388E3C;
   border-bottom: 3px solid #388E3C;
   box-shadow: 0 4px 0 #2E7D32;
+}
+
+/*返回按钮样式*/
+.back-button {
+  background-color: #4CAF50;
+  border-top: 3px solid #65df69;
+  border-left: 3px solid #65df69;
+  border-right: 3px solid #388E3C;
+  border-bottom: 3px solid #388E3C;
+  box-shadow: 0 4px 0 #2E7D32;
+}
+
+.back-button:hover {
+  background-color: #5BC75E;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2E7D32;
+}
+
+.back-button:active {
+  background-color: #388E3C;
+  border-top: 3px solid #388E3C;
+  border-left: 3px solid #388E3C;
+  border-right: 3px solid #65df69;
+  border-bottom: 3px solid #65df69;
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+#mapSelectScreen .back-button,
+#difficultyScreen .back-button {
+  margin: 8px;
+  min-width: 150px;
+  padding: 12px 20px;
+  font-size: 16px;
+}
+
+/* 通用滑块样式 */
+.color-slider {
+  -webkit-appearance: none;
+  width: 150px;
+  height: 10px;
+  /* background: #ffffff; */
+  border-radius: 5px;
+  outline: none;
+  margin: 5px 10px;
+}
+
+/* 滑轨轨道 */
+.color-slider::-webkit-slider-runnable-track {
+  height: 10px;
+  background: #e1e1e1;
+  border-radius: 5px;
+}
+
+/* 滑块小球 */
+.color-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #a2a2a2;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-top: -4px; /* 为了让 thumb 垂直居中 */
+  box-shadow: 0 0 3px rgba(0,0,0,0.3);
+}
+
+/* Firefox 支持 */
+.color-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #333;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.color-slider::-moz-range-track {
+  height: 10px;
+  background: #aaa;
+  border-radius: 5px;
+}
+
+.timer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 24px;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border: 2px solid #4CAF50;
+  font-family: 'Press Start 2P', 'VT323', 'Silkscreen', 'Joystix', 'Arcade', 'Courier New', monospace;
+  border-radius: 12px;
 }

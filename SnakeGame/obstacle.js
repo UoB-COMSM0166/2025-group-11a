@@ -4,41 +4,83 @@ class ObstacleManager {
   }
 
   generateObstacle(count = 1) {
+    const safeMargin = 4 * gridSize; // 安全边距
+    const minLength = 4 * gridSize;  // 最小长度
+    const maxLength = 10 * gridSize; // 最大长度
+  
     for (let i = 0; i < count; i++) {
-      let isHorizontal = random() > 0.4;
-      let x = random((-width * 1) + 4*gridSize, (width * 1) - 4*gridSize);
-      let y = random((-height * 1) + 4*gridSize, (height * 1) - 4*gridSize);
-      let length = floor(random(4, 10)) * gridSize;
+      const isHorizontal = random() > 0.4;
       
-      // 检查新障碍物是否与已有障碍物重叠
-      let newObstacle = { x, y, length, isHorizontal };
+      // 可用空间计算（考虑障碍物长度）
+      const boundary = {
+        left: -width * mapSize/2 + safeMargin,
+        right: width * mapSize/2 - safeMargin,
+        top: -height * mapSize/2 + safeMargin,
+        bottom: height * mapSize/2 - safeMargin
+      };
+  
+      // 生成位置和长度（确保完全在边界内）
+      let x, y, length;
+      
+      if (isHorizontal) {
+        length = floor(random(4, 10)) * gridSize;
+        x = random(
+          boundary.left,
+          boundary.right - length // 确保x+length不超出右边界
+        );
+        y = random(boundary.top, boundary.bottom);
+      } else {
+        length = floor(random(4, 10)) * gridSize;
+        x = random(boundary.left, boundary.right);
+        y = random(
+          boundary.top,
+          boundary.bottom - length // 确保y+length不超出下边界
+        );
+      }
+  
+      const newObstacle = { x, y, length, isHorizontal };
+      
       if (!this.isOverlapping(newObstacle)) {
         this.obstacles.push(newObstacle);
+      } else {
+        i--; // 重叠则重新生成
       }
     }
   }
 
-  // 检查是否有重叠
   isOverlapping(newObstacle) {
-    for (let o of this.obstacles) {
-      if (newObstacle.isHorizontal === o.isHorizontal) {
-        if (newObstacle.isHorizontal) {
-          // 检查横向障碍物重叠
-          if (newObstacle.y === o.y && 
-            (newObstacle.x < o.x + o.length && newObstacle.x + newObstacle.length > o.x)) {
-            return true;
-          }
-        } else {
-          // 检查竖向障碍物重叠
-          if (newObstacle.x === o.x && 
-            (newObstacle.y < o.y + o.length && newObstacle.y + newObstacle.length > o.y)) {
-            return true;
-          }
-        }
-      }
+  // 定义障碍物实际占用区域（考虑宽度）
+  const getBounds = (obs) => {
+    if (obs.isHorizontal) {
+      return {
+        x1: obs.x,
+        y1: obs.y - gridSize/4, // 考虑障碍物高度
+        x2: obs.x + obs.length,
+        y2: obs.y + gridSize/4
+      };
+    } else {
+      return {
+        x1: obs.x - gridSize/4, // 考虑障碍物宽度
+        y1: obs.y,
+        x2: obs.x + gridSize/4,
+        y2: obs.y + obs.length
+      };
     }
-    return false;
+  };
+
+  // 检查与所有现有障碍物的碰撞
+  for (let o of this.obstacles) {
+    const a = getBounds(newObstacle);
+    const b = getBounds(o);
+
+    // 轴对齐矩形碰撞检测
+    if (a.x1 < b.x2 && a.x2 > b.x1 && 
+        a.y1 < b.y2 && a.y2 > b.y1) {
+      return true;
+    }
   }
+  return false;
+}
 
   drawObstacles() {
     push();
@@ -93,4 +135,3 @@ drawVerticalLadder(x, y, width, height) {
   }
   }
 }
-

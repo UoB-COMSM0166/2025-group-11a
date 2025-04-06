@@ -5,30 +5,9 @@ class GameMap {
     this.borderSize = borderSize; // 可见边界大小
     this.visibleRange = 2;      // 可见网格范围倍数
     this.swampManager = new SwampManager();
-    this.fogManager = new FogManager();
+    this.desertManager = new DesertManager();
     this.teleportManager = new TeleportManager();
   }
-
-  // drawGrid() {
-  //   push();
-  //   stroke(255, 50); // 白色半透明网格线
-  //   strokeWeight(1);
-
-  //   let startX = -width * this.visibleRange - (width / 2 % this.gridSize);
-  //   let startY = -height * this.visibleRange - (height / 2 % this.gridSize);
-
-  //   // 绘制水平网格线
-  //   for (let y = startY; y < height * this.visibleRange; y += this.gridSize) {
-  //     line(-width * this.visibleRange, y, width * this.visibleRange, y);
-  //   }
-
-  //   // 绘制垂直网格线
-  //   for (let x = startX; x < width * this.visibleRange; x += this.gridSize) {
-  //     line(x, -height * this.visibleRange, x, height * this.visibleRange);
-  //   }
-
-  //   pop();
-  // }
 
   drawBoundary() {
     push();
@@ -57,33 +36,6 @@ class GameMap {
     rect(gameBoundary.x, gameBoundary.y, gameBoundary.w, gameBoundary.h);
     pop();
   }
-
-  // // 绘制固定网格，不随蛇移动
-  // drawFixedGrid() {
-  //   push();
-  //   stroke(255, 30); // 白色半透明网格线
-  //   strokeWeight(1);
-    
-  //   // 计算屏幕上可见的网格
-  //   let startX = floor(-width / 2 / gridSize) * gridSize;
-  //   let startY = floor(-height / 2 / gridSize) * gridSize;
-  //   let endX = ceil(width / 2 / gridSize) * gridSize;
-  //   let endY = ceil(height / 2 / gridSize) * gridSize;
-    
-  //   // 将画布原点移到屏幕中心
-  //   translate(width / 2, height / 2);
-    
-  //   // 绘制水平网格线
-  //   for (let y = startY; y <= endY; y += gridSize) {
-  //     line(startX, y, endX, y);
-  //   }
-    
-  //   // 绘制垂直网格线
-  //   for (let x = startX; x <= endX; x += gridSize) {
-  //     line(x, startY, x, endY);
-  //   }
-  //   pop();
-  // }
 
   drawFixedGrid() {
     push();
@@ -120,12 +72,12 @@ class GameMap {
     this.swampManager.drawSwamps();
   }
 
-  generateFogs() {
-    this.fogManager.generateFogs(difficultyMode === 'hard' ? 8 : 5);
+  generateDeserts() {
+    this.desertManager.generateDeserts(difficultyMode === 'hard' ? 8 : 5);
   }
 
-  drawFogs() {
-    this.fogManager.drawFogs();
+  drawDeserts() {
+    this.desertManager.drawDeserts();
   }
 
   // 添加生成传送点的方法
@@ -296,13 +248,13 @@ class SwampManager {
   }
 }
 
-class FogManager {
+class DesertManager {
   constructor() {
-    this.fogs = [];
+    this.deserts = [];
     this.noiseSeed = 0;
   }
 
-  generateFogs(count = 5) {
+  generateDeserts(count = 5) {
     this.noiseSeed = random(1000);
     for (let i = 0; i < count; i++) {
       let center = createVector(
@@ -310,17 +262,17 @@ class FogManager {
           random(-height * mapSize/2 + 200, height * mapSize/2 - 200)
       );
 
-      let fog = {
+      let desert = {
         position: center,
-        points: this.generateOrganicFogShape(center),
+        points: this.generateOrganicDesertShape(center),
         slowdown: 0.6 // 进入迷雾后速度降低 40%
       };
 
-      this.fogs.push(fog);
+      this.deserts.push(desert);
     }
   }
 
-  generateOrganicFogShape(center) {
+  generateOrganicDesertShape(center) {
     let points = [];
     const baseRadius = random(100, 180);
     const noiseLayers = [
@@ -351,10 +303,10 @@ class FogManager {
     }
 
     // 形状后处理
-    return this.processFogShape(points);
+    return this.processDesertShape(points);
   }
 
-  processFogShape(points) {
+  processDesertShape(points) {
     // 三次平滑处理
     for (let i = 0; i < 3; i++) {
       points = points.map((p, idx) => {
@@ -376,25 +328,25 @@ class FogManager {
     );
   }
 
-  drawFogs() {
+  drawDeserts() {
     push();
     noStroke();
-    for (let i = 0; i < this.fogs.length; i++) {
-      let fog = this.fogs[i];
+    for (let i = 0; i < this.deserts.length; i++) {
+      let desert = this.deserts[i];
 
       // 计算动态透明度：基于正弦波变化，范围 80 - 255
       let alpha = map(sin(frameCount * 0.01 + i), -1, 1, 80, 255);
 
       let offsetX = map(noise(frameCount * 0.005, i), 0, 1, -2, 2);
       let offsetY = map(noise(frameCount * 0.005 + 1000, i), 0, 1, -2, 2);
-      let movedPosition = createVector(fog.position.x + offsetX, fog.position.y + offsetY);
+      let movedPosition = createVector(desert.position.x + offsetX, desert.position.y + offsetY);
       fill(150, 150, 150, alpha); // 设置随时间变化的透明度
 
       beginShape();
-      for (let p of fog.points) {
+      for (let p of desert.points) {
         vertex(p.x + offsetX, p.y + offsetY);
       }
-      vertex(fog.points[0].x + offsetX, fog.points[0].y + offsetY);// 确保闭合
+      vertex(desert.points[0].x + offsetX, desert.points[0].y + offsetY);// 确保闭合
       endShape(CLOSE);
     }
 
