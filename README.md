@@ -93,6 +93,12 @@ In addition to player-centered stories, we also created developer and UI designe
 
 > "As a designer, I want to implement a victory and game-over screen with reasons (e.g., timeout, collision), so that players receive clear feedback."
 
+In designing user stories for our Snake Game, we adopted the “As a [user], I want to [goal] so that [reason]” structure to ensure clarity and player-centered design. This method helped us define features that directly address user needs and align with gameplay experience. 
+
+We also emphasized writing clear, testable acceptance criteria using the Given-When-Then format. For example, selecting the swamp map slows the snake with water hazards, while the desert mode increases difficulty by reducing food frequency. The teleportation mode repositions the snake across the screen, adding a unique twist. These outcomes help validate functionality effectively during development.
+
+Importantly, we ensured that all user stories were feasible and supported gameplay diversity. Using frameworks like MoSCoW, we prioritized features and focused development on delivering a smooth, engaging experience. This systematic approach improved collaboration and guaranteed a balanced, player-friendly design.
+
 # 4. Design <a id="design"></a>  
 - 15% ~750 words
 - System architecture. Class diagrams, behavioural diagrams.
