@@ -100,6 +100,43 @@ We also emphasized writing clear, testable acceptance criteria using the Given-W
 
 Importantly, we ensured that all user stories were feasible and supported gameplay diversity. Using frameworks like MoSCoW, we prioritized features and focused development on delivering a smooth, engaging experience. This systematic approach improved collaboration and guaranteed a balanced, player-friendly design.
 
+### Early Stages Design
+
+### Use-Case Diagram
+
+### Requirements Definition
+**1. Game Objective <br>**
+The main goal of the game is for the player to control a snake and consume randomly generated food on the map. The player must reach a target score within a limited time in order to win.
+
+**2. Player Controls <br>**
+The snake’s direction is controlled using the mouse. <br>
+The player can accelerate the snake by holding the left mouse button. Acceleration consumes stamina, which is limited and regenerates over time or through specific items.
+
+**3. Core Gameplay Mechanics <br>**
+Each time the snake consumes a piece of food, its body length increases and the score is incremented. <br>
+If the player defeats an AI-controlled snake by colliding with it using their snake’s body (not head), the AI snake is destroyed and additional food or special items are dropped. <br>
+The game ends immediately if the player's snake collides with the edge of the map, any obstacles, or the head/body of an AI snake.
+
+**4. Power-Ups and Items <br>**
+Several power-up items are introduced to enhance gameplay. <br>
+**Charge Boost**: Instantly refills the stamina bar, allowing the player to accelerate again. <br>
+**Invincibility**: Grants temporary immunity to collisions with obstacles and AI snakes. However, the player can still die if they collide with the edge of the map. <br>
+**Foraging Radius Increase**: Temporarily enlarges the effective area around the snake’s head for collecting food, making it easier to gather items.
+
+**5. Map Variations and Environmental Effects <br>**
+To introduce variety and challenge, the game includes multiple map modes, each with unique effects. <br>
+**Swamp Map**: When the snake moves through swamp terrain, its movement speed decreases, and acceleration is less effective. <br>
+**Desert Map**: Occasional sandstorms obscure the player's vision, making navigation more difficult. <br>
+**Teleportation Map**: Teleportation portals allow the snake to instantly travel to different locations on the map, enabling strategic repositioning. <br>
+
+**6. Difficulty Modes <br>**
+**Normal Mode**: Designed for casual gameplay, this mode includes a moderate number of AI snakes, a balanced distribution of obstacles, and a standard amount of food items across the map. <br>
+**Hard Mode**: Intended for experienced players seeking a challenge. In this mode, the game initializes with a significantly higher number of AI-controlled snakes, increased obstacles scattered throughout the map, and a reduced frequency of food item spawns. This setting requires more strategic movement and resource management to succeed.
+
+**7. Win and Loss Conditions <br>**
+**Victory Condition**: The player wins the game by achieving the target score within the allotted time limit. <br>
+**Defeat Conditions**: The player loses if they fail to reach the target score in time, or if their snake collides with the map boundary, any obstacle, or an AI-controlled snake.
+
 # 4. Design <a id="design"></a>  
 - 15% ~750 words
 - System architecture. Class diagrams, behavioural diagrams.
