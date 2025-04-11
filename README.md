@@ -35,8 +35,13 @@
 
 
 # 2. Introduction <a id="introduction"></a>  
-- 5% ~250 words
-- Describe your game, what is based on, what makes it novel?
+The starting point of this project is the classic game, Snake. However, compared to the traditional version where the snake is controlled using only the four arrow keys, we wanted to break this limitation on PC and make the snake's movement more fluid and free. Inspired by the mobile game Snake Battle (where players control the snake using a virtual joystick), we adopted a similar approach and used the mouse to control the snake’s movement direction.
+
+The p5.js library turned out to be a great fit for this project, as it allows for mouse-based control and supports drawing the snake body using overlapping circles. This means we could render the snake directly in code without needing to create separate textures.
+
+To enhance gameplay, we added special item-based food. When a player consumes these, they receive buffs such as increased food pickup range, temporary invincibility, or extended stamina for acceleration. We also designed different maps and difficulty levels, with each map introducing unique mechanics: swamps slow down movement, fog reduces visibility, and portals teleport players to other locations on the map.
+
+Finally, it's worth mentioning that we implemented AI-controlled snakes that compete with the player for food. To balance the difficulty, AI snakes drop food upon death. Since any snake dies upon colliding with non-food objects, players can use this mechanic to eliminate AI snakes and collect more food.
 
 
 # 3. Requirements <a id="requirements"></a>  
