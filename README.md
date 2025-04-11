@@ -32,7 +32,9 @@
   | 3      | Cheng Wang         | fd24967@bristol.ac.uk   | Designer, Coder     |
   | 4      |                    |                         |                     |
 </div>
-
+<div align="center">
+  Table 1: Team Members
+</div>
 
 # 2. Introduction <a id="introduction"></a>  
 This project draws inspiration from one of the most iconic classic games—**Snake**. However, in contrast to the traditional version, which restricts player movement to four directional keys (up, down, left, right), our goal was to provide a more fluid and intuitive control system on the PC platform. Inspired by the mobile game Snake Battle, where players use a virtual joystick to control the snake's direction, we designed our version to allow players to guide the snake using mouse input. The **p5.js** library proved to be particularly suitable for this purpose, as it enables precise mouse-based direction control and allows for the snake's body to be dynamically rendered using overlapping circles, eliminating the need for external sprite assets.
@@ -43,8 +45,32 @@ An important feature of the game is the inclusion of **AI-controlled snakes** th
 
 
 # 3. Requirements <a id="requirements"></a>  
+### ideation process
 
+Each member of our team independently researched game types they were personally interested in. We then came together to share and discuss our findings, evaluating each proposed concept based on feasibility, alignment with team members’ interests, and the potential for scalability within the scope of our project. Through this scoring process, two game types emerged as the highest-rated: side-scrolling platformers and arcade-style games, with Snake as a representative example.
 
+Ultimately, we chose Snake as the foundation for our project. Our primary objective was to focus on enhancing our coding skills and gameplay design abilities, rather than investing a large portion of our time in level or map design, which would have been a significant part of a platformer. The simplicity and extensibility of Snake aligned well with our goal to experiment with control schemes, AI behavior, and game mechanics.
+
+During the ideation phase, we also referenced modern adaptations of the classic Snake game, such as Slither.io and Snake Battle, which inspired us to explore mouse-based controls, dynamic gameplay elements, and multiplayer mechanics. We held structured brainstorming sessions using collaborative tools to consolidate ideas and assess the technical feasibility of each concept, especially within the capabilities of the p5.js library.
+
+Additionally, you may notice that our team was divided into two subgroups, 11a and 11b. This decision arose during the this stage, as we encountered fundamental differences in creative direction that proved difficult to reconcile. To ensure smooth progress and allow each group to pursue its own vision effectively, we mutually agreed to split into two sub-teams and continue the development of two game projects independently.
+
+<div align="center">
+  
+| Game Genre        | Reference Game     | Feasibility | Interest | Scalability | Total Score |
+|-------------------|--------------------|-------------|----------|-------------|-------------|
+| Side-scrolling Action | Super Mario      | 5           | 4        | 5           | 14          |
+| Arcade            | Snake              | 5           | 4        | 5           | 14          |
+| Tower Defense     | Plants vs. Zombies | 4           | 4        | 3           | 11          |
+| Roguelike         | Brotato            | 4           | 3        | 3           | 10          |
+| Simulation (Management) | Stardew Valley | 2           | 3        | 2           | 7           |
+| Puzzle            | Rusty Lake         | 1           | 2        | 4           | 7           |
+| RPG               | Pokémon            | 1           | 2        | 4           | 7           |
+| Simulation (Construction) | Poly Bridge | 1           | 2        | 4           | 7           |
+</div>
+<div align="center">
+Table 2: Game Research and Game Type Evaluation
+</div>
 
 # 4. Design <a id="design"></a>  
 - 15% ~750 words
