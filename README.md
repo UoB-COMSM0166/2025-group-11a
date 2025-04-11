@@ -59,14 +59,15 @@ Additionally, you may notice that our team was divided into two subgroups, 11a a
   
 | Game Genre        | Reference Game     | Feasibility | Interest | Scalability | Total Score |
 |-------------------|--------------------|-------------|----------|-------------|-------------|
-| Side-scrolling Action | Super Mario      | 5           | 4        | 5           | 14          |
+| Side-scrolling Action | Super Mario Bros  | 5           | 4        | 5           | 14          |
 | Arcade            | Snake              | 5           | 4        | 5           | 14          |
 | Tower Defense     | Plants vs. Zombies | 4           | 4        | 3           | 11          |
 | Roguelike         | Brotato            | 4           | 3        | 3           | 10          |
 | Simulation (Management) | Stardew Valley | 2           | 3        | 2           | 7           |
+| Scrolling Shooter | Gradius            | 5           | 1        | 1           | 7           |
 | Puzzle            | Rusty Lake         | 1           | 2        | 4           | 7           |
 | RPG               | Pokémon            | 1           | 2        | 4           | 7           |
-| Simulation (Construction) | Poly Bridge | 1           | 2        | 4           | 7           |
+| Simulation (Construction) | Poly Bridge | 1           | 2        | 3           | 6           |
 </div>
 <div align="center">
 Table 2: Game Research and Game Type Evaluation
