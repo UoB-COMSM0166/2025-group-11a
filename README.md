@@ -101,10 +101,17 @@ We also emphasized writing clear, testable acceptance criteria using the Given-W
 Importantly, we ensured that all user stories were feasible and supported gameplay diversity. Using frameworks like MoSCoW, we prioritized features and focused development on delivering a smooth, engaging experience. This systematic approach improved collaboration and guaranteed a balanced, player-friendly design.
 
 ### Early Stages Design
+To align with our development approach, we referred to the mobile game Snake Battle as our primary design inspiration. Although Snake Battle is a multiplayer online game, our target platform does not support multiplayer functionality. As a result, we had to explore alternative gameplay mechanics to enhance player engagement.
 
-### Use-Case Diagram
+In the early stages of design, we proposed incorporating roguelike elements, including various buff and debuff items—such as candy (which grants a temporary speed boost), cookies (which reveal additional food locations), and trash (which causes damage or unexpected acceleration). We also considered implementing both single-player and two-player modes.
+
+However, as development progressed, we realized that these ideas deviated from the core essence of the classic Snake game and introduced ambiguity in the win conditions, which undermined gameplay consistency. Therefore, we decided to retain only the buff system and the single-player mode, while continuously re-evaluating new gameplay ideas through weekly iteration and testing.
+
+In the first sprint (initial deliverable version), our focus was on faithfully recreating the core mechanics of the reference game: the snake is controlled using the mouse to navigate, consuming food increases its length and score, and the game ends if the snake collides with the map boundary or any obstacle. To increase the level of challenge, we added AI-controlled snakes and obstacles to the map. A collision between the player's snake head and an AI snake’s body also results in game over. AI snakes compete with the player for food, and in hard mode, food dropped upon the death of AI snakes becomes a crucial scoring resource.
 
 ### Requirements Definition
+We conduct weekly requirement reviews based on the current state of the game to gather additional player feedback, refine gameplay mechanics, and address bugs. This iterative process is also reflected in our Kanban board. The finalized requirements for the deliverable version are as follows: <br>
+
 **1. Game Objective <br>**
 The main goal of the game is for the player to control a snake and consume randomly generated food on the map. The player must reach a target score within a limited time in order to win.
 
@@ -136,6 +143,9 @@ To introduce variety and challenge, the game includes multiple map modes, each w
 **7. Win and Loss Conditions <br>**
 **Victory Condition**: The player wins the game by achieving the target score within the allotted time limit. <br>
 **Defeat Conditions**: The player loses if they fail to reach the target score in time, or if their snake collides with the map boundary, any obstacle, or an AI-controlled snake.
+
+### Use-Case Diagram
+
 
 # 4. Design <a id="design"></a>  
 - 15% ~750 words
