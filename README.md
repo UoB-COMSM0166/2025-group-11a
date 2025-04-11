@@ -35,13 +35,11 @@
 
 
 # 2. Introduction <a id="introduction"></a>  
-The starting point of this project is the classic game, Snake. However, compared to the traditional version where the snake is controlled using only the four arrow keys, we wanted to break this limitation on PC and make the snake's movement more fluid and free. Inspired by the mobile game Snake Battle (where players control the snake using a virtual joystick), we adopted a similar approach and used the mouse to control the snake’s movement direction.
+This project draws inspiration from one of the most iconic classic games—**Snake**. However, in contrast to the traditional version, which restricts player movement to four directional keys (up, down, left, right), our goal was to provide a more fluid and intuitive control system on the PC platform. Inspired by the mobile game Snake Battle, where players use a virtual joystick to control the snake's direction, we designed our version to allow players to guide the snake using mouse input. The **p5.js** library proved to be particularly suitable for this purpose, as it enables precise mouse-based direction control and allows for the snake's body to be dynamically rendered using overlapping circles, eliminating the need for external sprite assets.
 
-The p5.js library turned out to be a great fit for this project, as it allows for mouse-based control and supports drawing the snake body using overlapping circles. This means we could render the snake directly in code without needing to create separate textures.
+To enhance the game's playability, we introduced a variety of **power-up food items**. When consumed, these items grant temporary buffs such as increased food collection range, short-term invincibility, or enhanced stamina for acceleration. Additionally, we designed multiple **maps and difficulty levels**, each incorporating unique gameplay mechanics. For example, swamp terrain reduces movement speed, fog limits visibility, and teleportation portals allow for quick relocation to different areas of the map.
 
-To enhance gameplay, we added special item-based food. When a player consumes these, they receive buffs such as increased food pickup range, temporary invincibility, or extended stamina for acceleration. We also designed different maps and difficulty levels, with each map introducing unique mechanics: swamps slow down movement, fog reduces visibility, and portals teleport players to other locations on the map.
-
-Finally, it's worth mentioning that we implemented AI-controlled snakes that compete with the player for food. To balance the difficulty, AI snakes drop food upon death. Since any snake dies upon colliding with non-food objects, players can use this mechanic to eliminate AI snakes and collect more food.
+An important feature of the game is the inclusion of **AI-controlled snakes** that compete with the player for food. To maintain balance and competitiveness, AI snakes drop food upon death. Since any collision between a snake's head and a non-food object results in death, players can strategically eliminate AI opponents to gain additional resources.
 
 
 # 3. Requirements <a id="requirements"></a>  
