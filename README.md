@@ -109,6 +109,17 @@ However, as development progressed, we realized that these ideas deviated from t
 
 In the first sprint (initial deliverable version), our focus was on faithfully recreating the core mechanics of the reference game: the snake is controlled using the mouse to navigate, consuming food increases its length and score, and the game ends if the snake collides with the map boundary or any obstacle. To increase the level of challenge, we added AI-controlled snakes and obstacles to the map. A collision between the player's snake head and an AI snake’s body also results in game over. AI snakes compete with the player for food, and in hard mode, food dropped upon the death of AI snakes becomes a crucial scoring resource.
 
+### Use-Case Diagram
+<div align="center">
+    <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/use-case.jpg" alt="use-case diagram" >
+    <p>Image 5: Use-Case Diagram<br>
+</div>
+We used a use case diagram to preliminarily identify the functional components of the game, helping to provide a clear and intuitive understanding of the required features. During this phase, we held discussions to determine the key use cases of the game and how players would interact with each component. Players engage with the game through a linear interaction flow, starting from a specific screen shown after selecting "Start Game", after which they can choose a map and a difficulty mode. This design allows players to become familiar with the game before challenging themselves further.
+
+In addition, each difficulty mode is associated with its own set of components. As players progress, these components increase the challenge within each mode. For instance, the “Swamp” map may extend into a “Slow Speed” challenge, while the “Desert” map could introduce a “Reduced Visibility” mechanic. During gameplay, players are able to move, gain scores, and collect buff items, but may also die if they encounter obstacles.
+
+This use case diagram focuses solely on the game’s core gameplay functionality and supports the implementation of the features discussed in the early design phase. Since we adopted an agile development methodology, numerous additional features were introduced later in the project—such as pause functionality, sound effects, and more refined AI snake movement. All of these were integrated without disrupting the structure of the original use case diagram, which continued to serve as a foundation for iterative improvements.
+
 ### Requirements Definition
 We conduct weekly requirement reviews based on the current state of the game to gather additional player feedback, refine gameplay mechanics, and address bugs. This iterative process is also reflected in our Kanban board. The finalized requirements for the deliverable version are as follows: <br>
 
@@ -143,12 +154,6 @@ To introduce variety and challenge, the game includes multiple map modes, each w
 **7. Win and Loss Conditions <br>**
 **Victory Condition**: The player wins the game by achieving the target score within the allotted time limit. <br>
 **Defeat Conditions**: The player loses if they fail to reach the target score in time, or if their snake collides with the map boundary, any obstacle, or an AI-controlled snake.
-
-### Use-Case Diagram
-<div align="center">
-    <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/use-case.jpg" alt="use-case diagram" >
-    <p>Image 5: Use-case Diagram<br>
-</div>
 
 
 # 4. Design <a id="design"></a>  
