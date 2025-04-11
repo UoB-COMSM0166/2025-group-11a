@@ -38,10 +38,14 @@
 
 # 2. Introduction <a id="introduction"></a> 
 <div align="center"> 
-    <img src="https://uob-comsm0166.github.io/2025-group-11a/assignments/week02/snake.png" alt="snake" width="300"> 
-    <p>Image 3: Inspiration for Snake Game, Snake Battle<br>
-    Source: <a href="https://play.google.com/store/apps/details?id=snake.battle.arcade.io.game&hl=en_GB&pli=1">Snake Battle on Google Play</a></p> 
+    <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/classicsnake.gif" alt="classic" height="160"> <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snakebattle.gif" alt="snakebattle" height="160">  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/ourgame.gif" alt="our game" height="160"> 
+     <p>Image 2: Classic Snake Game, 
+    Source: <a href="https://analyticsindiamag.com/deep-tech/how-neural-network-can-be-trained-to-play-the-snake-game/">analyticsindiamag</a><br>
+    Image 3: Snake Battle, 
+    Source: <a href="https://www.youtube.com/watch?v=ZVsTZoaf-YM">Youtube</a><br>
+    Image 4: Our Game</p> <br>
 </div>
+
 This project draws inspiration from one of the most iconic classic games—**Snake**. However, in contrast to the traditional version, which restricts player movement to four directional keys (up, down, left, right), our goal was to provide a more fluid and intuitive control system on the PC platform. Inspired by the mobile game Snake Battle, where players use a virtual joystick to control the snake's direction, we designed our version to allow players to guide the snake using mouse input. The **p5.js** library proved to be particularly suitable for this purpose, as it enables precise mouse-based direction control and allows for the snake's body to be dynamically rendered using overlapping circles, eliminating the need for external sprite assets.
 
 To enhance the game's playability, we introduced a variety of **power-up food items**. When consumed, these items grant temporary buffs such as increased food collection range, short-term invincibility, or enhanced stamina for acceleration. Additionally, we designed multiple **maps and difficulty levels**, each incorporating unique gameplay mechanics. For example, swamp terrain reduces movement speed, fog limits visibility, and teleportation portals allow for quick relocation to different areas of the map.
