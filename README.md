@@ -145,6 +145,10 @@ To introduce variety and challenge, the game includes multiple map modes, each w
 **Defeat Conditions**: The player loses if they fail to reach the target score in time, or if their snake collides with the map boundary, any obstacle, or an AI-controlled snake.
 
 ### Use-Case Diagram
+<div align="center">
+    <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/use-case.jpg" alt="use-case diagram" >
+    <p>Image 5: Use-case Diagram<br>
+</div>
 
 
 # 4. Design <a id="design"></a>  
