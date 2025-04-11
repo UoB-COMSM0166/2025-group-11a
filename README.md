@@ -45,7 +45,7 @@ An important feature of the game is the inclusion of **AI-controlled snakes** th
 
 
 # 3. Requirements <a id="requirements"></a>  
-### ideation process
+### Ideation Process
 
 Each member of our team independently researched game types they were personally interested in. We then came together to share and discuss our findings, evaluating each proposed concept based on feasibility, alignment with team members’ interests, and the potential for scalability within the scope of our project. Through this scoring process, two game types emerged as the highest-rated: side-scrolling platformers and arcade-style games, with Snake as a representative example.
 
@@ -71,6 +71,27 @@ Additionally, you may notice that our team was divided into two subgroups, 11a a
 <div align="center">
 Table 2: Game Research and Game Type Evaluation
 </div>
+
+### User Stories
+To clarify the features we could realistically implement and to prioritize our development tasks, we discussed and formulated a series of user stories. The full list can be found in our [week 4 assignment](https://uob-comsm0166.github.io/2025-group-11a/assignments/week04). Below are several key stories that had a significant impact on the final deliverable:
+
+> "As a player, I want to control the snake using touch or keyboard so that I can play easily."
+
+>“As a player, I want different map modes, such as swamp, desert, and teleportation, each with unique characteristics, so that I can experience varied gameplay.”
+
+>“As a player, I want to adjust the game difficulty to match different challenge levels.”
+
+>“As a player, I want a timed mode where I can achieve the highest score within a limited time.”
+
+In addition to player-centered stories, we also created developer and UI designer stories to guide the project from a broader perspective:
+
+> "As a developer, I want to implement modular managers (e.g., FoodManager, ObstacleManager, ItemManager) so that we can maintain and expand different gameplay elements independently."
+
+> "As a developer, I want to implement AI snakes that can track, shoot at, and avoid the player, so the game has an engaging and competitive challenge."
+
+> "As a designer, I want to create a multi-step start menu (snake customization → map → difficulty), so players are guided smoothly into the game."
+
+> "As a designer, I want to implement a victory and game-over screen with reasons (e.g., timeout, collision), so that players receive clear feedback."
 
 # 4. Design <a id="design"></a>  
 - 15% ~750 words
