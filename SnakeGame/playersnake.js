@@ -10,7 +10,8 @@ class PlayerSnake extends Snake {
     this.boostSpeed = snakeSpeed * 2;
     this.boostCooldown = 0;//加速冷却时间
     this.isInvincible = false; // 无敌状态
-    this.invincibleDuration = 0; 
+    this.invincibleDuration = 0;
+    this.isInitialInvincibility = false;
     this.isEnlarged = false; // 头部食物碰撞变大
     this.enlargeDuration = 0;
   }

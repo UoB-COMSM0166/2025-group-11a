@@ -204,6 +204,7 @@ class ItemManager {
 
   activateInvincible(){
     playerSnake.actInvincibility();
+    playerSnake.isInitialInvincibility = false;
     this.addTooltip("Invincible!", playerSnake.body[0], [255, 215, 0]);
   }
 

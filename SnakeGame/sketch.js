@@ -70,6 +70,7 @@ function initGame() {
   smallSnakes = [];
   playerSnake.isInvincible = true; // 游戏刚开始时玩家蛇处于无敌状态
   playerSnake.invincibleDuration = 60;
+  playerSnake.isInitialInvincibility = true;
   bannerManager = new BannerManager();
 
   // 根据难度模式调整参数

@@ -333,7 +333,7 @@ class BannerManager {
     // 检查道具状态变化
     checkItemStatus(playerSnake) {
         // 检查无敌状态
-        if (playerSnake.isInvincible && !this.lastItemCheck.invincible) {
+        if (playerSnake.isInvincible && !this.lastItemCheck.invincible && !playerSnake.isInitialInvincibility) {
             this.addItemBanner("invincible", 6000);
             this.lastItemCheck.invincible = true;
         } else if (!playerSnake.isInvincible && this.lastItemCheck.invincible) {
