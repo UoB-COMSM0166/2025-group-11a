@@ -110,10 +110,13 @@ We also emphasized writing clear, testable acceptance criteria using the Given-W
 Importantly, we ensured that all user stories were feasible and supported gameplay diversity. Using frameworks like MoSCoW, we prioritized features and focused development on delivering a smooth, engaging experience. This systematic approach improved collaboration and guaranteed a balanced, player-friendly design.
 
 ### Early Stages Design
-<div align="center"> 
-    <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/prototype.gif" alt="prototype" > 
-    <p>Image 5: Prototype</p> 
-</div>
+
+<p align="center">
+  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/prototype_compressed.gif" alt="Prototype" height="400"/>
+</p>
+<p align="center">Image 5: Prototype</p>
+
+
 To align with our development approach, we referred to the mobile game Snake Battle as our primary design inspiration. Although Snake Battle is a multiplayer online game, our target platform does not support multiplayer functionality. As a result, we had to explore alternative gameplay mechanics to enhance player engagement.
 
 In the early stages of design, we proposed incorporating roguelike elements, including various buff and debuff items—such as candy (which grants a temporary speed boost), cookies (which reveal additional food locations), and trash (which causes damage or unexpected acceleration). We also considered implementing both single-player and two-player modes.
