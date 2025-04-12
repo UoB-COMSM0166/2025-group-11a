@@ -37,7 +37,7 @@ let selectedColor = [120, 230, 120]; // 默认绿色
 let selectedSnakeShape = 'circle'; // 默认形状
 let shapes = ['circle', 'square', 'triangle'];
 let autoSnakes = [];
-
+let bannerManager;
 
 function preload() {
   swampBg = loadImage('assets/pictures/swamp.jpg');
@@ -55,10 +55,6 @@ function setup() {
 
 function initGame() {
 
-
-
-
-
   // // 清理残留对象
   // if (foodManager) foodManager.foods = [];
   // if (obstacleManager) obstacleManager.obstacles = [];
@@ -74,7 +70,7 @@ function initGame() {
   smallSnakes = [];
   playerSnake.isInvincible = true; // 游戏刚开始时玩家蛇处于无敌状态
   playerSnake.invincibleDuration = 60;
-
+  bannerManager = new BannerManager();
 
   // 根据难度模式调整参数
   let aiSnakeCount = difficultyMode === 'hard' ? 10 : 5;
@@ -636,6 +632,7 @@ function draw() {
     // AI蛇头碰到玩家蛇身体后，ai蛇死亡-移除自己并生成随机数量的食物
     if (smallSnakes[i].checkCollisionWithPlayer(playerSnake)) {
       smallSnakes[i].die(); // 让 AI蛇死亡生成食物
+      bannerManager.addKillBanner();
       smallSnakes.splice(i, 1); // 删除 AI蛇
       smallSnakes.push(new AISnake());
       continue; // 跳过后续逻辑，防止报错
@@ -689,12 +686,15 @@ function draw() {
   if (result.collided) {
     if (result.type === "stamina") {
       itemManager.activateStamina();
+      bannerManager.addBanner("STAMINA RESTORED!", 'item'); // 添加体力恢复横幅
     }
     if (result.type === "invincible") {
       itemManager.activateInvincible();
+      bannerManager.addItemBanner("invincible", 6000); // 添加无敌效果横幅，持续6秒
     }
     if (result.type === "enlarge") {
       itemManager.activateEnlarge();
+      bannerManager.addItemBanner("enlarge", 6000); // 添加范围扩大横幅，持续6秒
     }
   }
 
@@ -758,7 +758,11 @@ function draw() {
   }
 
   if (!gameOver && !gameWon && gameStarted) {
-      itemManager.updateTooltips();
+    itemManager.updateTooltips();
+    bannerManager.checkSnakeLength(playerSnake); // 检查蛇长度变化
+    bannerManager.updateItemProgress(); // 更新道具进度
+    bannerManager.checkItemStatus(playerSnake);
+    bannerManager.update(); // 更新并绘制横幅
   }
 
   if (currentMap === 'desert') {
