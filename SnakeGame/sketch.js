@@ -403,8 +403,6 @@ function createUI() {
 function draw() {
   if (!gameStarted) {
 
-
-
     background('#63161A');
 
     translateCenter();
@@ -455,9 +453,6 @@ function draw() {
     push();
     gameMap.drawFixedGrid();
     pop();
-
-
-
 
     // 更新和绘制AI小蛇
     for (let i = smallSnakes2.length - 1; i >= 0; i--) {
@@ -681,7 +676,6 @@ function draw() {
     }
   }
 
-
   // 检查玩家身上是否有道具
   let result = playerSnake.checkItemCollision(itemManager.items);
   if (result.collided) {
@@ -763,11 +757,14 @@ function draw() {
     bannerManager.checkSnakeLength(playerSnake); // 检查蛇长度变化
     bannerManager.updateItemProgress(); // 更新道具进度
     bannerManager.checkItemStatus(playerSnake);
-    bannerManager.update(); // 更新并绘制横幅
   }
 
   if (currentMap === 'desert') {
     gameMap.drawDeserts();
+  }
+
+  if (!gameOver && !gameWon && gameStarted) {
+    bannerManager.update(); // 将横幅更新放在这里，确保在最后绘制
   }
 
   resetMatrix();
