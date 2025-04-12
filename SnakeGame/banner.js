@@ -261,8 +261,9 @@ class BannerManager {
                 if (this.banners[i].itemType === itemType) {
                     // 如果已有相同类型的横幅，更新它
                     this.banners[i].progress = 1.0;
-                    this.banners[i].duration = duration;
-                    this.banners[i].totalDuration = duration;
+                    this.banners[i].startTime = millis(); // 重置开始时间
+                    this.banners[i].duration = duration; // 重置持续时间
+                    this.banners[i].totalDuration = duration; // 重置总持续时间
                     return;
                 }
             }
