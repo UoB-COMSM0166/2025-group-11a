@@ -38,7 +38,7 @@
 
 # 2. Introduction <a id="introduction"></a> 
 <div align="center"> 
-    <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/classicsnake.gif" alt="classic" height="160"> <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snakebattle.gif" alt="snakebattle" height="160">  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/ourgame.gif" alt="our game" height="160"> 
+    <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/classicsnake.gif" alt="classic" height="120"> <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snakebattle.gif" alt="snakebattle" height="120">  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/ourgame.gif" alt="our game" height="120"> 
      <p>Image 2: Classic Snake Game, 
     Source: <a href="https://analyticsindiamag.com/deep-tech/how-neural-network-can-be-trained-to-play-the-snake-game/">analyticsindiamag</a><br>
     Image 3: Snake Battle, 
@@ -110,6 +110,10 @@ We also emphasized writing clear, testable acceptance criteria using the Given-W
 Importantly, we ensured that all user stories were feasible and supported gameplay diversity. Using frameworks like MoSCoW, we prioritized features and focused development on delivering a smooth, engaging experience. This systematic approach improved collaboration and guaranteed a balanced, player-friendly design.
 
 ### Early Stages Design
+<div align="center"> 
+    <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/prototype.gif" alt="prototype" > 
+    <p>Image 5: Prototype</p> 
+</div>
 To align with our development approach, we referred to the mobile game Snake Battle as our primary design inspiration. Although Snake Battle is a multiplayer online game, our target platform does not support multiplayer functionality. As a result, we had to explore alternative gameplay mechanics to enhance player engagement.
 
 In the early stages of design, we proposed incorporating roguelike elements, including various buff and debuff items—such as candy (which grants a temporary speed boost), cookies (which reveal additional food locations), and trash (which causes damage or unexpected acceleration). We also considered implementing both single-player and two-player modes.
@@ -121,7 +125,7 @@ In the first sprint (initial deliverable version), our focus was on faithfully r
 ### Use-Case Diagram
 <div align="center">
     <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/use-case.jpg" alt="use-case diagram" >
-    <p>Image 5: Use-Case Diagram<br>
+    <p>Image 6: Use-Case Diagram<br>
 </div>
 We used a use case diagram to preliminarily identify the functional components of the game, helping to provide a clear and intuitive understanding of the required features. During this phase, we held discussions to determine the key use cases of the game and how players would interact with each component. Players engage with the game through a linear interaction flow, starting from a specific screen shown after selecting "Start Game", after which they can choose a map and a difficulty mode. This design allows players to become familiar with the game before challenging themselves further.
 
