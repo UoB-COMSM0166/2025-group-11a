@@ -169,10 +169,9 @@ class BannerManager {
     drawBannerText(banner) {
         textAlign(CENTER, CENTER);
         textSize(22);
-
+        noStroke();
         // 设置字体样式
         textFont('HelveticaRoundedLT-BlackObl');
-
         // 根据横幅类型选择文本颜色
         switch(banner.type) {
             case 'kill':
@@ -186,6 +185,7 @@ class BannerManager {
         // 绘制文本
         text(banner.message, width/2, banner.y);
     }
+
 
     // 绘制进度条
     drawProgressBar(banner) {
