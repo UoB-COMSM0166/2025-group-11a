@@ -770,7 +770,7 @@ function draw() {
   resetMatrix();
   if (!gameOver && !gameWon && gameStarted) {
     itemManager.updateStatusDisplay(playerSnake);
-    itemManager.drawStatusDisplay();
+    //itemManager.drawStatusDisplay();
   }
 }
 
