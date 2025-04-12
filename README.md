@@ -38,7 +38,7 @@
 
 # 2. Introduction <a id="introduction"></a> 
 <div align="center"> 
-    <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/classicsnake.gif" alt="classic" height="120"> <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snakebattle.gif" alt="snakebattle" height="120">  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/ourgame.gif" alt="our game" height="120"> 
+    <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/classicsnake.gif" alt="classic" height="130"> <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snakebattle.gif" alt="snakebattle" height="130">  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/ourgame.gif" alt="our game" height="130"> 
      <p>Image 2: Classic Snake Game, 
     Source: <a href="https://analyticsindiamag.com/deep-tech/how-neural-network-can-be-trained-to-play-the-snake-game/">analyticsindiamag</a><br>
     Image 3: Snake Battle, 
