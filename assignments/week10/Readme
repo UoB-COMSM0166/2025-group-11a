@@ -1,11 +1,11 @@
-## Snake Rival SusAF Sustainability Analysis Report
+## Snake Game SusAF Sustainability Analysis Report
 
-### Game Overview
+### 🎮 Game Overview
 This is a single-player snake game developed using p5.js. Players can adjust the RGB values to choose their snake's color, select from four maps (Default, Swamp, Desert, Portal), and pick between two difficulty modes (Default or Hard) before starting the game. The snake’s direction is controlled by mouse movement, with a stamina bar that allows acceleration by holding the left mouse button when not empty. There are three power-ups: Invincibility, Expanded Foraging Range, and Stamina Boost. The map contains AI snakes, obstacles, and boundaries. Players can eliminate AI snakes by colliding with their heads, collecting food and power-ups. Colliding with obstacles, boundaries, or an AI snake’s body results in death. Players win by eating enough food within a time limit.
 
 ---
 
-## SusAF Five-Dimension Sustainability Analysis
+## 📝 SusAF Five-Dimension Sustainability Analysis
 
 ### 1. Social Dimension
 - **Sense of Community**: As a single-player offline game, it lacks community interaction and has minimal impact on community sense.
@@ -44,7 +44,7 @@ This is a single-player snake game developed using p5.js. Players can adjust the
 
 ---
 
-## Improvement Suggestions
+## 📊 Improvement Suggestions
 1. Lower the default frame rate to 24-30 fps to reduce device energy consumption.
 2. Pause rendering when the game is paused or the window loses focus to save idle resources.
 3. Optimize for partial rendering, avoiding full screen refreshes.
@@ -53,7 +53,13 @@ This is a single-player snake game developed using p5.js. Players can adjust the
 
 ---
 
-## Conclusion
+## 📌 Conclusion
 This snake game performs well in privacy, safety, device compatibility, and low resource consumption. The main areas for sustainability improvement are energy management, health reminders, and scalability for potential multiplayer modes. By implementing the proposed optimizations, the game can further enhance its environmental and individual sustainability performance, serving as a valuable reference case for green software development.
 
 ---
+
+### 📄 License & Credits
+Developed using [p5.js](https://p5js.org/) | Based on the [Green Software Foundation Patterns](https://patterns.greensoftware.foundation/) and [SusAF Sustainability Framework](https://www.sustainabilitydesign.org/)
+
+> Contact: [Your Name](mailto:your-email@example.com)
+
