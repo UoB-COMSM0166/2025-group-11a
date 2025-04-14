@@ -45,11 +45,9 @@ This is a single-player snake game developed using p5.js. Players can adjust the
 ---
 
 ## Improvement Suggestions
-1. Lower the default frame rate to 24-30 fps to reduce device energy consumption.
-2. Pause rendering when the game is paused or the window loses focus to save idle resources.
-3. Optimize for partial rendering, avoiding full screen refreshes.
-4. Add a “Green Mode” to manually or automatically adjust performance based on grid carbon intensity.
-5. Add health reminders and forced pause functions to protect player well-being.
+1. Optimize for partial rendering, avoiding full screen refreshes.
+2. Add a “Green Mode” to manually or automatically adjust performance based on grid carbon intensity.
+3. Add health reminders and forced pause functions to protect player well-being.
 
 ---
 
