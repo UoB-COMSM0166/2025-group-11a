@@ -1,4 +1,4 @@
-## SusAF Sustainability Analysis Report
+## Snake Rival SusAF Sustainability Analysis Report
 
 ### Game Overview
 This is a single-player snake game developed using p5.js. Players can adjust the RGB values to choose their snake's color, select from four maps (Default, Swamp, Desert, Portal), and pick between two difficulty modes (Default or Hard) before starting the game. The snake’s direction is controlled by mouse movement, with a stamina bar that allows acceleration by holding the left mouse button when not empty. There are three power-ups: Invincibility, Expanded Foraging Range, and Stamina Boost. The map contains AI snakes, obstacles, and boundaries. Players can eliminate AI snakes by colliding with their heads, collecting food and power-ups. Colliding with obstacles, boundaries, or an AI snake’s body results in death. Players win by eating enough food within a time limit.
@@ -57,3 +57,43 @@ This is a single-player snake game developed using p5.js. Players can adjust the
 This snake game performs well in privacy, safety, device compatibility, and low resource consumption. The main areas for sustainability improvement are energy management, health reminders, and scalability for potential multiplayer modes. By implementing the proposed optimizations, the game can further enhance its environmental and individual sustainability performance, serving as a valuable reference case for green software development.
 
 ---
+
+## Relevant Green Software Implementation Patterns
+
+### 1. Frame Rate Limiting
+**Application:** The game uses `frameRate(30)` in the `setup()` function to limit the frame rate.  
+**Green Value:** Reduces unnecessary CPU/GPU cycles, lowering energy consumption and device heat generation while maintaining a smooth user experience.  
+**Code Example:**
+```javascript
+function setup() {
+  frameRate(30);
+}
+```
+
+### 2. Object Pool Pattern
+**Application:** AI snakes are reused after death to reduce memory allocation and object creation overhead.  
+**Green Value:** Reduces frequent memory allocations and garbage collection, lowering energy usage associated with memory management.  
+**Code Example:**
+```javascript
+smallSnakes.splice(i, 1);
+smallSnakes.push(new AISnake());
+```
+
+### 3. Singleton-Like Resource Managers
+**Application:** Managers like FoodManager, ObstacleManager, and ItemManager are instantiated globally as single instances.  
+**Green Value:** Minimizes redundant resource allocations and centralizes management to improve memory and resource efficiency.  
+**Code Example:**
+```javascript
+foodManager = new FoodManager();
+```
+
+### 4. Strategy Pattern for Resource-Efficient AI
+**Application:** AI snakes use different pathfinding strategies such as `findRandomNearestFood()` and `moveTowardsFood()` to dynamically adjust their behavior.  
+**Green Value:** Enables AI to select simpler, low-cost decision strategies in certain contexts, improving computational efficiency.  
+**Code Example:**
+```javascript
+findRandomNearestFood(foods) { ... }
+```
+
+---
+
