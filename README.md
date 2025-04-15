@@ -195,6 +195,7 @@ To introduce variety and challenge, the game includes multiple map modes, each w
 # 7. Process <a id="process"></a>  
 ## Division of Work & Collaboration
 **(1) Division of Work**
+
 At the beginning of the project, our team held a detailed discussion on task allocation. Since all members expressed strong interest in programming, we decided that everyone would participate in the development of core functionalities. Other responsibilities were assigned based on each member’s strengths:
 
 - **Cheng**, as an avid gamer, has a good understanding of gameplay mechanics and user experience. He was mainly responsible for the design of game mechanics.
@@ -203,12 +204,15 @@ At the beginning of the project, our team held a detailed discussion on task all
 - **Yiqing** demonstrated strong organizational and coordination skills and therefore took the role of project manager, responsible for overall progress tracking, task delegation, and project coordination.
 
 **(2)Agile Software Development**
+
 We adopted the methodology of Agile Software Development, which proved to be particularly suitable given the team’s relatively limited programming experience and the small scale of the project. Each week, we set clear short-term goals and adjusted our plans flexibly based on the previous progress and feedback. Compared with the traditional Waterfall Development Model, our process focused more on continuous user feedback and iterative improvements rather than rigidly following an initial plan to perfection. Additionally, we embraced the concept of Minimum Viable Product — implementing the core gameplay first, followed by iterative extensions and optimizations. Feedback was mainly gathered from internal playtesting among group members and comments received during in-class demonstrations. We carefully incorporated this feedback into the development cycle to ensure a continuously improving game experience.
 
 **(3)Pair Programming**
+
 To improve code quality and minimize errors, we frequently adopted pair programming. This strategy was particularly effective for a team like ours, where members had limited experience but strong willingness to collaborate. For instance, in the module led by Cheng and Xing, Cheng focused on logic design and core code implementation, while Xing provided ongoing optimization suggestions and later carried out thorough testing and validation. The close collaboration ensured a higher degree of accuracy and efficiency in the final output.
 
 **(4)Frequent and Efficient Meetings**
+
 Throughout the project, we held meetings approximately every three days to review progress, resolve any issues, and assign new tasks. These meetings were kept brief yet efficient. We utilized the Planning Poker method to estimate the workload and complexity of each task. This technique enabled the team to achieve a fair and reasonable distribution of tasks and ensured that all assignments matched each member’s capability.
 
 # Tools
