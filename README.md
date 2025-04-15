@@ -13,8 +13,9 @@
 5. [Implementation](#implementation)
 6. [Evaluation](#evaluation)
 7. [Process](#process)
-8. [Conclusion](#conclusion)
-9. [References](#references)
+8. [Sustainability, ethics and accessibility](#Sustainability, ethics and accessibility)
+9. [Conclusion](#conclusion)
+10. [References](#references)
 
 
 
