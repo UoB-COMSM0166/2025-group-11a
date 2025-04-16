@@ -21,7 +21,7 @@
 
 # 1. Development Team <a id="development-team"></a>  
 <div align="center">
-![小组照片](https://github.com/user-attachments/assets/81ff989e-b7ea-4f1a-bb0e-a273797309ad)
+  ![小组照片](https://github.com/user-attachments/assets/0b1290a1-f95c-4291-90f8-5bdb3bd094e1)
 </div>
 
 <div align="center">
