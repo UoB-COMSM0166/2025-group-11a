@@ -230,7 +230,7 @@ Most of our regular discussions took place online using Tencent Meeting. Screen 
 Looking back on the entire project process, our team demonstrated a high level of collaboration efficiency, with well-organized task allocation and effective progress management, resulting in the successful development of an ideal game. Each member made significant contributions and fully experienced the complete cycle of project development.
 
 
-# 8. Sustainability, ethics and accessibility <a id="conclusion"></a>  
+# 8. Sustainability, ethics and accessibility <a id="sustainability"></a>  
 ## Environmental Impact
 
 Our Snake Rival game demonstrates strong environmental sustainability through several key design choices and technical implementations:
