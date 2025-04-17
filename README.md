@@ -356,7 +356,7 @@ Looking ahead, we have identified several future improvement opportunities. Tech
 In conclusion, the Snake Rival project transformed our understanding of game development and software engineering, highlighting that successful projects require far more than just technical expertise. Effective communication, the ability to explain complex technical concepts, openness to integrating diverse ideas, and persistence in debugging complex systems all proved equally vital. We learned how to balance creative vision with practical constraints, and how teamwork can produce results that exceed the sum of individual contributions. This project served as a valuable practical application of our coursework in Software Engineering Discipline and Practice, reinforcing core principles while challenging us to address real-world development problems. The lessons we gained in collaborative development, systematic problem-solving, and maintaining user-focused design will undoubtedly benefit us as we continue our studies and pursue future professional opportunities.
 
 
-# 9. References <a id="references"></a>  
+# 10. References <a id="references"></a>  
 ### Contribution Statement
 - Provide a table of everyone's contribution, which may be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Let us know as soon as possible if there are any issues with teamwork as soon as they are apparent.
 
