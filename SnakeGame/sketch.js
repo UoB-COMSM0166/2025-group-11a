@@ -26,6 +26,9 @@ let gameState = false; // 记录是否开始游戏
 let swampBg;//背景图片
 let desertBg;
 let teleportBg;
+let mainBGM,defaultBGM,swampBGM,desertBGM,teleportBGM;
+let hoverSound,clickSound,winsound,failSound;
+let eatSound,eatIteamSound,speedUpSound,teleportSound,killSound;
 let totalTime = 120;
 let remainingTime;
 let startTime;
@@ -38,12 +41,29 @@ let selectedSnakeShape = 'circle'; // 默认形状
 let shapes = ['circle', 'square', 'triangle'];
 let autoSnakes = [];
 let bannerManager;
+let failSoundPlayed;
+let winSoundPlayed;
 
 function preload() {
   swampBg = loadImage('assets/pictures/swamp.jpg');
   desertBg = loadImage('assets/pictures/desert.jpg');
   teleportBg = loadImage('assets/pictures/teleport.jpg');
+  mainBGM = loadSound('assets/sounds/main.mp3');
+  defaultBGM = loadSound('assets/sounds/default.mp3');
+  swampBGM = loadSound('assets/sounds/swamp.mp3');
+  desertBGM = loadSound('assets/sounds/desert.mp3');
+  teleportBGM = loadSound('assets/sounds/teleport.mp3');
+  hoverSound = loadSound('assets/sounds/hover.mp3');
+  clickSound = loadSound('assets/sounds/select.mp3');
+  winSound = loadSound('assets/sounds/win.mp3');
+  failSound = loadSound('assets/sounds/fail.mp3');
+  eatSound = loadSound('assets/sounds/eat.mp3');
+  eatIteamSound = loadSound('assets/sounds/eat_item.mp3');
+  speedUpSound = loadSound('assets/sounds/speed_up.mp3');
+  teleportSound = loadSound('assets/sounds/ported.mp3');
+  killSound = loadSound('assets/sounds/kill.mp3');
 }
+
 
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
@@ -51,6 +71,7 @@ function setup() {
   frameRate(30);
   createUI();
   initGame();
+  mainBGM.loop();
 }
 
 function initGame() {
@@ -64,6 +85,8 @@ function initGame() {
   //   gameMap.fogManager.fogs = [];
   //   gameMap.teleportManager.teleports = [];
   // }
+  failSoundPlayed = false;
+  winSoundPlayed = false;
   startTime = millis();
   totalPausedTime = 0;
   playerSnake = new PlayerSnake();
@@ -130,6 +153,7 @@ function createUI() {
   let startButton = createButton('START GAME');
   startButton.parent(startScreen);
   startButton.mousePressed(() => {
+    clickSound.play();
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('mapSelectScreen').style.display = 'flex';
     // showDifficultySelection();
@@ -139,6 +163,7 @@ function createUI() {
   helpButton.parent(startScreen);
   helpButton.class('help_btn')
   helpButton.mousePressed(() => {
+    clickSound.play();
     document.getElementById('HelpPage').style.visibility = 'visible'
   })
 
@@ -152,6 +177,7 @@ function createUI() {
   escButtom1.parent(escBtnPage)
   escButtom2.parent(escBtnPage)
   escButtom1.mousePressed(() => {
+    clickSound.play();
     isPaused = false; // 恢复游戏
     document.getElementById('scoreDisplay').style.visibility = 'visible';
     document.querySelector('.button-container').style.visibility = 'visible';
@@ -159,6 +185,7 @@ function createUI() {
     totalPausedTime += millis() - pauseStartTime;
   });
   escButtom2.mousePressed(() => {
+    clickSound.play();
     clear()
     isPaused = false
     restartGame()
@@ -182,6 +209,7 @@ function createUI() {
   let closeHelpButton = createButton('CLOSE');
   closeHelpButton.parent(HelpPage);
   closeHelpButton.mousePressed(() => {
+    clickSound.play();
     document.getElementById('HelpPage').style.visibility = 'hidden'
   })
   // 创建游戏帮助页面 end
@@ -193,6 +221,7 @@ function createUI() {
   snakeAppearanceScreen.parent('main');
 
   startButton.mousePressed(() => {
+    clickSound.play();
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('snakeAppearanceScreen').style.display = 'flex';
   });
@@ -223,6 +252,7 @@ function createUI() {
   confirmAppearanceBtn.parent(snakeAppearanceScreen);
 
   confirmAppearanceBtn.mousePressed(() => {
+    clickSound.play();
     window.selectedColor = selectedColor;
     window.selectedSnakeShape = selectedSnakeShape;
     document.getElementById('snakeAppearanceScreen').style.display = 'none';
@@ -248,6 +278,7 @@ function createUI() {
   let defaultMapBtn = createButton('DEFAULT');
   defaultMapBtn.parent(firstRow);
   defaultMapBtn.mousePressed(() => {
+    clickSound.play();
     currentMap = 'default';
     showDifficultySelection();
   });
@@ -256,6 +287,7 @@ function createUI() {
   let swampMapBtn = createButton('SWAMP');
   swampMapBtn.parent(firstRow);
   swampMapBtn.mousePressed(() => {
+    clickSound.play();
     currentMap = 'swamp';
     showDifficultySelection();
   });
@@ -269,6 +301,7 @@ function createUI() {
   let desertMapBtn = createButton('DESERT');
   desertMapBtn.parent(secondRow);
   desertMapBtn.mousePressed(() => {
+    clickSound.play();
     currentMap = 'desert';
     showDifficultySelection();
   });
@@ -277,6 +310,7 @@ function createUI() {
   let teleportMapBtn = createButton('TELEPORT');
   teleportMapBtn.parent(secondRow);
   teleportMapBtn.mousePressed(() => {
+    clickSound.play();
     currentMap = 'teleport';
     showDifficultySelection();
   });
@@ -292,6 +326,7 @@ function createUI() {
   backButtonMap.parent(thirdRow);
   backButtonMap.class('back-button');
   backButtonMap.mousePressed(() => {
+    clickSound.play();
     document.getElementById('mapSelectScreen').style.display = 'none';
     document.getElementById('startScreen').style.display = 'flex';
   });
@@ -315,6 +350,7 @@ function createUI() {
   let normalButton = createButton('NORMAL');
   normalButton.parent(diffFirstRow);
   normalButton.mousePressed(() => {
+    clickSound.play();
     difficultyMode = 'normal';
     startGame();
   });
@@ -323,6 +359,7 @@ function createUI() {
   let hardButton = createButton('HARD');
   hardButton.parent(diffFirstRow);
   hardButton.mousePressed(() => {
+    clickSound.play();
     difficultyMode = 'hard';
     startGame();
   });
@@ -338,6 +375,7 @@ function createUI() {
   backButtonDifficulty.parent(diffSecondRow);
   backButtonDifficulty.class('back-button');
   backButtonDifficulty.mousePressed(() => {
+    clickSound.play();
     document.getElementById('difficultyScreen').style.display = 'none';
     document.getElementById('mapSelectScreen').style.display = 'flex';
   });
@@ -411,44 +449,6 @@ function draw() {
       gameWon = true;
     }
 
-    if (gameWon) {
-      document.getElementById('scoreDisplay').style.visibility = 'hidden';
-      document.querySelector('.button-container').style.visibility = 'hidden';
-      document.getElementById('timerDisplay').style.visibility = 'hidden';
-      document.getElementById('gameWonScreen').style.visibility = 'visible';
-      document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
-      return;
-    }
-
-    if (gameOver) {
-      console.log("Setting gameOverTitle:", gameOverReason);
-      let gameOverText = "GAME OVER";
-      switch (gameOverReason) {
-        case 'timeout':
-          gameOverText = "TIME'S UP!";
-          break;
-        case 'collision_with_snake':
-          gameOverText = "You hit another snake!";
-          break;
-        case 'collision_with_obstacle':
-          gameOverText = "You hit an obstacle!";
-          break;
-        case 'collision_with_boundary':
-          gameOverText = "You hit the boundary!";
-          break;
-      }
-      // document.getElementById('gameOverTitle').innerHTML =
-      //   gameOverReason === 'timeout' ? "TIME'S UP!" : "GAME OVER";
-      document.getElementById('gameOverTitle').innerHTML = gameOverText;
-      document.getElementById('gameOverTitle').style.visibility = 'visible';
-      document.getElementById('scoreDisplay').style.visibility = 'hidden';
-      document.querySelector('.button-container').style.visibility = 'hidden';
-      document.getElementById('timerDisplay').style.visibility = 'hidden';
-      document.getElementById('gameOverScreen').style.visibility = 'visible';
-      document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
-      return;
-    }
-
     // 在平移前绘制固定网格
     push();
     gameMap.drawFixedGrid();
@@ -510,15 +510,49 @@ function draw() {
   }
 
   if (gameWon) {
+    // 停止当前地图BGM
+    switch(currentMap) {
+      case 'default':
+        if (defaultBGM) defaultBGM.stop();
+        break;
+      case 'swamp':
+        if (swampBGM) swampBGM.stop();
+        break;
+      case 'desert':
+        if (desertBGM) desertBGM.stop();
+        break;
+      case 'teleport':
+        if (teleportBGM) teleportBGM.stop();
+        break;
+    }
     document.getElementById('scoreDisplay').style.visibility = 'hidden';
     document.querySelector('.button-container').style.visibility = 'hidden';
     document.getElementById('timerDisplay').style.visibility = 'hidden';
     document.getElementById('gameWonScreen').style.visibility = 'visible';
     document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
+    if (!winSoundPlayed) {
+      winSound.play();
+      winSoundPlayed = true;
+    }
     return;
   }
 
   if (gameOver) {
+    // 停止当前地图BGM
+    switch(currentMap) {
+      case 'default':
+        if (defaultBGM) defaultBGM.stop();
+        break;
+      case 'swamp':
+        if (swampBGM) swampBGM.stop();
+        break;
+      case 'desert':
+        if (desertBGM) desertBGM.stop();
+        break;
+      case 'teleport':
+        if (teleportBGM) teleportBGM.stop();
+        break;
+    }
     console.log("Setting gameOverTitle:", gameOverReason);
     let gameOverText = "GAME OVER";
     switch (gameOverReason) {
@@ -544,6 +578,10 @@ function draw() {
     document.getElementById('timerDisplay').style.visibility = 'hidden';
     document.getElementById('gameOverScreen').style.visibility = 'visible';
     document.getElementById('finalScore').innerHTML = `Final Score: ${score}`;
+    if (!failSoundPlayed) {
+      failSound.play();
+      failSoundPlayed = true;
+    }
     return;
   }
 
@@ -592,6 +630,7 @@ function draw() {
 
     // 检查玩家是否触发传送
     gameMap.teleportManager.checkTeleport(playerSnake);
+    
     // 检查AI蛇是否触发传送
     for (let snake of smallSnakes) {
       gameMap.teleportManager.checkTeleport(snake);
@@ -627,6 +666,7 @@ function draw() {
     }
     // AI蛇头碰到玩家蛇身体后，ai蛇死亡-移除自己并生成随机数量的食物
     if (smallSnakes[i].checkCollisionWithPlayer(playerSnake)) {
+      killSound.play();
       smallSnakes[i].die(); // 让 AI蛇死亡生成食物
       bannerManager.addKillBanner();
       smallSnakes.splice(i, 1); // 删除 AI蛇
@@ -691,6 +731,7 @@ function draw() {
       itemManager.activateEnlarge();
       bannerManager.addItemBanner("enlarge", 6000); // 添加范围扩大横幅，持续6秒
     }
+    eatIteamSound.play();
   }
 
   // 检查并处理食物碰撞，返回吃到的食物数量
@@ -698,6 +739,7 @@ function draw() {
   if (foodEaten > 0) {
     score += foodEaten;
     document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
+    eatSound.play();
   }
 
   foodManager.drawFoods();
@@ -919,8 +961,15 @@ function drawPulsingWarning() {
 }
 
 function restartGame() {
-
-
+  // 停止所有地图BGM
+  if (defaultBGM) defaultBGM.stop();
+  if (swampBGM) swampBGM.stop();
+  if (desertBGM) desertBGM.stop();
+  if (teleportBGM) teleportBGM.stop();
+  
+  // 重新播放主界面音乐
+  if (mainBGM) mainBGM.loop();
+  
   // 隐藏游戏相关界面
   document.getElementById('gameOverScreen').style.visibility = 'hidden';
   document.getElementById('gameOverTitle').style.visibility = 'hidden';
@@ -1032,7 +1081,24 @@ function showDifficultySelection() {
 }
 
 function startGame() {
-  gameState = true
+
+  gameState = true;
+  mainBGM.stop();
+  // 播放对应地图的BGM
+  switch(currentMap) {
+    case 'default':
+      if (defaultBGM) defaultBGM.loop();
+      break;
+    case 'swamp':
+      if (swampBGM) swampBGM.loop();
+      break;
+    case 'desert':
+      if (desertBGM) desertBGM.loop();
+      break;
+    case 'teleport':
+      if (teleportBGM) teleportBGM.loop();
+      break;
+  }
   // 隐藏所有非游戏界面
   document.getElementById('difficultyScreen').style.display = 'none';
   document.getElementById('startScreen').style.display = 'none';
