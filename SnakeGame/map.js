@@ -567,6 +567,7 @@ class TeleportManager {
         // 添加提示信息
         if (snake === playerSnake) {
           itemManager.addTooltip("Teleported!", newPosition, [255, 255, 100]);
+          teleportSound.play();
         }
 
         return true;
