@@ -195,6 +195,7 @@ button:active {
 
 #startScreen button {
   font-size: 22px;
+  width: 300px;
   padding: 15px 40px;
 }
 
@@ -430,7 +431,7 @@ button:active {
 
 .help_btn {
   /*width: 180px;*/
-  margin-top: 20px;
+  margin-top: 60px;
   background-color: #4CAF50;
   border-top: 3px solid #65df69;
   border-left: 3px solid #65df69;
