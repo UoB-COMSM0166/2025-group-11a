@@ -14,6 +14,7 @@ class PlayerSnake extends Snake {
     this.isInitialInvincibility = false;
     this.isEnlarged = false; // 头部食物碰撞变大
     this.enlargeDuration = 0;
+    this.isSpeedUpSoundPlayed = false;
   }
 
   actInvincibility() {
@@ -141,11 +142,16 @@ class PlayerSnake extends Snake {
     if (this.isAccelerating && this.stamina > 0) {
       this.speed = this.boostSpeed * currentSlowdown;
       this.stamina -= this.staminaDrainRate;
+      if (!this.isSpeedUpSoundPlayed&&!speedUpSound.isPlaying()) {
+        // speedUpSound.play();
+        this.isSpeedUpSoundPlayed = true;
+      }
     } else {
       this.speed = this.originalSpeed * currentSlowdown;
       if (this.stamina < this.maxStamina) {
         this.stamina += this.staminaRecoverRate;
       }
+      this.isSpeedUpSoundPlayed = false;
     }
 
     // 确保体力值在合理范围内
