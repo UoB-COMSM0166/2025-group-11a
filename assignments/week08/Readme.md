@@ -3,6 +3,7 @@
 <table>
   <thead>
     <tr>
+      <th><strong>Dimensions</strong></th>
       <th><strong>Mental Demand</strong></th>
       <th><strong>Physical Demand</strong></th>
       <th><strong>Temporal Demand</strong></th>
