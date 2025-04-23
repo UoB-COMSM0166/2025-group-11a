@@ -31,7 +31,7 @@
   | 1      | Yiqing Zhou        | lr24125@bristol.ac.uk   | Scrum Master, Coder |
   | 2      | Xing Yang          | zj24404@bristol.ac.uk   | Optimizer, Coder    |
   | 3      | Cheng Wang         | fd24967@bristol.ac.uk   | Designer, Coder     |
-  | 4      |                    |                         |                     |
+  | 4      | Jiayi Lin          | fg24079@bristol.ac.uk   | UI Designer, Coder  |
 </div>
 <div align="center">
   Table 1: Team Members
