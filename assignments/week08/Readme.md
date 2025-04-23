@@ -3,7 +3,7 @@
 <table>
   <thead>
     <tr>
-      <th><strong>Dimensions</strong></th>
+      <th><strong>User ID/Dimensions</strong></th>
       <th><strong>Mental Demand</strong></th>
       <th><strong>Physical Demand</strong></th>
       <th><strong>Temporal Demand</strong></th>
@@ -14,8 +14,8 @@
   </thead>
   <tbody>
     <tr>
-      <td>starting</td>
-      <td>lack a description of gameplay mechanics, level selection, and the option to choose between single-player and multiplayer modes</td>
+      <td>U1</td>
+      <td>25</td>
       <td>visibility of system status</td>
       <td>3</td>
       <td>3</td>
