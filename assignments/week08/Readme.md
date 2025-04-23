@@ -1,14 +1,14 @@
+# Raw Data
 # NASA
 <table>
   <thead>
     <tr>
-      <th><strong>interface</strong></th>
-      <th><strong>issue</strong></th>
-      <th><strong>heuristic</strong></th>
-      <th><strong>frequency</strong></th>
-      <th><strong>impact</strong></th>
-      <th><strong>persistence</strong></th>
-      <th><strong>severity</strong></th>
+      <th><strong>Mental Demand</strong></th>
+      <th><strong>Physical Demand</strong></th>
+      <th><strong>Temporal Demand</strong></th>
+      <th><strong>Frustration</strong></th>
+      <th><strong>Effort</strong></th>
+      <th><strong>Performance</strong></th>
     </tr>
   </thead>
   <tbody>
