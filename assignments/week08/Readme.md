@@ -1,81 +1,13 @@
-# Raw Data
-# NASA
-<table>
-  <thead>
-    <tr>
-      <th><strong>User ID/Dimensions</strong></th>
-      <th><strong>Mental Demand</strong></th>
-      <th><strong>Physical Demand</strong></th>
-      <th><strong>Temporal Demand</strong></th>
-      <th><strong>Frustration</strong></th>
-      <th><strong>Effort</strong></th>
-      <th><strong>Performance</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>U1</td>
-      <td>25</td>
-      <td>visibility of system status</td>
-      <td>3</td>
-      <td>3</td>
-      <td>4</td>
-      <td>3.33</td>
-    </tr>
-    <tr>
-      <td>gaming</td>
-      <td>ai Snake won't die when it touches the player</td>
-      <td>consistency and standards</td>
-      <td>4</td>
-      <td>2</td>
-      <td>3</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>gaming</td>
-      <td>unable to pause the game</td>
-      <td>user control and freedom</td>
-      <td>3</td>
-      <td>2</td>
-      <td>3</td>
-      <td>2.67</td>
-    </tr>
-    <tr>
-      <td>ending</td>
-      <td>lack of winning conditions</td>
-      <td>consistency and standards</td>
-      <td>2</td>
-      <td>4</td>
-      <td>2</td>
-      <td>2.67</td>
-    </tr>
-    <tr>
-      <td>gaming</td>
-      <td>difficulty in distinguishing snake movement</td>
-      <td>recognition rather than recall</td>
-      <td>2</td>
-      <td>3</td>
-      <td>3</td>
-      <td>2.67</td>
-    </tr>
-    <tr>
-      <td>gaming</td>
-      <td>background and player snake visually synchronized</td>
-      <td>aesthetic and minimalist design</td>
-      <td>3</td>
-      <td>1</td>
-      <td>2</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <td>gaming</td>
-      <td>restarting the game doesn't not clear the score</td>
-      <td>consistency and standards</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-<br>
+| NASA | Mental<br>Demand | | Physical<br>Demand | | Temporal<br>Demand | | Frustration | | Effort | | Performance | |
+|------|:---------------:|:---:|:----------------:|:---:|:----------------:|:---:|:----------:|:---:|:------:|:---:|:----------:|:---:|
+|      | L1              | L2  | L1               | L2  | L1               | L2  | L1         | L2  | L1     | L2  | L1         | L2  |
+| 第1位 | 25              | 70  | 25               | 60  | 25               | 50  | 5          | 50  | 15     | 50  | 75         | 100 |
+| 第2位 | 50              | 30  | 50               | 75  | 25               | 75  | 35         | 70  | 25     | 65  | 25         | 75  |
+| 第3位 | 10              | 25  | 5                | 15  | 5                | 50  | 5          | 5   | 10     | 15  | 5          | 25  |
+| 第4位 | 30              | 60  | 30               | 40  | 25               | 30  | 10         | 20  | 10     | 20  | 25         | 30  |
+| 第5位 | 40              | 55  | 30               | 45  | 15               | 30  | 10         | 25  | 15     | 20  | 30         | 35  |
+| 第6位 | 45              | 65  | 20               | 45  | 20               | 40  | 15         | 30  | 20     | 25  | 20         | 30  |
+| 第7位 | 40              | 50  | 10               | 30  | 15               | 20  | 10         | 20  | 20     | 20  | 20         | 35  |
+| 第8位 | 30              | 40  | 10               | 20  | 20               | 25  | 10         | 15  | 15     | 20  | 5          | 20  |
+| 第9位 | 15              | 20  | 15               | 20  | 15               | 25  | 10         | 10  | 15     | 20  | 10         | 20  |
+| 第10位| 10              | 15  | 10               | 20  | 15               | 20  | 20         | 20  | 15     | 25  | 10         | 20  |
