@@ -144,7 +144,7 @@ function createUI() {
   startScreen.id('startScreen');
   startScreen.parent('main');
 
-  let title = createElement('h1', 'SNAKE GAME');
+  let title = createElement('h1', 'SNAKE RIVAL');
   title.parent(startScreen);
 
   let instructions = createP('Use mouse to control the snake!');
@@ -196,7 +196,7 @@ function createUI() {
   let HelpPage = createDiv('')
   HelpPage.id('HelpPage')
   HelpPage.parent('main');
-  createElement('h1', 'SNAKE GAME').parent(HelpPage);
+  createElement('h1', 'SNAKE RIVAL').parent(HelpPage);
   // createElement('p', 'This report aims to provide a comprehensive overview of the progress made in ' +
   //   'the development of our company\'s new mobile app as of [report date]. The project, which commenced' +
   //   ' on [start date], has been progressing through various stages, with the primary goal of delivering' +
@@ -442,24 +442,28 @@ function draw() {
   if (!gameStarted) {
 
     background('#63161A');
+    
 
     translateCenter();
-
-    if (score >= 100) {
-      gameWon = true;
-    }
 
     // 在平移前绘制固定网格
     push();
     gameMap.drawFixedGrid();
     pop();
+    
+    if (score >= 100) {
+      gameWon = true;
+    }
+
+    // // 在平移前绘制固定网格
+    // push();
+    // gameMap.drawFixedGrid();
+    // pop();
 
     // 更新和绘制AI小蛇
     for (let i = smallSnakes2.length - 1; i >= 0; i--) {
       smallSnakes2[i].draw();
       smallSnakes2[i].update();
-
-
     }
 
     setTimeout(()=>{
