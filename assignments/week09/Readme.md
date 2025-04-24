@@ -1,6 +1,6 @@
 # Black-Box Testing Plan for Snake Battle
 
-## Selection of Functional Units  
+## Functional Units Segmentation  
 First, we need to determine which functional units to test. From the game function, we can identify the following key functional units:
 
 1. **Player Snake Control System** – Handles mouse input and movement  
