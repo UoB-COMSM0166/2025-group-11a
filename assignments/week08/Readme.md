@@ -12,6 +12,21 @@
 | U8      | 15       | 23      | 57.5   |57.5     |
 | U9      | 13       | 19      | 80     | 75     |
 | U10     | 13      | 20      | 67.5     | 65   |
+
+- **Averages**:
+  - NASA TLX L1: 19.8, NASA TLX L2: 34.7.
+  - SUS L1: 75, SUS L2: 71.
+## Statistical Analysis
+- **NASA TLX**:
+  - Wilcoxon test result: W test statistic= 0 (n=10, number of non-tied pairs).
+  - Critical value (n=10, α=0.05): 8.
+  - Conclusion: W < 8, there is a significant difference.
+- **SUS**:
+  - Wilcoxon test result: W test statistic= 0 (n=8, number of non-tied pairs).
+  - Critical value (n=8, α=0.05): 3.
+  - Conclusion: W < 3, there is a significant difference.
+# Discussion & Conclusion
+
 # Appendix
 ## Raw Data
 ### NASA TLX L1&L2
