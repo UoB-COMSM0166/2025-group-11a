@@ -7,14 +7,20 @@ This report assignment aims to evaluate the user experience of the SNAKE RIVAL g
 Notes: NASA TLX is a subjective workload measurement tool covering six dimensions (Hart & Staveland, 1988). SUS is a reliable usability evaluation tool (Brooke, 1986). This study combines these two methods to analyze the impact of SNAKE RIVAL's workload and usability and its difficulty level on player experience.
 ## Methods
 ### Participants
-- Quantify SNAKE RIVAL workload (NASA TLX) and availability (SUS) at L1 and L2.
-- Use statistical tests to determine the significance of differences.
-### Participants
-- Quantify SNAKE RIVAL workload (NASA TLX) and availability (SUS) at L1 and L2.
-- Use statistical tests to determine the significance of differences.
-### Participants
-- Quantify SNAKE RIVAL workload (NASA TLX) and availability (SUS) at L1 and L2.
-- Use statistical tests to determine the significance of differences.
+- **Number of people**: 10 volunteers.
+- **Features**: Ordinary students who don't have much gaming experience
+- **Selection method**: Voluntary participation, random recruitment.
+### Experimental design
+- **Difficulty level setting**: SNAKE RIVAL contains two difficulties, L1 and L2.
+- **Test order**: Half of the users (5 people) play the game at L1 difficulty first, and then at L2 difficulty. The other half of the users (the remaining 5 people) play the game at L2 difficulty first, and then at L1 difficulty. This reduces the impact of the user's learning experience on the experimental results.
+### Data Collection
+- **Data Collection Tools**
+  - **NASA TLX**: 6 dimensions (raw scores).
+  - **SUS**: 10-question survey (raw scores).
+
+Each user played one difficulty level and then filled out the NASA TLX and SUS forms, resulting in four scores per participant.
+- **Data Analysis Tools**
+  - **Wilcoxon signed-rank test**: Use statistical tests to determine the significance of differences. Significance Level: α = 0.05.
 # Data Results
 ## Data Summary
 | User ID | NASA TLX L1 |NASA TLX L2|SUS L1 | SUS L2 |
