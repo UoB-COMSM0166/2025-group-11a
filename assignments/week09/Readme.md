@@ -1,4 +1,4 @@
-# Black-Box Testing Plan for Snake Battle
+# Black-Box Testing Plan for Snake Rival
 
 ## Functional Units Segmentation  
 First, we need to determine which functional units to test. From the game function, we can identify the following key functional units:
