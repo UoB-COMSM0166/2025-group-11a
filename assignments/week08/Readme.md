@@ -13,7 +13,7 @@ Notes: NASA TLX is a subjective workload measurement tool covering six dimension
 ### Experimental design
 - **Difficulty level setting**: SNAKE RIVAL contains two difficulties, L1 and L2.
 - **Test order**: Half of the users (5 people) play the game at L1 difficulty first, and then at L2 difficulty. The other half of the users (the remaining 5 people) play the game at L2 difficulty first, and then at L1 difficulty. This reduces the impact of the user's learning experience on the experimental results.
-### Data Collection
+### Data Collection and Analysis
 - **Data Collection Tools**
   - **NASA TLX**: 6 dimensions (raw scores).
   - **SUS**: 10-question survey (raw scores).
