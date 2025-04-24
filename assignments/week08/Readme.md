@@ -1,3 +1,20 @@
+# Objectives and Methods
+## Objectives
+This report assignment aims to evaluate the user experience of the SNAKE RIVAL game at lower difficulty (L1) and higher difficulty (L2) through quantitative methods (including NASA TLX and SUS), and compare the differences in workload and usability.
+- Quantify SNAKE RIVAL workload (NASA TLX) and availability (SUS) at L1 and L2.
+- Use statistical tests to determine the significance of differences.
+
+Notes: NASA TLX is a subjective workload measurement tool covering six dimensions (Hart & Staveland, 1988). SUS is a reliable usability evaluation tool (Brooke, 1986). This study combines these two methods to analyze the impact of SNAKE RIVAL's workload and usability and its difficulty level on player experience.
+## Methods
+### Participants
+- Quantify SNAKE RIVAL workload (NASA TLX) and availability (SUS) at L1 and L2.
+- Use statistical tests to determine the significance of differences.
+### Participants
+- Quantify SNAKE RIVAL workload (NASA TLX) and availability (SUS) at L1 and L2.
+- Use statistical tests to determine the significance of differences.
+### Participants
+- Quantify SNAKE RIVAL workload (NASA TLX) and availability (SUS) at L1 and L2.
+- Use statistical tests to determine the significance of differences.
 # Data Results
 ## Data Summary
 | User ID | NASA TLX L1 |NASA TLX L2|SUS L1 | SUS L2 |
