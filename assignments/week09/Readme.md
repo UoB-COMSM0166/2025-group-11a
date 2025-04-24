@@ -1,7 +1,7 @@
 # Black-Box Testing Plan for Snake Battle
 
 ## Selection of Functional Units  
-First, we need to determine which functional units to test. From the code, I can identify the following key functional units:
+First, we need to determine which functional units to test. From the game function, we can identify the following key functional units:
 
 1. **Player Snake Control System** – Handles mouse input and movement  
 2. **AI Snake Behavior System** – Manages AI snake movement and decision-making  
@@ -101,4 +101,3 @@ Designing tests for specific input boundaries:
    - Collision occurs 1 frame before invincibility ends  
    - Collision occurs right after invincibility ends  
 
-This test plan, based on the Equivalence Partitioning method, ensures comprehensive testing of the **Snake Battle** game's collision detection system. It covers normal flows, boundary conditions, and special states, helping effectively identify potential issues.
