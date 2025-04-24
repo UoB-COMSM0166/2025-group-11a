@@ -15,7 +15,7 @@
 
 - **Averages**:
   - NASA TLX L1: 19.8, NASA TLX L2: 34.7.
-  - SUS L1: 75, SUS L2: 71.
+  - SUS L1: 75, SUS L2: 71. Both is higher than 68.
 ## Statistical Analysis
 - **NASA TLX**:
   - Wilcoxon test result: W test statistic= 0 (n=10, number of non-tied pairs).
@@ -26,7 +26,14 @@
   - Critical value (n=8, α=0.05): 3.
   - Conclusion: W < 3, there is a significant difference.
 # Discussion & Conclusion
-
+## Interpretation of Data Results
+  - **Workload**: L2 NASA TLX (34.7) is higher than L1 (19.8), presumably due to the increased physical control requirements (such as controlling the player snake to avoid obstacles) and attention efforts (such as finding areas with newly generated food on the map), and this difference is significant between the two difficulties.
+  - **Usability**: The L2 SUS (71) is slightly lower than the L1 (75), indicating that the increased difficulty of L2 slightly reduces the usability of users’ perception and operation of the game system, and the difference is significant.
+## Insights and Conclusion
+  - **Is it consistent with expectations?** Compared with the expectation, L2 is expected to have higher workload and lower availability. The observed data results are consistent with the expectation and reach statistical significance, indicating that the difference in difficulty setting is sufficient and reasonable.
+  - **What design was done to meet the test requirements?** By increasing the interval between food generation and shortening the task completion time, the difficulty of L2 is increased to amplify the workload difference. At the same time, in order to ensure the continuity of usability, the mouse control fluency and map settings of L2 are optimized to reduce the decrease in usability caused by the increase in workload.
+  - **Is that enough?** The small sample size (only 10 participants) limits the statistical power and does not adequately account for the full results. The difference in difficulty between L1 and L2 may not be sufficient to fully reflect the change in game challenge of the Snake Rival game.
+  - **What is the final conclusion?** The workload of L2 is higher than that of L1 (34.7 vs 19.8), and its SUS score is lower than that of L1 (71 vs 75), both of which are statistically significant (NASA TLX W = 0, SUS W = 0, p < 0.05). It is recommended to continue to maintain a balance between the difficulty of L1 and L2 and good usability.
 # Appendix
 ## Raw Data
 ### NASA TLX L1&L2
