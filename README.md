@@ -186,78 +186,78 @@ To introduce variety and challenge, the game includes multiple map modes, each w
 # 6. Evaluation <a id="evaluation"></a>  
 
 ## Heuristic Evaluation
-
+The evaluation team conducted a comprehensive review of the Snake game, identifying multiple issues and scoring them by severity based on Nielsen's usability principles:
 <table>
   <thead>
     <tr>
-      <th><strong>interface</strong></th>
-      <th><strong>issue</strong></th>
-      <th><strong>heuristic</strong></th>
-      <th><strong>frequency</strong></th>
-      <th><strong>impact</strong></th>
-      <th><strong>persistence</strong></th>
-      <th><strong>severity</strong></th>
+      <th><strong>Interface</strong></th>
+      <th><strong>Issue</strong></th>
+      <th><strong>Heuristic</strong></th>
+      <th><strong>Frequency</strong></th>
+      <th><strong>Impact</strong></th>
+      <th><strong>Persistence</strong></th>
+      <th><strong>Severity</strong></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>starting</td>
-      <td>lack a description of gameplay mechanics, level selection, and the option to choose between single-player and multiplayer modes</td>
-      <td>visibility of system status</td>
+      <td>Starting</td>
+      <td>Lack a description of gameplay mechanics, level selection, and the option to choose between single-player and multiplayer modes</td>
+      <td>Help and Documentation</td>
       <td>3</td>
       <td>3</td>
       <td>4</td>
       <td>3.33</td>
     </tr>
     <tr>
-      <td>gaming</td>
-      <td>ai Snake won't die when it touches the player</td>
-      <td>consistency and standards</td>
+      <td>Gaming</td>
+      <td>Ai Snake won't die when it touches the player</td>
+      <td>Consistency and standards</td>
       <td>4</td>
       <td>2</td>
       <td>3</td>
       <td>3</td>
     </tr>
     <tr>
-      <td>gaming</td>
-      <td>unable to pause the game</td>
-      <td>user control and freedom</td>
+      <td>Gaming</td>
+      <td>Unable to pause the game and unable return to previous step</td>
+      <td>User control and freedom</td>
       <td>3</td>
       <td>2</td>
       <td>3</td>
       <td>2.67</td>
     </tr>
     <tr>
-      <td>ending</td>
-      <td>lack of winning conditions</td>
-      <td>consistency and standards</td>
+      <td>Ending</td>
+      <td>Lack of winning conditions</td>
+      <td>Consistency and standards</td>
       <td>2</td>
       <td>4</td>
       <td>2</td>
       <td>2.67</td>
     </tr>
     <tr>
-      <td>gaming</td>
-      <td>difficulty in distinguishing snake movement</td>
-      <td>recognition rather than recall</td>
+      <td>Gaming</td>
+      <td>Lack of sufficient game feedback to players</td>
+      <td>Visibility of System Status</td>
       <td>2</td>
       <td>3</td>
       <td>3</td>
       <td>2.67</td>
     </tr>
     <tr>
-      <td>gaming</td>
-      <td>background and player snake visually synchronized</td>
-      <td>aesthetic and minimalist design</td>
+      <td>Gaming</td>
+      <td>Background and player snake visually synchronized</td>
+      <td>Aesthetic and minimalist design</td>
       <td>3</td>
       <td>1</td>
       <td>2</td>
       <td>2</td>
     </tr>
     <tr>
-      <td>gaming</td>
-      <td>restarting the game doesn't not clear the score</td>
-      <td>consistency and standards</td>
+      <td>Gaming</td>
+      <td>Restarting the game doesn't not clear the score</td>
+      <td>Consistency and standards</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
