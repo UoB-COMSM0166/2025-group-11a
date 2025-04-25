@@ -277,7 +277,28 @@ Heuristic evaluation provides us with a systematic, quantifiable list of problem
 | | | Add difficulty modes |
 
 ## SUS
+Based on the images you shared, here's the information specifically about the SUS (System Usability Scale) from the report:
 
+SUS is a reliable usability evaluation tool (Brooke, 1986) used in this study alongside NASA TLX to analyze the impact of SNAKE RIVAL's workload and usability at different difficulty levels.
+
+Data Collection and Analysis information about SUS:
+- SUS consists of a 10-question survey (raw scores)
+- Each user completed the SUS form after playing at each difficulty level
+- The statistical analysis used the Wilcoxon signed-rank test with a significance level of α = 0.05
+
+Results for SUS:
+- SUS L1 (lower difficulty): Average score of 75
+- SUS L2 (higher difficulty): Average score of 71
+- Both scores are higher than 68 (which appears to be a benchmark threshold)
+- Statistical Analysis showed:
+  * Wilcoxon test result: W test statistic = 0 (n=8, number of non-tied pairs)
+  * Critical value (n=8, α=0.05): 3
+  * Conclusion: W < 3, indicating a statistically significant difference between difficulty levels
+
+Interpretation:
+The L2 SUS score (71) is slightly lower than the L1 score (75), indicating that the increased difficulty of L2 slightly reduces the usability of users' perception and operation of the game system. This difference was found to be statistically significant.
+
+The report concludes that maintaining a balance between difficulty levels and good usability is recommended.
 ## Black-Boxing Testing
 
 
