@@ -266,6 +266,15 @@ The evaluation team conducted a comprehensive review of the Snake game, identify
   </tbody>
 </table>
 <br>
+Heuristic evaluation provides us with a systematic, quantifiable list of problems and improvement directions. By categorizing the problems by severity, our team solved the following problems that affect the user experience in order of priority, greatly improving the user experience of the game.
+
+| High Priority (Severity > 3) | Medium Priority (Severity 2-3) | Feature Enhancements |
+|------------------------------|--------------------------------|----------------------|
+| Add game instructions, level selection, and single/multiplayer mode options | Add a game pause button | Add a health system for the snake |
+| Fix the logic issue where AI snakes don't die when colliding with the player | Set clear winning conditions (reaching 100 points = win) | Increase food variety with corresponding effects |
+| | Make snake head more obvious by adding eyes | Add map obstacles |
+| | Change background design for better visual contrast | Implement speed boost mechanism with stamina bar |
+| | | Add difficulty modes |
 
 ## SUS
 
