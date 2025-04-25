@@ -184,13 +184,12 @@ To introduce variety and challenge, the game includes multiple map modes, each w
 
 
 # 6. Evaluation <a id="evaluation"></a>  
-- 15% ~750 words
 
-- One qualitative evaluation (your choice)
+## Heuristic
 
-- One quantitative evaluation (of your choice)
+## SUS
 
-- Description of how code was tested.
+## Black-Boxing Testing
 
 
 # 7. Process <a id="process"></a>  
