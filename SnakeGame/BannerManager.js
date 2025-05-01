@@ -39,10 +39,10 @@ class BannerManager {
 
         // kill banner
         if (type === 'kill') {
-            const currentTime = millis();
+            const gameTime = millis();
 
             // check for consecutive kills within 10 seconds
-            if (currentTime - this.killTimestamp < 10000) {
+            if (gameTime - this.killTimestamp < 10000) {
                 this.killCount++;
                 if (this.killCount === 2) {
                     this.addBanner("DOUBLE KILL!", 'combo', 3500);
@@ -54,7 +54,7 @@ class BannerManager {
             } else {
                 this.killCount = 1;
             }
-            this.killTimestamp = currentTime;
+            this.killTimestamp = gameTime;
         }
     }
 

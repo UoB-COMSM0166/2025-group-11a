@@ -426,8 +426,8 @@ function draw() {
   if (!gameOver && !gameWon) {
     if (startGame) {
       if (!isPaused) {
-        let currentTime = millis();
-        let elapsed = (currentTime - startTime - totalPausedTime) / 1000;
+        let gameTime = millis();
+        let elapsed = (gameTime - startTime - totalPausedTime) / 1000;
         remainingTime = totalTime - elapsed;
 
         // 时间耗尽判断
