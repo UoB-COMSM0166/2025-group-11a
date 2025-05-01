@@ -9,21 +9,20 @@ let gameStarted = false;
 let gridSize = 20;
 let snakeSpeed = 5;
 let smallSnakes = [];
-let smallSnakes2 = [];
 let mapSize = 2;
 let borderSize = 1.8;
 let gridAlpha = 50;
-let visibleGridRange = 2; // 可见网格范围（单位：画布倍数）
+let visibleGridRange = 2; 
 let boundaryColor = [255, 0, 0];
 let boundaryStroke = 2;
-let cornerSize = 20;            // 四角标识长度（像素）
+let cornerSize = 20;          
 let warningDistance = 500;
 let score = 0;
 let difficultyMode = 'normal';
 let currentMap = 'default';
-let isPaused = false; // 记录游戏是否暂停
-let gameState = false; // 记录是否开始游戏
-let swampBg;//背景图片
+let isPaused = false; 
+let gameState = false; 
+let swampBg;
 let desertBg;
 let teleportBg;
 let mainBGM,defaultBGM,swampBGM,desertBGM,teleportBGM;
@@ -36,9 +35,8 @@ let elapsed;
 let pauseStartTime = 0;
 let totalPausedTime = 0;
 let gameOverReason = '';
-let selectedColor = [120, 230, 120]; // 默认绿色
-let selectedSnakeShape = 'circle'; // 默认形状
-let shapes = ['circle', 'square', 'triangle'];
+let selectedColor = [120, 230, 120]; 
+let selectedSnakeShape = 'circle'; 
 let autoSnakes = [];
 let bannerManager;
 let failSoundPlayed;
@@ -75,28 +73,17 @@ function setup() {
 }
 
 function initGame() {
-
-  // // 清理残留对象
-  // if (foodManager) foodManager.foods = [];
-  // if (obstacleManager) obstacleManager.obstacles = [];
-  // if (itemManager) itemManager.items = [];
-  // if (gameMap) {
-  //   gameMap.swampManager.swamps = [];
-  //   gameMap.fogManager.fogs = [];
-  //   gameMap.teleportManager.teleports = [];
-  // }
   failSoundPlayed = false;
   winSoundPlayed = false;
   startTime = millis();
   totalPausedTime = 0;
   playerSnake = new PlayerSnake();
   smallSnakes = [];
-  playerSnake.isInvincible = true; // 游戏刚开始时玩家蛇处于无敌状态
+  playerSnake.isInvincible = true; 
   playerSnake.invincibleDuration = 60;
   playerSnake.isInitialInvincibility = true;
   bannerManager = new BannerManager();
 
-  // 根据难度模式调整参数
   let aiSnakeCount = difficultyMode === 'hard' ? 10 : 5;
   let foodCount = difficultyMode === 'hard' ? 50 : 200;
   let obstacleCount = difficultyMode === 'hard' ? 30 : 10;
@@ -116,30 +103,24 @@ function initGame() {
   for (let i = 0; i < aiSnakeCount; i++) {
     smallSnakes.push(new AISnake());
   }
-  if(smallSnakes2.length<16){
-    for (let i = 0; i < 16; i++) {
-      smallSnakes2.push(new AutoSnake());
-    }
-  }
 
 
   if (gameStarted) {
-    // 根据地图选择初始化
     if(currentMap === 'swamp') {
-      gameMap.generateSwamps(); // 生成沼泽地形
-      gameMap.drawSwamps(); // 绘制沼泽地形
+      gameMap.generateSwamps(); 
+      gameMap.drawSwamps();
     }else if (currentMap === 'desert') {
-      gameMap.generateDeserts(); // 生成迷雾
+      gameMap.generateDeserts(); 
       gameMap.drawDeserts();
     }else if (currentMap === 'teleport') {
-      gameMap.generateTeleports(); // 生成传送点
-      gameMap.drawTeleports(); // 绘制传送点
+      gameMap.generateTeleports(); 
+      gameMap.drawTeleports();
     }
   }
 }
 
 function createUI() {
-  // 创建游戏开始屏幕
+  // startScreen
   let startScreen = createDiv('');
   startScreen.id('startScreen');
   startScreen.parent('main');
@@ -156,8 +137,6 @@ function createUI() {
     clickSound.play();
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('mapSelectScreen').style.display = 'flex';
-    // showDifficultySelection();
-    // document.getElementById('difficultyScreen').style.display = 'block';
   });
   let helpButton = createButton('View Help')
   helpButton.parent(startScreen);
@@ -167,7 +146,7 @@ function createUI() {
     document.getElementById('HelpPage').style.visibility = 'visible'
   })
 
-  // 创建游戏继续页面 start
+  // escBtnPage
   let escBtnPage = createDiv('')
   escBtnPage.id('escBtnPage')
   escBtnPage.parent('main');
@@ -178,7 +157,7 @@ function createUI() {
   escButtom2.parent(escBtnPage)
   escButtom1.mousePressed(() => {
     clickSound.play();
-    isPaused = false; // 恢复游戏
+    isPaused = false; 
     document.getElementById('scoreDisplay').style.visibility = 'visible';
     document.querySelector('.button-container').style.visibility = 'visible';
     document.getElementById('escBtnPage').style.visibility = 'hidden';
@@ -190,17 +169,13 @@ function createUI() {
     isPaused = false
     restartGame()
   })
-  // 创建游戏继续页面 end
 
-  // 创建游戏帮助页面 start
+
+  // helpPage
   let HelpPage = createDiv('')
   HelpPage.id('HelpPage')
   HelpPage.parent('main');
   createElement('h1', 'SNAKE RIVAL').parent(HelpPage);
-  // createElement('p', 'This report aims to provide a comprehensive overview of the progress made in ' +
-  //   'the development of our company\'s new mobile app as of [report date]. The project, which commenced' +
-  //   ' on [start date], has been progressing through various stages, with the primary goal of delivering' +
-  //   ' a high - quality, user - friendly mobile application within the scheduled timeline.').parent(HelpPage);
   createElement('p', '• Eating food can make the snake longer, and eating different props will get rewards').parent(HelpPage);
   createElement('p', '• Don\'t touch the borders and obstacles, and don\'t hit other snakes with your head').parent(HelpPage);
   createElement('p', '• The SWAMP level has a speed reduction zone').parent(HelpPage);
@@ -212,9 +187,9 @@ function createUI() {
     clickSound.play();
     document.getElementById('HelpPage').style.visibility = 'hidden'
   })
-  // 创建游戏帮助页面 end
 
-  // 创建蛇形象选择界面
+
+  // snakeAppearanceScreen
   let snakeAppearanceScreen = createDiv('');
   snakeAppearanceScreen.id('snakeAppearanceScreen');
   snakeAppearanceScreen.style('display', 'none');
@@ -259,22 +234,19 @@ function createUI() {
     document.getElementById('mapSelectScreen').style.display = 'flex';
   });
 
-  // 创建地图选择界面
+  // mapSelectScreen
   let mapSelectScreen = createDiv('');
   mapSelectScreen.id('mapSelectScreen');
   mapSelectScreen.style('display', 'none');
   mapSelectScreen.parent('main');
 
-  // 地图标题
   let mapTitle = createElement('h2', 'MAP');
   mapTitle.parent(mapSelectScreen);
 
-  // 第一行按钮容器
   let firstRow = createDiv('');
   firstRow.class('button-row');
   firstRow.parent(mapSelectScreen);
 
-  // 默认地图按钮
   let defaultMapBtn = createButton('DEFAULT');
   defaultMapBtn.parent(firstRow);
   defaultMapBtn.mousePressed(() => {
@@ -283,7 +255,6 @@ function createUI() {
     showDifficultySelection();
   });
 
-  // 沼泽地图按钮
   let swampMapBtn = createButton('SWAMP');
   swampMapBtn.parent(firstRow);
   swampMapBtn.mousePressed(() => {
@@ -292,12 +263,10 @@ function createUI() {
     showDifficultySelection();
   });
 
-  // 第二行按钮容器
   let secondRow = createDiv('');
   secondRow.class('button-row');
   secondRow.parent(mapSelectScreen);
 
-  // 沙漠地图按钮
   let desertMapBtn = createButton('DESERT');
   desertMapBtn.parent(secondRow);
   desertMapBtn.mousePressed(() => {
@@ -306,7 +275,6 @@ function createUI() {
     showDifficultySelection();
   });
 
-  // 传送地图按钮
   let teleportMapBtn = createButton('TELEPORT');
   teleportMapBtn.parent(secondRow);
   teleportMapBtn.mousePressed(() => {
@@ -315,13 +283,11 @@ function createUI() {
     showDifficultySelection();
   });
 
-  // 第三行按钮容器（返回按钮）
   let thirdRow = createDiv('');
   thirdRow.class('button-row');
   thirdRow.style('margin-top', '20px');
   thirdRow.parent(mapSelectScreen);
 
-  // 添加返回按钮
   let backButtonMap = createButton('BACK');
   backButtonMap.parent(thirdRow);
   backButtonMap.class('back-button');
@@ -331,22 +297,19 @@ function createUI() {
     document.getElementById('startScreen').style.display = 'flex';
   });
 
-  // 难度选择
+  // difficultyScreen
   let difficultyScreen = createDiv('');
   difficultyScreen.id('difficultyScreen');
   difficultyScreen.style('display', 'none');
   difficultyScreen.parent('main');
 
-  // 难度标题
   let difficultyTitle = createElement('h2', 'DIFFICULTY：');
   difficultyTitle.parent(difficultyScreen);
 
-  // 第一行按钮容器
   let diffFirstRow = createDiv('');
   diffFirstRow.class('button-row');
   diffFirstRow.parent(difficultyScreen);
 
-  // 普通难度按钮
   let normalButton = createButton('NORMAL');
   normalButton.parent(diffFirstRow);
   normalButton.mousePressed(() => {
@@ -355,7 +318,6 @@ function createUI() {
     startGame();
   });
 
-  // 困难难度按钮
   let hardButton = createButton('HARD');
   hardButton.parent(diffFirstRow);
   hardButton.mousePressed(() => {
@@ -364,13 +326,11 @@ function createUI() {
     startGame();
   });
 
-  // 第二行按钮容器（返回按钮）
   let diffSecondRow = createDiv('');
   diffSecondRow.class('button-row');
   diffSecondRow.style('margin-top', '20px');
   diffSecondRow.parent(difficultyScreen);
 
-  // 添加返回按钮
   let backButtonDifficulty = createButton('BACK');
   backButtonDifficulty.parent(diffSecondRow);
   backButtonDifficulty.class('back-button');
@@ -380,19 +340,18 @@ function createUI() {
     document.getElementById('mapSelectScreen').style.display = 'flex';
   });
 
-  // 创建倒计时显示
+  // timer
   let timerDiv = createDiv(`Time: 120s`);
   timerDiv.class('timer');
   timerDiv.id('timerDisplay');
   timerDiv.parent('main');
 
 
-  // 创建游戏结束屏幕
+  // gameOverScreen
   let gameOverScreen = createDiv('');
   gameOverScreen.id('gameOverScreen');
   gameOverScreen.parent('main');
 
-  // let gameOverTitle = createElement('h1', 'GAME OVER');
   let gameOverTitle = createElement('h1', '');
   gameOverTitle.id('gameOverTitle');
   gameOverTitle.parent(gameOverScreen);
@@ -405,7 +364,7 @@ function createUI() {
   restartButton.parent(gameOverScreen);
   restartButton.mousePressed(restartGame);
 
-  // 创建游戏胜利屏幕
+  // gameWonScreen
   let gameWonScreen = createDiv('');
   gameWonScreen.id('gameWonScreen');
   gameWonScreen.parent('main');
@@ -421,18 +380,16 @@ function createUI() {
   winRestartButton.parent(gameWonScreen);
   winRestartButton.mousePressed(restartGame);
 
-  // 创建右上角控制按钮
   let buttonContainer = createDiv('');
   buttonContainer.class('button-container');
   buttonContainer.parent('main');
 
-  // 创建分数显示
+  // scoreDisplay
   let scoreDiv = createDiv('score: 0');
   scoreDiv.class('score');
   scoreDiv.id('scoreDisplay');
   scoreDiv.parent('main');
 
-  // 初始隐藏分数和重新开始按钮，直到游戏真正开始
   document.getElementById('scoreDisplay').style.visibility = 'hidden';
   document.querySelector('.button-container').style.visibility = 'hidden';
   document.getElementById('timerDisplay').style.visibility = 'hidden';
@@ -440,30 +397,22 @@ function createUI() {
 
 function draw() {
   if (!gameStarted) {
+    // push();
+    background(30); // 整体背景为灰色
+    // pop();
+    // background('#63161A');
+    // translateCenter();
 
-    background('#63161A');
     
-
-    translateCenter();
-
-    // 在平移前绘制固定网格
-    push();
-    gameMap.drawFixedGrid();
-    pop();
     
     if (score >= 100) {
       gameWon = true;
     }
 
-    // // 在平移前绘制固定网格
-    // push();
-    // gameMap.drawFixedGrid();
-    // pop();
-
     // 更新和绘制AI小蛇
-    for (let i = smallSnakes2.length - 1; i >= 0; i--) {
-      smallSnakes2[i].draw();
-      smallSnakes2[i].update();
+    for (let i = smallSnakes.length - 1; i >= 0; i--) {
+      smallSnakes[i].draw();
+      smallSnakes[i].update();
     }
 
     setTimeout(()=>{
@@ -505,8 +454,8 @@ function draw() {
     return; // 如果暂停，跳过游戏逻辑
   }
 
-  background('#63161A');
-
+  // background('#63161A');
+  background(30); // 整体背景为灰色
   translateCenter();
 
   if (score >= 100) {
@@ -573,8 +522,7 @@ function draw() {
         gameOverText = "You hit the boundary!";
         break;
     }
-    // document.getElementById('gameOverTitle').innerHTML =
-    //   gameOverReason === 'timeout' ? "TIME'S UP!" : "GAME OVER";
+    
     document.getElementById('gameOverTitle').innerHTML = gameOverText;
     document.getElementById('gameOverTitle').style.visibility = 'visible';
     document.getElementById('scoreDisplay').style.visibility = 'hidden';
@@ -590,9 +538,9 @@ function draw() {
   }
 
   // 在平移前绘制固定网格
-  push();
-  gameMap.drawFixedGrid();
-  pop();
+  // push();
+  // gameMap.drawFixedGrid();
+  // pop();
 
   //背景贴图
   if (currentMap === 'swamp' && swampBg) {
@@ -653,7 +601,7 @@ function draw() {
     }
   }
 
-  console.log('xxxxxxxx123')
+  // console.log('xxxxxxxx123')
   // 更新和绘制AI小蛇
   for (let i = smallSnakes.length - 1; i >= 0; i--) {
     smallSnakes[i].draw();
@@ -829,9 +777,9 @@ function translateCenter() {
 }
 
 function drawBoundaryWarning() {
+  
   if (!playerSnake || playerSnake.body.length === 0) return;
-
-  // 可配置参数
+  
   const warningWidth = 150;      // 预警区域宽度
   const maxAlpha = 255;          // 最大透明度
   const gradientLayers = 100;     // 渐变层级
@@ -842,21 +790,24 @@ function drawBoundaryWarning() {
   const topEdge = -height * mapSize / 2;
   const bottomEdge = height * mapSize / 2;
 
+  const worldW = width * 3;
+  const worldH = height * 3;
+
   push();
   noStroke();
+  fill(255, 50, 50, 100);
 
+  // 上方区域
+  rect(leftEdge - worldW, topEdge - worldH, worldW * 2 + (rightEdge - leftEdge), worldH);
 
-  if(currentMap=='default'){
-    // 修改预警颜色为暗红色
-    // const warningColor = color(139, 0, 0); // 暗红色，低饱和度
-    //
-    // // 绘制外部区域为暗红色
-    // fill('#141414');
-    // rect(leftEdge, topEdge, rightEdge - leftEdge, bottomEdge - topEdge);
+  // 下方区域
+  rect(leftEdge - worldW, bottomEdge, worldW * 2 + (rightEdge - leftEdge), worldH);
 
-  }
+  // 左侧区域
+  rect(leftEdge - worldW, topEdge, worldW, bottomEdge - topEdge);
 
-
+  // 右侧区域
+  rect(rightEdge, topEdge, worldW, bottomEdge - topEdge);
 
   // 四边预警（带层级渐变）
   drawGradientWarning(
@@ -1015,23 +966,6 @@ function restartGame() {
   document.getElementById('escBtnPage').style.visibility = 'hidden';
   document.getElementById('timerDisplay').style.visibility = 'hidden';
   gameWon = false;
-
-  // foodManager = new FoodManager();
-  // obstacleManager = new ObstacleManager();
-  // itemManager = new ItemManager();
-  // gameMap = new GameMap(gridSize, mapSize, borderSize); // 强制创建新实例
-
-
-  // 清除画布
-  // clear();
-  // background(20);
-  // redraw(); // 立即刷新
-  // 解除之前的draw循环
-  // noLoop(); // 停止p5.js的draw循环
-  // setTimeout(() => loop(), 100); // 稍后重新启动循环
-
-
-
   initGame();
 }
 
@@ -1088,7 +1022,7 @@ function startGame() {
 
   gameState = true;
   mainBGM.stop();
-  // 播放对应地图的BGM
+  // BGM
   switch(currentMap) {
     case 'default':
       //if (defaultBGM) defaultBGM.loop();
@@ -1103,58 +1037,53 @@ function startGame() {
       //if (teleportBGM) teleportBGM.loop();
       break;
   }
-  // 隐藏所有非游戏界面
+
   document.getElementById('difficultyScreen').style.display = 'none';
   document.getElementById('startScreen').style.display = 'none';
   document.getElementById('mapSelectScreen').style.display = 'none';
-
-  // 显示分数和重新开始按钮
   document.getElementById('scoreDisplay').style.visibility = 'visible';
   document.querySelector('.button-container').style.visibility = 'visible';
   document.getElementById('timerDisplay').style.visibility = 'visible';
 
-  // 重置游戏状态
+  // reset game variables
   gameStarted = true;
   gameOver = false;
   gameWon = false;
-
   startTime = millis();
-
   initGame();
 }
 
-// 键盘事件
 function keyPressed() {
-  if (gameState) { // 检查游戏状态
+  if (gameState) { 
     if (key === 'p') {
-      isPaused = !isPaused; // 切换暂停状态
+      isPaused = !isPaused; 
       if (isPaused) {
-        pauseStartTime = millis(); // 记录暂停开始时间
+        pauseStartTime = millis(); 
         document.getElementById('escBtnPage').style.visibility = 'visible';
         document.getElementById('scoreDisplay').style.visibility = 'visible';
         document.querySelector('.button-container').style.visibility = 'visible';
       } else {
-        totalPausedTime += millis() - pauseStartTime; // 计算暂停总时间
+        totalPausedTime += millis() - pauseStartTime; 
         document.getElementById('escBtnPage').style.visibility = 'hidden';
         document.getElementById('scoreDisplay').style.visibility = 'hidden';
         document.querySelector('.button-container').style.visibility = 'hidden';
       }
     }
-    else if (keyCode == 27 || keyCode == 32) { // 按下 'Esc' 或 '空格' 键
-      isPaused = !isPaused; // 切换暂停状态
+    else if (keyCode == 27 || keyCode == 32) { 
+      isPaused = !isPaused; 
       if (isPaused) {
-        pauseStartTime = millis(); // 记录暂停开始时间
+        pauseStartTime = millis(); 
         document.getElementById('escBtnPage').style.visibility = 'visible';
         document.getElementById('scoreDisplay').style.visibility = 'visible';
         document.querySelector('.button-container').style.visibility = 'visible';
       } else {
-        totalPausedTime += millis() - pauseStartTime; // 计算暂停总时间
+        totalPausedTime += millis() - pauseStartTime; 
         document.getElementById('escBtnPage').style.visibility = 'hidden';
         document.getElementById('scoreDisplay').style.visibility = 'hidden';
         document.querySelector('.button-container').style.visibility = 'hidden';
       }
     }
-    elapsed = (millis() - startTime - totalPausedTime) / 1000; // 计算游戏已运行的时间（排除暂停时间）
+    elapsed = (millis() - startTime - totalPausedTime) / 1000; 
   }
 }
 function updatePreview() {
@@ -1162,7 +1091,7 @@ function updatePreview() {
   previewCanvas.pixelDensity(2);
   previewCanvas.clear();
   previewCanvas.push();
-  previewCanvas.translate(25, 25); // 中心
+  previewCanvas.translate(25, 25); 
   previewCanvas.noStroke();
   previewCanvas.fill(...selectedColor);
   previewCanvas.ellipse(0, 0, 20);

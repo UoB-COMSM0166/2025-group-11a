@@ -8,22 +8,22 @@ class PlayerSnake extends Snake {
     this.staminaRecoverRate = 0.5; 
     this.originalSpeed = snakeSpeed; 
     this.boostSpeed = snakeSpeed * 2;
-    this.boostCooldown = 0;//加速冷却时间
-    this.isInvincible = false; // 无敌状态
+    this.boostCooldown = 0;
+    this.isInvincible = false; 
     this.invincibleDuration = 0;
     this.isInitialInvincibility = false;
-    this.isEnlarged = false; // 头部食物碰撞变大
+    this.isEnlarged = false;
     this.enlargeDuration = 0;
     this.isSpeedUpSoundPlayed = false;
   }
 
   actInvincibility() {
     this.isInvincible = true;
-    this.invincibleDuration = 180; // 无敌时间持续180帧
+    this.invincibleDuration = 180;
   }
 
   actStamina() {
-    this.stamina = min(this.stamina + 50, this.maxStamina);//每次只增加 50 点体力，但不会超过 maxStamina。
+    this.stamina = min(this.stamina + 50, this.maxStamina);
   }
 
   actEnlarge() {
@@ -46,11 +46,10 @@ class PlayerSnake extends Snake {
     let head = this.body[0];
     let foodEaten = 0;
     for (let i = foods.length - 1; i >= 0; i--) {
-      //食物碰撞分是否enlarged两种情况
+      // food collisions can be enlarged or not
       if (this.isEnlarged == false && p5.Vector.dist(head, foods[i]) < gridSize * 0.8
-    || this.isEnlarged == true && p5.Vector.dist(head, foods[i]) < gridSize * 2.2) {
+          || this.isEnlarged == true && p5.Vector.dist(head, foods[i]) < gridSize * 2.2) {
         this.grow();
-        // foods.splice(i, 1);
         foodManager.removeFood(i);
         foodEaten++;
       }
@@ -64,11 +63,10 @@ class PlayerSnake extends Snake {
     let head = this.body[0];
 
     for (let i = items.length - 1; i >= 0; i--) {
-      //d道具碰撞分是否enlarged两种情况
+      // item collisions can be enlarged or not
       if (this.isEnlarged == false && p5.Vector.dist(head, items[i].position) < gridSize * 1.1
     ||this.isEnlarged == true && p5.Vector.dist(head, items[i].position) < gridSize * 2.2) {
         let itemType = items[i].type;
-        
         items.splice(i, 1);
         return { collided: true, type: itemType };
       }
@@ -79,14 +77,14 @@ class PlayerSnake extends Snake {
   checkObstacleCollision(obstacles) {
     let head = this.body[0];
     let headSize = gridSize;
-    let extraPadding = gridSize * 0.6; // 额外检测范围，用于调试碰撞
+    let extraPadding = gridSize * 0.6;
     let collisionDetected = false;
 
     for (let i = obstacles.length - 1; i >= 0; i--) {
       let o = obstacles[i];
       if (o.isHorizontal) {
         if (
-            head.x < o.x + o.length + extraPadding && // 提前触发
+            head.x < o.x + o.length + extraPadding && 
             head.x + headSize > o.x &&
             head.y < o.y + gridSize &&
             head.y + headSize > o.y
@@ -98,7 +96,7 @@ class PlayerSnake extends Snake {
         if (
             head.x < o.x + gridSize &&
             head.x + headSize > o.x &&
-            head.y < o.y + o.length + extraPadding && // 提前触发
+            head.y < o.y + o.length + extraPadding && 
             head.y + headSize > o.y
         ) {
           collisionDetected = true;
@@ -107,43 +105,41 @@ class PlayerSnake extends Snake {
       }
     }
     if (collisionDetected) {
-      if (!this.isRecovering) { // 防止重复触发
+      if (!this.isRecovering) { 
         this.isRecovering = true;
-        this.speed = 0; // 停止移动
+        this.speed = 0; 
       }
       return true;
     }
     return false;
   }
 
-  //玩家蛇头 碰到 ai蛇头与蛇身时， 均会死亡
+  // when player snake head collides with AI snake head or body, player snake dies
   checkCollisionWithAISnake(aiSnake) {
     let head = this.body[0];
-    let aiHead = aiSnake.body[0]; // 获取AI蛇的头部
-    // 先检查玩家蛇头是否撞到AI蛇头
+    let aiHead = aiSnake.body[0]; 
+    // head collision
     if (p5.Vector.dist(head, aiHead) < gridSize) {
-      return true; // 头碰头，玩家死亡
+      return true; 
     }
-    // 检查玩家蛇头是否撞到AI蛇的身体
-    for (let i = 1; i < aiSnake.body.length; i++) { // 从1开始，避免重复检查AI头部
+    // body collision
+    for (let i = 1; i < aiSnake.body.length; i++) { 
       let seg = aiSnake.body[i];
       if (p5.Vector.dist(head, seg) < gridSize) {
-        return true; // 碰到AI身体，玩家死亡
+        return true; 
       }
     }
-    return false; // 没有碰撞
+    return false;
   }
 
   move() {
-    // 检测沼泽减速
     let currentSlowdown = gameMap.swampManager.inSwamp(this.body[0]);
 
-    // 根据是否加速来调整速度
+    // acceleration and stamina management
     if (this.isAccelerating && this.stamina > 0) {
       this.speed = this.boostSpeed * currentSlowdown;
       this.stamina -= this.staminaDrainRate;
       if (!this.isSpeedUpSoundPlayed&&!speedUpSound.isPlaying()) {
-        // speedUpSound.play();
         this.isSpeedUpSoundPlayed = true;
       }
     } else {
@@ -154,20 +150,19 @@ class PlayerSnake extends Snake {
       this.isSpeedUpSoundPlayed = false;
     }
 
-    // 确保体力值在合理范围内
+    // ensure stamina in reasonable range
     this.stamina = constrain(this.stamina, 0, this.maxStamina);
 
     if (this.stamina <= 0) {
       this.isAccelerating = false;
-      this.speed = this.originalSpeed; // 确保速度重置
+      this.speed = this.originalSpeed; 
     }
 
     super.move();
   }
 
   teleportFlash() {
-    // 传送后的闪烁效果
     this.isFlashing = true;
-    this.flashDuration = 15; // 闪烁持续15帧
+    this.flashDuration = 15;
   }
 }

@@ -12,9 +12,9 @@ class FoodManager {
       ));
 
       this.foodColors.push({
-        h: random(360),  // 随机色相
-        s: random(20, 50),  // 高饱和度
-        b: random(80, 100)   // 高亮度
+        h: random(360),
+        s: random(20, 50),
+        b: random(80, 100)
       });
     }
   }
@@ -23,9 +23,7 @@ class FoodManager {
     push();
     noStroke();
     colorMode(HSB, 360, 100, 100);
-    // for (let f of this.foods) {
-    //   ellipse(f.x, f.y, gridSize * 0.4);
-    // }
+
     for (let i = 0; i < this.foods.length; i++) {
       let f = this.foods[i];
       let col = this.foodColors[i];
