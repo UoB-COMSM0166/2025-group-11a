@@ -15,7 +15,7 @@ class SwampManager {
       let swamp = {
         position: center,
         points: this.generateOrganicSwampShape(center),
-        slowdown: 0.6 // 速度降到60%
+        slowdown: 0.6 
       };
 
       this.swamps.push(swamp);
@@ -25,24 +25,22 @@ class SwampManager {
     let points = [];
     const baseRadius = random(100, 180);
     const noiseLayers = [
-      { scale: 0.15, weight: 0.5 }, // 低频形状
-      { scale: 0.4, weight: 0.3 },  // 中频细节
-      { scale: 1.2, weight: 0.2 }   // 高频细节
+      { scale: 0.15, weight: 0.5 }, 
+      { scale: 0.4, weight: 0.3 },  
+      { scale: 1.2, weight: 0.2 }   
     ];
-    const pointCount = 36; // 增加采样点
+    const pointCount = 36; 
 
-    // 生成基础形状
+    // base shape
     for (let a = 0; a < TWO_PI; a += TWO_PI/pointCount) {
       let radius = baseRadius;
 
-      // 多层噪声叠加
       noiseLayers.forEach(layer => {
         const xoff = cos(a) * layer.scale + this.noiseSeed;
         const yoff = sin(a) * layer.scale + this.noiseSeed;
         radius += noise(xoff, yoff) * layer.weight * baseRadius;
       });
 
-      // 添加缓变扰动
       radius *= map(sin(a * 3 + this.noiseSeed), -1, 1, 0.95, 1.05);
 
       points.push(createVector(
@@ -51,12 +49,12 @@ class SwampManager {
       ));
     }
 
-    // 形状后处理
+    // process shape
     return this.processShape(points);
   }
 
   processShape(points) {
-    // 三次平滑处理
+    // smooth corners
     for (let i = 0; i < 3; i++) {
       points = points.map((p, idx) => {
         const prev = points[(idx + points.length - 1) % points.length];
@@ -68,7 +66,6 @@ class SwampManager {
       });
     }
 
-    // 添加微观扰动
     return points.map(p =>
       createVector(
         p.x + random(-3, 3),
@@ -77,49 +74,10 @@ class SwampManager {
     );
   }
 
-/*
-  generateSwampShape(center) {
-    let points = [];
-    let baseRadiusX = random(100, 180);
-    let baseRadiusY = random(100, 180);
-    let baseRadius = random(80, 150);
-    let noiseScale = 0.3; // 控制形状复杂度
-    let noiseOffset = random(100); // 随机噪声偏移量
-
-    for (let a = 0; a < TWO_PI; a += TWO_PI/24) { // 增加采样点
-      // 使用三维噪声参数增加随机性
-      let xoff = cos(a) * noiseScale + noiseOffset;
-      let yoff = sin(a) * noiseScale + noiseOffset;
-      let zoff = frameCount * 0.01; // 可选：加入时间维度
-
-      // 生成噪声值（范围0-1）
-      let noiseVal = noise(xoff, yoff, zoff);
-
-      // 将噪声值映射到更宽的范围（-0.5到0.5）
-      let offset = map(noiseVal, 0, 1, -1, 1);
-
-      // 动态半径计算
-      let dynamicRadius = baseRadius * (1 + offset);
-
-      points.push(createVector(
-        center.x + baseRadiusX * cos(a),
-        center.y + baseRadiusY * sin(a)
-      ));
-    }
-    points = points.map(p => {
-      return createVector(
-        p.x + random(-8, 8),
-        p.y + random(-8, 8)
-      );
-    });
-
-    return points;
-  }
-*/
   drawSwamps() {
     push();
     noStroke();
-    fill(89, 170, 193, 50); // 沼泽颜色
+    fill(89, 170, 193, 50);
     for (let swamp of this.swamps) {
       beginShape();
       for (let p of swamp.points) {
@@ -130,7 +88,6 @@ class SwampManager {
     pop();
   }
 
-  // 检测位置是否在沼泽中
   inSwamp(position) {
     for (let swamp of this.swamps) {
       if (this.pointInPolygon(position, swamp.points)) {
@@ -140,7 +97,6 @@ class SwampManager {
     return 1.0;
   }
 
-  // 多边形点检测算法
   pointInPolygon(point, polygon) {
     let collision = false;
     for (let i = 0; i < polygon.length; i++) {

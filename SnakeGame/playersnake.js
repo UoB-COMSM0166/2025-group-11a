@@ -166,3 +166,4 @@ class PlayerSnake extends Snake {
     this.flashDuration = 15;
   }
 }
+ 

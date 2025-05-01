@@ -99,11 +99,9 @@ function initGame() {
   gameOver = false;
   document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
 
-
   for (let i = 0; i < aiSnakeCount; i++) {
     smallSnakes.push(new AISnake());
   }
-
 
   if (gameStarted) {
     if(currentMap === 'swamp') {
@@ -115,6 +113,11 @@ function initGame() {
     }else if (currentMap === 'teleport') {
       gameMap.generateTeleports(); 
       gameMap.drawTeleports();
+      gameMap.teleportManager.checkTeleport(playerSnake);
+      
+      for (let snake of smallSnakes) {
+        gameMap.teleportManager.checkTeleport(snake);
+      }
     }
   }
 }
@@ -170,7 +173,6 @@ function createUI() {
     restartGame()
   })
 
-
   // helpPage
   let HelpPage = createDiv('')
   HelpPage.id('HelpPage')
@@ -187,7 +189,6 @@ function createUI() {
     clickSound.play();
     document.getElementById('HelpPage').style.visibility = 'hidden'
   })
-
 
   // snakeAppearanceScreen
   let snakeAppearanceScreen = createDiv('');
@@ -346,7 +347,6 @@ function createUI() {
   timerDiv.id('timerDisplay');
   timerDiv.parent('main');
 
-
   // gameOverScreen
   let gameOverScreen = createDiv('');
   gameOverScreen.id('gameOverScreen');
@@ -397,32 +397,17 @@ function createUI() {
 
 function draw() {
   if (!gameStarted) {
-    // push();
-    background(30); // 整体背景为灰色
-    // pop();
-    // background('#63161A');
-    // translateCenter();
+    background(30);
 
-    
-    
     if (score >= 100) {
       gameWon = true;
     }
 
-    // 更新和绘制AI小蛇
-    for (let i = smallSnakes.length - 1; i >= 0; i--) {
-      smallSnakes[i].draw();
-      smallSnakes[i].update();
-    }
-
-    setTimeout(()=>{
-      defaultCanvas0.style.visibility = 'visible'
-
-    },800)
+    setTimeout(()=>{defaultCanvas0.style.visibility = 'visible'},800)
     return;
   }
 
-  // 更新倒计时
+  // timer
   if (!gameOver && !gameWon) {
     if (startGame) {
       if (!isPaused) {
@@ -430,7 +415,6 @@ function draw() {
         let elapsed = (gameTime - startTime - totalPausedTime) / 1000;
         remainingTime = totalTime - elapsed;
 
-        // 时间耗尽判断
         if (remainingTime <= 0) {
           remainingTime = 0;
           if (score >= 100) {
@@ -440,22 +424,20 @@ function draw() {
             gameOverReason = 'timeout';
           }
         }
-        // 更新倒计时显示
         document.getElementById('timerDisplay').innerHTML =
           `Time: ${Math.ceil(remainingTime)}s`;
       }
     }
     if (isPaused) {
-      return; // 如果暂停，跳过游戏逻辑
+      return;
     }
   }
 
   if (isPaused) {
-    return; // 如果暂停，跳过游戏逻辑
+    return;
   }
 
-  // background('#63161A');
-  background(30); // 整体背景为灰色
+  background(30);
   translateCenter();
 
   if (score >= 100) {
@@ -463,21 +445,7 @@ function draw() {
   }
 
   if (gameWon) {
-    // 停止当前地图BGM
-    switch(currentMap) {
-      case 'default':
-        if (defaultBGM) defaultBGM.stop();
-        break;
-      case 'swamp':
-        if (swampBGM) swampBGM.stop();
-        break;
-      case 'desert':
-        if (desertBGM) desertBGM.stop();
-        break;
-      case 'teleport':
-        if (teleportBGM) teleportBGM.stop();
-        break;
-    }
+    stopCurrentMapBGM();
     document.getElementById('scoreDisplay').style.visibility = 'hidden';
     document.querySelector('.button-container').style.visibility = 'hidden';
     document.getElementById('timerDisplay').style.visibility = 'hidden';
@@ -491,21 +459,7 @@ function draw() {
   }
 
   if (gameOver) {
-    // 停止当前地图BGM
-    switch(currentMap) {
-      case 'default':
-        if (defaultBGM) defaultBGM.stop();
-        break;
-      case 'swamp':
-        if (swampBGM) swampBGM.stop();
-        break;
-      case 'desert':
-        if (desertBGM) desertBGM.stop();
-        break;
-      case 'teleport':
-        if (teleportBGM) teleportBGM.stop();
-        break;
-    }
+    stopCurrentMapBGM();
     console.log("Setting gameOverTitle:", gameOverReason);
     let gameOverText = "GAME OVER";
     switch (gameOverReason) {
@@ -537,12 +491,7 @@ function draw() {
     return;
   }
 
-  // 在平移前绘制固定网格
-  // push();
-  // gameMap.drawFixedGrid();
-  // pop();
-
-  //背景贴图
+  // insert images for maps
   if (currentMap === 'swamp' && swampBg) {
     let gameBoundary = {
       x: -width * gameMap.mapSize / 2,
@@ -551,6 +500,7 @@ function draw() {
       h: height * gameMap.mapSize
     };
     image(swampBg, gameBoundary.x, gameBoundary.y, gameBoundary.w, gameBoundary.h);
+    gameMap.drawSwamps();
   }
 
   if (currentMap === 'desert' && desertBg) {
@@ -561,6 +511,7 @@ function draw() {
       h: height * gameMap.mapSize
     };
     image(desertBg, gameBoundary.x, gameBoundary.y, gameBoundary.w, gameBoundary.h);
+    gameMap.drawDeserts();
   }
 
   if (currentMap === 'teleport' && teleportBg) {
@@ -571,38 +522,21 @@ function draw() {
       h: height * gameMap.mapSize
     };
     image(teleportBg, gameBoundary.x, gameBoundary.y, gameBoundary.w, gameBoundary.h);
-  }
-
-  if (currentMap === 'swamp') {
-    gameMap.drawSwamps(); // 新增沼泽绘制
-  }
-  // 绘制传送点
-  if (currentMap === 'teleport') {
     gameMap.drawTeleports();
-
-    // 检查玩家是否触发传送
-    gameMap.teleportManager.checkTeleport(playerSnake);
-    
-    // 检查AI蛇是否触发传送
-    for (let snake of smallSnakes) {
-      gameMap.teleportManager.checkTeleport(snake);
-    }
   }
+
   if (this.isFlashing) {
     this.flashDuration--;
     if (this.flashDuration <= 0) {
       this.isFlashing = false;
     }
 
-    // 闪烁效果只在某些帧绘制
     if (this.flashDuration % 4 >= 2) {
-      // 不绘制蛇（实现闪烁）
       return;
     }
   }
 
-  // console.log('xxxxxxxx123')
-  // 更新和绘制AI小蛇
+  // AI snakes
   for (let i = smallSnakes.length - 1; i >= 0; i--) {
     smallSnakes[i].draw();
     smallSnakes[i].update();
@@ -611,33 +545,25 @@ function draw() {
       smallSnakes[i] = new AISnake();
     }
 
-    // 检查玩家与AI小蛇的碰撞
+    // collision detection
     if (playerSnake.checkCollisionWithAISnake(smallSnakes[i]) && !playerSnake.isInvincible) {
       gameOver = true;
       gameOverReason = 'collision_with_snake';
     }
-    // AI蛇头碰到玩家蛇身体后，ai蛇死亡-移除自己并生成随机数量的食物
+
+    // AI snake collision with player snake
     if (smallSnakes[i].checkCollisionWithPlayer(playerSnake)) {
       killSound.play();
-      smallSnakes[i].die(); // 让 AI蛇死亡生成食物
+      smallSnakes[i].die();
       bannerManager.addKillBanner();
-      smallSnakes.splice(i, 1); // 删除 AI蛇
+      smallSnakes.splice(i, 1);
       smallSnakes.push(new AISnake());
-      continue; // 跳过后续逻辑，防止报错
+      continue; 
     }
     drawStaminaBar();
   }
 
-  // 检查食物数量，如果过少则生成更多
-  // if (difficultyMode === 'normal') {
-  if (foodManager.foods.length < 100) {
-    foodManager.generateFood(10);
-  }
-  // }
-  if (itemManager.items.length < 5) {
-    itemManager.generateItem(5);
-  }
-
+  // collision 
   if (!gameOver) {
     drawBoundaryWarning();
   }
@@ -654,53 +580,20 @@ function draw() {
     gameOver = true;
     gameOverReason = 'collision_with_obstacle';
   }
-  //逐帧减少玩家道具时间
+
+  // food and buff 
+  if (foodManager.foods.length < 100) {
+    foodManager.generateFood(10);
+  }
+  if (itemManager.items.length < 5) {
+    itemManager.generateItem(5);
+  }
+  
   if (playerSnake.isInvincible) {
     playerSnake.invincibleDuration--;
     if (playerSnake.invincibleDuration <= 0) {
-      playerSnake.isInvincible = false; // 无敌时间结束
+      playerSnake.isInvincible = false;
     }
-  }
-  if (playerSnake.isEnlarged) {
-    playerSnake.enlargeDuration--;
-    if (playerSnake.enlargeDuration <= 0) {
-      playerSnake.isEnlarged = false;
-    }
-  }
-
-  // 检查玩家身上是否有道具
-  let result = playerSnake.checkItemCollision(itemManager.items);
-  if (result.collided) {
-    if (result.type === "stamina") {
-      itemManager.activateStamina();
-      bannerManager.addBanner("STAMINA RESTORED!", 'item'); // 添加体力恢复横幅
-    }
-    if (result.type === "invincible") {
-      itemManager.activateInvincible();
-      bannerManager.addItemBanner("invincible", 6000); // 添加无敌效果横幅，持续6秒
-    }
-    if (result.type === "enlarge") {
-      itemManager.activateEnlarge();
-      bannerManager.addItemBanner("enlarge", 6000); // 添加范围扩大横幅，持续6秒
-    }
-    eatIteamSound.play();
-  }
-
-  // 检查并处理食物碰撞，返回吃到的食物数量
-  let foodEaten = playerSnake.checkFoodCollision(foodManager.foods);
-  if (foodEaten > 0) {
-    score += foodEaten;
-    document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
-    eatSound.play();
-  }
-
-  foodManager.drawFoods();
-  obstacleManager.drawObstacles();
-  itemManager.drawItems();
-  // gameMap.drawBoundary();
-
-  // 实现无敌闪烁
-  if (playerSnake.isInvincible) {
     if (playerSnake.invincibleDuration % 10 >= 3) {
       playerSnake.draw();
     }
@@ -708,8 +601,12 @@ function draw() {
     playerSnake.draw();
   }
 
-  // 实现觅食范围变大的特效
   if (playerSnake.isEnlarged) {
+    playerSnake.enlargeDuration--;
+    if (playerSnake.enlargeDuration <= 0) {
+      playerSnake.isEnlarged = false;
+    }
+  
     let head = playerSnake.body[0];
     push();
     let baseRadius = gridSize * 2.2;
@@ -746,25 +643,50 @@ function draw() {
     pop();
   }
 
+  let result = playerSnake.checkItemCollision(itemManager.items);
+  if (result.collided) {
+    if (result.type === "stamina") {
+      itemManager.activateStamina();
+      bannerManager.addBanner("STAMINA RESTORED!", 'item');
+    }
+    if (result.type === "invincible") {
+      itemManager.activateInvincible();
+      bannerManager.addItemBanner("invincible", 6000); 
+    }
+    if (result.type === "enlarge") {
+      itemManager.activateEnlarge();
+      bannerManager.addItemBanner("enlarge", 6000); 
+    }
+    eatIteamSound.play();
+  }
+
+  // eat food
+  let foodEaten = playerSnake.checkFoodCollision(foodManager.foods);
+  if (foodEaten > 0) {
+    score += foodEaten;
+    document.getElementById('scoreDisplay').innerHTML = `Score: ${score}`;
+    eatSound.play();
+  }
+
+  foodManager.drawFoods();
+  obstacleManager.drawObstacles();
+  itemManager.drawItems();
+
   if (!gameOver && !gameWon && gameStarted) {
     itemManager.updateTooltips();
-    bannerManager.checkSnakeLength(playerSnake); // 检查蛇长度变化
-    bannerManager.updateItemProgress(); // 更新道具进度
+    bannerManager.checkSnakeLength(playerSnake);
+    bannerManager.updateItemProgress(); 
     bannerManager.checkItemStatus(playerSnake);
+    bannerManager.update();
   }
 
   if (currentMap === 'desert') {
     gameMap.drawDeserts();
   }
 
-  if (!gameOver && !gameWon && gameStarted) {
-    bannerManager.update(); // 将横幅更新放在这里，确保在最后绘制
-  }
-
   resetMatrix();
   if (!gameOver && !gameWon && gameStarted) {
     itemManager.updateStatusDisplay(playerSnake);
-    //itemManager.drawStatusDisplay();
   }
 }
 
@@ -780,9 +702,9 @@ function drawBoundaryWarning() {
   
   if (!playerSnake || playerSnake.body.length === 0) return;
   
-  const warningWidth = 150;      // 预警区域宽度
-  const maxAlpha = 255;          // 最大透明度
-  const gradientLayers = 100;     // 渐变层级
+  const warningWidth = 150;   
+  const maxAlpha = 255;         
+  const gradientLayers = 100;     
 
   const head = playerSnake.body[0];
   const leftEdge = -width * mapSize / 2;
@@ -797,19 +719,11 @@ function drawBoundaryWarning() {
   noStroke();
   fill(255, 50, 50, 100);
 
-  // 上方区域
   rect(leftEdge - worldW, topEdge - worldH, worldW * 2 + (rightEdge - leftEdge), worldH);
-
-  // 下方区域
   rect(leftEdge - worldW, bottomEdge, worldW * 2 + (rightEdge - leftEdge), worldH);
-
-  // 左侧区域
   rect(leftEdge - worldW, topEdge, worldW, bottomEdge - topEdge);
-
-  // 右侧区域
   rect(rightEdge, topEdge, worldW, bottomEdge - topEdge);
 
-  // 四边预警（带层级渐变）
   drawGradientWarning(
     head.x - leftEdge,
     leftEdge,
@@ -916,16 +830,14 @@ function drawPulsingWarning() {
 }
 
 function restartGame() {
-  // 停止所有地图BGM
   if (defaultBGM) defaultBGM.stop();
   if (swampBGM) swampBGM.stop();
   if (desertBGM) desertBGM.stop();
   if (teleportBGM) teleportBGM.stop();
   
-  // 重新播放主界面音乐
   if (mainBGM) mainBGM.loop();
   
-  // 隐藏游戏相关界面
+  // hide all screens
   document.getElementById('gameOverScreen').style.visibility = 'hidden';
   document.getElementById('gameOverTitle').style.visibility = 'hidden';
   document.getElementById('gameWonScreen').style.visibility = 'hidden';
@@ -933,10 +845,9 @@ function restartGame() {
   document.querySelector('.button-container').style.visibility = 'hidden';
   document.getElementById('startScreen').style.display = 'flex';
   document.getElementById('difficultyScreen').style.display = 'none';
-
   document.getElementById('escBtnPage').style.visibility = 'hidden'
 
-  // 完全重置游戏状态
+  // reset game variables
   gameStarted = false;
   gameOver = false;
   gameWon = false;
@@ -948,7 +859,7 @@ function restartGame() {
   remainingTime = totalTime;
   gameOverReason = '';
 
-  // 清理现有游戏对象
+  // clear game objects
   if (playerSnake) playerSnake = null;
   smallSnakes = [];
   if (foodManager) foodManager.foods = [];
@@ -974,7 +885,6 @@ function windowResized() {
 }
 
 function drawStaminaBar() {
-  // 如果体力已满且鼠标未按住，则不显示体力条
   if (playerSnake.stamina >= playerSnake.maxStamina && !(mouseIsPressed && mouseButton === LEFT)) {
     return;
   }
@@ -983,19 +893,15 @@ function drawStaminaBar() {
   let barHeight = 10;
   let offsetY = -100;
 
-  // 获取蛇头部的位置
   let head = playerSnake.body[0];
   let x = head.x - barWidth / 2;
   let y = head.y + offsetY;
 
-  // 绘制背景条
   noStroke();
   fill(100, 100);
   rect(x, y, barWidth, barHeight);
 
-  // 绘制体力条
   let staminaWidth = map(playerSnake.stamina, 0, playerSnake.maxStamina, 0, barWidth);
-  // 根据体力状态设置颜色
   if (mouseIsPressed && mouseButton === LEFT && playerSnake.stamina > 0) {
     fill(0, 200, 200, 100);
   } else {
@@ -1003,7 +909,6 @@ function drawStaminaBar() {
   }
   rect(x, y, staminaWidth, barHeight);
 
-  // 绘制边框
   noFill();
   stroke(255);
   strokeWeight(2);
@@ -1097,4 +1002,21 @@ function updatePreview() {
   previewCanvas.ellipse(0, 0, 20);
   previewCanvas.pop();
   document.getElementById('snakePreview').src = previewCanvas.canvas.toDataURL();
+}
+
+function stopCurrentMapBGM() {
+  switch(currentMap) {
+    case 'default':
+      if (defaultBGM) defaultBGM.stop();
+      break;
+    case 'swamp':
+      if (swampBGM) swampBGM.stop();
+      break;
+    case 'desert':
+      if (desertBGM) desertBGM.stop();
+      break;
+    case 'teleport':
+      if (teleportBGM) teleportBGM.stop();
+      break;
+  }
 }
