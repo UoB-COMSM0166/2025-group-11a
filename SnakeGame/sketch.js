@@ -697,7 +697,7 @@ function draw() {
   foodManager.drawFoods();
   obstacleManager.drawObstacles();
   itemManager.drawItems();
-  gameMap.drawBoundary();
+  // gameMap.drawBoundary();
 
   // 实现无敌闪烁
   if (playerSnake.isInvincible) {
