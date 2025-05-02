@@ -54,6 +54,9 @@ button {
   position: relative;
   outline: none;
   border-radius: 8px; 
+
+  transition: all 0.15s ease-out;
+  will-change: transform;
 }
 
 button:hover {
