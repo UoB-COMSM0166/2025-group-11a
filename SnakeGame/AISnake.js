@@ -405,7 +405,6 @@ class AISnake extends Snake {
 
     return false;
   }
-
 }
 
  

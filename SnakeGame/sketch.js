@@ -37,7 +37,7 @@ let totalPausedTime = 0;
 let gameOverReason = '';
 let selectedColor = [120, 230, 120]; 
 let selectedSnakeShape = 'circle'; 
-let autoSnakes = [];
+let backgroundAISnakes = [];
 let bannerManager;
 let failSoundPlayed;
 let winSoundPlayed;
@@ -67,6 +67,7 @@ function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('main');
   frameRate(30);
+  initBackgroundAISnakes();
   createUI();
   initGame();
   mainBGM.loop();
@@ -398,7 +399,10 @@ function createUI() {
 function draw() {
   if (!gameStarted) {
     background(30);
-
+    for (let snake of backgroundAISnakes) {
+      snake.update();  // move
+      snake.draw();    // render
+    }
     if (score >= 100) {
       gameWon = true;
     }
@@ -1018,5 +1022,22 @@ function stopCurrentMapBGM() {
     case 'teleport':
       if (teleportBGM) teleportBGM.stop();
       break;
+  }
+}
+
+function initBackgroundAISnakes() {
+  backgroundAISnakes = [];
+  for (let i = 0; i < 18; i++) {
+    let snake = new AISnake();
+    let longerSize = floor(random(10, 16));
+    let centerX = random(-width * mapSize / 2 + gridSize, width * mapSize / 2 - gridSize);
+    let centerY = random(-height * mapSize / 2 + gridSize, height * mapSize / 2 - gridSize);
+    
+    snake.body = [];
+    for (let j = 0; j < longerSize; j++) {
+      snake.body.push(createVector(centerX - j * gridSize, centerY));
+    }
+
+    backgroundAISnakes.push(snake);
   }
 }
