@@ -21,7 +21,7 @@
 
 # 1. Development Team <a id="development-team"></a>  
 <div align="center">
-   <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/team_photo.jpg" alt="team_photo" height="200"> 
+   <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/team_photo.jpg" alt="team_photo" height="400"> 
 </div>
 <div align="center">
   <p>Image 1: Team Members</p>
