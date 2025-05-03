@@ -178,12 +178,12 @@ function createUI() {
   let HelpPage = createDiv('')
   HelpPage.id('HelpPage')
   HelpPage.parent('main');
+  HelpPage.style('overflow-y', 'auto');
   createElement('h1', 'SNAKE RIVAL').parent(HelpPage);
-  createElement('p', '• Eating food can make the snake longer, and eating different props will get rewards').parent(HelpPage);
-  createElement('p', '• Don\'t touch the borders and obstacles, and don\'t hit other snakes with your head').parent(HelpPage);
-  createElement('p', '• The SWAMP level has a speed reduction zone').parent(HelpPage);
-  createElement('p', '• The Desert level has a blind spot').parent(HelpPage);
-  createElement('p', '• The TELEPORT level has a portal').parent(HelpPage);
+  createElement('p', '• You need to achieve the required score within a limited time in order to win the game').parent(HelpPage);
+  createElement('p', '• Eating different props will get rewards<br>   —Battery replenishes energy<br>   —Shield can make you invisible<br>   —Green circle helps you expand your food collection range').parent(HelpPage);
+  createElement('p', '• Don\'t touch the borders and obstacles, and don\'t hit other snakes with your head<br>  You can hit their heads with your body and there will be a surprise').parent(HelpPage);
+  createElement('p', '• There are different terrains in different maps<br>   —The SWAMP level has speed reduction zones<br>   —The DESERT level has blind spots<br>   —The TELEPORT level has portals').parent(HelpPage);
   let closeHelpButton = createButton('CLOSE');
   closeHelpButton.parent(HelpPage);
   closeHelpButton.mousePressed(() => {
