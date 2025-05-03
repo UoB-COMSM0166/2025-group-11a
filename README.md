@@ -1,7 +1,7 @@
 # 2025-group-11a
 2025 COMSM0166 group 11a  
 🎮 [Click this link to play our game!](https://uob-comsm0166.github.io/2025-group-11a/SnakeGame/)   
-💻 Here are the links to our weekly homeworks.  | [week 1](https://uob-comsm0166.github.io/2025-group-11a/assignments/week01) | [week 2](https://uob-comsm0166.github.io/2025-group-11a/assignments/week02) | [week 3](https://uob-comsm0166.github.io/2025-group-11a/assignments/week03) | [week 4](https://uob-comsm0166.github.io/2025-group-11a/assignments/week04) | [week 5](https://uob-comsm0166.github.io/2025-group-11a/assignments/week05) | [week 7](https://uob-comsm0166.github.io/2025-group-11a/assignments/week07) |  <br>
+💻 Here are the links to our weekly homeworks.  | [week 1](https://uob-comsm0166.github.io/2025-group-11a/assignments/week01) | [week 2](https://uob-comsm0166.github.io/2025-group-11a/assignments/week02) | [week 3](https://uob-comsm0166.github.io/2025-group-11a/assignments/week03) | [week 4](https://uob-comsm0166.github.io/2025-group-11a/assignments/week04) | [week 5](https://uob-comsm0166.github.io/2025-group-11a/assignments/week05) | [week 7](https://uob-comsm0166.github.io/2025-group-11a/assignments/week07) | [week 8](https://uob-comsm0166.github.io/2025-group-11a/assignments/week08) | [week 9](https://uob-comsm0166.github.io/2025-group-11a/assignments/week09) | [week 10](https://uob-comsm0166.github.io/2025-group-11a/assignments/week10)<br>
 📋 [This is the link to our Kanban board.](https://yiqing.atlassian.net/jira/software/projects/DP/boards/1?atlOrigin=eyJpIjoiZjNjMTJhMWUyMDY1NDg3ODk3Nzk3MzcwZTc5MjNlYWYiLCJwIjoiaiJ9)
 
 # Table of Contents
@@ -22,6 +22,9 @@
 # 1. Development Team <a id="development-team"></a>  
 <div align="center">
    <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/小组照片 1.jpg" alt="团队照片" style="width:50%;> 
+</div>
+<div align="center">
+  <p>Image 1: Team Members</p>
 </div>
 
 <div align="center">
@@ -98,7 +101,7 @@ In addition to player-centered stories, we also created developer and UI designe
 
 > "As a developer, I want to implement modular managers (e.g., FoodManager, ObstacleManager, ItemManager) so that we can maintain and expand different gameplay elements independently."
 
-> "As a developer, I want to implement AI snakes that can track, shoot at, and avoid the player, so the game has an engaging and competitive challenge."
+> "As a developer, I want to implement AI snakes that can compete with players for food, so the game has an engaging and competitive challenge."
 
 > "As a designer, I want to create a multi-step start menu (snake customization → map → difficulty), so players are guided smoothly into the game."
 
@@ -479,7 +482,18 @@ In conclusion, the Snake Rival project transformed our understanding of game dev
 
 # 10. References <a id="references"></a>  
 ### Contribution Statement
-- Provide a table of everyone's contribution, which may be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Let us know as soon as possible if there are any issues with teamwork as soon as they are apparent.
+<div align="center">
+  
+  | MEMBER | NAME               | EMAIL                   | CONTRIBUTION               |
+  |--------|--------------------|-------------------------|--------------------|
+  | 1      | Yiqing Zhou        | lr24125@bristol.ac.uk   | **coding**: overall game architecture, basic gaming functionality, scoring methods, winning and dying decisions, ai snakes moving logic, interface logic, difficulty settings and timers, swamp terrain, bug fixes, code refactor<br>**report**: introduction and requirements<br>**scrum master**: follow up on progress, organize meetings and assign tasks to team members|
+  | 2      | Xing Yang          | zj24404@bristol.ac.uk   | Optimizer, Coder    |
+  | 3      | Cheng Wang         | fd24967@bristol.ac.uk   | Designer, Coder     |
+  | 4      | Jiayi Lin          | fg24079@bristol.ac.uk   | UI Designer, Coder  |
+</div>
+<div align="center">
+Table ???: Contribution
+</div>
 
 ### Additional Marks
 You can delete this section in your own repo, it's just here for information. in addition to the marks above, we will be marking you on the following two points:
