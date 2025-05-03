@@ -442,7 +442,8 @@ button:active {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  /*background-color: rgba(0, 0, 0, 0.9);*/
+  background-color: black; 
   z-index: 30;
   padding: 6vw;
   visibility: hidden;
@@ -451,24 +452,42 @@ button:active {
 
 #HelpPage h1 {
   color: #4CAF50;
-  font-size: 36px;
-  margin-bottom: 20px;
+  font-size: 50px;
+  margin-bottom: 50px;
   text-shadow: 3px 3px 0 #2E7D32;
   letter-spacing: 2px;
+  text-align: center;
 }
 
-#HelpPage p {
+#HelpPage h2 {
   color: white;
-  width: 90vw;
-  max-width: 800px;
+  width: 100vw;
+  max-width: 1300px;
   white-space: normal;
   display: block;
   margin-top: 20px;
+  line-height: 1.5;
+  font-size: 25px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2px;
+  /*border-left: 3px solid #4CAF50;*/
+  border-radius: 6px;
+  font-family: "SimSun";
+}
+
+#HelpPage p {
+  color: rgb(231, 222, 182);
+  width: 100vw;
+  max-width: 1300px;
+  white-space: normal;
+  display: block;
+  margin-top: 0px;
+  margin-bottom: 30px;
   line-height: 1.6;
-  font-size: 16px;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 20px;
-  border-left: 3px solid #4CAF50;
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0px;
+  /*border-left: 3px solid #4CAF50;*/
   border-radius: 6px;
 }
 

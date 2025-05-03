@@ -179,11 +179,32 @@ function createUI() {
   HelpPage.id('HelpPage')
   HelpPage.parent('main');
   HelpPage.style('overflow-y', 'auto');
-  createElement('h1', 'SNAKE RIVAL').parent(HelpPage);
-  createElement('p', '• You need to achieve the required score within a limited time in order to win the game').parent(HelpPage);
-  createElement('p', '• Eating different props will get rewards<br>   —Battery replenishes energy<br>   —Shield can make you invisible<br>   —Green circle helps you expand your food collection range').parent(HelpPage);
-  createElement('p', '• Don\'t touch the borders and obstacles, and don\'t hit other snakes with your head<br>  You can hit their heads with your body and there will be a surprise').parent(HelpPage);
-  createElement('p', '• There are different terrains in different maps<br>   —The SWAMP level has speed reduction zones<br>   —The DESERT level has blind spots<br>   —The TELEPORT level has portals').parent(HelpPage);
+  createElement('h1', 'HELP').parent(HelpPage);
+
+  createElement('h2', '1. Use the mouse cursor to guide the direction of the snake. Hold down the left mouse button to speed up, but stamina will be depleted and needs time to recover.').parent(HelpPage);
+  
+  createElement('h2', '2. You must score 100 points in 120 seconds to win. You will lose the game in any of the following cases:').parent(HelpPage);
+  createElement('p', '   • You fail to score 100 points within 120 seconds<br>   • You touch a ladder<br>   • You hit the game boundary (a red warning appears when you get close)<br>   • Your snake head crashes into another snake').parent(HelpPage);
+  
+  createElement('h2', '3. If you want to leave the game temporarily, just press the “ESC” key or the space key; press it again to continue.').parent(HelpPage);
+  
+  createElement('h2', '4. Eating different props will produce different effects').parent(HelpPage);
+  createElement('p', '   • Batteries can instantly restore half of your stamina.<br>   • Shield can make you invisible so you can pass through obstacles<br>   • Green circle helps you expand your food collection range').parent(HelpPage);
+  
+  createElement('h2', '5. Don\'t hit other snakes with your head but you can hit their heads with your body, and there will be a surprise~').parent(HelpPage);
+  
+  createElement('h2', '6. You can choose the difficulty level. Normal is more suitable for beginners. In Hard mode, there is less food, more hazardous terrain, more obstacles, and more enemy snakes.').parent(HelpPage);
+  createElement('h2', '7. You can choose from four different maps: normal, desert, swamp, and teleport. There are different terrains in different maps').parent(HelpPage);
+  createElement('p', '   • In the swamp map, puddles will slow you down<br>   • In the desert map, sandstorms will obscure your vision<br>   • In the teleportation map, there are portals that transport you to a different location — the destination is random each time').parent(HelpPage);
+  
+  createElement('h2', '8. You can customize the snake\'s color according to your preference, but be mindful of the level you choose — it is best to avoid colors that blend in with the background.').parent(HelpPage);
+  
+  
+  
+  // createElement('p', '• You need to achieve the required score within a limited time in order to win the game').parent(HelpPage);
+  // createElement('p', '• Eating different props will get rewards<br>   —Battery replenishes energy<br>   —Shield can make you invisible<br>   —Green circle helps you expand your food collection range').parent(HelpPage);
+  // createElement('p', '• Don\'t touch the borders and obstacles, and don\'t hit other snakes with your head<br>    You can hit their heads with your body and there will be a surprise').parent(HelpPage);
+  // createElement('p', '• There are different terrains in different maps<br>   —The SWAMP level has speed reduction zones<br>   —The DESERT level has blind spots<br>   —The TELEPORT level has portals').parent(HelpPage);
   let closeHelpButton = createButton('CLOSE');
   closeHelpButton.parent(HelpPage);
   closeHelpButton.mousePressed(() => {
