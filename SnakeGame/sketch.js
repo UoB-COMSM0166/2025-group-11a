@@ -955,16 +955,16 @@ function startGame() {
   // BGM
   switch(currentMap) {
     case 'default':
-      //if (defaultBGM) defaultBGM.loop();
+      if (defaultBGM) defaultBGM.loop();
       break;
     case 'swamp':
-      //if (swampBGM) swampBGM.loop();
+      if (swampBGM) swampBGM.loop();
       break;
     case 'desert':
-      //if (desertBGM) desertBGM.loop();
+      if (desertBGM) desertBGM.loop();
       break;
     case 'teleport':
-      //if (teleportBGM) teleportBGM.loop();
+      if (teleportBGM) teleportBGM.loop();
       break;
   }
 
