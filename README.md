@@ -403,112 +403,121 @@ Looking back on the entire project process, our team demonstrated a high level o
 # 8. Sustainability, ethics and accessibility <a id="sustainability"></a>  
 ## Environmental Impact
 
-Our Snake Rival game demonstrates strong environmental sustainability through several key design choices and technical implementations:
+Our *Snake Rival* game demonstrates strong environmental sustainability through several key design choices and technical implementations:
 
 ### Energy Efficiency
+
 We have implemented multiple green software patterns to minimize energy consumption:
-- **Frame Rate Limiting**: The game uses `frameRate(30)` to cap rendering at 30 frames per second, significantly reducing unnecessary CPU/GPU cycles while maintaining smooth gameplay. This optimization can reduce energy consumption by up to 40% compared to uncapped frame rates.
-- **Object Pool Pattern**: AI snakes are reused after death rather than being recreated, minimizing memory allocation overhead and garbage collection cycles. This pattern reduces the energy-intensive process of frequent object creation/destruction.
-- **Singleton Resource Managers**: Centralized managers for food, obstacles and power-ups prevent redundant resource allocations, improving memory efficiency.
+
+- **Frame Rate Limiting**: The game uses `frameRate(30)` to cap rendering at 30 frames per second, significantly reducing unnecessary CPU/GPU cycles while maintaining smooth gameplay. This can lower energy usage by up to 40% compared to uncapped frame rates.
+- **Object Pool Pattern**: AI snakes are reused after death instead of being recreated, minimizing memory allocation and garbage collection cycles. This reduces the high energy cost of frequent object creation/destruction.
+- **Singleton Resource Managers**: Centralized managers for food, obstacles, and power-ups prevent redundant resource allocations, improving memory efficiency.
 
 ### Carbon Awareness
-While currently a local game, we've designed architecture that could support future carbon-aware features:
-- Potential for "Green Mode" that could automatically adjust graphical fidelity based on local grid carbon intensity
-- Dynamic performance scaling that could reduce energy use during high-carbon periods
-- Minimal data transmission requirements (currently none) that avoids network energy costs
+
+Although currently a local offline game, we’ve designed the architecture to support future carbon-aware features:
+
+- Potential for a “Green Mode” that adjusts graphical fidelity based on the local grid’s carbon intensity
+- Dynamic performance scaling to reduce energy usage during high-carbon periods
+- Zero data transmission (no online features or login required), avoiding network energy usage
 
 ### Resource Optimization
-The web-based p5.js implementation ensures:
-- No physical materials or logistics required for distribution
-- Extremely small file size (<2MB) reduces storage and transfer energy
-- Adaptive rendering that can scale to different device capabilities
-- Efficient collision detection algorithms minimize computational overhead
+
+Our web-based implementation using **p5.js** ensures:
+
+- No physical materials or distribution logistics are required
+- Adaptive rendering based on device capabilities; tested on Windows, Linux, and Android
+- Efficient collision detection algorithms (for food, power-ups, AI snakes, obstacles, and boundaries) help reduce computational load
 
 ## Individual Impact
 
-Our game prioritizes player wellbeing through several thoughtful design elements:
+Our game prioritizes player health and well-being through multiple user-friendly design elements:
 
 ### Health Considerations
-- **Visual Ergonomics**: Customizable snake colors and map themes help reduce eye strain. The swamp and desert themes use carefully selected color palettes that are easier on the eyes than high-contrast defaults.
-- **Physical Comfort**: Mouse-based controls with stamina mechanics naturally encourage periodic breaks as players wait for stamina to recharge.
-- **Future Improvements**: We plan to add periodic health reminders and an optional forced pause function after extended play sessions.
+
+- **Visual Ergonomics**: Customizable snake colors and map themes reduce eye strain. Swamp and desert themes use low-contrast, soothing color palettes.
+- **Auditory Comfort**: Rich sound effects and background music enhance the immersive experience without being overwhelming.
+- **Future Improvements**: Planned features include periodic health reminders and optional forced pauses to prevent overplay.
 
 ### Privacy Protection
-The game collects absolutely no personal data, implementing Privacy by Design principles:
-- No user accounts or profiles required
-- No tracking of gameplay statistics
-- All processing occurs locally in the browser
-- No third-party analytics or advertising
+
+We fully implement Privacy by Design principles. The game collects no personal data:
+
+- No login, user account, or profile is needed
+- No gameplay data is stored or tracked—each session starts fresh
+- No third-party analytics or advertising tools are used
 
 ### Accessibility Features
+
 Current accessibility implementations include:
-- Simple, intuitive controls suitable for all ages
-- Clear visual feedback for all game events
-- Adjustable difficulty levels to accommodate different skill levels
-Planned improvements based on WCAG guidelines:
-- High-contrast mode for visually impaired players
-- Alternative control schemes for motor-impaired users
-- Screen reader compatibility for menu navigation
+
+- Simple mouse-based controls suitable for all ages
+- Clear visual and audio feedback for all in-game events
+- Two difficulty levels (Normal and Hard) to accommodate different skill levels
+
+Planned WCAG-inspired improvements include:
+
+- A high-contrast mode or maps for visually impaired players
+- Screen reader compatibility for navigating menus
 
 ## Social Impact
 
-While primarily a single-player experience, our game considers several social factors:
+Though primarily a single-player experience, our game design also considers broader social factors:
 
 ### Inclusivity
-- No language barriers - gameplay is purely visual
-- No cultural references that might exclude certain groups
-- No competitive elements that might create negative social pressure
-- No age restrictions or mature content
+
+- No language barriers—gameplay is fully visual, with menus in basic English
+- No cultural references—snake as protagonist is universal and inclusive
+- No competitive elements—eliminates negative social pressure
+- No age-restricted or inappropriate content—safe for all ages
 
 ### Educational Value
-The game provides learning opportunities:
-- For players: develops hand-eye coordination and strategic thinking
-- For developers: demonstrates clean software architecture and sustainable coding practices
-- Contains subtle educational elements about snake behavior and ecosystems in different map environments
 
-### Community Considerations
-While currently offline, the design allows for potential positive social expansion:
-- Architecture could support local multiplayer without requiring internet
-- Score sharing could be implemented without personal data collection
-- Modding support could encourage creative community contributions
+The game provides learning opportunities for both players and developers:
+
+- **For players**: Enhances hand-eye coordination and strategic thinking
+- **For developers**: Clean code structure showcases sustainable software architecture
+- Highlights responsible use of environmental assets (e.g., swamp and desert ecosystems)
 
 ## Ethical Considerations
 
-We've addressed several ethical aspects in our design:
+We've addressed several ethical concerns during the game's design process:
 
 ### Algorithmic Fairness
-- AI snakes use simple, transparent rules rather than opaque machine learning
-- No hidden difficulty scaling that might frustrate players
-- Random number generation uses fair, verifiable algorithms
+
+- AI snakes operate on simple, transparent rules—no opaque machine learning
+- No hidden difficulty adjustments that may cause unfair frustration
 
 ### Responsible Design
-- No addictive mechanics like variable reward schedules
-- Clear win/lose conditions prevent endless play
-- No monetization schemes that might exploit players
+
+- No addictive mechanics or variable reward loops
+- Clear win/lose conditions—each session is limited to a maximum of 120 seconds
+- No monetization or in-app purchases that could exploit players
 
 ### Transparency
-All game mechanics are either:
-- Immediately obvious through gameplay
-- Explained in simple tooltips
-- Available in source code for inspection
+
+- All game mechanics are intuitive and explained through gameplay
+- Basic explanations are provided via the in-game Help screen
+- Open-source code makes implementation logic fully inspectable
 
 ## Conclusion and Future Improvements
 
-Our Snake Rival game demonstrates strong sustainability performance across environmental, individual and social dimensions. The web-based implementation with energy-conscious coding patterns sets a positive example for green game development.
+Our *Snake Rival* game exhibits strong sustainability across environmental, individual, and social dimensions. Even as a simple game, it embraces thoughtful green software practices.
 
-Key strengths include:
+### Key Strengths
+
 - Excellent energy efficiency through frame rate limiting and object reuse
-- Strong privacy protections by design
-- Good baseline accessibility with clear improvement pathways
-- Ethical gameplay mechanics free from manipulative design
+- Privacy built-in from the ground up—no data collection or accounts
+- Good baseline accessibility with plans for further expansion
+- Ethical game mechanics—no manipulation, no monetization
 
-Planned enhancements will further improve sustainability:
-- Implementation of dynamic performance scaling based on device capabilities
-- Addition of comprehensive accessibility options
-- Development of local multiplayer without network requirements
-- Expansion of carbon-aware features when relevant
+### Planned Enhancements
 
-This project serves as a model for how even simple games can thoughtfully address sustainability across multiple dimensions while maintaining engaging gameplay. The techniques demonstrated here - particularly the green software patterns - could be adopted by other developers to reduce the environmental impact of digital entertainment.
+- Dynamic performance scaling across devices (PC, tablet, mobile)
+- Local multiplayer support without requiring internet connectivity
+- Extension of carbon-aware features as needed
+
+> This project shows that even small games can be built with sustainability in mind. The green software patterns applied here are practical, effective, and adaptable—setting a strong example for responsible game development.
 
 
 # 9. Conclusion <a id="conclusion"></a>  
