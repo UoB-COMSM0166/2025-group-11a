@@ -189,7 +189,7 @@ To enhance the player's sense of control and immersion within the game, we desig
 To prevent sudden angular shifts or jitter during gameplay, we further incorporated a linear interpolation algorithm (commonly referred to as "lerp") to ensure a gradual transition of direction. Specifically, in each frame, the angle between the current orientation and the target direction is smoothly adjusted, producing a gentle turning curve. This approach not only improves the responsiveness of the controls but also enhances the physical coherence of the character’s movement.
 
 <p align="center">
-  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/xxxxxxxxxxxxxxxxxxxxx.gif" alt="xxxxxxxxxxxxxx" height="400"/>
+  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/xxxxxxxxxxxxxxxxxxxxx.gif" alt="xxxxxxxxxxxxxx" height="200"/>
 </p>
 <p align="center">Image 7: Prototype</p>
 
@@ -202,6 +202,11 @@ Furthermore, the target tracking mechanism enhances the AI's strategic behavior.
 
 Lastly, the interaction with the player and the death feedback mechanism further enrich gameplay dynamics. The AI actively detects collisions with the player's snake: if the player's head collides with the AI's body, the player is defeated; conversely, if the AI's head hits the player, the AI is destroyed. Upon death, the AI snake spawns a number of food items and power-ups proportional to its body length. This design not only increases the game's dynamism but also provides clear reward feedback to the player. To ensure these drops do not overlap or appear in invalid locations, the system shuffles the AI's body segments and applies coordinate offsets during placement.
 
+<p align="center">
+  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/challange2.gif" alt="AI snake" height="200"/>
+</p>
+<p align="center">Image 8: AI snake</p>
+
 ### Challenge 3: Different maps and terrains
 To enrich the gameplay experience, we introduced several distinct map types: Swamp, Desert, and Teleport. Each map features unique terrain types and items, along with background color variations to enhance visual diversity.
 
@@ -210,6 +215,11 @@ One of the major technical challenges was the terrain generation algorithm. For 
 Another significant programming difficulty lies in the gameplay mechanics influenced by terrain. For example, when a snake enters a swamp or desert area, its movement speed is significantly reduced. Implementing this behavior necessitates real-time detection of whether the snake's head is within a complex polygon. To achieve this, we implemented a point-in-polygon collision detection algorithm, which involves ray casting and geometric computations. Although the logic is complex, it must operate efficiently to maintain game responsiveness.
 
 Additionally, the teleportation system posed a considerable technical challenge. Each teleport portal is randomly paired with a target location. When the snake enters a portal, its entire body must be repositioned to the corresponding target portal while preserving its current movement direction. A cooldown mechanism is also implemented to prevent immediate reactivation. To enhance player feedback and immersion, the teleportation process is accompanied by particle explosion effects, which must be precisely synchronized with the interaction logic to ensure seamless gameplay.
+
+<p align="center">
+  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/challange3.gif" alt="Teleport" height="200"/>
+</p>
+<p align="center">Image 9: Teleport</p>
 
 
 # 6. Evaluation <a id="evaluation"></a>  
@@ -368,7 +378,7 @@ Throughout the project, we held meetings approximately every three days to revie
 Each team member used GitHub for version control throughout the development process. Every contributor developed their assigned modules in a separate branch. Before merging any development branch into the main branch, a Pull Request was created and reviewed by Xing, ensuring code quality and maintaining a stable main branch at all times. We merged into the main branch weekly. Bugs and feedback issues are also logged via GitHub.
 
 <p align="center">
-  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/github.png" alt="github" height="400"/>
+  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/github.png" alt="github" height="300"/>
 </p>
 <p align="center">Image 10: github</p>
 
@@ -379,9 +389,9 @@ We used a Shared Document to record outcomes from lab discussions, as well as id
 Project management was mainly conducted using our [Kanban board](https://yiqing.atlassian.net/jira/software/projects/DP/summary). Yiqing was responsible for updating task statuses on a weekly basis, which included the categories “To Do,” “In Progress,” and “Completed.” Our team started working on the project in Week 6, which was relatively late compared to other groups, giving us a tighter schedule. The Kanban board helped us stay organized and on track under pressure. Weekly deadlines were set for Monday so that we could learn new topics in Tuesday’s lab session and then assign new tasks after class.
 
 <p align="center">
-  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/kanban.png" alt="kanban" height="400"/>
+  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/kanban.png" alt="kanban" height="300"/>
 </p>
-<p align="center">Image 10: kanban</p>
+<p align="center">Image 11: kanban</p>
 
 **(4) Online Meeting and WeChat Group**   
 Most of our regular discussions took place online using Tencent Meeting. Screen sharing was frequently used to collaboratively debug. We also created a WeChat group, which served as the main channel for quick updates, Q&A, and file sharing. It played a key role in maintaining fast and effective communication.
