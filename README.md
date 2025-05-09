@@ -189,7 +189,7 @@ To enhance the player's sense of control and immersion within the game, we desig
 To prevent sudden angular shifts or jitter during gameplay, we further incorporated a linear interpolation algorithm (commonly referred to as "lerp") to ensure a gradual transition of direction. Specifically, in each frame, the angle between the current orientation and the target direction is smoothly adjusted, producing a gentle turning curve. This approach not only improves the responsiveness of the controls but also enhances the physical coherence of the character’s movement.
 
 <p align="center">
-  <img src="https://github.com/UoB-COMSM0166/2025-group-11a/blob/main/docs/Control.gif" alt="Control" height="200"/>
+  <img src="https://github.com/UoB-COMSM0166/2025-group-11a/blob/main/docs/Control.gif" alt="Control" height="300"/>
 </p>
 <p align="center">Image 7: Control</p>
 
@@ -203,9 +203,9 @@ Furthermore, the target tracking mechanism enhances the AI's strategic behavior.
 Lastly, the interaction with the player and the death feedback mechanism further enrich gameplay dynamics. The AI actively detects collisions with the player's snake: if the player's head collides with the AI's body, the player is defeated; conversely, if the AI's head hits the player, the AI is destroyed. Upon death, the AI snake spawns a number of food items and power-ups proportional to its body length. This design not only increases the game's dynamism but also provides clear reward feedback to the player. To ensure these drops do not overlap or appear in invalid locations, the system shuffles the AI's body segments and applies coordinate offsets during placement.
 
 <p align="center">
-  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/challange2.gif" alt="challange2" height="200"/>
+  <img src="https://github.com/UoB-COMSM0166/2025-group-11a/blob/main/docs/AI%20snake.gif" alt="AI snake" height="300"/>
 </p>
-<p align="center">Image 8: challange2</p>
+<p align="center">Image 8: AI snake</p>
 
 ### Challenge 3: Different maps and terrains
 To enrich the gameplay experience, we introduced several distinct map types: Swamp, Desert, and Teleport. Each map features unique terrain types and items, along with background color variations to enhance visual diversity.
@@ -217,7 +217,7 @@ Another significant programming difficulty lies in the gameplay mechanics influe
 Additionally, the teleportation system posed a considerable technical challenge. Each teleport portal is randomly paired with a target location. When the snake enters a portal, its entire body must be repositioned to the corresponding target portal while preserving its current movement direction. A cooldown mechanism is also implemented to prevent immediate reactivation. To enhance player feedback and immersion, the teleportation process is accompanied by particle explosion effects, which must be precisely synchronized with the interaction logic to ensure seamless gameplay.
 
 <p align="center">
-  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/challange3.gif" alt="challange3" height="200"/>
+  <img src="https://github.com/UoB-COMSM0166/2025-group-11a/blob/main/docs/Teleport.gif" alt="Teleport" height="300"/>
 </p>
 <p align="center">Image 9: Teleport</p>
 
