@@ -517,7 +517,7 @@ Our *Snake Rival* game exhibits strong sustainability across environmental, indi
 - Local multiplayer support without requiring internet connectivity
 - Extension of carbon-aware features as needed
 
-This project shows that even small games can be built with sustainability in mind. The green software patterns applied here are practical, effective, and adaptable—setting a example for responsible game development.
+This project shows that even small games can be built with sustainability in mind. The green software patterns applied here are practical, effective, and adaptable—setting an example for responsible game development.
 
 
 # 9. Conclusion <a id="conclusion"></a>  
