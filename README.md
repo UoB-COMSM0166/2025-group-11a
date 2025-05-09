@@ -189,9 +189,9 @@ To enhance the player's sense of control and immersion within the game, we desig
 To prevent sudden angular shifts or jitter during gameplay, we further incorporated a linear interpolation algorithm (commonly referred to as "lerp") to ensure a gradual transition of direction. Specifically, in each frame, the angle between the current orientation and the target direction is smoothly adjusted, producing a gentle turning curve. This approach not only improves the responsiveness of the controls but also enhances the physical coherence of the character’s movement.
 
 <p align="center">
-  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/xxxxxxxxxxxxxxxxxxxxx.gif" alt="xxxxxxxxxxxxxx" height="200"/>
+  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/Control.gif" alt="Control" height="200"/>
 </p>
-<p align="center">Image 7: Prototype</p>
+<p align="center">Image 7: Control</p>
 
 ### Challenge 2: AI enemy snake design
 To enhance the game's challenge, we designed an AI-controlled enemy snake with capabilities including autonomous pathfinding, obstacle avoidance, target tracking, and player interaction.
