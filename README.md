@@ -205,7 +205,7 @@ Lastly, the interaction with the player and the death feedback mechanism further
 <p align="center">
   <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/challange2.gif" alt="challange2" height="200"/>
 </p>
-<p align="center">Image 8: AI snake</p>
+<p align="center">Image 8: challange2</p>
 
 ### Challenge 3: Different maps and terrains
 To enrich the gameplay experience, we introduced several distinct map types: Swamp, Desert, and Teleport. Each map features unique terrain types and items, along with background color variations to enhance visual diversity.
