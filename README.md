@@ -177,16 +177,16 @@ To introduce variety and challenge, the game includes multiple map modes, each w
 
 
 # 4. Design <a id="design"></a>  
-## Class diagram
+### Class diagram
 The class diagram for the Snake Game represents the key components and their relationships. The Snake class serves as the base for PlayerSnake and AISnake, with attributes like body, direction, and movement methods, while PlayerSnake handles user input, stamina, and special states, and AISnake focuses on AI-controlled behavior such as tracking food and avoiding obstacles. The GameMap class manages grid size, borders, and environmental effects, interacting with specialized managers like SwampManager, FogManager, and TeleportManager to generate and process different terrain effects. The ItemManager controls in-game items such as stamina boosts and teleportation, while ObstacleManager generates and manages obstacles like ladders. The FoodManager governs food placement and properties, ensuring AI and player interactions. Enumerations define item types and difficulty modes. This structured design ensures modularity, clear responsibilities, and efficient game management.
 <p align="center">
   <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake_class diagram.png" alt="class_diagram" height="800"/>
 </p>
 
-## Behavioural diagrams
+### Behavioural diagrams
 The Snake Game sequence diagram illustrates the game's core logic, including initialization, main game loop, and game over handling. The game starts with Sketch calling setup(), which initializes the UI, player snake, multiple AI snakes, and managers for food, items, obstacles, and the game map. Based on the map type, specific elements like swamps, fog, or teleportation points are generated. During the main game loop (draw()), if the game is not paused, it renders the grid and special map features, updates AI snakes to move toward food, check collisions with food, the player, or other AI, and handles AI deaths when needed. The game over phase is triggered if the player loses, displaying the Game Over screen, drawing the stamina bar and boundary warnings, and allowing the player to restart via mouse interaction. This sequence diagram provides a structured view of the game's execution flow, covering initialization, frame-by-frame updates, AI behavior, and restart mechanics.
 <p align="center">
-  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake_sequence diagram.png" alt="sequence_diagram" height="800"/>
+  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake_sequence diagram.png" alt="sequence_diagram" height="1600"/>
 </p>
 
 
