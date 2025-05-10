@@ -181,7 +181,7 @@ To introduce variety and challenge, the game includes multiple map modes, each w
 - System architecture. Class diagrams, behavioural diagrams.
 The class diagram for the Snake Game represents the key components and their relationships. The Snake class serves as the base for PlayerSnake and AISnake, with attributes like body, direction, and movement methods, while PlayerSnake handles user input, stamina, and special states, and AISnake focuses on AI-controlled behavior such as tracking food and avoiding obstacles. The GameMap class manages grid size, borders, and environmental effects, interacting with specialized managers like SwampManager, FogManager, and TeleportManager to generate and process different terrain effects. The ItemManager controls in-game items such as stamina boosts and teleportation, while ObstacleManager generates and manages obstacles like ladders. The FoodManager governs food placement and properties, ensuring AI and player interactions. Enumerations define item types and difficulty modes. This structured design ensures modularity, clear responsibilities, and efficient game management.
 <p align="center">
-  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/prototype_compressed.gif" alt="Prototype" height="400"/>
+  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake_class diagram.png" alt="class_diagram" height="400"/>
 </p>
 
 
