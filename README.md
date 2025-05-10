@@ -422,30 +422,30 @@ Our *Snake Rival* game demonstrates strong environmental sustainability through 
 
 Our game prioritizes player health and well-being through multiple user-friendly design elements.
 
-**Health Considerations**:Customizable snake colors and map themes reduce eye strain, with swamp and desert themes offering low-contrast, soothing palettes. Rich sound effects and background music enhance immersion without being overwhelming. Planned improvements include periodic health reminders and optional forced pauses to prevent overplay.
-**Privacy Protection**:We fully implement Privacy by Design principles. The game collects no personal data. No login, user account, or profile is required, no gameplay data is stored or tracked—each session starts fresh—and no third-party analytics or advertising tools are used.
+**Health Considerations**:Customizable snake colors and map themes reduce eye strain, with swamp and desert themes offering low-contrast, soothing palettes. Rich sound effects and background music enhance immersion without being overwhelming. Planned improvements include periodic health reminders and optional forced pauses to prevent overplay.  
+**Privacy Protection**:We fully implement Privacy by Design principles. The game collects no personal data. No login, user account, or profile is required, no gameplay data is stored or tracked—each session starts fresh—and no third-party analytics or advertising tools are used.  
 **Accessibility Features**:Current accessibility implementations include simple mouse-based controls suitable for all ages, clear visual and audio feedback for all in-game events, and two difficulty levels (Normal and Hard) to accommodate different skill levels. Planned improvements inspired by WCAG include a high-contrast mode or maps for visually impaired players and screen reader compatibility for navigating menus.
 
 ### Social Impact
 
 Though primarily a single-player experience, our game design also considers broader social factors.
 
-**Inclusivity**:There are no language barriers as gameplay is fully visual and menus use basic English. There are no cultural references, as the snake protagonist is universal and inclusive. There are no competitive elements, removing negative social pressure, and no age-restricted or inappropriate content, making it safe for all ages.
+**Inclusivity**:There are no language barriers as gameplay is fully visual and menus use basic English. There are no cultural references, as the snake protagonist is universal and inclusive. There are no competitive elements, removing negative social pressure, and no age-restricted or inappropriate content, making it safe for all ages.  
 **Educational Value**:The game enhances hand-eye coordination and strategic thinking for players. For developers, the clean code structure showcases sustainable software architecture. It also highlights responsible use of environmental assets, such as swamp and desert ecosystems.
 
 ### Ethical Considerations
 
 We’ve addressed several ethical concerns during the game’s design process.
 
-**Algorithmic Fairness**:AI snakes operate on simple, transparent rules with no opaque machine learning or hidden difficulty adjustments that could cause frustration.
-**Responsible Design**:The game contains no addictive mechanics or variable reward loops. Win/lose conditions are clearly defined, with each session limited to a maximum of 120 seconds. There is no monetization or in-app purchases that could exploit players.
+**Algorithmic Fairness**:AI snakes operate on simple, transparent rules with no opaque machine learning or hidden difficulty adjustments that could cause frustration.  
+**Responsible Design**:The game contains no addictive mechanics or variable reward loops. Win/lose conditions are clearly defined, with each session limited to a maximum of 120 seconds. There is no monetization or in-app purchases that could exploit players.  
 **Transparency**:All game mechanics are intuitive and explained through gameplay. Basic instructions are available via the in-game Help screen, and the open-source code makes all implementation logic fully inspectable.
 
 ### Conclusion and Future Improvements
 
 Our *Snake Rival* game exhibits strong sustainability across environmental, individual, and social dimensions. Even as a simple game, it embraces thoughtful green software practices.
 
-**Key Strengths**:The game achieves excellent energy efficiency through frame rate limiting and object reuse. Privacy is built-in from the ground up, with no data collection or accounts. Accessibility is already supported at a baseline level, with plans for further expansion. The game is ethically designed, with no manipulation or monetization.
+**Key Strengths**:The game achieves excellent energy efficiency through frame rate limiting and object reuse. Privacy is built-in from the ground up, with no data collection or accounts. Accessibility is already supported at a baseline level, with plans for further expansion. The game is ethically designed, with no manipulation or monetization.  
 **Planned Enhancements**:We plan to add dynamic performance scaling across devices (PC, tablet, mobile), local multiplayer support without requiring internet connectivity, and an extension of carbon-aware features as needed.
 
 This project shows that even small games can be built with sustainability in mind. The green software patterns applied here are practical, effective, and adaptable—setting an example for responsible game development.
