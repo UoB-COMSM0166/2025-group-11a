@@ -362,6 +362,44 @@ The L2 SUS score (71) is slightly lower than the L1 score (75), indicating that 
 
 ## Black-Boxing Testing
 
+### 1. Boundary Collision Test  
+| Test Case | Input | Expected Output |  
+|-----------|-------|------------------|  
+| 1.1 | Player snake in normal state hits the map boundary | Game over, display "You hit the boundary!" |  
+| 1.2 | Player snake in invincible state hits the map boundary | Game continues, player takes no damage |  
+| 1.3 | Player snake approaches but does not touch boundary | Display boundary warning effect, game continues |  
+
+### 2. Obstacle Collision Test  
+| Test Case | Input | Expected Output |  
+|-----------|-------|------------------|  
+| 2.1 | Player snake in normal state hits an obstacle | Game over, display "You hit an obstacle!" |  
+| 2.2 | Player snake in invincible state hits an obstacle | Game continues, player takes no damage |  
+
+### 3. Snake-to-Snake Collision Test  
+| Test Case | Input | Expected Output |  
+|-----------|-------|------------------|  
+| 3.1 | Player snake in normal state hits AI snake body | Game over, display "You hit another snake!" |  
+| 3.2 | Player snake in invincible state hits AI snake body | Game continues, player takes no damage |  
+| 3.3 | AI snake head hits player snake body | AI snake dies, random number of food and items spawn, display "SNAKE DEFEATED!" banner |  
+
+### 4. Food Collision Test  
+| Test Case | Input | Expected Output |  
+|-----------|-------|------------------|  
+| 4.1 | Player snake in normal state touches food | Snake length increases, play eating sound effect, score increases |  
+| 4.2 | Player snake in expanded detection range state approaches food | Snake collects food without direct contact, length increases, play eating sound effect, score increases |  
+
+### 5. Item Collision Test  
+| Test Case | Input | Expected Output |  
+|-----------|-------|------------------|  
+| 5.1 | Player snake touches invincibility item | Invincible state activated, display banner, play item sound effect |  
+| 5.2 | Player snake touches stamina item | Stamina restored, display banner, play item sound effect |  
+| 5.3 | Player snake touches range expansion item | Expanded detection range state activated, display banner, play item sound effect |  
+
+### 6. Special Map Features Test  
+| Test Case | Input | Expected Output |  
+|-----------|-------|------------------|  
+| 6.1 | Player snake enters swamp area | Snake movement speed is reduced |  
+| 6.2 | Player snake enters teleport point | Snake is teleported to the corresponding target point, teleport effect and message shown |  
 
 # 7. Process <a id="process"></a>  
 ### Division of Work & Collaboration
