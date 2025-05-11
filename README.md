@@ -187,8 +187,11 @@ The class diagram for the Snake Game represents the key components and their r
 
 ### Behavioural diagrams
 The Snake Rival Game sequence diagram illustrates the game's core logic, including initialization, main loop, and game over handling. The game starts with the user loading the page, then sketch.js calls the setup() function, which initializes the UI, player snake, multiple AI snakes, and managers for food, items, obstacles, and the game map. After the user clicks the "Start Game" button, they select the map type and difficulty level, then the initGame() function is called to complete game initialization. Based on the map type selected, specific elements like swamps, fog areas, or teleportation points are generated.<br>
+
 During the initialization phase, the system sequentially creates the PlayerSnake object, multiple AISnake objects, GameMap object, generates map elements, generates food, and creates a BannerManager for displaying game notifications. During the main game loop (draw()), if the game is not paused, it performs the following operations: the player snake calls updateDirection() and move() methods to update its position, AI snakes call update() and draw() methods to search for food and move, checks various collisions (including with boundaries, obstacles, and other snakes), and updates the BannerManager to display game messages.<br>
+
 When game end conditions are triggered (such as the player colliding with boundaries/obstacles/other snakes, or time running out), the system displays the game over screen. The player can restart the game through mouse interaction. During gameplay, the player controls the snake's direction with the mouse, accelerates with the left-click button; eating food increases the score and length, collecting items grants special abilities.<br>
+
 This sequence diagram provides a structured view of the game's execution flow, covering initialization, frame-by-frame updates, AI behavior, and restart mechanics.<br>
 <p align="center">
   <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake-sequence-diagram 1.png" alt="sequence_diagram" height="800"/>
