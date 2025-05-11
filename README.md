@@ -187,7 +187,7 @@ The class diagram for the Snake Game represents the key components and their r
 ### Behavioural diagrams
 The Snake Game sequence diagram illustrates the game's core logic, including initialization, main game loop, and game over handling. The game starts with Sketch calling setup(), which initializes the UI, player snake, multiple AI snakes, and managers for food, items, obstacles, and the game map. Based on the map type, specific elements like swamps, fog, or teleportation points are generated. During the main game loop (draw()), if the game is not paused, it renders the grid and special map features, updates AI snakes to move toward food, check collisions with food, the player, or other AI, and handles AI deaths when needed. The game over phase is triggered if the player loses, displaying the Game Over screen, drawing the stamina bar and boundary warnings, and allowing the player to restart via mouse interaction. This sequence diagram provides a structured view of the game's execution flow, covering initialization, frame-by-frame updates, AI behavior, and restart mechanics.
 <p align="center">
-  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake-sequence-diagram 1.png" alt="sequence_diagram" height="1600"/>
+  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake-sequence-diagram 1.png" alt="sequence_diagram" height="800"/>
 </p>
 
 
@@ -234,7 +234,7 @@ Additionally, the teleportation system posed a considerable technical challenge.
 
 # 6. Evaluation <a id="evaluation"></a>  
 
-## Heuristic Evaluation
+### Heuristic Evaluation
 The evaluation team conducted a comprehensive review of the Snake game, identifying multiple issues and scoring them by severity based on Nielsen's usability principles:
 <table>
   <thead>
@@ -325,7 +325,7 @@ Heuristic evaluation provides us with a systematic, quantifiable list of problem
 | | Change background design for better visual contrast | Implement speed boost mechanism with stamina bar |
 | | | Add difficulty modes |
 
-## SUS
+### SUS
 SUS is a reliable usability evaluation tool (Brooke, 1986) used to analyze the impact of SNAKE RIVAL's workload and usability at different difficulty levels.
 
 **Data Collection and Analysis information about SUS:**
@@ -360,42 +360,42 @@ SUS is a reliable usability evaluation tool (Brooke, 1986) used to analyze the i
 **Interpretation:**
 The L2 SUS score (71) is slightly lower than the L1 score (75), indicating that the increased difficulty of L2 slightly reduces the usability of users' perception and operation of the game system. This difference was found to be statistically significant. Maintaining a balance between difficulty levels and good usability is recommended.
 
-## Black-Boxing Testing
+### Black-Boxing Testing
 
-### 1. Boundary Collision Test  
+**1. Boundary Collision Test**  
 | Test Case | Input | Expected Output |  
 |-----------|-------|------------------|  
 | 1.1 | Player snake in normal state hits the map boundary | Game over, display "You hit the boundary!" |  
 | 1.2 | Player snake in invincible state hits the map boundary | Game continues, player takes no damage |  
 | 1.3 | Player snake approaches but does not touch boundary | Display boundary warning effect, game continues |  
 
-### 2. Obstacle Collision Test  
+**2. Obstacle Collision Test**
 | Test Case | Input | Expected Output |  
 |-----------|-------|------------------|  
 | 2.1 | Player snake in normal state hits an obstacle | Game over, display "You hit an obstacle!" |  
 | 2.2 | Player snake in invincible state hits an obstacle | Game continues, player takes no damage |  
 
-### 3. Snake-to-Snake Collision Test  
+**3. Snake-to-Snake Collision Test**  
 | Test Case | Input | Expected Output |  
 |-----------|-------|------------------|  
 | 3.1 | Player snake in normal state hits AI snake body | Game over, display "You hit another snake!" |  
 | 3.2 | Player snake in invincible state hits AI snake body | Game continues, player takes no damage |  
 | 3.3 | AI snake head hits player snake body | AI snake dies, random number of food and items spawn, display "SNAKE DEFEATED!" banner |  
 
-### 4. Food Collision Test  
+**4. Food Collision Test**
 | Test Case | Input | Expected Output |  
 |-----------|-------|------------------|  
 | 4.1 | Player snake in normal state touches food | Snake length increases, play eating sound effect, score increases |  
 | 4.2 | Player snake in expanded detection range state approaches food | Snake collects food without direct contact, length increases, play eating sound effect, score increases |  
 
-### 5. Item Collision Test  
+**5. Item Collision Test**
 | Test Case | Input | Expected Output |  
 |-----------|-------|------------------|  
 | 5.1 | Player snake touches invincibility item | Invincible state activated, display banner, play item sound effect |  
 | 5.2 | Player snake touches stamina item | Stamina restored, display banner, play item sound effect |  
 | 5.3 | Player snake touches range expansion item | Expanded detection range state activated, display banner, play item sound effect |  
 
-### 6. Special Map Features Test  
+**6. Special Map Features Test**  
 | Test Case | Input | Expected Output |  
 |-----------|-------|------------------|  
 | 6.1 | Player snake enters swamp area | Snake movement speed is reduced |  
@@ -512,7 +512,7 @@ In conclusion, the Snake Rival project transformed our understanding of game dev
   |     MEMBER     | SCORE | EMAIL            | CONTRIBUTION      |
   |----------------|-------|------------------|-------------------|
   |    Yiqing Zhou    |  1  | lr24125@bristol.ac.uk   | **coding**: overall game architecture, basic gaming functionality, scoring methods, winning and dying decisions, ai snakes moving logic, interface logic, difficulty settings and timers, swamp terrain, bug fixes, code refactor<br>**report**: introduction and requirements<br>**scrum master**: follow up on progress, organize meetings and assign tasks to team members<br>**video**: writing the script|
-  |    Xing Yang     |  1   | zj24404@bristol.ac.uk   | Optimizer, Coder    |
+  |    Xing Yang     |  1   | zj24404@bristol.ac.uk   | **coding**: overall game architecture, basic gaming functionality, defination of snakes, architecture and logic of playersnake, collision and interaction between snakes, fog terrain, teleport terrain, banner mechanism, bug fixes<br>**report**: Design and evaluation<br>**optimizor**: test codes after each member's commit, follow and takle test problems, optimize game<br>**video**: write detailed scripts and design storyboards   |
   |    Cheng Wang    |  1  | fd24967@bristol.ac.uk   | Designer, Coder     |
   |    Jiayi Lin     |  1  | fg24079@bristol.ac.uk   | **coding**: basic game functionality, border and snake movement, different backgrounds, snake appearance optimization, font style, menu, main interface animation, help page, interface logic, bug fixes<br>**report**: implementation and process<br>**UI Designer**: drawing maps as backgrounds, snake appearance design, interface design<br>**video**: filming and dubbing|
 </div>
