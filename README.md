@@ -406,7 +406,7 @@ The L2 SUS score (71) is slightly lower than the L1 score (75), indicating that 
 
 # 7. Process <a id="process"></a>  
 ### Division of Work & Collaboration
-**(1) Division of Work**  
+**1. Division of Work**  
 At the beginning of the project, our team held a detailed discussion on task allocation. Since all members expressed strong interest in programming, we decided that everyone would participate in the development of core functionalities. Other responsibilities were assigned based on each member’s strengths:
 
 - **Cheng**, as an avid gamer, has a good understanding of gameplay mechanics and user experience. He was mainly responsible for the design of game mechanics.
@@ -414,18 +414,18 @@ At the beginning of the project, our team held a detailed discussion on task all
 - **Jiayi**, with a background in art and design, was in charge of the UI, including elements such as menus, help pages, and background visuals.
 - **Yiqing** demonstrated strong organizational and coordination skills and therefore took the role of project manager, responsible for overall progress tracking, task delegation, and project coordination.
 
-**(2)Agile Software Development**  
+**2. Agile Software Development**  
 We adopted the methodology of Agile Software Development, which proved to be particularly suitable given the team’s relatively limited programming experience and the small scale of the project. Each week, we set clear short-term goals and adjusted our plans flexibly based on the previous progress and feedback. Compared with the traditional Waterfall Development Model, our process focused more on continuous user feedback and iterative improvements rather than rigidly following an initial plan to perfection. Additionally, we embraced the concept of Minimum Viable Product — implementing the core gameplay first, followed by iterative extensions and optimizations. Feedback was mainly gathered from internal playtesting among group members and comments received during in-class demonstrations. We carefully incorporated this feedback into the development cycle to ensure a continuously improving game experience.
 
-**(3)Pair Programming**  
+**3. Pair Programming**  
 To improve code quality and minimize errors, we frequently adopted pair programming. This strategy was particularly effective for a team like ours, where members had limited experience but strong willingness to collaborate. For instance, in the module led by Cheng and Xing, Cheng focused on logic design and core code implementation, while Xing provided ongoing optimization suggestions and later carried out thorough testing and validation. The close collaboration ensured a higher degree of accuracy and efficiency in the final output.
 
-**(4)Frequent and Efficient Meetings**  
+**4. Frequent and Efficient Meetings**  
 Throughout the project, we held meetings approximately every three days to review progress, resolve any issues, and assign new tasks. These meetings were kept brief yet efficient. We utilized the Planning Poker method to estimate the workload and complexity of each task. This technique enabled the team to achieve a fair and reasonable distribution of tasks and ensured that all assignments matched each member’s capability.
 
 ### Tools
 
-**(1) GitHub**  
+**1. GitHub**  
 Each team member used GitHub for version control throughout the development process. Every contributor developed their assigned modules in a separate branch. Before merging any development branch into the main branch, a Pull Request was created and reviewed by Xing, ensuring code quality and maintaining a stable main branch at all times. We merged into the main branch weekly. Bugs and feedback issues are also logged via GitHub.
 
 <p align="center">
@@ -433,10 +433,10 @@ Each team member used GitHub for version control throughout the development proc
 </p>
 <p align="center">Image 10: github</p>
 
-**(2) Temporary Google Shared Document**  
+**2. Temporary Google Shared Document**  
 We used a Shared Document to record outcomes from lab discussions, as well as ideas and task distributions discussed during each meeting. The shared document allowed real-time viewing and editing, greatly improving collaboration efficiency and transparency.
 
-**(3) Kanban Board**   
+**3. Kanban Board**   
 Project management was mainly conducted using our [Kanban board](https://yiqing.atlassian.net/jira/software/projects/DP/summary). Yiqing was responsible for updating task statuses on a weekly basis, which included the categories “To Do,” “In Progress,” and “Completed.” Our team started working on the project in Week 6, which was relatively late compared to other groups, giving us a tighter schedule. The Kanban board helped us stay organized and on track under pressure. Weekly deadlines were set for Monday so that we could learn new topics in Tuesday’s lab session and then assign new tasks after class.
 
 <p align="center">
@@ -444,7 +444,7 @@ Project management was mainly conducted using our [Kanban board](https://yiqing.
 </p>
 <p align="center">Image 11: kanban</p>
 
-**(4) Online Meeting and WeChat Group**   
+**4. Online Meeting and WeChat Group**   
 Most of our regular discussions took place online using Tencent Meeting. Screen sharing was frequently used to collaboratively debug. We also created a WeChat group, which served as the main channel for quick updates, Q&A, and file sharing. It played a key role in maintaining fast and effective communication.
 
 ### Reflection  
