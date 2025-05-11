@@ -473,10 +473,10 @@ In conclusion, the Snake Rival project transformed our understanding of game dev
   
   | MEMBER | SCORE         | EMAIL                   | CONTRIBUTION               |
   |--------|---------------|-------------------------|--------------------|
-  | Yiqing Zhou   |   1    | lr24125@bristol.ac.uk   | **coding**: overall game architecture, basic gaming functionality, scoring methods, winning and dying decisions, ai snakes moving logic, interface logic, difficulty settings and timers, swamp terrain, bug fixes, code refactor<br>**report**: introduction and requirements<br>**scrum master**: follow up on progress, organize meetings and assign tasks to team members<br>**video**: writing the script|
-  | Xing Yang   |    1     | zj24404@bristol.ac.uk   | Optimizer, Coder    |
-  | Cheng Wang   |    1    | fd24967@bristol.ac.uk   | Designer, Coder     |
-  | Jiayi Lin   |    1    | fg24079@bristol.ac.uk   | **coding**: basic game functionality, border and snake movement, different backgrounds, snake appearance optimization, font style, menu, main interface animation, help page, interface logic, bug fixes<br>**report**: implementation and process<br>**UI Designer**: drawing maps as backgrounds, snake appearance design, interface design<br>**video**: filming and dubbing|
+  |   Yiqing Zhou    |   1    | lr24125@bristol.ac.uk   | **coding**: overall game architecture, basic gaming functionality, scoring methods, winning and dying decisions, ai snakes moving logic, interface logic, difficulty settings and timers, swamp terrain, bug fixes, code refactor<br>**report**: introduction and requirements<br>**scrum master**: follow up on progress, organize meetings and assign tasks to team members<br>**video**: writing the script|
+  |   Xing Yang    |    1     | zj24404@bristol.ac.uk   | Optimizer, Coder    |
+  |   Cheng Wang    |    1    | fd24967@bristol.ac.uk   | Designer, Coder     |
+  |   Jiayi Lin    |    1    | fg24079@bristol.ac.uk   | **coding**: basic game functionality, border and snake movement, different backgrounds, snake appearance optimization, font style, menu, main interface animation, help page, interface logic, bug fixes<br>**report**: implementation and process<br>**UI Designer**: drawing maps as backgrounds, snake appearance design, interface design<br>**video**: filming and dubbing|
 </div>
 <div align="center">
 Table ???: Contribution
