@@ -194,7 +194,7 @@ When game end conditions are triggered (such as the player colliding with bounda
 
 This sequence diagram provides a structured view of the game's execution flow, covering initialization, frame-by-frame updates, AI behavior, and restart mechanics.<br>
 <p align="center">
-  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake-sequence-diagram 1.png" alt="sequence_diagram" height="800"/>
+  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake-sequence-diagram 1.png" alt="sequence_diagram" height="600"/>
    <p align="center">Image 8: Sequence Diagram<br>
 </p>
 
