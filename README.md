@@ -182,6 +182,7 @@ To introduce variety and challenge, the game includes multiple map modes, each w
 The class diagram for the Snake Game represents the key components and their relationships. The Snake class serves as the base for PlayerSnake and AISnake, with attributes like body, direction, and movement methods, while PlayerSnake handles user input, stamina, and special states, and AISnake focuses on AI-controlled behavior such as tracking food and avoiding obstacles. The GameMap class manages grid size, borders, and environmental effects, interacting with specialized managers like SwampManager, FogManager, and TeleportManager to generate and process different terrain effects. The ItemManager controls in-game items such as stamina boosts and teleportation, while ObstacleManager generates and manages obstacles like ladders. The FoodManager governs food placement and properties, ensuring AI and player interactions. Enumerations define item types and difficulty modes. This structured design ensures modularity, clear responsibilities, and efficient game management.
 <p align="center">
   <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake_class diagram.png" alt="class_diagram" height="800"/>
+  <p>Image 7: Class Diagram<br>
 </p>
 
 ### Behavioural diagrams
@@ -191,6 +192,7 @@ When game end conditions are triggered (such as the player colliding with bounda
 This sequence diagram provides a structured view of the game's execution flow, covering initialization, frame-by-frame updates, AI behavior, and restart mechanics.<br>
 <p align="center">
   <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake-sequence-diagram 1.png" alt="sequence_diagram" height="800"/>
+   <p>Image 8: Sequence Diagram<br>
 </p>
 
 
@@ -204,7 +206,7 @@ To prevent sudden angular shifts or jitter during gameplay, we further incorpora
 <p align="center">
   <img src="https://github.com/UoB-COMSM0166/2025-group-11a/blob/main/docs/Control.gif" alt="Control" height="300"/>
 </p>
-<p align="center">Image 7: Control</p>
+<p align="center">Image 9: Control</p>
 
 ### Challenge 2: AI enemy snake design
 To enhance the game's challenge, we designed an AI-controlled enemy snake with capabilities including autonomous pathfinding, obstacle avoidance, target tracking, and player interaction.
@@ -218,7 +220,7 @@ Lastly, the interaction with the player and the death feedback mechanism further
 <p align="center">
   <img src="https://github.com/UoB-COMSM0166/2025-group-11a/blob/main/docs/AI%20snake.gif" alt="AI snake" height="300"/>
 </p>
-<p align="center">Image 8: AI snake</p>
+<p align="center">Image 10: AI snake</p>
 
 ### Challenge 3: Different maps and terrains
 To enrich the gameplay experience, we introduced several distinct map types: Swamp, Desert, and Teleport. Each map features unique terrain types and items, along with background color variations to enhance visual diversity.
@@ -232,7 +234,7 @@ Additionally, the teleportation system posed a considerable technical challenge.
 <p align="center">
   <img src="https://github.com/UoB-COMSM0166/2025-group-11a/blob/main/docs/Teleport.gif" alt="Teleport" height="300"/>
 </p>
-<p align="center">Image 9: Teleport</p>
+<p align="center">Image 11: Teleport</p>
 
 
 # 6. Evaluation <a id="evaluation"></a>  
@@ -431,7 +433,7 @@ Each team member used GitHub for version control throughout the development proc
 <p align="center">
   <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/github.png" alt="github" height="300"/>
 </p>
-<p align="center">Image 10: github</p>
+<p align="center">Image 12: github</p>
 
 **2. Temporary Google Shared Document**  
 We used a Shared Document to record outcomes from lab discussions, as well as ideas and task distributions discussed during each meeting. The shared document allowed real-time viewing and editing, greatly improving collaboration efficiency and transparency.
@@ -442,7 +444,7 @@ Project management was mainly conducted using our [Kanban board](https://yiqing.
 <p align="center">
   <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/kanban.png" alt="kanban" height="300"/>
 </p>
-<p align="center">Image 11: kanban</p>
+<p align="center">Image 13: kanban</p>
 
 **4. Online Meeting and WeChat Group**   
 Most of our regular discussions took place online using Tencent Meeting. Screen sharing was frequently used to collaboratively debug. We also created a WeChat group, which served as the main channel for quick updates, Q&A, and file sharing. It played a key role in maintaining fast and effective communication.
