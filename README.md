@@ -560,14 +560,6 @@ In conclusion, the Snake Rival project transformed our understanding of game dev
 Table 12: Contribution
 </div>
 
-### Additional Marks
-You can delete this section in your own repo, it's just here for information. in addition to the marks above, we will be marking you on the following two points:
-- **Quality** of report writing, presentation, use of figures and visual material (5%)
-  Please write in a clear concise manner suitable for an interested layperson. Write as if this repo was publicly available.
-- **Documentation** of code (5%)
-  Is your repo clearly organised?
-  Is code well commented throughout?
-
 
 
 
