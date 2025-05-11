@@ -471,8 +471,8 @@ In conclusion, the Snake Rival project transformed our understanding of game dev
 ### Contribution Statement
 <div align="center">
   
-  |   MEMBER   | SCORE | EMAIL                   | CONTRIBUTION               |
-  |------------|-------|-------------------------|--------------------|
+  |    MEMBER    | SCORE | EMAIL            | CONTRIBUTION       |
+  |--------------|-------|------------------|--------------------|
   |   Yiqing Zhou    |  1  | lr24125@bristol.ac.uk   | **coding**: overall game architecture, basic gaming functionality, scoring methods, winning and dying decisions, ai snakes moving logic, interface logic, difficulty settings and timers, swamp terrain, bug fixes, code refactor<br>**report**: introduction and requirements<br>**scrum master**: follow up on progress, organize meetings and assign tasks to team members<br>**video**: writing the script|
   |   Xing Yang    |  1   | zj24404@bristol.ac.uk   | Optimizer, Coder    |
   |   Cheng Wang    |  1  | fd24967@bristol.ac.uk   | Designer, Coder     |
