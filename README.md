@@ -182,7 +182,7 @@ To introduce variety and challenge, the game includes multiple map modes, each w
 The class diagram for the Snake Game represents the key components and their relationships. The Snake class serves as the base for PlayerSnake and AISnake, with attributes like body, direction, and movement methods, while PlayerSnake handles user input, stamina, and special states, and AISnake focuses on AI-controlled behavior such as tracking food and avoiding obstacles. The GameMap class manages grid size, borders, and environmental effects, interacting with specialized managers like SwampManager, FogManager, and TeleportManager to generate and process different terrain effects. The ItemManager controls in-game items such as stamina boosts and teleportation, while ObstacleManager generates and manages obstacles like ladders. The FoodManager governs food placement and properties, ensuring AI and player interactions. Enumerations define item types and difficulty modes. This structured design ensures modularity, clear responsibilities, and efficient game management.
 <p align="center">
   <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake_class diagram.png" alt="class_diagram" height="800"/>
-  <p>Image 7: Class Diagram<br>
+  <p align="center">Image 7: Class Diagram<br>
 </p>
 
 ### Behavioural diagrams
@@ -192,7 +192,7 @@ When game end conditions are triggered (such as the player colliding with bounda
 This sequence diagram provides a structured view of the game's execution flow, covering initialization, frame-by-frame updates, AI behavior, and restart mechanics.<br>
 <p align="center">
   <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake-sequence-diagram 1.png" alt="sequence_diagram" height="800"/>
-   <p>Image 8: Sequence Diagram<br>
+   <p align="center">Image 8: Sequence Diagram<br>
 </p>
 
 
@@ -319,7 +319,9 @@ The evaluation team conducted a comprehensive review of the Snake game, identify
     </tr>
   </tbody>
 </table>
-<br>
+<div align="center">
+Table 3: Heuristic Evaluation Result
+</div>
 Heuristic evaluation provides us with a systematic, quantifiable list of problems and improvement directions. By categorizing the problems by severity, our team solved the following problems that affect the user experience in order of priority, greatly improving the user experience of the game.
 
 | High Priority (Severity > 3) | Medium Priority (Severity 2-3) | Feature Enhancements |
@@ -329,6 +331,9 @@ Heuristic evaluation provides us with a systematic, quantifiable list of problem
 | | Make snake head more obvious by adding eyes | Add map obstacles |
 | | Change background design for better visual contrast | Implement speed boost mechanism with stamina bar |
 | | | Add difficulty modes |
+<div align="center">
+Table 4: Resolved items in order of priority
+</div>
 
 ### SUS
 SUS is a reliable usability evaluation tool (Brooke, 1986) used to analyze the impact of SNAKE RIVAL's workload and usability at different difficulty levels.
@@ -353,6 +358,10 @@ SUS is a reliable usability evaluation tool (Brooke, 1986) used to analyze the i
 | U9      | 80     | 75     |
 | U10     | 67.5   | 65     |
 
+<div align="left">
+Table 5: SUS data Result
+</div>
+
 **Data Analysis:**
 - SUS L1 (lower difficulty): Average score of 75
 - SUS L2 (higher difficulty): Average score of 71
@@ -373,12 +382,18 @@ The L2 SUS score (71) is slightly lower than the L1 score (75), indicating that 
 | 1.1 | Player snake in normal state hits the map boundary | Game over, display "You hit the boundary!" |  
 | 1.2 | Player snake in invincible state hits the map boundary | Game continues, player takes no damage |  
 | 1.3 | Player snake approaches but does not touch boundary | Display boundary warning effect, game continues |  
+<div align="center">
+Table 6: Boundary Collision Test cases
+</div>
 
 **2. Obstacle Collision Test**
 | Test Case | Input | Expected Output |  
 |-----------|-------|------------------|  
 | 2.1 | Player snake in normal state hits an obstacle | Game over, display "You hit an obstacle!" |  
 | 2.2 | Player snake in invincible state hits an obstacle | Game continues, player takes no damage |  
+<div align="center">
+Table 7: Obstacle Collision Test cases
+</div>
 
 **3. Snake-to-Snake Collision Test**  
 | Test Case | Input | Expected Output |  
@@ -386,12 +401,18 @@ The L2 SUS score (71) is slightly lower than the L1 score (75), indicating that 
 | 3.1 | Player snake in normal state hits AI snake body | Game over, display "You hit another snake!" |  
 | 3.2 | Player snake in invincible state hits AI snake body | Game continues, player takes no damage |  
 | 3.3 | AI snake head hits player snake body | AI snake dies, random number of food and items spawn, display "SNAKE DEFEATED!" banner |  
+<div align="center">
+Table 8: Snake-to-Snake Collision Test cases
+</div>
 
 **4. Food Collision Test**
 | Test Case | Input | Expected Output |  
 |-----------|-------|------------------|  
 | 4.1 | Player snake in normal state touches food | Snake length increases, play eating sound effect, score increases |  
 | 4.2 | Player snake in expanded detection range state approaches food | Snake collects food without direct contact, length increases, play eating sound effect, score increases |  
+<div align="center">
+Table 9: Food Collision Test cases
+</div>
 
 **5. Item Collision Test**
 | Test Case | Input | Expected Output |  
@@ -399,12 +420,18 @@ The L2 SUS score (71) is slightly lower than the L1 score (75), indicating that 
 | 5.1 | Player snake touches invincibility item | Invincible state activated, display banner, play item sound effect |  
 | 5.2 | Player snake touches stamina item | Stamina restored, display banner, play item sound effect |  
 | 5.3 | Player snake touches range expansion item | Expanded detection range state activated, display banner, play item sound effect |  
+<div align="center">
+Table 10: Item Collision Test cases
+</div>
 
 **6. Special Map Features Test**  
 | Test Case | Input | Expected Output |  
 |-----------|-------|------------------|  
 | 6.1 | Player snake enters swamp area | Snake movement speed is reduced |  
 | 6.2 | Player snake enters teleport point | Snake is teleported to the corresponding target point, teleport effect and message shown |  
+<div align="center">
+Table 11: Special Map Features Test cases
+</div>
 
 # 7. Process <a id="process"></a>  
 ### Division of Work & Collaboration
@@ -522,7 +549,7 @@ In conclusion, the Snake Rival project transformed our understanding of game dev
   |    Jiayi Lin     |  1  | fg24079@bristol.ac.uk   | **coding**: basic game functionality, border and snake movement, different backgrounds, snake appearance optimization, font style, menu, main interface animation, help page, interface logic, bug fixes<br>**report**: implementation and process<br>**UI Designer**: drawing maps as backgrounds, snake appearance design, interface design<br>**video**: filming and dubbing|
 </div>
 <div align="center">
-Table ???: Contribution
+Table 12: Contribution
 </div>
 
 ### Additional Marks
