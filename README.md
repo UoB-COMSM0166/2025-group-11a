@@ -187,7 +187,7 @@ The class diagram for the Snake Game represents the key components and their r
 ### Behavioural diagrams
 The Snake Game sequence diagram illustrates the game's core logic, including initialization, main game loop, and game over handling. The game starts with Sketch calling setup(), which initializes the UI, player snake, multiple AI snakes, and managers for food, items, obstacles, and the game map. Based on the map type, specific elements like swamps, fog, or teleportation points are generated. During the main game loop (draw()), if the game is not paused, it renders the grid and special map features, updates AI snakes to move toward food, check collisions with food, the player, or other AI, and handles AI deaths when needed. The game over phase is triggered if the player loses, displaying the Game Over screen, drawing the stamina bar and boundary warnings, and allowing the player to restart via mouse interaction. This sequence diagram provides a structured view of the game's execution flow, covering initialization, frame-by-frame updates, AI behavior, and restart mechanics.
 <p align="center">
-  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake_sequence diagram.png" alt="sequence_diagram" height="1600"/>
+  <img src="https://uob-comsm0166.github.io/2025-group-11a/docs/snake-sequence-diagram 1.png" alt="sequence_diagram" height="1600"/>
 </p>
 
 
