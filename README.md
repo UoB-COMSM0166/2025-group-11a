@@ -195,6 +195,12 @@ This sequence diagram provides a structured view of the game's execution flow, c
    <p align="center">Image 8: Sequence Diagram<br>
 </p>
 
+### Conclusion
+Snake Rival adopts an object-oriented modular architecture, with the Snake class as the basis, and two subclasses, PlayerSnake and AISnake, derived. PlayerSnake handles user input and special states (invincibility, physical strength, and magnification), while AISnake focuses on AI behaviors such as finding food and avoiding obstacles. The game process starts with page loading, initializing the UI and game components through sketch.js, and calling initGame() after the player selects the map and difficulty to complete the initialization.<br>
+
+The core manager classes include GameMap (handling terrain effects), FoodManager (food management), ItemManager (prop system), ObstacleManager (obstacles), and BannerManager (game notifications). The main game loop (draw()) handles the movement, collision detection, and state updates of the snake until the end condition is triggered.<br>
+
+This structural design ensures a high degree of modularity and clear responsibility allocation, which is convenient for functional expansion and maintenance, while providing a smooth gaming experience and rich interactive mechanisms, such as terrain effects (swamp deceleration, teleportation points) and a variety of special abilities (speed up, invincibility, enhanced detection).
 
 # 5. Implementation <a id="implementation"></a>  
 There are three areas of challenge：
