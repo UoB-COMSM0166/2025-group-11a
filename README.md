@@ -433,6 +433,14 @@ Table 10: Item Collision Test cases
 Table 11: Special Map Features Test cases
 </div>
 
+### Conclusion
+The evaluation of Snake Rival provided comprehensive insights using multiple methods. The heuristic evaluation identified several key usability issues, the most serious of which included a lack of game instructions and issues with AI snake collision detection logic. The development team systematically addressed these issues by priority, implementing game instructions, fixing collision logic, adding a pause function, and establishing a clear win condition (100 points to win).<br>
+
+The System Usability Scale (SUS) evaluation showed high usability scores for both difficulty levels, with low difficulty (L1) at 75 points and high difficulty (L2) at 71 points, both above the baseline threshold of 68 points. Statistical analysis confirmed significant differences between difficulty levels, indicating that increasing difficulty slightly reduced usability.<br>
+
+Black box testing validated the core mechanics of the game, including boundary collision, obstacle interaction, snake-snake collision, food collection, power-up, and special map features. These tests confirmed the proper functioning of the game in various scenarios, including the proper functioning of the invincibility state, the stamina system, and the enhanced food detection mechanic.<br>
+
+The combination of these evaluation methods guided effective improvements to Snake Rival, making the game more user-friendly, balanced, and fun, while maintaining an appropriate level of challenge across different difficulty settings.<br>
 # 7. Process <a id="process"></a>  
 ### Division of Work & Collaboration
 **1. Division of Work**  
